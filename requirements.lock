@@ -1,0 +1,15 @@
+# SupeRR Intelligence — Pinned Production Dependencies (requirements.lock)
+# Generated for Python 3.12+ / 3.14 compatibility
+anyio==4.12.1
+fastapi==0.162.7
+huggingface-hub==0.28.1
+httpx==0.28.1
+lightgbm==4.7.0
+numpy==2.4.2
+pandas==2.3.3
+pydantic==2.14.3
+pydantic_core==2.50.4
+scikit-learn==1.8.0
+scipy==1.17.0
+starlette==1.10.0
+uvicorn==0.54.0

@@ -1,195 +1,205 @@
-# SupeRR Intelligence — AI-Powered Cricket Scouting Platform
+# SupeRR Intelligence — AI-Powered Cricket Pressure Analytics Platform
 
-**SupeRR Intelligence** is an advanced, evidence-grounded cricket scouting and performance intelligence platform. It combines ball-by-ball contextual state modeling, pressure index quantification, win probability added (WPA), and Bayesian reliability shrinkage into the **Clutch Performance Rating Index (CPRI)**, layered with a **Three-Tier AI Scouting Intelligence Engine**.
+[![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.12%20%7C%203.14-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-18-61DAFB.svg)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6.svg)](https://www.typescriptlang.org/)
+[![Tests](https://img.shields.io/badge/Tests-214%20Passing-success.svg)]()
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+
+**SupeRR Intelligence** is an advanced, evidence-grounded cricket scouting and clutch performance platform built for **SupeRR Selector Season 2 (Round 1)**.
+
+It replaces naive aggregates (averages, raw strike rates) with delivery-level contextual state modeling, pressure index quantification, Win Probability Added (WPA), and Bayesian reliability shrinkage into the **Clutch Performance Rating Index (CPRI)**, layered with a **Three-Tier AI Scouting Intelligence Engine** and Rajasthan Royals visual identity.
 
 ---
 
-## 1. Quick Start & Setup
+## 1. Problem Statement & Motivation
+
+Traditional cricket statistics treat every delivery identically: a single off the first ball of an innings is credited the same as a single required off the final ball of a chase. 
+
+**SupeRR Intelligence solves three core limitations in T20 analytics:**
+1. **Leverage Neglect:** Quantifies pressure dynamically using 1st innings par trajectories and 2nd innings required run rates, wickets in hand, and ball-by-ball WPA.
+2. **Small-Sample Distortion:** Applies empirical Bayesian shrinkage and bootstrap rank confidence intervals (90% CI) to distinguish persistent clutch mastery from sample variance.
+3. **Format Normalization:** Incorporates format-conditioned delivery expectations to evaluate dual-format players across both IPL and T20 International cricket fairly.
+
+---
+
+## 2. Official Competition Submission (Phase 8 Frozen Baseline)
+
+The authoritative competition submission is frozen in **CPRI-v1.0.0-PROD-FREEZE**. Single-tournament slices serve as contextual secondary league views.
+
+### Official Top 10 Batters
+
+| Rank | Player | Unified CPRI | 90% Bootstrap CI | Confidence Tier | Evidence Scope | Pressure Balls |
+| :---: | :--- | :---: | :---: | :---: | :---: | :---: |
+| **1** | **Matthew Wade** | **85.36** | [1, 22] | Exploratory | Dual-Format | 191 |
+| **2** | **Tim David** | **82.44** | [1, 19] | High Confidence | Dual-Format | 476 |
+| **3** | **Suryakumar Yadav** | **81.42** | [2, 25] | High Confidence | Dual-Format | 749 |
+| **4** | **Reeza Hendricks** | **77.45** | [2, 49] | High Confidence | Dual-Format | 398 |
+| **5** | **Rinku Singh** | **77.18** | [1, 51] | High Confidence | Dual-Format | 342 |
+| **6** | **Phil Salt** | **76.96** | [2, 46] | High Confidence | Dual-Format | 358 |
+| **7** | **Romario Shepherd** | **75.33** | [2, 47] | High Confidence | Dual-Format | 309 |
+| **8** | **Namboori Tilak Varma** | **74.81** | [3, 49] | High Confidence | Dual-Format | 496 |
+| **9** | **Dinesh Karthik** | **74.54** | [3, 44] | High Confidence | Dual-Format | 288 |
+| **10** | **Ravindra Jadeja** | **73.70** | [3, 56] | High Confidence | Dual-Format | 370 |
+
+### Official Top 10 Bowlers
+
+| Rank | Player | Unified CPRI | 90% Bootstrap CI | Confidence Tier | Evidence Scope | Pressure Balls |
+| :---: | :--- | :---: | :---: | :---: | :---: | :---: |
+| **1** | **Mitchell Santner** | **79.84** | [2, 36] | High Confidence | Dual-Format | 511 |
+| **2** | **Sufiyan Muqeem** | **78.78** | [1, 74] | Exploratory | T20I-Only | 151 |
+| **3** | **Rashid Khan** | **77.90** | [2, 33] | High Confidence | Dual-Format | 871 |
+| **4** | **Jamie Overton** | **76.92** | [1, 71] | Exploratory | T20I-Only | 168 |
+| **5** | **Matheesha Pathirana** | **75.77** | [4, 49] | High Confidence | IPL-Only | 569 |
+| **6** | **Sunil Narine** | **75.63** | [3, 52] | High Confidence | Dual-Format | 511 |
+| **7** | **Mohammad Nawaz** | **75.51** | [2, 60] | High Confidence | Dual-Format | 316 |
+| **8** | **Jasprit Bumrah** | **73.36** | [3, 67] | High Confidence | Dual-Format | 606 |
+| **9** | **Varun Chakravarthy** | **73.02** | [3, 68] | High Confidence | Dual-Format | 585 |
+| **10** | **Yuzvendra Chahal** | **73.01** | [3, 48] | High Confidence | Dual-Format | 674 |
+
+> **Uncertainty & Tier Classification:** Players with $\ge 300$ pressure balls and bounded CIs are categorized as **High Confidence**. Outliers with elite rate stats but $<250$ deliveries (e.g. Wade [1, 22], Muqeem [1, 74], Overton [1, 71]) are categorized as **Exploratory**. Full sensitivity details: [`docs/methodology/ADAPTABILITY_FORMULA_AND_SENSITIVITY.md`](docs/methodology/ADAPTABILITY_FORMULA_AND_SENSITIVITY.md).
+
+---
+
+## 3. System Architecture
+
+```mermaid
+flowchart TD
+    subgraph DataEngine["1. Analytical & Data Layer"]
+        A["Raw Data Pack\n(194,014 official deliveries)"] --> B["Phase 1: Zero-Leakage Processing\n(Pre-ball State Features)"]
+        B --> C["Phase 2: Leverage & WPA Engine\n(Par Curves & Win Prob)"]
+        C --> D["Phase 3: CPRI Model Engine\n(PI, PA, CC, RC Pillars)"]
+        D --> E["Phase 8: Official Selection & CIs\n(Bootstrap Uncertainty Audits)"]
+    end
+
+    subgraph ServiceEngine["2. Backend & Intelligence Engine (FastAPI)"]
+        E --> F["Scouting Data Engine\n(Fast JSON Stores)"]
+        F --> G["Official Rankings Endpoints\n(/api/v1/official)"]
+        F --> H["Grounded Prompt Assembler"]
+        H --> I["Three-Tier AI Service\n(Tier 1: HF API | Tier 3: Deterministic Fallback)"]
+        I --> J["Response Verifier & Anti-Hallucination Guardrails"]
+    end
+
+    subgraph UserInterface["3. Modern Frontend Application (React / Vite)"]
+        G --> K["Overview Dashboard & Official Podium"]
+        G --> L["Rankings Table with 90% CIs"]
+        J --> M["Player Intelligence & AI Dossiers"]
+        F --> N["Head-to-Head & Matchup Matrix"]
+        E --> O["Limitations & Uncertainty Audit Page"]
+    end
+```
+
+---
+
+## 4. Quick Start & Setup
 
 ### Prerequisites
 - Python 3.10+ (Tested up to Python 3.14.3 64-bit)
+- Node.js 18+ & npm
 - Windows, Linux, or macOS
 
-### Installation
-1. **Clone or navigate to the repository**:
-   ```bash
-   cd SupeRR_Intelligence_Phase1/SupeRR_Phase1
-   ```
-
-2. **Install production dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Configure Environment (Optional for Tier 1 AI generation)**:
-   ```bash
-   cp .env.example .env
-   ```
-   Edit `.env` and add your Hugging Face API token:
-   ```ini
-   HF_TOKEN=your_huggingface_token_here
-   ```
-   > **Note**: The platform runs 100% offline out-of-the-box using **Tier 3 (Deterministic Python Fallback)** even without internet access or an API token.
-
----
-
-## 2. Command-Line Scouting Interface (`scouting_cli.py`)
-
-Run interactive queries or system self-tests directly from your terminal:
-
-### Run System Self-Test (Verifies All 7 Scouting Features):
+### 1. Installation
 ```bash
-python scouting_cli.py --test
+# Clone the repository
+git clone https://github.com/CodePraneesh/SuperRR.git
+cd SuperRR
+
+# Install Python backend dependencies
+pip install -r requirements.txt
+
+# Install frontend dependencies
+cd frontend && npm install && cd ..
 ```
 
-### Feature 1: Comprehensive Player Scouting Report
+### 2. Configure Environment (Optional)
 ```bash
-python scouting_cli.py --feature report --player "Rinku Singh" --scope IPL --role Batter
-python scouting_cli.py --feature report --player "Matthew Wade" --scope T20I --role Batter
+cp .env.example .env
+```
+Edit `.env` and set `HF_TOKEN=your_token` if using Hugging Face inference. If omitted, the system operates completely offline using **Tier 3 (Deterministic Python Fallback)**.
+
+### 3. Build Stores & Run Tests
+```bash
+# Build the official Phase 8 scouting store
+python scripts/build_official_store.py
+
+# Run all 214 automated tests
+python run_all_tests_suite.py
 ```
 
-### Feature 2: Pressure Performance Dossier
-```bash
-python scouting_cli.py --feature pressure --player "Matheesha Pathirana" --scope IPL --role Bowler
-```
+### 4. Start the Application
+- **Backend API Server**:
+  ```bash
+  uvicorn backend.app.main:app --reload --host 0.0.0.0 --port 8000
+  ```
+  Interactive API docs: [http://localhost:8000/docs](http://localhost:8000/docs)
 
-### Feature 3 & 4: Tactical Strengths & Weaknesses
-```bash
-python scouting_cli.py --feature batter_sw --player "Rinku Singh" --scope IPL
-python scouting_cli.py --feature bowler_sw --player "Matheesha Pathirana" --scope IPL
-```
+- **Frontend Dashboard**:
+  ```bash
+  cd frontend && npm run dev
+  ```
+  Application UI: [http://localhost:5173](http://localhost:5173)
 
-### Feature 5: Batter-versus-Batter Comparison
+Alternatively, use the unified automation script:
 ```bash
-python scouting_cli.py --feature compare --player "Rinku Singh" --target "Suryakumar Yadav" --scope IPL
-```
-
-### Feature 6: Batter vs Bowler Head-to-Head Scouting
-```bash
-python scouting_cli.py --feature h2h --player "Rinku Singh" --target "Mohit Sharma" --scope IPL
-```
-
-### Feature 7: Natural Language Analytics QA
-```bash
-python scouting_cli.py --feature ask --query "Why is Rinku Singh ranked #1 under pressure?" --player "Rinku Singh" --scope IPL
+bash scripts/run_all.sh all
 ```
 
 ---
 
-## 3. Architecture Overview
+## 5. Raw Data Pack Requirements & Reproducibility
 
-The system is organized into modular phases:
+The repository includes pre-built JSON stores in `output/phase4/data/` allowing full backend and frontend execution immediately upon cloning.
 
-```
-[Phase 1: Ingestion & Feature Engineering]
-   └── deliveries_enriched.csv (200k+ balls, pre-ball pressure state, zero lookahead leakage)
-
-[Phase 2: Expectations & WPA Modeling]
-   ├── LightGBM run expectancy & dismissal risk models
-   └── Delivery-level Win Probability Added (WPA) attribution
-
-[Phase 3: CPRI Engine & Methodology Freeze]
-   ├── Pressure Impact (40%), Adaptability (25%), Consistency (20%), Reliability (15%)
-   └── CPRI-v1.0.0-PROD-FREEZE (Official Top 10 + Provisional Top 5 rankings sealed)
-
-[Phase 4: AI Scouting Intelligence Engine]
-   ├── Phase 4.2: Fast Scouting Stores (<8 MB JSON stores)
-   ├── Phase 4.3: Scouting Data Engine & Grounded Prompt Assembler
-   ├── Phase 4.4: Three-Tier Generation Service (HF API + Deterministic Fallback)
-   └── Phase 4.5: Response Verifier & Anti-Hallucination Guardrails
-```
+To re-run Phase 1 from raw source files:
+1. Place the official competition data archive `6af458274c1e8_data_pack.zip` into the project root.
+2. Unpack into `data/` (`train.csv` and `matches.csv`).
+3. Run `python supeRR_phase1_pipeline.py`.
+4. Fingerprint verification:
+   - Total Matches: 883 (867 ball-data matches, 16 abandoned)
+   - Official Scope Deliveries: 194,014 (excludes 30 emerging matches / 6,985 balls)
+   - Deliverable SHA-256 hashes: [`output/phase8_ranking_reconsideration/reproducibility_manifest.json`](output/phase8_ranking_reconsideration/reproducibility_manifest.json)
 
 ---
 
-## 4. Running the Test Suites
+## 6. Test Suite & Verification Metrics
 
-The platform includes exhaustive automated tests guaranteeing 100% test pass rates across all subsystems:
+SupeRR Intelligence maintains an exhaustive test suite with **214 passing unit tests**:
+- **Phase 1 Data Validation:** 16 tests (`test_phase1_validation.py`)
+- **Phase 2–10 Engine & API Tests:** 198 tests (`tests/test_*.py`)
+- **Total Combined Tests:** **214 tests, 0 failures, 0 errors**
 
-### Run Master Platform Test Suite (All 176 Tests):
+Run the full test suite with:
 ```bash
 python run_all_tests_suite.py
 ```
 
-### Run Dedicated Subsystem Test Suites:
-```bash
-# 1. Phase 5 FastAPI Backend Suite (16 tests)
-python -m unittest tests/test_phase5_api.py
+---
 
-# 2. Scouting Data Stores Test (9 tests)
-python -m unittest tests/test_phase4_2_stores.py
+## 7. Core REST API Endpoints
 
-# 3. Scouting Query Engine Test (9 tests)
-python -m unittest tests/test_phase4_3_engine.py
-
-# 4. AI Service & Guardrails Test (7 tests)
-python -m unittest tests/test_phase4_4_ai_service.py
-
-# 5. Integration Verification Test (7 tests)
-python -m unittest tests/test_phase4_5_integration.py
-```
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/api/v1/official/rankings` | Authoritative official Phase 8 Top 10 for both Batters and Bowlers with 90% CIs |
+| `GET` | `/api/v1/official/batters` | Official Top 10 Batters + contender candidates |
+| `GET` | `/api/v1/official/bowlers` | Official Top 10 Bowlers + contender candidates |
+| `GET` | `/api/v1/official/player/{name}` | Player official standing, CPRI, and rank CI |
+| `GET` | `/api/v1/players/{scope}/{role}` | Contextual single-tournament cohort players (IPL / T20I) |
+| `GET` | `/api/v1/players/{scope}/{role}/{name}` | Full player profile, CPRI components, and exposure |
+| `GET` | `/api/v1/players/{scope}/{role}/{name}/splits` | Situational innings phase and pressure splits |
+| `GET` | `/api/v1/scouting/matchup/{scope}/{batter}/{bowler}` | H2H encounter data with sample size tier warnings |
+| `POST` | `/api/v1/scouting/compare` | Multi-dimensional side-by-side player comparison |
+| `POST` | `/api/v1/scouting/ask` | Evidence-grounded natural language analytics QA |
+| `GET` | `/api/v1/health` | Service health, inference tier availability, and stores status |
 
 ---
 
-## 5. Phase 5 FastAPI Backend Service
+## 8. Documentation Index
 
-The high-performance REST API backend is implemented using FastAPI and Uvicorn. It exposes all frozen CPRI rankings, player profiles, situational splits, and multi-tier AI scouting capabilities.
-
-### Launching the API Server
-
-```bash
-python -m uvicorn backend.app.main:app --reload --host 0.0.0.0 --port 8000
-```
-
-Once running:
-- **Interactive Swagger UI**: [http://localhost:8000/docs](http://localhost:8000/docs)
-- **ReDoc Documentation**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
-- **OpenAPI 3.1 Schema**: [http://localhost:8000/openapi.json](http://localhost:8000/openapi.json)
-
-### Core API Endpoints
-
-| Method | Endpoint | Description | Query / Body Params |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/v1/health` | Health & Store Readiness | None |
-| `GET` | `/api/v1/players/{scope}/{role}` | List cohort players & rankings | `official_only=bool`, `confidence_tier=str`, `limit=int`, `offset=int` |
-| `GET` | `/api/v1/players/{scope}/{role}/{name}` | Full player profile & CPRI components | None |
-| `GET` | `/api/v1/players/{scope}/{role}/{name}/splits` | Phase & pressure splits | None |
-| `GET` | `/api/v1/scouting/report/{scope}/{role}/{name}` | AI scouting report | None |
-| `GET` | `/api/v1/scouting/pressure/{scope}/{role}/{name}` | Pressure performance analysis | None |
-| `POST` | `/api/v1/scouting/compare` | Side-by-side player comparison | `scope`, `role`, `player_a`, `player_b` |
-| `GET` | `/api/v1/scouting/matchup/{scope}/{batter}/{bowler}` | H2H encounter & sample tier warning | None |
-| `POST` | `/api/v1/scouting/ask` | Natural language analytics QA | `query`, `scope` (optional), `role` (optional) |
-
----
-
-## 6. Phase 6 React Frontend Dashboard
-
-The frontend is a modern dark-first web application built with **React 18**, **Vite 6**, **TypeScript**, **Tailwind CSS**, and **Recharts**.
-
-### Launching the Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Application will run locally at: **`http://localhost:5173`**
-
-### Live Integration Verification
-Run the automated end-to-end integration test against the running backend:
-```bash
-cd frontend
-node test-integration.js
-```
-*Result: 9 / 9 live API endpoints verified.*
-
----
-
-## 7. Phase 7 Production Cloud Deployment
-
-SupeRR Intelligence is prepared for cloud deployment:
-- **Backend**: Hosted on **Render** using [`render.yaml`](./render.yaml) and dynamic `$PORT` binding.
-- **Frontend**: Hosted on **Vercel** with SPA client-side routing rewrites configured in [`frontend/vercel.json`](./frontend/vercel.json).
-
-For complete step-by-step instructions, environment variable setup, memory profiling details, and the 5-minute competition demo script, refer to:
-👉 **[`DEPLOYMENT.md`](./DEPLOYMENT.md)**
+- **Master Documentation Index:** [`docs/README.md`](docs/README.md)
+- **Adaptability Formula & Sensitivity:** [`docs/methodology/ADAPTABILITY_FORMULA_AND_SENSITIVITY.md`](docs/methodology/ADAPTABILITY_FORMULA_AND_SENSITIVITY.md)
+- **Official Selection Report:** [`docs/methodology/PHASE_8_OFFICIAL_SELECTION_REPORT.md`](docs/methodology/PHASE_8_OFFICIAL_SELECTION_REPORT.md)
+- **Final Methodology Report:** [`docs/methodology/PHASE_8_FINAL_METHODOLOGY_REPORT.md`](docs/methodology/PHASE_8_FINAL_METHODOLOGY_REPORT.md)
+- **Temporal Robustness & ML Evaluation:** [`docs/methodology/PHASE_9_2_TEMPORAL_ROBUSTNESS_REPORT.md`](docs/methodology/PHASE_9_2_TEMPORAL_ROBUSTNESS_REPORT.md)
+- **Final Ranking Validation (Phase 10):** [`docs/methodology/PHASE_10_FINAL_ASSESSMENT_REPORT.md`](docs/methodology/PHASE_10_FINAL_ASSESSMENT_REPORT.md)
+- **Cloud Deployment Guide:** [`DEPLOYMENT.md`](./DEPLOYMENT.md)
