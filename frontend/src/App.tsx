@@ -7,6 +7,7 @@ import { PlayerIntelligencePage } from './pages/PlayerIntelligencePage'
 import { PlayerComparisonPage } from './pages/PlayerComparisonPage'
 import { MatchupAnalysisPage } from './pages/MatchupAnalysisPage'
 import { ScoutingAssistantPage } from './pages/ScoutingAssistantPage'
+import { LimitationsPage } from './pages/LimitationsPage'
 import { MethodologyPage } from './pages/MethodologyPage'
 
 export const App: React.FC = () => {
@@ -17,7 +18,7 @@ export const App: React.FC = () => {
         <Route path="/" element={<OverviewPage />} />
 
         {/* Page 2: Rankings */}
-        <Route path="/rankings" element={<Navigate to="/rankings/ipl" replace />} />
+        <Route path="/rankings" element={<RankingsPage />} />
         <Route path="/rankings/:scopeParam" element={<RankingsPage />} />
 
         {/* Page 3: Player Intelligence */}
@@ -36,7 +37,10 @@ export const App: React.FC = () => {
         {/* Page 6: AI Scouting Assistant */}
         <Route path="/assistant" element={<ScoutingAssistantPage />} />
 
-        {/* Page 7: Methodology */}
+        {/* Page 7: Limitations & Uncertainty */}
+        <Route path="/limitations" element={<LimitationsPage />} />
+
+        {/* Page 8: Methodology */}
         <Route path="/methodology" element={<MethodologyPage />} />
 
         {/* Fallback */}

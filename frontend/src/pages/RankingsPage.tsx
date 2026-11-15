@@ -1,9 +1,23 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import { Trophy, Search, Filter, ArrowUpDown, ArrowRight, ShieldCheck, Crown, Flame, Target } from 'lucide-react'
+import { useParams, useNavigate, Link } from 'react-router-dom'
+import {
+  Trophy,
+  Search,
+  Filter,
+  ArrowUpDown,
+  ArrowRight,
+  ShieldCheck,
+  Crown,
+  Flame,
+  Target,
+  AlertTriangle,
+  Info
+} from 'lucide-react'
 import { getCohortPlayers } from '../api/playerApi'
+import { getOfficialRoleRankings } from '../api/officialApi'
 import type { PlayerSummaryItem } from '../types/player'
-import type { Scope, Role } from '../types/common'
+import type { OfficialPlayerItem } from '../types/official'
+import type { Role } from '../types/common'
 import { Card } from '../components/common/Card'
 import { Badge } from '../components/common/Badge'
 import { LoadingSpinner } from '../components/common/LoadingSpinner'
@@ -18,25 +32,38 @@ export const RankingsPage: React.FC = () => {
   const { scopeParam } = useParams<{ scopeParam?: string }>()
   const navigate = useNavigate()
 
-  // Default scope from URL: /rankings/ipl -> 'IPL', /rankings/t20i -> 'T20I'
-  const scope: Scope = scopeParam?.toLowerCase() === 't20i' ? 'T20I' : 'IPL'
+  // Mode: 'official' by default, or 'ipl', 't20i'
+  const mode = scopeParam?.toLowerCase() === 'ipl' ? 'ipl' : scopeParam?.toLowerCase() === 't20i' ? 't20i' : 'official'
+  const isOfficial = mode === 'official'
+
   const [role, setRole] = useState<Role>('Batter')
-  const [players, setPlayers] = useState<PlayerSummaryItem[]>([])
+  
+  // Data stores
+  const [officialTop10, setOfficialTop10] = useState<OfficialPlayerItem[]>([])
+  const [officialCandidates, setOfficialCandidates] = useState<OfficialPlayerItem[]>([])
+  const [cohortPlayers, setCohortPlayers] = useState<PlayerSummaryItem[]>([])
+  
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [showCandidates, setShowCandidates] = useState(false)
 
   // Filtering & Sorting
   const [search, setSearch] = useState('')
-  const [filterOfficial, setFilterOfficial] = useState(false)
-  const [sortField, setSortField] = useState<SortField>('cpri')
-  const [sortOrder, setSortOrder] = useState<SortOrder>('desc')
+  const [sortField, setSortField] = useState<SortField>('rank')
+  const [sortOrder, setSortOrder] = useState<SortOrder>('asc')
 
-  const fetchCohort = async () => {
+  const fetchData = async () => {
     setLoading(true)
     setError(null)
     try {
-      const data = await getCohortPlayers(scope, role, { limit: 100 })
-      setPlayers(data.players)
+      if (isOfficial) {
+        const data = await getOfficialRoleRankings(role)
+        setOfficialTop10(data.official_top10)
+        setOfficialCandidates(data.candidates || [])
+      } else {
+        const data = await getCohortPlayers(mode.toUpperCase() as any, role, { limit: 100 })
+        setCohortPlayers(data.players)
+      }
     } catch (err) {
       setError(getErrorMessage(err))
     } finally {
@@ -45,24 +72,27 @@ export const RankingsPage: React.FC = () => {
   }
 
   useEffect(() => {
-    fetchCohort()
-  }, [scope, role])
+    fetchData()
+  }, [mode, role])
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')
     } else {
       setSortField(field)
-      setSortOrder('desc')
+      setSortOrder(field === 'rank' ? 'asc' : 'desc')
     }
   }
 
+  const baseList: any[] = isOfficial
+    ? (showCandidates ? [...officialTop10, ...officialCandidates] : officialTop10)
+    : cohortPlayers
+
   const filteredAndSortedPlayers = useMemo(() => {
-    return players
+    return baseList
       .filter((p) => {
         const matchesName = p.player_name.toLowerCase().includes(search.toLowerCase())
-        const matchesOfficial = filterOfficial ? p.is_official_top10 : true
-        return matchesName && matchesOfficial
+        return matchesName
       })
       .sort((a, b) => {
         let valA = 0
@@ -93,87 +123,89 @@ export const RankingsPage: React.FC = () => {
             valB = b.components.reliability_confidence
             break
           case 'balls':
-            valA = a.pressure_deliveries
-            valB = b.pressure_deliveries
+            valA = a.pressure_stats?.pressure_deliveries || a.pressure_deliveries
+            valB = b.pressure_stats?.pressure_deliveries || b.pressure_deliveries
             break
         }
         return sortOrder === 'desc' ? valB - valA : valA - valB
       })
-  }, [players, search, filterOfficial, sortField, sortOrder])
+  }, [baseList, search, sortField, sortOrder])
 
-  // Top 3 official leaders for spotlight cards
-  const topThree = useMemo(() => {
-    return [...players]
-      .filter((p) => p.is_official_top10 && p.official_rank)
-      .sort((a, b) => (a.official_rank || 999) - (b.official_rank || 999))
-      .slice(0, 3)
-  }, [players])
+  const topThree = filteredAndSortedPlayers.slice(0, 3)
 
   return (
     <div className="space-y-6">
       {/* Header Banner */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#182752]">
+      <div className="bg-white border border-[#E5E7EB] rounded-lg p-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-xs font-mono font-medium text-pink-400 mb-1">
-            <Crown className="w-4 h-4 text-amber-400" />
-            <span>Official CPRI Leaderboard</span>
-            <span className="text-slate-600">•</span>
-            <span className="text-slate-400">{scope} Championship Cohort</span>
+          <div className="text-xs uppercase tracking-widest text-[#EC008C] font-bold mb-1">
+            {isOfficial ? 'SupeRR Selector Season 2 • Official Competition Submission' : `${mode.toUpperCase()} Contextual League Slice`}
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
-            <span>{scope}</span>
-            <span className="text-pink-500 font-black">CPRI</span>
-            <span>Rankings</span>
+          <h1 className="text-2xl md:text-3xl font-extrabold text-[#101F43] tracking-tight">
+            {isOfficial ? `Official Top 10 ${role}s` : `${mode.toUpperCase()} ${role} Rankings`}
           </h1>
-          <p className="text-xs text-slate-400 mt-0.5">
-            Composite Pressure Resilience Index rankings frozen under CPRI-v1.0.0 methodology
+          <p className="text-xs text-slate-500 mt-1 max-w-2xl">
+            {isOfficial
+              ? 'Authoritative frozen competition rankings evaluating high-pressure execution (PI ≥ 50.0) across all qualifying IPL and T20I match deliveries.'
+              : `Contextual single-tournament slice isolating balls faced/bowled within ${mode.toUpperCase()} only.`}
           </p>
         </div>
 
-        {/* Scope and Role Tabs */}
+        {/* Navigation Switchers */}
         <div className="flex flex-wrap items-center gap-3">
-          {/* Format Switcher */}
-          <div className="inline-flex rounded-lg p-1 bg-[#0c132c] border border-[#182752] text-xs font-semibold shadow-inner">
+          {/* Format / Mode Switcher */}
+          <div className="inline-flex rounded-md p-1 bg-[#F5F7FA] border border-[#E5E7EB] text-xs font-semibold">
             <button
-              onClick={() => navigate('/rankings/ipl')}
-              className={`px-3 py-1.5 rounded-md transition-all ${
-                scope === 'IPL'
-                  ? 'bg-gradient-to-r from-blue-700 to-indigo-700 text-white shadow-md shadow-blue-900/30'
-                  : 'text-slate-400 hover:text-white'
+              onClick={() => navigate('/rankings')}
+              className={`px-3 py-1.5 rounded transition-colors flex items-center gap-1.5 ${
+                isOfficial
+                  ? 'bg-[#101F43] text-white shadow-xs'
+                  : 'text-slate-600 hover:text-[#101F43]'
               }`}
             >
-              IPL Cohort
+              <Crown className="w-3.5 h-3.5 text-[#EC008C]" />
+              <span>Official Unified</span>
+            </button>
+            <button
+              onClick={() => navigate('/rankings/ipl')}
+              className={`px-3 py-1.5 rounded transition-colors ${
+                mode === 'ipl'
+                  ? 'bg-[#101F43] text-white shadow-xs'
+                  : 'text-slate-600 hover:text-[#101F43]'
+              }`}
+            >
+              IPL Contextual
             </button>
             <button
               onClick={() => navigate('/rankings/t20i')}
-              className={`px-3 py-1.5 rounded-md transition-all ${
-                scope === 'T20I'
-                  ? 'bg-gradient-to-r from-blue-700 to-indigo-700 text-white shadow-md shadow-blue-900/30'
-                  : 'text-slate-400 hover:text-white'
+              className={`px-3 py-1.5 rounded transition-colors ${
+                mode === 't20i'
+                  ? 'bg-[#101F43] text-white shadow-xs'
+                  : 'text-slate-600 hover:text-[#101F43]'
               }`}
             >
-              T20I Cohort
+              T20I Contextual
             </button>
           </div>
 
           {/* Role Switcher */}
-          <div className="inline-flex rounded-lg p-1 bg-[#0c132c] border border-[#182752] text-xs font-semibold shadow-inner">
+          <div className="inline-flex rounded-md p-1 bg-[#F5F7FA] border border-[#E5E7EB] text-xs font-semibold">
             <button
               onClick={() => setRole('Batter')}
-              className={`px-3 py-1.5 rounded-md transition-all ${
+              className={`px-3.5 py-1.5 rounded transition-colors ${
                 role === 'Batter'
-                  ? 'bg-gradient-to-r from-pink-600 to-rose-600 text-white shadow-md shadow-pink-600/30'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-[#101F43] text-white shadow-xs'
+                  : 'text-slate-600 hover:text-[#101F43]'
               }`}
             >
               Batters
             </button>
             <button
               onClick={() => setRole('Bowler')}
-              className={`px-3 py-1.5 rounded-md transition-all ${
+              className={`px-3.5 py-1.5 rounded transition-colors ${
                 role === 'Bowler'
-                  ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-md shadow-blue-600/30'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-[#101F43] text-white shadow-xs'
+                  : 'text-slate-600 hover:text-[#101F43]'
               }`}
             >
               Bowlers
@@ -182,255 +214,238 @@ export const RankingsPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Top 3 Podium Cards */}
-      {!loading && topThree.length >= 3 && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {topThree.map((player) => {
-            const isRank1 = player.official_rank === 1
-            const isRank2 = player.official_rank === 2
-            const borderColor = isRank1
-              ? 'border-amber-400/50 shadow-lg shadow-amber-500/10'
-              : isRank2
-              ? 'border-pink-500/40 shadow-lg shadow-pink-500/10'
-              : 'border-blue-500/40 shadow-lg shadow-blue-500/10'
-            const badgeBg = isRank1
-              ? 'bg-amber-400/20 text-amber-300 border-amber-400/40'
-              : isRank2
-              ? 'bg-pink-500/20 text-pink-300 border-pink-500/40'
-              : 'bg-blue-500/20 text-blue-300 border-blue-500/40'
-
-            return (
-              <Card
-                key={player.player_name}
-                variant="interactive"
-                className={`p-4 relative overflow-hidden ${borderColor}`}
-                onClick={() => navigate(`/players/${scope}/${role}/${encodeURIComponent(player.player_name)}`)}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className={`px-2 py-0.5 rounded text-xs font-mono font-bold border ${badgeBg}`}>
-                      {isRank1 && <Crown className="w-3 h-3 inline mr-1 text-amber-400" />}
-                      #{player.official_rank}
-                    </span>
-                    <Badge variant="official" size="sm">Official Top 10</Badge>
-                  </div>
-                  <span className="text-[10px] font-mono text-slate-400">
-                    {player.pressure_deliveries} Pressure Balls
-                  </span>
-                </div>
-                <div className="text-base font-bold text-white mb-1 group-hover:text-pink-400 transition-colors">
-                  {player.player_name}
-                </div>
-                <div className="flex items-baseline justify-between pt-2 border-t border-[#182752]/60">
-                  <span className="text-xs text-slate-400">CPRI Score</span>
-                  <span className="text-xl font-mono font-black text-pink-400">
-                    {formatScore(player.cpri_score)}
-                  </span>
-                </div>
-                <div className="grid grid-cols-4 gap-1 pt-2 mt-2 border-t border-[#182752]/40 text-center font-mono text-[10px]">
-                  <div>
-                    <div className="text-slate-500">PI</div>
-                    <div className="text-slate-200 font-semibold">{formatScore(player.components.pressure_impact, 0)}</div>
-                  </div>
-                  <div>
-                    <div className="text-slate-500">PA</div>
-                    <div className="text-slate-200 font-semibold">{formatScore(player.components.pressure_adaptability, 0)}</div>
-                  </div>
-                  <div>
-                    <div className="text-slate-500">CC</div>
-                    <div className="text-slate-200 font-semibold">{formatScore(player.components.clutch_consistency, 0)}</div>
-                  </div>
-                  <div>
-                    <div className="text-slate-500">RC</div>
-                    <div className="text-slate-200 font-semibold">{formatScore(player.components.reliability_confidence, 0)}</div>
-                  </div>
-                </div>
-              </Card>
-            )
-          })}
+      {/* Secondary View Warning Banner */}
+      {!isOfficial && (
+        <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg shadow-xs flex items-start gap-3">
+          <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+          <div className="text-xs text-amber-900 leading-relaxed">
+            <strong className="font-bold">Contextual League Notice: </strong>
+            This view reflects single-tournament metrics within {mode.toUpperCase()}. 
+            The <strong>Official Competition Ranking</strong> submitted for SupeRR Selector Season 2 is the{' '}
+            <button
+              onClick={() => navigate('/rankings')}
+              className="font-bold underline text-[#101F43] hover:text-[#EC008C]"
+            >
+              Unified Phase 8 Ranking
+            </button>.
+          </div>
         </div>
       )}
 
-      {/* Filter and Search Controls */}
-      <Card variant="subtle" className="p-4 flex flex-col md:flex-row items-center justify-between gap-4 border-[#182752]">
-        <div className="relative w-full md:w-80">
-          <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+      {/* Controls Bar: Search & Toggle */}
+      <div className="bg-white border border-[#E5E7EB] rounded-lg p-4 shadow-xs flex flex-wrap items-center justify-between gap-4">
+        <div className="relative flex-1 min-w-[240px] max-w-md">
+          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
-            placeholder={`Filter ${scope} ${role}s by name...`}
+            placeholder="Search by player name..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 rounded-lg bg-[#070b18] border border-[#182752] text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-pink-500 transition-colors"
+            className="w-full pl-9 pr-4 py-2 bg-[#F5F7FA] border border-[#E5E7EB] rounded-md text-xs text-[#101F43] focus:outline-none focus:border-[#EC008C]"
           />
         </div>
 
-        <div className="flex items-center gap-3 w-full md:w-auto justify-end">
-          <button
-            onClick={() => setFilterOfficial(!filterOfficial)}
-            className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium border transition-colors ${
-              filterOfficial
-                ? 'bg-pink-500/20 text-pink-300 border-pink-500/40 shadow-sm shadow-pink-500/20'
-                : 'bg-[#070b18] text-slate-400 border-[#182752] hover:text-white'
-            }`}
-          >
-            <ShieldCheck className="w-3.5 h-3.5" />
-            Official Top 10 Only
-          </button>
-          <span className="text-xs text-slate-400 font-mono">
-            Showing <strong className="text-pink-400">{filteredAndSortedPlayers.length}</strong> players
-          </span>
-        </div>
-      </Card>
+        <div className="flex items-center gap-3">
+          {isOfficial && (
+            <label className="flex items-center gap-2 text-xs font-semibold text-slate-700 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={showCandidates}
+                onChange={(e) => setShowCandidates(e.target.checked)}
+                className="rounded border-[#E5E7EB] text-[#EC008C] focus:ring-[#EC008C]"
+              />
+              <span>Include Contender Candidates (Ranks 11–25)</span>
+            </label>
+          )}
 
-      {/* Main Table */}
+          <div className="text-xs font-mono text-slate-500">
+            Showing {filteredAndSortedPlayers.length} players
+          </div>
+        </div>
+      </div>
+
       {loading ? (
-        <LoadingSpinner label={`Loading ${scope} ${role} rankings...`} />
+        <LoadingSpinner label={`Loading ${isOfficial ? 'Official' : mode.toUpperCase()} ${role} rankings...`} />
       ) : error ? (
-        <ErrorState message={error} onRetry={fetchCohort} />
+        <ErrorState message={error} onRetry={fetchData} />
       ) : (
-        <Card variant="default" className="overflow-hidden p-0 border-[#182752]">
+        /* Leaderboard Table */
+        <div className="bg-white border border-[#E5E7EB] rounded-lg shadow-xs overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-[#070b18] text-slate-400 font-mono uppercase text-[10px] tracking-wider border-b border-[#182752]">
-                <tr>
+            <table className="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr className="bg-[#101F43] text-white border-b border-[#E5E7EB]">
                   <th
-                    className="py-3.5 px-4 cursor-pointer hover:text-white select-none"
+                    className="py-3 px-3 cursor-pointer hover:bg-white/10 transition-colors"
                     onClick={() => handleSort('rank')}
                   >
                     <div className="flex items-center gap-1">
                       <span>Rank</span>
-                      <ArrowUpDown className="w-3 h-3 text-slate-500" />
+                      <ArrowUpDown className="w-3 h-3 text-slate-400" />
                     </div>
                   </th>
-                  <th className="py-3.5 px-4">Player Details</th>
+                  {isOfficial && <th className="py-3 px-3">90% CI</th>}
+                  <th className="py-3 px-3">Player</th>
+                  {isOfficial && <th className="py-3 px-3">Format Evidence</th>}
+                  <th className="py-3 px-3">Confidence Tier</th>
                   <th
-                    className="py-3.5 px-4 cursor-pointer hover:text-pink-400 select-none text-pink-400"
+                    className="py-3 px-3 text-right cursor-pointer hover:bg-white/10 transition-colors"
                     onClick={() => handleSort('cpri')}
                   >
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center justify-end gap-1">
                       <span>CPRI Score</span>
-                      <ArrowUpDown className="w-3 h-3 text-pink-400" />
+                      <ArrowUpDown className="w-3 h-3 text-[#EC008C]" />
                     </div>
                   </th>
                   <th
-                    className="py-3.5 px-4 cursor-pointer hover:text-white select-none"
+                    className="py-3 px-3 text-right cursor-pointer hover:bg-white/10 transition-colors"
                     onClick={() => handleSort('pi')}
                   >
-                    <div className="flex items-center gap-1">
-                      <span>Pressure Impact (40%)</span>
-                      <ArrowUpDown className="w-3 h-3 text-slate-500" />
-                    </div>
+                    PI (40%)
                   </th>
                   <th
-                    className="py-3.5 px-4 cursor-pointer hover:text-white select-none"
+                    className="py-3 px-3 text-right cursor-pointer hover:bg-white/10 transition-colors"
                     onClick={() => handleSort('pa')}
                   >
-                    <div className="flex items-center gap-1">
-                      <span>Adaptability (25%)</span>
-                      <ArrowUpDown className="w-3 h-3 text-slate-500" />
-                    </div>
+                    PA (25%)
                   </th>
                   <th
-                    className="py-3.5 px-4 cursor-pointer hover:text-white select-none"
+                    className="py-3 px-3 text-right cursor-pointer hover:bg-white/10 transition-colors"
                     onClick={() => handleSort('cc')}
                   >
-                    <div className="flex items-center gap-1">
-                      <span>Consistency (20%)</span>
-                      <ArrowUpDown className="w-3 h-3 text-slate-500" />
-                    </div>
+                    CC (20%)
                   </th>
                   <th
-                    className="py-3.5 px-4 cursor-pointer hover:text-white select-none"
+                    className="py-3 px-3 text-right cursor-pointer hover:bg-white/10 transition-colors"
                     onClick={() => handleSort('rc')}
                   >
-                    <div className="flex items-center gap-1">
-                      <span>Reliability (15%)</span>
-                      <ArrowUpDown className="w-3 h-3 text-slate-500" />
-                    </div>
+                    RC (15%)
                   </th>
-                  <th className="py-3.5 px-4">Confidence</th>
-                  <th className="py-3.5 px-4 text-right">Dossier</th>
+                  <th
+                    className="py-3 px-3 text-right cursor-pointer hover:bg-white/10 transition-colors"
+                    onClick={() => handleSort('balls')}
+                  >
+                    Pressure Balls
+                  </th>
+                  <th className="py-3 px-3 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#182752]/60 font-sans">
-                {filteredAndSortedPlayers.map((p, idx) => (
-                  <tr
-                    key={p.player_name}
-                    className="hover:bg-blue-950/20 transition-colors cursor-pointer group"
-                    onClick={() => navigate(`/players/${scope}/${role}/${encodeURIComponent(p.player_name)}`)}
-                  >
-                    <td className="py-3.5 px-4 font-mono font-bold text-slate-300">
-                      {p.official_rank ? (
+              <tbody className="divide-y divide-[#E5E7EB]">
+                {filteredAndSortedPlayers.map((p, idx) => {
+                  const rankNum = p.official_rank || idx + 1
+                  const isTop3 = rankNum <= 3
+                  const confTier = p.confidence_tier || 'High Confidence'
+                  const isExploratory = confTier === 'Exploratory'
+                  const pScope = isOfficial ? (p.competition_evidence === 'T20I-Only' ? 'T20I' : 'IPL') : mode.toUpperCase()
+
+                  return (
+                    <tr
+                      key={p.player_id || p.player_name}
+                      className="hover:bg-[#F5F7FA] transition-colors"
+                    >
+                      {/* Rank */}
+                      <td className="py-3 px-3 font-mono font-bold">
+                        <div className="flex items-center gap-1.5">
+                          <span
+                            className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${
+                              rankNum === 1
+                                ? 'bg-[#EC008C] text-white font-extrabold'
+                                : isTop3
+                                ? 'bg-[#101F43] text-white'
+                                : 'bg-[#F5F7FA] text-[#101F43] border border-[#E5E7EB]'
+                            }`}
+                          >
+                            {rankNum}
+                          </span>
+                        </div>
+                      </td>
+
+                      {/* 90% Rank CI */}
+                      {isOfficial && (
+                        <td className="py-3 px-3 font-mono text-slate-600 font-semibold">
+                          {p.rank_uncertainty?.ci_display || '—'}
+                        </td>
+                      )}
+
+                      {/* Player Name */}
+                      <td className="py-3 px-3">
+                        <Link
+                          to={`/players/${pScope}/${role}/${encodeURIComponent(p.player_name)}`}
+                          className="font-bold text-[#101F43] hover:text-[#EC008C] transition-colors"
+                        >
+                          {p.player_name}
+                        </Link>
+                      </td>
+
+                      {/* Format Evidence */}
+                      {isOfficial && (
+                        <td className="py-3 px-3">
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700">
+                            {p.competition_evidence || 'Dual-Format'}
+                          </span>
+                        </td>
+                      )}
+
+                      {/* Confidence Tier */}
+                      <td className="py-3 px-3">
                         <span
-                          className={`w-6 h-6 rounded-md flex items-center justify-center text-xs ${
-                            p.official_rank === 1
-                              ? 'bg-amber-400/20 text-amber-300 border border-amber-400/40 font-black'
-                              : p.official_rank === 2
-                              ? 'bg-pink-500/20 text-pink-300 border border-pink-500/40 font-bold'
-                              : p.official_rank === 3
-                              ? 'bg-blue-500/20 text-blue-300 border border-blue-500/40 font-bold'
-                              : 'bg-[#182752]/50 text-slate-400'
+                          className={`text-[10px] font-bold px-2 py-0.5 rounded ${
+                            isExploratory
+                              ? 'bg-amber-100 text-amber-800'
+                              : 'bg-emerald-100 text-emerald-800'
                           }`}
                         >
-                          #{p.official_rank}
+                          {confTier}
                         </span>
-                      ) : (
-                        <span className="text-slate-600 pl-1 font-mono text-xs">#{idx + 1}*</span>
-                      )}
-                    </td>
-                    <td className="py-3.5 px-4">
-                      <div className="flex items-center gap-2">
-                        <span className="font-semibold text-white group-hover:text-pink-400 transition-colors text-sm">
-                          {p.player_name}
-                        </span>
-                        <Badge variant={p.is_official_top10 ? 'official' : 'provisional'} size="sm">
-                          {p.ranking_tier}
-                        </Badge>
-                      </div>
-                      <div className="text-[10px] text-slate-400 font-mono mt-0.5">
-                        {p.pressure_deliveries} Pressure Deliveries • {role === 'Batter' ? `${p.strike_rate || '—'} SR` : `${p.economy_rate || '—'} Econ`}
-                      </div>
-                    </td>
-                    <td className="py-3.5 px-4 font-mono font-bold text-pink-400 text-sm">
-                      {formatScore(p.cpri_score)}
-                    </td>
-                    <td className="py-3.5 px-4 font-mono text-slate-300">
-                      {formatScore(p.components.pressure_impact, 1)}
-                    </td>
-                    <td className="py-3.5 px-4 font-mono text-slate-300">
-                      {formatScore(p.components.pressure_adaptability, 1)}
-                    </td>
-                    <td className="py-3.5 px-4 font-mono text-slate-300">
-                      {formatScore(p.components.clutch_consistency, 1)}
-                    </td>
-                    <td className="py-3.5 px-4 font-mono text-slate-300">
-                      {formatScore(p.components.reliability_confidence, 1)}
-                    </td>
-                    <td className="py-3.5 px-4">
-                      <Badge
-                        variant={
-                          p.confidence_tier.includes('High')
-                            ? 'high'
-                            : p.confidence_tier.includes('Medium')
-                            ? 'medium'
-                            : 'low'
-                        }
-                        size="sm"
-                      >
-                        {p.confidence_tier}
-                      </Badge>
-                    </td>
-                    <td className="py-3.5 px-4 text-right">
-                      <span className="inline-flex items-center gap-1 text-xs font-medium text-pink-400 group-hover:text-pink-300">
-                        View Dossier <ArrowRight className="w-3.5 h-3.5" />
-                      </span>
-                    </td>
-                  </tr>
-                ))}
+                      </td>
+
+                      {/* CPRI Score */}
+                      <td className="py-3 px-3 text-right font-black text-sm text-[#EC008C] font-mono">
+                        {formatScore(p.cpri_score)}
+                      </td>
+
+                      {/* PI */}
+                      <td className="py-3 px-3 text-right font-mono text-slate-700">
+                        {formatScore(p.components.pressure_impact)}
+                      </td>
+
+                      {/* PA */}
+                      <td className="py-3 px-3 text-right font-mono text-slate-700">
+                        {formatScore(p.components.pressure_adaptability)}
+                      </td>
+
+                      {/* CC */}
+                      <td className="py-3 px-3 text-right font-mono text-slate-700">
+                        {formatScore(p.components.clutch_consistency)}
+                      </td>
+
+                      {/* RC */}
+                      <td className="py-3 px-3 text-right font-mono text-slate-700">
+                        {formatScore(p.components.reliability_confidence)}
+                      </td>
+
+                      {/* Pressure Balls */}
+                      <td className="py-3 px-3 text-right font-mono text-slate-600">
+                        {p.pressure_stats?.pressure_deliveries || p.pressure_deliveries}
+                      </td>
+
+                      {/* Action */}
+                      <td className="py-3 px-3 text-right">
+                        <Link
+                          to={`/players/${pScope}/${role}/${encodeURIComponent(p.player_name)}`}
+                          className="text-[11px] font-bold text-[#EC008C] hover:text-[#101F43] inline-flex items-center gap-1"
+                        >
+                          <span>Dossier</span>
+                          <ArrowRight className="w-3 h-3" />
+                        </Link>
+                      </td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>
-        </Card>
+        </div>
       )}
     </div>
   )

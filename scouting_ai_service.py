@@ -360,8 +360,9 @@ class DeterministicScoutingFallback:
 
         for entity, data in profiles.items():
             if "cpri_score" in data:
+                ci_text = f" | 90% Rank CI: {data['rank_uncertainty']['ci_display']}" if "rank_uncertainty" in data else ""
                 lines.append(
-                    f"- **{entity}**: Official CPRI `{data['cpri_score']:.2f}` (Rank #{data['official_rank']}, {data['ranking_tier']}). "
+                    f"- **{entity}**: Official CPRI `{data['cpri_score']:.2f}` (Rank #{data['official_rank']}, {data['ranking_tier']}{ci_text}). "
                     f"Pressure Deliveries: `{data['exposure']['pressure_deliveries']}`. "
                     f"Pressure Impact: `{data['components']['pressure_impact']:.1f}`, Consistency: `{data['components']['clutch_consistency']:.1f}`."
                 )
@@ -371,7 +372,7 @@ class DeterministicScoutingFallback:
         lines.extend([
             "",
             "### Analytical Summary:",
-            "All findings above are strictly derived from verified Phase 3.5 frozen rankings and contextual match states. "
+            "All findings above are strictly derived from verified Phase 8 official rankings, bootstrap rank uncertainty, and contextual match states. "
             "Unrecorded attributes (such as ball release velocity or subjective confidence) are excluded to ensure 100% statistical integrity."
         ])
 

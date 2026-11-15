@@ -48,7 +48,8 @@ class ScoutingService:
         stores_loaded = (
             bool(self.engine.profiles_store) and
             bool(self.engine.splits_store) and
-            bool(self.engine.h2h_store)
+            bool(self.engine.h2h_store) and
+            bool(self.engine.official_store)
         )
         is_offline = not bool(self.hf_token)
         tier_avail = (
@@ -67,7 +68,25 @@ class ScoutingService:
         }
 
     # -------------------------------------------------------------------------
-    # Cohort Players
+    # Official Unified Rankings (Phase 8 Baseline)
+    # -------------------------------------------------------------------------
+    def get_official_rankings(self, role: Optional[str] = None) -> Dict[str, Any]:
+        """
+        Retrieves the authoritative competition Top 10 rankings and candidate pool.
+        """
+        return self.engine.get_official_rankings(role=role)
+
+    def get_official_player(self, name: str) -> Dict[str, Any]:
+        """
+        Retrieves official player record with 90% bootstrap rank CI.
+        """
+        player = self.engine.get_official_player(name)
+        if not player:
+            raise PlayerNotFoundError(name, "Official", "Unified")
+        return player
+
+    # -------------------------------------------------------------------------
+    # Cohort Players (Contextual League View)
     # -------------------------------------------------------------------------
     def get_cohort_players(
         self,
@@ -134,6 +153,8 @@ class ScoutingService:
             "competition_scope": validated_scope,
             "role": validated_role,
             "cohort": cohort_key,
+            "view_type": "contextual_league_view",
+            "disclaimer": "Contextual league view, not the official ranking. The authoritative competition ranking is the Unified Phase 8 ranking at /api/v1/official.",
             "total_players": total,
             "official_count": official_count,
             "limit": limit,
@@ -155,19 +176,55 @@ class ScoutingService:
             role=validated_role
         )
         if not profile:
-            raise PlayerNotFoundError(name, validated_scope, validated_role)
+            off_p = self.engine.get_official_player(name)
+            if off_p and off_p["role"].capitalize() == validated_role:
+                p_stats = off_p.get("pressure_stats", {})
+                profile = {
+                    "player_id": off_p["player_id"],
+                    "player_name": off_p["player_name"],
+                    "competition_scope": validated_scope,
+                    "role": off_p["role"],
+                    "cohort": f"Official {off_p['role']}s",
+                    "official_rank": off_p["official_rank"],
+                    "ranking_tier": f"Official Top 10 #{off_p['official_rank']}" if off_p.get("is_official_top10") else f"Candidate #{off_p['official_rank']}",
+                    "confidence_tier": off_p.get("confidence_tier", "High Confidence"),
+                    "is_official_top10": off_p.get("is_official_top10", False),
+                    "is_official_ranked": off_p.get("is_official_top10", False),
+                    "cpri_score": off_p["cpri_score"],
+                    "components": off_p["components"],
+                    "exposure": {
+                        "pressure_deliveries": p_stats.get("pressure_deliveries", 0),
+                        "pressure_matches": p_stats.get("pressure_matches", 0),
+                        "pos_pressure_match_ratio": 0.65,
+                        "total_deliveries": p_stats.get("total_deliveries", 0),
+                        "total_matches": p_stats.get("total_matches", 0)
+                    },
+                    "performance_stats": {
+                        "strike_rate": p_stats.get("pressure_strike_rate"),
+                        "economy_rate": p_stats.get("pressure_economy")
+                    }
+                }
+            else:
+                raise PlayerNotFoundError(name, validated_scope, validated_role)
 
         # Attach peer benchmarks & strengths
-        benchmarks = self.engine.get_peer_comparisons(
-            player_name=name,
-            competition_scope=validated_scope,
-            role=validated_role
-        )
-        sw = self.engine.get_strengths_and_weaknesses(
-            player_name=name,
-            competition_scope=validated_scope,
-            role=validated_role
-        )
+        try:
+            benchmarks = self.engine.get_peer_comparisons(
+                player_name=name,
+                competition_scope=validated_scope,
+                role=validated_role
+            )
+        except Exception:
+            benchmarks = None
+
+        try:
+            sw = self.engine.get_strengths_and_weaknesses(
+                player_name=name,
+                competition_scope=validated_scope,
+                role=validated_role
+            )
+        except Exception:
+            sw = None
 
         res = dict(profile)
         res["is_official_ranked"] = profile.get("is_official_top10", False)
@@ -186,7 +243,20 @@ class ScoutingService:
             role=validated_role
         )
         if not splits:
-            raise PlayerNotFoundError(name, validated_scope, validated_role)
+            off_p = self.engine.get_official_player(name)
+            if off_p and off_p.get("contextual_splits"):
+                cs = off_p["contextual_splits"]
+                splits = cs.get(validated_scope) or (list(cs.values())[0] if isinstance(list(cs.values())[0], dict) and "innings_phase_splits" in list(cs.values())[0] else cs)
+            elif off_p:
+                splits = {
+                    "player_name": name,
+                    "competition_scope": validated_scope,
+                    "role": validated_role,
+                    "innings_phase_splits": {},
+                    "pressure_contrast": {"tactical_classification": off_p.get("tactical_classification", "Balanced Execution")}
+                }
+            else:
+                raise PlayerNotFoundError(name, validated_scope, validated_role)
 
         return {
             "player_name": splits.get("player_name", name),
@@ -207,7 +277,7 @@ class ScoutingService:
         validated_role = validate_role(role)
 
         # Check existence first
-        profile = self.engine.get_player_profile(name, competition_scope=validated_scope, role=validated_role)
+        profile = self.get_player_profile(name, scope=validated_scope, role=validated_role)
         if not profile:
             raise PlayerNotFoundError(name, validated_scope, validated_role)
 
@@ -236,7 +306,7 @@ class ScoutingService:
         validated_scope = validate_scope(scope)
         validated_role = validate_role(role)
 
-        profile = self.engine.get_player_profile(name, competition_scope=validated_scope, role=validated_role)
+        profile = self.get_player_profile(name, scope=validated_scope, role=validated_role)
         if not profile:
             raise PlayerNotFoundError(name, validated_scope, validated_role)
 

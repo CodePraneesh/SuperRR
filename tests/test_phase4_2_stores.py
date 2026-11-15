@@ -216,6 +216,31 @@ class TestPhase42ScoutingStores(unittest.TestCase):
                 self.assertEqual(m["sample_tier"], "Robust Sample (>=30 balls)")
                 self.assertTrue(m["is_statistically_reliable"])
 
+    def test_10_official_phase8_store_matches_freeze(self):
+        """Verify official_scouting_store.json matches Phase 8 freeze files exactly."""
+        off_store_path = self.data_dir / "official_scouting_store.json"
+        self.assertTrue(off_store_path.exists(), "official_scouting_store.json must exist")
+        with open(off_store_path, "r", encoding="utf-8") as f:
+            off_store = json.load(f)
+
+        p8_bat = pd.read_csv("output/phase8_ranking_reconsideration/official_top10_batters.csv")
+        p8_bowl = pd.read_csv("output/phase8_ranking_reconsideration/official_top10_bowlers.csv")
+
+        self.assertEqual(len(off_store["official_top10_batters"]), 10)
+        self.assertEqual(len(off_store["official_top10_bowlers"]), 10)
+
+        for i, row in p8_bat.iterrows():
+            store_item = off_store["official_top10_batters"][i]
+            self.assertEqual(store_item["official_rank"], int(row["official_rank"]))
+            self.assertEqual(store_item["player_name"], str(row["player_name"]))
+            self.assertAlmostEqual(store_item["cpri_score"], round(float(row["cpri_score"]), 2), places=2)
+
+        for i, row in p8_bowl.iterrows():
+            store_item = off_store["official_top10_bowlers"][i]
+            self.assertEqual(store_item["official_rank"], int(row["official_rank"]))
+            self.assertEqual(store_item["player_name"], str(row["player_name"]))
+            self.assertAlmostEqual(store_item["cpri_score"], round(float(row["cpri_score"]), 2), places=2)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -8,11 +8,10 @@ import {
   ResponsiveContainer,
   Cell,
 } from 'recharts'
-import type { PlayerSummaryItem } from '../../types/player'
 
 interface TopRankingsBarChartProps {
-  players: PlayerSummaryItem[]
-  onSelectPlayer?: (player: PlayerSummaryItem) => void
+  players: any[]
+  onSelectPlayer?: (player: any) => void
   height?: number
 }
 
@@ -28,7 +27,9 @@ export const TopRankingsBarChart: React.FC<TopRankingsBarChartProps> = ({
       name: p.player_name,
       cpri: p.cpri_score,
       rank: p.official_rank || idx + 1,
-      tier: p.ranking_tier,
+      ci: p.rank_uncertainty?.ci_display || '',
+      tier: p.confidence_tier || p.ranking_tier || 'Official Top 10',
+      evidence: p.competition_evidence || p.competition_scope,
       raw: p,
     }))
 
@@ -38,7 +39,7 @@ export const TopRankingsBarChart: React.FC<TopRankingsBarChartProps> = ({
         <BarChart
           data={top10}
           layout="vertical"
-          margin={{ top: 5, right: 30, left: 75, bottom: 5 }}
+          margin={{ top: 5, right: 30, left: 85, bottom: 5 }}
         >
           <XAxis
             type="number"
@@ -51,34 +52,33 @@ export const TopRankingsBarChart: React.FC<TopRankingsBarChartProps> = ({
             dataKey="name"
             tick={{ fill: '#101F43', fontSize: 12, fontWeight: 600 }}
             stroke="#E5E7EB"
-            width={110}
+            width={120}
           />
           <Tooltip
             contentStyle={{
               backgroundColor: '#FFFFFF',
               borderColor: '#E5E7EB',
               borderRadius: '6px',
-              color: '#101F43',
               fontSize: '12px',
-              boxShadow: '0 4px 6px -1px rgba(16, 31, 67, 0.08)',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
             }}
-            formatter={(value: any) => [`${Number(value).toFixed(2)} CPRI`, 'Score']}
-            labelFormatter={(name: any, entry: any) => {
-              const item = entry?.[0]?.payload
-              return `#${item?.rank} ${name} (${item?.tier})`
-            }}
+            formatter={(value: any, name: any, item: any) => [
+              `${Number(value).toFixed(2)} CPRI ${item.payload.ci ? `(CI ${item.payload.ci})` : ''}`,
+              `Rank #${item.payload.rank} • ${item.payload.tier}`,
+            ]}
           />
           <Bar
             dataKey="cpri"
             radius={[0, 4, 4, 0]}
-            onClick={(data) => onSelectPlayer && onSelectPlayer(data.raw)}
-            cursor={onSelectPlayer ? 'pointer' : 'default'}
+            onClick={(entry) => onSelectPlayer && onSelectPlayer(entry.raw)}
+            cursor="pointer"
           >
-            {top10.map((entry, index) => {
-              // Problem Statement Theme: #1 rank in Rajasthan Royals pink (#EC008C), others in deep navy (#101F43)
-              const fill = index === 0 ? '#EC008C' : '#101F43'
-              return <Cell key={`cell-${index}`} fill={fill} />
-            })}
+            {top10.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={index === 0 ? '#EC008C' : index < 3 ? '#101F43' : '#334155'}
+              />
+            ))}
           </Bar>
         </BarChart>
       </ResponsiveContainer>

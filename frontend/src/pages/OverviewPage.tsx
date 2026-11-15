@@ -7,10 +7,15 @@ import {
   Activity,
   ShieldCheck,
   Target,
+  AlertTriangle,
+  Flame,
+  Crown
 } from 'lucide-react'
 import { getCohortPlayers } from '../api/playerApi'
+import { getOfficialRoleRankings } from '../api/officialApi'
 import type { PlayerSummaryItem } from '../types/player'
-import type { Scope, Role } from '../types/common'
+import type { OfficialPlayerItem } from '../types/official'
+import type { Role } from '../types/common'
 import { Card } from '../components/common/Card'
 import { Badge } from '../components/common/Badge'
 import { LoadingSpinner } from '../components/common/LoadingSpinner'
@@ -20,20 +25,32 @@ import { CPRIComponentRadar } from '../components/charts/CPRIComponentRadar'
 import { formatScore } from '../utils/formatters'
 import { getErrorMessage } from '../api/client'
 
+type ViewMode = 'official' | 'ipl' | 't20i'
+
 export const OverviewPage: React.FC = () => {
-  const [scope, setScope] = useState<Scope>('IPL')
+  const [viewMode, setViewMode] = useState<ViewMode>('official')
   const [role, setRole] = useState<Role>('Batter')
-  const [players, setPlayers] = useState<PlayerSummaryItem[]>([])
+  
+  // Official unified state
+  const [officialPlayers, setOfficialPlayers] = useState<OfficialPlayerItem[]>([])
+  // Contextual league state
+  const [cohortPlayers, setCohortPlayers] = useState<PlayerSummaryItem[]>([])
+  
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
 
-  const loadData = async (s: Scope, r: Role) => {
+  const loadData = async () => {
     setLoading(true)
     setError(null)
     try {
-      const data = await getCohortPlayers(s, r, { limit: 50 })
-      setPlayers(data.players)
+      if (viewMode === 'official') {
+        const data = await getOfficialRoleRankings(role)
+        setOfficialPlayers(data.official_top10)
+      } else {
+        const data = await getCohortPlayers(viewMode.toUpperCase() as any, role, { limit: 50 })
+        setCohortPlayers(data.players)
+      }
     } catch (err) {
       setError(getErrorMessage(err))
     } finally {
@@ -42,11 +59,13 @@ export const OverviewPage: React.FC = () => {
   }
 
   useEffect(() => {
-    loadData(scope, role)
-  }, [scope, role])
+    loadData()
+  }, [viewMode, role])
 
-  const champion = players[0]
-  const topThree = players.slice(0, 3)
+  const isOfficial = viewMode === 'official'
+  const displayPlayers: any[] = isOfficial ? officialPlayers : cohortPlayers
+  const champion = displayPlayers[0]
+  const topThree = displayPlayers.slice(0, 3)
 
   return (
     <div className="space-y-8">
@@ -66,41 +85,52 @@ export const OverviewPage: React.FC = () => {
           </div>
 
           <p className="text-sm text-slate-600 leading-relaxed mb-6 max-w-3xl">
-            Conventional cricket statistics collapse when match leverage peaks. SupeRR Intelligence isolates and quantifies player execution strictly when match outcome volatility spikes (Pressure Index ≥ 50.0). By synthesizing ball-by-ball Win Probability Added (WPA) residuals with Bayesian reliability shrinkage, the platform produces the frozen Clutch Performance &amp; Reliability Index (CPRI v1.0.0).
+            Conventional cricket statistics collapse when match leverage peaks. SupeRR Intelligence isolates and quantifies player execution strictly when match outcome volatility spikes (Pressure Index ≥ 50.0). By synthesizing ball-by-ball expected-performance residuals with Bayesian reliability shrinkage, the platform produces the certified <strong>Clutch Performance &amp; Reliability Index (CPRI v1.0.0)</strong>.
           </p>
 
           {/* Clean Editorial Switchers */}
           <div className="flex flex-wrap items-center gap-4 pt-2 border-t border-[#E5E7EB]">
-            {/* Scope Switcher */}
+            {/* View Mode Switcher */}
             <div className="flex items-center gap-1.5">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 mr-1">Competition:</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 mr-1">Ranking View:</span>
               <div className="inline-flex rounded-md p-1 bg-[#F5F7FA] border border-[#E5E7EB] text-xs font-semibold">
                 <button
-                  onClick={() => setScope('IPL')}
-                  className={`px-3.5 py-1.5 rounded transition-colors ${
-                    scope === 'IPL'
+                  onClick={() => setViewMode('official')}
+                  className={`px-3 py-1.5 rounded transition-colors flex items-center gap-1.5 ${
+                    viewMode === 'official'
                       ? 'bg-[#101F43] text-white shadow-xs'
                       : 'text-slate-600 hover:text-[#101F43]'
                   }`}
                 >
-                  IPL
+                  <Crown className="w-3.5 h-3.5 text-[#EC008C]" />
+                  <span>Official Unified (Headline)</span>
                 </button>
                 <button
-                  onClick={() => setScope('T20I')}
-                  className={`px-3.5 py-1.5 rounded transition-colors ${
-                    scope === 'T20I'
+                  onClick={() => setViewMode('ipl')}
+                  className={`px-3 py-1.5 rounded transition-colors ${
+                    viewMode === 'ipl'
                       ? 'bg-[#101F43] text-white shadow-xs'
                       : 'text-slate-600 hover:text-[#101F43]'
                   }`}
                 >
-                  T20I
+                  IPL Contextual
+                </button>
+                <button
+                  onClick={() => setViewMode('t20i')}
+                  className={`px-3 py-1.5 rounded transition-colors ${
+                    viewMode === 't20i'
+                      ? 'bg-[#101F43] text-white shadow-xs'
+                      : 'text-slate-600 hover:text-[#101F43]'
+                  }`}
+                >
+                  T20I Contextual
                 </button>
               </div>
             </div>
 
             {/* Role Switcher */}
             <div className="flex items-center gap-1.5">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 mr-1">Cohort:</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 mr-1">Role:</span>
               <div className="inline-flex rounded-md p-1 bg-[#F5F7FA] border border-[#E5E7EB] text-xs font-semibold">
                 <button
                   onClick={() => setRole('Batter')}
@@ -128,11 +158,29 @@ export const OverviewPage: React.FC = () => {
             {/* Methodology status tag */}
             <div className="ml-auto hidden md:flex items-center gap-1.5 text-xs text-slate-500 font-mono">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              <span>CPRI-v1.0.0 Frozen Baseline</span>
+              <span>CPRI Phase 8 Frozen Baseline</span>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Contextual Disclaimer Banner when viewing league-only */}
+      {!isOfficial && (
+        <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg shadow-xs flex items-start gap-3">
+          <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+          <div className="text-xs text-amber-900 leading-relaxed">
+            <span className="font-bold">Contextual League View ({viewMode.toUpperCase()} {role}s): </span>
+            This secondary view isolates performances strictly within {viewMode.toUpperCase()}. 
+            The <strong>Official Competition Ranking</strong> evaluating all qualifying evidence is the{' '}
+            <button
+              onClick={() => setViewMode('official')}
+              className="font-bold underline text-[#101F43] hover:text-[#EC008C]"
+            >
+              Unified Phase 8 Ranking
+            </button>.
+          </div>
+        </div>
+      )}
 
       {/* The 4 CPRI Pillars (Editorial Grid) */}
       <div>
@@ -146,7 +194,7 @@ export const OverviewPage: React.FC = () => {
             </div>
             <div className="text-base font-bold text-[#101F43] mb-1">Pressure Impact</div>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Expected run and dismissal residuals on high-pressure deliveries ($PI \ge 50.0$) against pre-ball baselines.
+              Expected run and dismissal residuals on high-pressure deliveries (PI ≥ 50.0) against pre-ball match state baselines.
             </p>
           </div>
 
@@ -156,7 +204,7 @@ export const OverviewPage: React.FC = () => {
             </div>
             <div className="text-base font-bold text-[#101F43] mb-1">Pressure Adaptability</div>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Performance rate delta comparing high-pressure execution directly against low-pressure baseline rates.
+              Combined leverage formula (0.60 × Pressure Impact + 0.40 × max(delta, -5.0)) evaluating clutch execution vs low-leverage baselines.
             </p>
           </div>
 
@@ -176,16 +224,16 @@ export const OverviewPage: React.FC = () => {
             </div>
             <div className="text-base font-bold text-[#101F43] mb-1">Reliability Confidence</div>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Empirical Bayes shrinkage based on pressure ball sample depth ($\ge 100$ balls) and match dispersion.
+              Empirical Bayes shrinkage based on pressure ball sample depth (≥100 balls) and match dispersion.
             </p>
           </div>
         </div>
       </div>
 
       {loading ? (
-        <LoadingSpinner label={`Retrieving ${scope} ${role} rankings...`} />
+        <LoadingSpinner label={`Retrieving ${isOfficial ? 'Official' : viewMode.toUpperCase()} ${role} rankings...`} />
       ) : error ? (
-        <ErrorState message={error} onRetry={() => loadData(scope, role)} />
+        <ErrorState message={error} onRetry={loadData} />
       ) : (
         <>
           {/* Top 3 Pressure Performers Spotlight */}
@@ -193,223 +241,184 @@ export const OverviewPage: React.FC = () => {
             <div className="flex items-center justify-between mb-3">
               <div>
                 <div className="text-xs font-bold uppercase tracking-wider text-[#EC008C] mb-0.5">
-                  Official Leaderboard Spotlight
+                  {isOfficial ? 'Official Competition Podium' : `${viewMode.toUpperCase()} Contextual Leaders`}
                 </div>
                 <h2 className="text-lg font-bold text-[#101F43]">
-                  {scope} {role} Leaders (Official Top 3)
+                  {isOfficial ? `Official Top 3 ${role}s` : `${viewMode.toUpperCase()} ${role} Leaders`}
                 </h2>
               </div>
               <Link
-                to={`/rankings/${scope.toLowerCase()}`}
-                className="text-xs font-bold text-[#EC008C] hover:text-[#C70076] flex items-center gap-1 transition-colors"
+                to={isOfficial ? '/rankings' : `/rankings/${viewMode}`}
+                className="text-xs font-bold text-[#EC008C] hover:text-[#101F43] flex items-center gap-1 transition-colors"
               >
-                View Full Cohort <ArrowRight className="w-3.5 h-3.5" />
+                <span>View Full Leaderboard</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {topThree.map((player, idx) => (
-                <div
-                  key={player.player_name}
-                  onClick={() => navigate(`/players/${scope}/${role}/${encodeURIComponent(player.player_name)}`)}
-                  className="bg-white border border-[#E5E7EB] rounded-lg p-5 shadow-xs hover:border-[#EC008C]/40 transition-all cursor-pointer group"
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`w-7 h-7 rounded flex items-center justify-center font-bold text-xs ${
-                          idx === 0
-                            ? 'bg-[#FDF2F8] text-[#EC008C] border border-[#FBCFE8]'
-                            : 'bg-[#F1F5F9] text-[#101F43] border border-[#E2E8F0]'
-                        }`}
-                      >
-                        #{player.official_rank || idx + 1}
-                      </span>
-                      <Badge variant={player.is_official_top10 ? 'official' : 'provisional'} size="sm">
-                        {player.ranking_tier}
-                      </Badge>
-                    </div>
-                    <Badge variant="neutral" size="sm">
-                      {player.confidence_tier}
-                    </Badge>
-                  </div>
+              {topThree.map((p, idx) => {
+                const rankNum = p.official_rank || idx + 1
+                const ciText = p.rank_uncertainty?.ci_display ? ` 90% CI: ${p.rank_uncertainty.ci_display}` : ''
+                const isFirst = rankNum === 1
+                const confTier = p.confidence_tier || 'High Confidence'
+                const isExploratory = confTier === 'Exploratory'
 
-                  <h3 className="text-lg font-bold text-[#101F43] group-hover:text-[#EC008C] transition-colors mb-1 truncate">
-                    {player.player_name}
-                  </h3>
-                  <div className="text-xs text-slate-500 mb-4 flex items-center gap-2 font-mono">
-                    <span>{player.pressure_deliveries} Pressure Balls</span>
-                    <span>•</span>
-                    <span>
-                      {role === 'Batter' ? `${player.strike_rate || '—'} SR` : `${player.economy_rate || '—'} Econ`}
-                    </span>
-                  </div>
+                return (
+                  <div
+                    key={p.player_id || p.player_name}
+                    onClick={() => {
+                      const pScope = isOfficial ? (p.competition_evidence === 'T20I-Only' ? 'T20I' : 'IPL') : viewMode.toUpperCase()
+                      navigate(`/players/${pScope}/${role}/${encodeURIComponent(p.player_name)}`)
+                    }}
+                    className={`relative p-5 rounded-lg border transition-all cursor-pointer hover:shadow-md ${
+                      isFirst
+                        ? 'bg-gradient-to-br from-[#101F43] to-[#1E3A8A] text-white border-[#101F43]'
+                        : 'bg-white border-[#E5E7EB] text-[#101F43]'
+                    }`}
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex items-center gap-2">
+                        <span
+                          className={`w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs ${
+                            isFirst ? 'bg-[#EC008C] text-white' : 'bg-[#F5F7FA] text-[#101F43] border border-[#E5E7EB]'
+                          }`}
+                        >
+                          #{rankNum}
+                        </span>
+                        {ciText && (
+                          <span className={`text-[11px] font-mono font-medium ${isFirst ? 'text-slate-200' : 'text-slate-500'}`}>
+                            {p.rank_uncertainty.ci_display}
+                          </span>
+                        )}
+                      </div>
+                      
+                      <div className="flex items-center gap-1.5">
+                        {p.competition_evidence && (
+                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
+                            isFirst ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-700'
+                          }`}>
+                            {p.competition_evidence}
+                          </span>
+                        )}
+                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
+                          isExploratory
+                            ? isFirst ? 'bg-amber-400/30 text-amber-200' : 'bg-amber-100 text-amber-800'
+                            : isFirst ? 'bg-emerald-400/30 text-emerald-200' : 'bg-emerald-100 text-emerald-800'
+                        }`}>
+                          {confTier}
+                        </span>
+                      </div>
+                    </div>
 
-                  <div className="pt-3 border-t border-[#E5E7EB] flex items-baseline justify-between">
-                    <div>
-                      <div className="text-[10px] uppercase tracking-wider text-slate-500 font-bold">
-                        CPRI Score
-                      </div>
-                      <div className="text-2xl font-black font-sans text-[#101F43]">
-                        {formatScore(player.cpri_score)}
+                    <div className="font-extrabold text-lg tracking-tight mb-1">{p.player_name}</div>
+                    
+                    <div className="flex items-baseline gap-2 mb-4">
+                      <div className="text-2xl font-black text-[#EC008C]">{formatScore(p.cpri_score)}</div>
+                      <div className={`text-xs uppercase tracking-wider font-semibold ${isFirst ? 'text-slate-300' : 'text-slate-500'}`}>
+                        CPRI Index
                       </div>
                     </div>
-                    <div className="text-right text-[11px] font-mono text-slate-500">
-                      <div>PI: <span className="text-[#101F43] font-bold">{formatScore(player.components.pressure_impact, 1)}</span></div>
-                      <div>CC: <span className="text-[#101F43] font-bold">{formatScore(player.components.clutch_consistency, 1)}</span></div>
+
+                    {/* Component Pills */}
+                    <div className="grid grid-cols-4 gap-1.5 pt-3 border-t border-slate-200/20 text-center">
+                      <div>
+                        <div className={`text-[10px] uppercase ${isFirst ? 'text-slate-300' : 'text-slate-500'}`}>PI (40%)</div>
+                        <div className="text-xs font-bold font-mono">{formatScore(p.components.pressure_impact)}</div>
+                      </div>
+                      <div>
+                        <div className={`text-[10px] uppercase ${isFirst ? 'text-slate-300' : 'text-slate-500'}`}>PA (25%)</div>
+                        <div className="text-xs font-bold font-mono">{formatScore(p.components.pressure_adaptability)}</div>
+                      </div>
+                      <div>
+                        <div className={`text-[10px] uppercase ${isFirst ? 'text-slate-300' : 'text-slate-500'}`}>CC (20%)</div>
+                        <div className="text-xs font-bold font-mono">{formatScore(p.components.clutch_consistency)}</div>
+                      </div>
+                      <div>
+                        <div className={`text-[10px] uppercase ${isFirst ? 'text-slate-300' : 'text-slate-500'}`}>RC (15%)</div>
+                        <div className="text-xs font-bold font-mono">{formatScore(p.components.reliability_confidence)}</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
 
-          {/* Visualizations Grid */}
+          {/* Deep Analysis Grid: Chart & Component Radar */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Top 10 Chart */}
             <div className="bg-white border border-[#E5E7EB] rounded-lg p-5 shadow-xs">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-[#EC008C] mb-0.5">
-                    Benchmark Distribution
+                  <div className="text-xs font-bold uppercase tracking-wider text-[#EC008C] mb-0.5">
+                    Official CPRI Distribution
                   </div>
-                  <h3 className="text-sm font-bold text-[#101F43] flex items-center gap-1.5">
-                    <TrendingUp className="w-4 h-4 text-[#101F43]" />
-                    Top 10 CPRI Ranking Curve
+                  <h3 className="text-base font-bold text-[#101F43]">
+                    {isOfficial ? `Official Top 10 ${role}s` : `${viewMode.toUpperCase()} ${role} Rankings`}
                   </h3>
                 </div>
-                <span className="text-xs font-mono text-slate-500">Scale: [60-100]</span>
+                <div className="text-xs font-mono text-slate-500">Scale: 60 - 100 CPRI</div>
               </div>
+
               <TopRankingsBarChart
-                players={players}
-                onSelectPlayer={(p) => navigate(`/players/${scope}/${role}/${encodeURIComponent(p.player_name)}`)}
-                height={280}
+                players={displayPlayers}
+                height={340}
+                onSelectPlayer={(selected) => {
+                  const pScope = isOfficial ? (selected.competition_evidence === 'T20I-Only' ? 'T20I' : 'IPL') : viewMode.toUpperCase()
+                  navigate(`/players/${pScope}/${role}/${encodeURIComponent(selected.player_name)}`)
+                }}
               />
             </div>
 
-            {/* Radar Comparison for #1 */}
+            {/* #1 Player Radar Profile */}
             {champion && (
-              <div className="bg-white border border-[#E5E7EB] rounded-lg p-5 shadow-xs">
+              <div className="bg-white border border-[#E5E7EB] rounded-lg p-5 shadow-xs flex flex-col">
                 <div className="flex items-center justify-between mb-2">
                   <div>
-                    <div className="text-[10px] font-bold uppercase tracking-wider text-[#EC008C] mb-0.5">
-                      Component Decomposition
+                    <div className="text-xs font-bold uppercase tracking-wider text-[#EC008C] mb-0.5">
+                      #1 Ranked Performer Radar
                     </div>
-                    <h3 className="text-sm font-bold text-[#101F43] flex items-center gap-1.5">
-                      <Activity className="w-4 h-4 text-[#101F43]" />
-                      #{champion.official_rank || 1} {champion.player_name}
+                    <h3 className="text-base font-bold text-[#101F43]">
+                      {champion.player_name} (CPRI {formatScore(champion.cpri_score)})
                     </h3>
                   </div>
-                  <span className="text-xs font-bold text-[#101F43] font-sans">
-                    CPRI {formatScore(champion.cpri_score)}
-                  </span>
+                  {champion.rank_uncertainty && (
+                    <div className="text-xs font-mono font-bold bg-[#F5F7FA] border border-[#E5E7EB] px-2 py-1 rounded text-[#101F43]">
+                      Rank CI: {champion.rank_uncertainty.ci_display}
+                    </div>
+                  )}
                 </div>
-                <CPRIComponentRadar componentsA={champion.components} labelA={champion.player_name} height={260} />
+
+                <div className="text-xs text-slate-500 mb-2">
+                  {champion.tactical_classification} • {champion.pressure_stats?.pressure_deliveries || champion.pressure_deliveries} Pressure Deliveries
+                </div>
+
+                <div className="flex-1 flex items-center justify-center">
+                  <CPRIComponentRadar
+                    componentsA={champion.components}
+                    labelA={champion.player_name}
+                    height={260}
+                  />
+                </div>
+
+                <div className="mt-4 pt-3 border-t border-[#E5E7EB] flex items-center justify-between text-xs">
+                  <span className="text-slate-500">
+                    Confidence Tier: <strong className="text-[#101F43]">{champion.confidence_tier || 'High Confidence'}</strong>
+                  </span>
+                  <button
+                    onClick={() => {
+                      const pScope = isOfficial ? (champion.competition_evidence === 'T20I-Only' ? 'T20I' : 'IPL') : viewMode.toUpperCase()
+                      navigate(`/players/${pScope}/${role}/${encodeURIComponent(champion.player_name)}`)
+                    }}
+                    className="font-bold text-[#EC008C] hover:text-[#101F43] flex items-center gap-1 transition-colors"
+                  >
+                    <span>Inspect Full Dossier</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
               </div>
             )}
-          </div>
-
-          {/* Master Cohort Table */}
-          <div className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden shadow-xs">
-            <div className="p-4 border-b border-[#E5E7EB] flex items-center justify-between bg-white">
-              <div>
-                <div className="text-[10px] font-bold uppercase tracking-wider text-[#EC008C] mb-0.5">
-                  Complete Evaluation Roster
-                </div>
-                <h3 className="text-sm font-bold text-[#101F43]">
-                  {scope} {role} CPRI Master Table
-                </h3>
-              </div>
-              <Link
-                to={`/rankings/${scope.toLowerCase()}`}
-                className="text-xs font-bold text-[#EC008C] hover:text-[#C70076] flex items-center gap-1"
-              >
-                Detailed Rankings <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
-                <thead className="bg-[#F5F7FA] text-[#101F43] font-sans font-bold uppercase text-[10px] tracking-wider border-b border-[#E5E7EB]">
-                  <tr>
-                    <th className="py-3 px-4">Rank</th>
-                    <th className="py-3 px-4">Player</th>
-                    <th className="py-3 px-4">CPRI Score</th>
-                    <th className="py-3 px-4">Pressure Impact (40%)</th>
-                    <th className="py-3 px-4">Adaptability (25%)</th>
-                    <th className="py-3 px-4">Consistency (20%)</th>
-                    <th className="py-3 px-4">Reliability (15%)</th>
-                    <th className="py-3 px-4">Confidence</th>
-                    <th className="py-3 px-4 text-right">Action</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[#E5E7EB] font-sans">
-                  {players.slice(0, 10).map((p, idx) => (
-                    <tr
-                      key={p.player_name}
-                      className="hover:bg-[#F8FAFC] transition-colors cursor-pointer group"
-                      onClick={() => navigate(`/players/${scope}/${role}/${encodeURIComponent(p.player_name)}`)}
-                    >
-                      <td className="py-3 px-4 font-mono font-bold text-slate-700">
-                        {p.official_rank === 1 ? (
-                          <span className="w-6 h-6 rounded bg-[#FDF2F8] text-[#EC008C] border border-[#FBCFE8] flex items-center justify-center font-bold">
-                            #1
-                          </span>
-                        ) : p.official_rank ? (
-                          <span className="w-6 h-6 rounded bg-[#F1F5F9] text-[#101F43] border border-[#E2E8F0] flex items-center justify-center font-bold">
-                            #{p.official_rank}
-                          </span>
-                        ) : (
-                          <span className="text-slate-400 pl-1 font-mono text-xs">#{idx + 1}*</span>
-                        )}
-                      </td>
-                      <td className="py-3 px-4">
-                        <div className="font-bold text-[#101F43] group-hover:text-[#EC008C] transition-colors text-sm">
-                          {p.player_name}
-                        </div>
-                        <div className="text-[10px] text-slate-500 font-mono">
-                          {p.pressure_deliveries} balls under pressure
-                        </div>
-                      </td>
-                      <td className="py-3 px-4 font-sans font-bold text-[#101F43] text-sm">
-                        {formatScore(p.cpri_score)}
-                      </td>
-                      <td className="py-3 px-4 font-mono text-slate-700">
-                        {formatScore(p.components.pressure_impact, 1)}
-                      </td>
-                      <td className="py-3 px-4 font-mono text-slate-700">
-                        {formatScore(p.components.pressure_adaptability, 1)}
-                      </td>
-                      <td className="py-3 px-4 font-mono text-slate-700">
-                        {formatScore(p.components.clutch_consistency, 1)}
-                      </td>
-                      <td className="py-3 px-4 font-mono text-slate-700">
-                        {formatScore(p.components.reliability_confidence, 1)}
-                      </td>
-                      <td className="py-3 px-4">
-                        <Badge
-                          variant={
-                            p.confidence_tier.includes('High')
-                              ? 'high'
-                              : p.confidence_tier.includes('Medium')
-                              ? 'medium'
-                              : 'low'
-                          }
-                          size="sm"
-                        >
-                          {p.confidence_tier}
-                        </Badge>
-                      </td>
-                      <td className="py-3 px-4 text-right">
-                        <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#EC008C] group-hover:text-[#C70076]">
-                          Inspect <ArrowRight className="w-3 h-3" />
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
           </div>
         </>
       )}

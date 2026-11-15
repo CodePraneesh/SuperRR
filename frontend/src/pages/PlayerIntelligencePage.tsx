@@ -14,11 +14,14 @@ import {
   GitCompare,
   Crown,
   Flame,
+  Info,
 } from 'lucide-react'
 import { getPlayerProfile, getPlayerSplits } from '../api/playerApi'
 import { getScoutingReport, getPressureExplanation } from '../api/scoutingApi'
+import { getOfficialPlayer } from '../api/officialApi'
 import type { PlayerProfileResponse, ContextualSplitsResponse } from '../types/player'
 import type { ScoutingReportResponse, PressureExplanationResponse } from '../types/scouting'
+import type { OfficialPlayerItem } from '../types/official'
 import type { Scope, Role } from '../types/common'
 import { Card } from '../components/common/Card'
 import { Badge } from '../components/common/Badge'
@@ -46,6 +49,7 @@ export const PlayerIntelligencePage: React.FC = () => {
 
   const [profile, setProfile] = useState<PlayerProfileResponse | null>(null)
   const [splits, setSplits] = useState<ContextualSplitsResponse | null>(null)
+  const [officialData, setOfficialData] = useState<OfficialPlayerItem | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -62,12 +66,14 @@ export const PlayerIntelligencePage: React.FC = () => {
     setAiReport(null)
     setPressureReport(null)
     try {
-      const [profileData, splitsData] = await Promise.all([
+      const [profileData, splitsData, offData] = await Promise.all([
         getPlayerProfile(scope, role, playerName),
         getPlayerSplits(scope, role, playerName),
+        getOfficialPlayer(playerName).catch(() => null),
       ])
       setProfile(profileData)
       setSplits(splitsData)
+      setOfficialData(offData)
     } catch (err) {
       setError(getErrorMessage(err))
     } finally {
@@ -125,6 +131,54 @@ export const PlayerIntelligencePage: React.FC = () => {
 
   return (
     <div className="space-y-8">
+      {/* Official Phase 8 Competition Standing Banner */}
+      {officialData ? (
+        <div className="bg-[#101F43] border border-[#EC008C]/40 rounded-2xl p-5 shadow-lg text-white">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div>
+              <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                <span className="text-[10px] font-mono uppercase tracking-wider bg-[#EC008C] text-white px-2 py-0.5 rounded font-black">
+                  Official Phase 8 Submission
+                </span>
+                <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold ${
+                  officialData.confidence_tier === 'High Confidence'
+                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                    : 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
+                }`}>
+                  {officialData.confidence_tier}
+                </span>
+                <span className="text-xs text-slate-300 font-mono">
+                  {officialData.competition_evidence} Evidence
+                </span>
+              </div>
+              <h2 className="text-xl font-bold flex items-center gap-2">
+                <span>{officialData.player_name}</span>
+                <span className="text-slate-300 font-normal text-sm">
+                  — Official #{officialData.official_rank} {officialData.role}
+                </span>
+              </h2>
+              <p className="text-xs text-slate-300 mt-1">
+                90% Bootstrap Rank CI: <span className="font-mono font-bold text-amber-300">[{officialData.rank_uncertainty.rank_p5}, {officialData.rank_uncertainty.rank_p95}]</span> • Top-10 Inclusion: <span className="font-mono text-emerald-300">{(officialData.rank_uncertainty.top10_inclusion_freq * 100).toFixed(0)}%</span> • {officialData.pressure_stats?.pressure_deliveries || 0} Pressure Deliveries
+              </p>
+            </div>
+            <div className="text-right bg-[#070b18]/80 px-4 py-2.5 rounded-xl border border-pink-500/20 min-w-[130px]">
+              <div className="text-[10px] font-mono uppercase text-slate-400 font-bold">Official CPRI</div>
+              <div className="text-3xl font-black font-mono text-[#EC008C]">
+                {formatScore(officialData.cpri_score)}
+              </div>
+              <div className="text-[10px] font-mono text-amber-300">Phase 8 Baseline</div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="bg-[#101F43]/5 border border-slate-200 rounded-xl p-4 text-slate-600 flex items-center gap-3">
+          <Info className="w-5 h-5 text-slate-400 flex-shrink-0" />
+          <div className="text-xs">
+            <span className="font-semibold text-slate-800">Contextual League Profile ({scope}):</span> This dossier represents single-tournament {scope} play. Player is not ranked in the official Top 25 unified submission.
+          </div>
+        </div>
+      )}
+
       {/* Header Profile Hero Card */}
       <Card variant="royal" className="p-6 md:p-8 relative overflow-hidden border-[#182752]">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">

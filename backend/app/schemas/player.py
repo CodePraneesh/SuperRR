@@ -35,6 +35,11 @@ class CohortListResponse(BaseModel):
     competition_scope: str = Field(..., description="Requested competition scope")
     role: str = Field(..., description="Requested role")
     cohort: str = Field(..., description="Cohort identifier")
+    view_type: str = Field("contextual_league_view", description="Indicates this is a single-tournament slice, not the official competition ranking")
+    disclaimer: str = Field(
+        "Contextual league view, not the official ranking. The authoritative competition ranking is the Unified Phase 8 ranking at /api/v1/official.",
+        description="Official ranking notice"
+    )
     total_players: int = Field(..., description="Total players matching criteria in cohort")
     official_count: int = Field(..., description="Number of official Top 10 players in cohort")
     limit: int = Field(..., description="Pagination limit")

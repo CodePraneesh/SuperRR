@@ -35,6 +35,10 @@ class ScoutingDataEngine:
         self.profiles_store = self._load_json("player_scouting_profiles.json")
         self.splits_store = self._load_json("player_contextual_splits.json")
         self.h2h_store = self._load_json("head_to_head_matrix.json")
+        
+        # Load official Phase 8 unified store if present
+        off_file = self.data_dir / "official_scouting_store.json"
+        self.official_store = self._load_json("official_scouting_store.json") if off_file.exists() else {}
 
         # Fast in-memory indexes
         self._profiles_by_key = self.profiles_store.get("by_key", {})
@@ -44,6 +48,12 @@ class ScoutingDataEngine:
         self._splits_by_name = self.splits_store.get("by_player_name", {})
         self._h2h_by_key = self.h2h_store.get("by_key", {})
 
+        # Official Phase 8 indexes
+        self._official_batters = self.official_store.get("official_top10_batters", [])
+        self._official_bowlers = self.official_store.get("official_top10_bowlers", [])
+        self._official_by_name = self.official_store.get("by_player_name", {})
+        self._official_by_id = self.official_store.get("by_player_id", {})
+
         # Build cohort index for peer comparisons
         self._cohort_players: Dict[str, List[Dict[str, Any]]] = {}
         for p in self.profiles_store.get("profiles", []):
@@ -51,6 +61,55 @@ class ScoutingDataEngine:
             if cohort not in self._cohort_players:
                 self._cohort_players[cohort] = []
             self._cohort_players[cohort].append(p)
+
+    def get_official_rankings(self, role: Optional[str] = None) -> Dict[str, Any]:
+        """
+        Returns the authoritative Phase 8 Unified Official Rankings with 90% rank CIs.
+        """
+        role_norm = role.strip().capitalize() if role else None
+        batters = self.official_store.get("official_top10_batters", [])
+        bowlers = self.official_store.get("official_top10_bowlers", [])
+        cand_batters = self.official_store.get("candidate_batters", [])
+        cand_bowlers = self.official_store.get("candidate_bowlers", [])
+
+        if role_norm == "Batter":
+            return {
+                "role": "Batter",
+                "title": "Official Top 10 Batters (SupeRR Selector Season 2)",
+                "total_official": len(batters),
+                "total_candidates": len(batters) + len(cand_batters),
+                "official_top10": batters,
+                "candidates": cand_batters,
+                "metadata": self.official_store.get("metadata", {})
+            }
+        elif role_norm == "Bowler":
+            return {
+                "role": "Bowler",
+                "title": "Official Top 10 Bowlers (SupeRR Selector Season 2)",
+                "total_official": len(bowlers),
+                "total_candidates": len(bowlers) + len(cand_bowlers),
+                "official_top10": bowlers,
+                "candidates": cand_bowlers,
+                "metadata": self.official_store.get("metadata", {})
+            }
+        else:
+            return {
+                "version": self.official_store.get("version", "CPRI-v1.0.0-PHASE8-OFFICIAL"),
+                "title": "SupeRR Intelligence — Official Competition Rankings",
+                "batters": batters,
+                "bowlers": bowlers,
+                "metadata": self.official_store.get("metadata", {})
+            }
+
+    def get_official_player(self, player_name: str) -> Optional[Dict[str, Any]]:
+        """
+        Returns unified official player record by name (case-insensitive).
+        """
+        name_clean = player_name.strip().lower()
+        for name, p in self._official_by_name.items():
+            if name.lower() == name_clean:
+                return p
+        return None
 
     def _load_json(self, filename: str) -> Dict[str, Any]:
         filepath = self.data_dir / filename

@@ -9,6 +9,7 @@ import {
   Swords,
   Bot,
   BookOpen,
+  AlertTriangle,
   X,
 } from 'lucide-react'
 import { cn } from '../../utils/cn'
@@ -21,12 +22,14 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const navItems = [
     { name: 'Overview', to: '/', icon: LayoutDashboard },
+    { name: 'Official Rankings', to: '/rankings', icon: Trophy, badge: 'OFFICIAL' },
     { name: 'IPL Rankings', to: '/rankings/ipl', icon: Trophy },
     { name: 'T20I Rankings', to: '/rankings/t20i', icon: Globe },
     { name: 'Player Intelligence', to: '/players/IPL/Batter/Rinku%20Singh', icon: UserCheck },
     { name: 'Player Comparison', to: '/compare', icon: GitCompare },
     { name: 'Matchup Analysis', to: '/matchup', icon: Swords },
     { name: 'AI Scouting Assistant', to: '/assistant', icon: Bot, badge: 'AI' },
+    { name: 'Limitations', to: '/limitations', icon: AlertTriangle },
     { name: 'Methodology', to: '/methodology', icon: BookOpen },
   ]
 

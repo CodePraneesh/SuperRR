@@ -310,17 +310,30 @@ class ScoutingPromptAssembler:
 
         if entities_involved:
             for entity in entities_involved:
-                prof = self.engine.get_player_profile(entity, competition_scope=competition_scope)
-                if prof:
+                off_prof = self.engine.get_official_player(entity)
+                if off_prof:
                     evidence["entity_profiles"][entity] = {
-                        "cpri_score": prof["cpri_score"],
-                        "official_rank": prof["official_rank"],
-                        "ranking_tier": prof["ranking_tier"],
-                        "components": prof["components"],
-                        "exposure": prof["exposure"]
+                        "cpri_score": off_prof["cpri_score"],
+                        "official_rank": off_prof["official_rank"],
+                        "role": off_prof["role"],
+                        "ranking_tier": "Official Top 10" if off_prof["is_official_top10"] else "Contender Candidate",
+                        "confidence_tier": off_prof["confidence_tier"],
+                        "rank_uncertainty": off_prof["rank_uncertainty"],
+                        "components": off_prof["components"],
+                        "exposure": off_prof["pressure_stats"]
                     }
                 else:
-                    evidence["entity_profiles"][entity] = {"status": "Player not found in ranked stores"}
+                    prof = self.engine.get_player_profile(entity, competition_scope=competition_scope)
+                    if prof:
+                        evidence["entity_profiles"][entity] = {
+                            "cpri_score": prof["cpri_score"],
+                            "official_rank": prof["official_rank"],
+                            "ranking_tier": prof["ranking_tier"],
+                            "components": prof["components"],
+                            "exposure": prof["exposure"]
+                        }
+                    else:
+                        evidence["entity_profiles"][entity] = {"status": "Player not found in ranked stores"}
 
         user_prompt = (
             f"Answer the following cricket analytics query: \"{query}\". "
