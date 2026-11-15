@@ -2,7 +2,9 @@
 backend/app/api/routes/scouting.py
 AI scouting reports, pressure explanations, comparisons, matchups, and natural-language QA.
 """
-from fastapi import APIRouter, Depends, Path
+import time
+from collections import defaultdict
+from fastapi import APIRouter, Depends, Path, Request, HTTPException
 from backend.app.schemas.scouting import (
     ScoutingReportResponse,
     PressureExplanationResponse,
@@ -93,6 +95,25 @@ def get_matchup(
     return service.get_matchup(batter=batter, bowler=bowler, scope=scope)
 
 
+# In-memory sliding-window rate limiter (30 requests/minute per client IP)
+_RATE_LIMIT_WINDOW = 60.0
+_MAX_REQUESTS_PER_WINDOW = 30
+_request_history = defaultdict(list)
+
+
+def check_rate_limit(client_ip: str) -> None:
+    now = time.time()
+    history = _request_history[client_ip]
+    cutoff = now - _RATE_LIMIT_WINDOW
+    _request_history[client_ip] = [t for t in history if t > cutoff]
+    if len(_request_history[client_ip]) >= _MAX_REQUESTS_PER_WINDOW:
+        raise HTTPException(
+            status_code=429,
+            detail="Rate limit exceeded: maximum 30 queries per minute per client. Please retry shortly."
+        )
+    _request_history[client_ip].append(now)
+
+
 @router.post(
     "/ask",
     response_model=AnalyticsQueryResponse,
@@ -100,14 +121,24 @@ def get_matchup(
 )
 def ask_question(
     payload: AnalyticsQueryRequest,
+    request: Request,
     service: ScoutingService = Depends(get_scouting_service)
 ):
     """
     Answers natural-language cricket queries grounded strictly in verified statistical evidence.
     Never hallucinates unrecorded metrics or attributes.
     """
+    client_ip = request.client.host if request.client else "127.0.0.1"
+    check_rate_limit(client_ip)
+
+    clean_query = payload.query.strip()
+    if len(clean_query) < 3:
+        raise HTTPException(status_code=422, detail="Query must be at least 3 characters.")
+    if len(clean_query) > 500:
+        raise HTTPException(status_code=422, detail="Query must not exceed 500 characters.")
+
     return service.ask_analytics_question(
-        query=payload.query,
+        query=clean_query,
         scope=payload.scope,
         role=payload.role,
         target_entities=payload.target_entities

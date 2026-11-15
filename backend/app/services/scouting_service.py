@@ -48,7 +48,7 @@ class ScoutingService:
         stores_loaded = (
             bool(self.engine.profiles_store) and
             bool(self.engine.splits_store) and
-            bool(self.engine.h2h_store) and
+            (self.data_dir / "head_to_head_matrix.json").exists() and
             bool(self.engine.official_store)
         )
         is_offline = not bool(self.hf_token)

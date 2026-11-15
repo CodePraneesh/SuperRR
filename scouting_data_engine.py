@@ -34,7 +34,10 @@ class ScoutingDataEngine:
         self.data_dir = Path(data_dir) if data_dir else DATA_DIR
         self.profiles_store = self._load_json("player_scouting_profiles.json")
         self.splits_store = self._load_json("player_contextual_splits.json")
-        self.h2h_store = self._load_json("head_to_head_matrix.json")
+        
+        # Lazy-loaded to conserve RAM and optimize startup latency
+        self._h2h_store: Optional[Dict[str, Any]] = None
+        self._h2h_by_key: Optional[Dict[str, Any]] = None
         
         # Load official Phase 8 unified store if present
         off_file = self.data_dir / "official_scouting_store.json"
@@ -46,7 +49,6 @@ class ScoutingDataEngine:
         self._profiles_by_id = {p["player_id"]: p for p in self.profiles_store.get("profiles", [])}
         self._splits_by_key = self.splits_store.get("by_key", {})
         self._splits_by_name = self.splits_store.get("by_player_name", {})
-        self._h2h_by_key = self.h2h_store.get("by_key", {})
 
         # Official Phase 8 indexes
         self._official_batters = self.official_store.get("official_top10_batters", [])
@@ -195,6 +197,20 @@ class ScoutingDataEngine:
         key = profile["profile_key"]
         return self._splits_by_key.get(key)
 
+    @property
+    def h2h_store(self) -> Dict[str, Any]:
+        """Lazy-loads head_to_head_matrix.json to conserve RAM and startup time."""
+        if self._h2h_store is None:
+            self._h2h_store = self._load_json("head_to_head_matrix.json")
+            self._h2h_by_key = self._h2h_store.get("by_key", {})
+        return self._h2h_store
+
+    @property
+    def h2h_by_key(self) -> Dict[str, Any]:
+        if self._h2h_by_key is None:
+            _ = self.h2h_store
+        return self._h2h_by_key
+
     # -------------------------------------------------------------------------
     # Feature 3: Get Batter-versus-Bowler Matchup
     # -------------------------------------------------------------------------
@@ -212,13 +228,14 @@ class ScoutingDataEngine:
         bw_name = bowler_name.strip()
         scope = competition_scope.strip().upper()
 
+        by_key = self.h2h_by_key
         key = f"{b_name} vs {bw_name} [{scope}]"
-        if key in self._h2h_by_key:
-            return self._h2h_by_key[key]
+        if key in by_key:
+            return by_key[key]
 
         # Case-insensitive lookup
         key_lower = key.lower()
-        for k, v in self._h2h_by_key.items():
+        for k, v in by_key.items():
             if k.lower() == key_lower:
                 return v
 

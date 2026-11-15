@@ -7,12 +7,12 @@ from pydantic import BaseModel, Field
 
 
 class ScoutingReportResponse(BaseModel):
-    status: str = Field(..., description="Generation execution status", example="success")
+    status: str = Field(..., description="Generation execution status", json_schema_extra={"example": "success"})
     player_name: str = Field(..., description="Player name")
     competition_scope: str = Field(..., description="Competition scope (IPL or T20I)")
     role: str = Field(..., description="Player role (Batter or Bowler)")
-    feature: str = Field(..., description="Feature identifier", example="player_scouting_report")
-    tier_used: str = Field(..., description="Inference tier used for generation", example="Tier 3: Deterministic Fallback Engine")
+    feature: str = Field(..., description="Feature identifier", json_schema_extra={"example": "player_scouting_report"})
+    tier_used: str = Field(..., description="Inference tier used for generation", json_schema_extra={"example": "Tier 3: Deterministic Fallback Engine"})
     model_name: str = Field(..., description="Name of generating model or rule engine")
     verified: bool = Field(..., description="Whether response passed strict numerical verification")
     verification_notes: List[str] = Field(default_factory=list, description="Verification notes or discrepancy audits")
@@ -25,7 +25,7 @@ class PressureExplanationResponse(BaseModel):
     player_name: str = Field(..., description="Player name")
     competition_scope: str = Field(..., description="Competition scope")
     role: str = Field(..., description="Player role")
-    feature: str = Field(..., description="Feature identifier", example="explain_pressure_performance")
+    feature: str = Field(..., description="Feature identifier", json_schema_extra={"example": "explain_pressure_performance"})
     tier_used: str = Field(..., description="Inference tier used")
     model_name: str = Field(..., description="Model or engine used")
     verified: bool = Field(..., description="Whether response passed verification")
@@ -37,8 +37,8 @@ class PressureExplanationResponse(BaseModel):
 class PlayerComparisonRequest(BaseModel):
     scope: str = Field("IPL", description="Competition scope ('IPL' or 'T20I')")
     role: str = Field("Batter", description="Role to compare ('Batter' or 'Bowler')")
-    player_a: str = Field(..., description="Name of first player", example="Rinku Singh")
-    player_b: str = Field(..., description="Name of second player", example="Andre Russell")
+    player_a: str = Field(..., description="Name of first player", json_schema_extra={"example": "Rinku Singh"})
+    player_b: str = Field(..., description="Name of second player", json_schema_extra={"example": "Andre Russell"})
 
 
 class PlayerComparisonResponse(BaseModel):
@@ -72,7 +72,7 @@ class MatchupResponse(BaseModel):
 
 
 class AnalyticsQueryRequest(BaseModel):
-    query: str = Field(..., description="Natural language question", example="Who is the best death-overs finisher under pressure?")
+    query: str = Field(..., min_length=3, max_length=500, description="Natural language question", json_schema_extra={"example": "Who is the best death-overs finisher under pressure?"})
     scope: Optional[str] = Field(None, description="Optional scope filter ('IPL' or 'T20I')")
     role: Optional[str] = Field(None, description="Optional role filter ('Batter' or 'Bowler')")
     target_entities: Optional[List[str]] = Field(None, description="Optional list of specific player names")
