@@ -47,7 +47,11 @@ class TestPhase42ScoutingStores(unittest.TestCase):
 
         # Load upstream reference data
         cls.off_csv = pd.read_csv("output/phase3_5/official_rankings.csv")
-        cls.deliv_df = pd.read_csv("output/phase2/pressure_scored_deliveries.csv", low_memory=False)
+        deliv_path = Path("output/phase2/pressure_scored_deliveries.csv")
+        if deliv_path.exists():
+            cls.deliv_df = pd.read_csv(deliv_path, low_memory=False)
+        else:
+            cls.deliv_df = None
 
     def test_01_all_files_exist_and_non_empty(self):
         """Test that all three JSON stores and the data dictionary exist and are non-empty."""
@@ -181,6 +185,9 @@ class TestPhase42ScoutingStores(unittest.TestCase):
 
     def test_08_head_to_head_reconciliation(self):
         """Reconcile a sample of head-to-head records against raw delivery data."""
+        if self.deliv_df is None:
+            self.skipTest("Requires local raw delivery dataset (output/phase2/pressure_scored_deliveries.csv)")
+
         # Test known encounter: Rinku Singh vs Mohit Sharma (IPL)
         h2h_key = "Rinku Singh vs Mohit Sharma [IPL]"
         if h2h_key in self.store_3["by_key"]:

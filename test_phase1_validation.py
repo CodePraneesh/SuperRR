@@ -18,8 +18,15 @@ class TestPhase1Validation(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         print("\nLoading Phase 1 processed and feature datasets...")
-        cls.deliveries = pd.read_csv(PROCESSED_DIR / "deliveries_enriched.csv", low_memory=False)
-        cls.matches = pd.read_csv(PROCESSED_DIR / "matches_enriched.csv", low_memory=False)
+        deliv_path = PROCESSED_DIR / "deliveries_enriched.csv"
+        match_path = PROCESSED_DIR / "matches_enriched.csv"
+        if not deliv_path.exists() or not match_path.exists():
+            raise unittest.SkipTest(
+                "Phase 1 raw processed data not found in output/processed/. "
+                "See README.md to unpack 6af458274c1e8_data_pack.zip."
+            )
+        cls.deliveries = pd.read_csv(deliv_path, low_memory=False)
+        cls.matches = pd.read_csv(match_path, low_memory=False)
         cls.batters = pd.read_csv(FEATURES_DIR / "batter_baselines_provisional.csv", low_memory=False)
         cls.bowlers = pd.read_csv(FEATURES_DIR / "bowler_baselines_provisional.csv", low_memory=False)
         print("Data loaded successfully.")

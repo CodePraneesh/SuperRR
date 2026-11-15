@@ -765,9 +765,9 @@ Phase 4.2 constructs three compact, structured, queryable JSON data stores to po
 
 | File Name | Primary Purpose | Record Scope | Target Size |
 |:---|:---|:---|:---:|
-| [`player_scouting_profiles.json`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/phase4/data/player_scouting_profiles.json) | Complete profile for each ranked player: CPRI scores, components, confidence tiers, exposure, baseline stats, and bootstrap uncertainty. | 60 Players (40 Official Top 10 + 20 Provisional Top 5) | ~0.2 MB |
-| [`player_contextual_splits.json`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/phase4/data/player_contextual_splits.json) | Situational breakdowns: Powerplay, Middle, Death, Pace vs Spin (Batters), vs RHB/LHB (Bowlers), and High vs Low Pressure contrasts. | 60 Players (40 Official Top 10 + 20 Provisional Top 5) | ~0.15 MB |
-| [`head_to_head_matrix.json`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/phase4/data/head_to_head_matrix.json) | Exhaustive batter vs bowler historical encounters in IPL and T20I with explicit sample size tiers and reliability indicators. | 25,985 Matchup Pairs (5,631 involving ranked players) | ~18 MB |
+| [`player_scouting_profiles.json`](output/phase4/data/player_scouting_profiles.json) | Complete profile for each ranked player: CPRI scores, components, confidence tiers, exposure, baseline stats, and bootstrap uncertainty. | 60 Players (40 Official Top 10 + 20 Provisional Top 5) | ~0.2 MB |
+| [`player_contextual_splits.json`](output/phase4/data/player_contextual_splits.json) | Situational breakdowns: Powerplay, Middle, Death, Pace vs Spin (Batters), vs RHB/LHB (Bowlers), and High vs Low Pressure contrasts. | 60 Players (40 Official Top 10 + 20 Provisional Top 5) | ~0.15 MB |
+| [`head_to_head_matrix.json`](output/phase4/data/head_to_head_matrix.json) | Exhaustive batter vs bowler historical encounters in IPL and T20I with explicit sample size tiers and reliability indicators. | 25,985 Matchup Pairs (5,631 involving ranked players) | ~18 MB |
 
 ---
 

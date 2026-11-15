@@ -1,8 +1,9 @@
 import os
 import sys
 import unittest
+from pathlib import Path
 
-base_dir = r'C:\Users\Praneesh\OneDrive\Desktop\RR\SupeRR_Intelligence_Phase1\SupeRR_Phase1'
+base_dir = str(Path(__file__).resolve().parent)
 os.chdir(base_dir)
 if base_dir not in sys.path:
     sys.path.insert(0, base_dir)
