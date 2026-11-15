@@ -1,0 +1,26 @@
+player_id,Def_A (Phase 8 Baseline),Def_B (Role-Aware Leverage),Def_C (Contest Closeness x Urgency),Def_D (Knockout Leverage),player_name,top10_appearances,top10_share,robust_status
+4722,6,1,1,1,Rashid Khan,4,1.0,Highly Robust (>=75%)
+2933,7,8,11,9,Jasprit Bumrah,3,0.75,Highly Robust (>=75%)
+6256,14,6,5,6,Varun Chakravarthy,3,0.75,Highly Robust (>=75%)
+3644,8,58,2,59,Kuldeep Yadav,2,0.5,Moderate (50%)
+305,10,51,8,49,Ravichandran Ashwin,2,0.5,Moderate (50%)
+7503,17,4,15,5,Ravi Bishnoi,2,0.5,Moderate (50%)
+7240,18,10,158,10,FazalHaq Farooqi,2,0.5,Moderate (50%)
+360,24,2,75,2,Bhuvneshwar Kumar,2,0.5,Moderate (50%)
+6464,26,3,35,3,Arshdeep Singh,2,0.5,Moderate (50%)
+1566,40,5,155,4,Mohammed Shami,2,0.5,Moderate (50%)
+34485,54,9,104,8,Sufiyan Muqeem,2,0.5,Moderate (50%)
+5837,102,7,53,7,Mahedi Hasan,2,0.5,Moderate (50%)
+4101,1,26,27,26,Mitchell Santner,1,0.25,Definition Sensitive
+5979,2,67,52,62,Abrar Ahmed,1,0.25,Definition Sensitive
+781,3,43,13,45,Sunil Narine,1,0.25,Definition Sensitive
+8661,4,41,39,44,Matheesha Pathirana,1,0.25,Definition Sensitive
+4373,5,29,29,27,Mustafizur Rahman,1,0.25,Definition Sensitive
+2490,9,17,46,15,Mohammad Nawaz,1,0.25,Definition Sensitive
+19316,13,14,9,14,Maheesh Theekshana,1,0.25,Definition Sensitive
+1612,11,12,19,12,Yuzvendra Chahal,0,0.0,Definition Sensitive
+6355,12,19,80,22,Shaheen Afridi,0,0.0,Definition Sensitive
+2876,15,21,21,20,Axar Patel,0,0.0,Definition Sensitive
+479,41,13,31,13,Adil Rashid,0,0.0,Definition Sensitive
+2681,60,11,74,11,Taskin Ahmed,0,0.0,Definition Sensitive
+6450,64,15,77,16,Mujeeb Ur Rahman,0,0.0,Definition Sensitive

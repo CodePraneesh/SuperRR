@@ -28,6 +28,18 @@ jobs:
       - name: Verify Reproducibility Manifest Hashes
         run: python scripts/verify_manifest.py
 
+      - name: Verify Submission Safety & Unstop Dropdown Parity
+        run: python scripts/verify_submission.py
+
+      - name: End-to-End Pipeline Reproduction (Conditional)
+        run: |
+          if [ -f "6af458274c1e8_data_pack.zip" ]; then
+            echo "Data pack detected. Executing full end-to-end reproduction..."
+            bash scripts/reproduce_phase8.sh 6af458274c1e8_data_pack.zip
+          else
+            echo "Notice: Raw data pack (6af458274c1e8_data_pack.zip) is not committed (180 MB gitignored). Skipping raw reproduction step; running manifest and store verification on checked-in official deliverables."
+          fi
+
       - name: Build Official Scouting Store
         run: python scripts/build_official_store.py
 

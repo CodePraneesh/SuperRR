@@ -151,14 +151,33 @@ bash scripts/run_all.sh all
 
 The repository includes pre-built JSON stores in `output/phase4/data/` allowing full backend and frontend execution immediately upon cloning.
 
-To re-run Phase 1 from raw source files:
-1. Place the official competition data archive `6af458274c1e8_data_pack.zip` into the project root.
-2. Unpack into `data/` (`train.csv` and `matches.csv`).
-3. Run `python supeRR_phase1_pipeline.py`.
+To re-run Phase 1 and the full analytical pipeline from raw source files:
+1. Place the official competition data archive `6af458274c1e8_data_pack.zip` into the project root (or provide its path).
+2. Ensure pinned dependencies are installed: `pip install -r requirements.lock`.
+3. Run the automated end-to-end reproduction script:
+   ```bash
+   bash scripts/reproduce_phase8.sh [path/to/6af458274c1e8_data_pack.zip]
+   # or on Windows:
+   scripts\reproduce_phase8.bat [path\to\6af458274c1e8_data_pack.zip]
+   # or via Makefile:
+   make reproduce-phase8
+   ```
+   This script deterministically executes:
+   - Environment check (`python scripts/check_environment.py`)
+   - Phase 1 ingestion: `python supeRR_phase1_pipeline.py --zip "$ZIP_PATH" --out output`
+   - Phase 2 ML generators with `PYTHONPATH=.`:
+     - `python ml/phase2/pressure_validation.py`
+     - `python ml/phase2/model_evaluation.py`
+     - `python ml/phase2/wpa_evaluation.py`
+   - Phase 8 selection recalculation: `python scripts/execute_phase8_analysis.py`
+   - Verification: `python scripts/verify_manifest.py` and `python scripts/verify_submission.py`
 4. Fingerprint verification:
    - Total Matches: 883 (867 ball-data matches, 16 abandoned)
    - Official Scope Deliveries: 194,014 (excludes 30 emerging matches / 6,985 balls)
    - Deliverable SHA-256 hashes: [`output/phase8_ranking_reconsideration/reproducibility_manifest.json`](output/phase8_ranking_reconsideration/reproducibility_manifest.json)
+
+### Environment Sensitivity & Library Pinning (Finding F1)
+The Phase 2 pressure and win-probability engines utilize gradient-boosted trees and ridge regression models. Because pressure classification applies a threshold at $PI \ge 50$, minor floating-point variations across unpinned machine-learning libraries (e.g., scikit-learn 1.9.1 / pandas 3.0.5 vs pinned scikit-learn 1.8.0 / pandas 2.3.3) shift predictions on borderline balls by 1–5 deliveries. In close cohorts separated by fractions of a point (e.g., Batters 4/5, 8/9; Bowler 10), this can perturb CPRI scores by up to $\sim 1.1$ points and reorder adjacent ranks. Pinned reproduction with `requirements.lock` guarantees exact byte-for-byte output reproduction.
 
 ---
 

@@ -1,0 +1,26 @@
+player_id,Def_A (Phase 8 Baseline),Def_B (Role-Aware Leverage),Def_C (Contest Closeness x Urgency),Def_D (Knockout Leverage),player_name,top10_appearances,top10_share,robust_status
+1699,8,2.0,3.0,2.0,Suryakumar Yadav,4,1.0,Highly Robust (>=75%)
+50284,2,1.0,,1.0,Vaibhav Sooryavanshi,3,0.75,Highly Robust (>=75%)
+6396,3,5.0,18.0,6.0,Tim David,3,0.75,Highly Robust (>=75%)
+3125,7,7.0,62.0,8.0,Nicholas Pooran,3,0.75,Highly Robust (>=75%)
+5039,148,3.0,4.0,3.0,Rajat Patidar,3,0.75,Highly Robust (>=75%)
+6281,16,10.0,128.0,10.0,Abhishek Sharma,2,0.5,Moderate (50%)
+4260,56,9.0,15.0,9.0,Heinrich Klaasen,2,0.5,Moderate (50%)
+1318,65,6.0,11.0,5.0,Andre Russell,2,0.5,Moderate (50%)
+818,86,4.0,113.0,4.0,Mitchell Marsh,2,0.5,Moderate (50%)
+781,111,8.0,,7.0,Sunil Narine,2,0.5,Moderate (50%)
+46066,1,,,,Vipraj Nigam,1,0.25,Definition Sensitive
+5553,4,42.0,126.0,43.0,Phil Salt,1,0.25,Definition Sensitive
+25139,5,,,,Shubham Dubey,1,0.25,Definition Sensitive
+6819,6,28.0,90.0,30.0,Yashasvi Jaiswal,1,0.25,Definition Sensitive
+143,9,55.0,51.0,62.0,Dinesh Karthik,1,0.25,Definition Sensitive
+768,10,75.0,94.0,75.0,Reeza Hendricks,1,0.25,Definition Sensitive
+1077,12,49.0,6.0,46.0,David Miller,1,0.25,Definition Sensitive
+796,11,141.0,158.0,143.0,Matthew Wade,0,0.0,Definition Sensitive
+813,13,11.0,28.0,11.0,Jos Buttler,0,0.0,Definition Sensitive
+6931,14,57.0,142.0,56.0,Pathum Nissanka,0,0.0,Definition Sensitive
+7897,15,18.0,14.0,19.0,Namboori Tilak Varma,0,0.0,Definition Sensitive
+2258,17,13.0,34.0,13.0,Sanju Samson,0,0.0,Definition Sensitive
+4391,35,14.0,66.0,16.0,Liam Livingstone,0,0.0,Definition Sensitive
+4986,42,12.0,12.0,12.0,Rovman Powell,0,0.0,Definition Sensitive
+6726,63,15.0,93.0,14.0,Romario Shepherd,0,0.0,Definition Sensitive
