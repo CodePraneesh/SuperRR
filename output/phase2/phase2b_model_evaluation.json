@@ -1,0 +1,40 @@
+{
+  "split": {
+    "train_matches": 569,
+    "val_matches": 122,
+    "test_matches": 122,
+    "train_deliveries": 135264,
+    "test_deliveries": 28639,
+    "test_period": "2026-02-01 to 2026-11-01"
+  },
+  "batter_expected_runs": {
+    "model_mae": 1.3622,
+    "baseline_mae": 1.2036,
+    "model_rmse": 1.799,
+    "baseline_rmse": 1.866,
+    "mae_improvement_pct": -13.18
+  },
+  "batter_dismissal_prob": {
+    "model_log_loss": 0.2007,
+    "baseline_log_loss": 0.2034,
+    "model_brier_score": 0.04869,
+    "baseline_brier_score": 0.04901,
+    "calibration_mean_observed": 0.0517,
+    "calibration_mean_predicted": 0.0527
+  },
+  "bowler_expected_runs": {
+    "model_mae": 1.3452,
+    "baseline_mae": 1.1683,
+    "model_rmse": 1.7807,
+    "baseline_rmse": 1.8626,
+    "mae_improvement_pct": -15.15
+  },
+  "bowler_wicket_prob": {
+    "model_log_loss": 0.197,
+    "baseline_log_loss": 0.1989,
+    "model_brier_score": 0.04742,
+    "baseline_brier_score": 0.04763,
+    "calibration_mean_observed": 0.0501,
+    "calibration_mean_predicted": 0.0508
+  }
+}

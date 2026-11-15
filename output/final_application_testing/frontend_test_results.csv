@@ -1,0 +1,17 @@
+test_id,category,page_route,component,result,details
+FE-NAV-01,Navigation & Overview,/,OverviewPage.tsx,PASS,"Navigated to root URL; Hero banner, 4 methodological pillars, scope/role switchers, and Top 3 podium cards rendered cleanly with Rinku Singh #1."
+FE-NAV-02,Rankings,/rankings/ipl,RankingsPage.tsx,PASS,"IPL scope verified; table loaded 15 players; Top 3 podium rendered Pathirana (#1, 83.50), Mohit Sharma (#2, 79.15), Eshan Malinga (#3, 76.57)."
+FE-NAV-03,Rankings,/rankings/t20i,RankingsPage.tsx,PASS,T20I scope verified; table loaded 15 players; Matthew Wade displayed as #1 (CPRI 97.42); podium cards correctly reflect T20I leaders.
+FE-NAV-04,Player Intelligence,/players/IPL/Batter/Rinku%20Singh,PlayerIntelligencePage.tsx,PASS,"Rinku Singh profile loaded; verified CPRI 89.03; 4 component pillars, peer benchmarks, phase splits, and AI scouting dossier displayed without error."
+FE-NAV-05,Player Comparison,/compare,PlayerComparisonPage.tsx,PASS,Loaded comparison matrix; selected Rinku Singh vs Ashutosh Sharma; compared component-by-component deltas (CPRI delta +0.17) and tactical narrative.
+FE-NAV-06,Matchup Intelligence,/matchup,MatchupAnalysisPage.tsx,PASS,"Analyzed batter vs bowler encounter; displayed balls faced, runs, strike rate, dismissals; verified small-sample warnings (<18 balls)."
+FE-NAV-07,AI Assistant Terminal,/assistant,ScoutingAssistantPage.tsx,PASS,Submitted natural-language scouting prompt; received and rendered grounded response with 'Audited by Response Verifier' badge and Tier 3 indicator.
+FE-NAV-08,Methodology,/methodology,MethodologyPage.tsx,PASS,Verified CPRI-v1.0.0-PROD-FREEZE certification banner; mathematical pillar weight distribution (40/25/20/15) and 100% pass rate badges rendered.
+FE-NAV-09,Layout & Shell,Global,"Sidebar.tsx, AppLayout.tsx",PASS,"Rajasthan Royals theme verified (#FFFFFF background, #101F43 typography, #EC008C pink accents); navigation active states and mobile toggle operational."
+FE-STATE-10,Loading States,Global,LoadingSpinner.tsx,PASS,"Loading indicators cleanly displayed during asynchronous API fetching across Overview, Rankings, and Player Intelligence pages."
+FE-STATE-11,Empty States,Global,"MatchupAnalysisPage.tsx, RankingsPage.tsx",PASS,Clean empty state rendered when filtering yields zero matches or when querying 0-ball head-to-head encounters without unhandled errors.
+FE-STATE-12,Error Handling,Global,"ErrorState.tsx, client.ts",PASS,Human-friendly error formatting verified in getErrorMessage(); retry action triggers clean reload on simulated network interruption.
+FE-CONS-13,Data Consistency,Global,"Badge.tsx, RankingsPage.tsx",PASS,Strict separation between 'Official Top 10' and 'Provisional Top 5' badges; no provisional player ever mislabelled as official.
+FE-CONSOLE-14,Console Integrity,All Pages,Chrome DevTools MCP,PASS,"Audited active Chrome DevTools console logs across all 8 navigation routes; exactly zero JavaScript errors, unhandled rejections, or React warnings."
+FE-NET-15,Network Integrity,All Pages,Chrome DevTools MCP,PASS,Audited network traffic during active UI sessions; 100% of fetch requests to backend endpoints (127.0.0.1:8000/api/v1/*) resolved with HTTP 200.
+FE-BUILD-16,Production Build,Build Output,Vite + TypeScript,PASS,"Executed 'npm run build' (tsc -b && vite build); compiled cleanly in 15.98s; generated minified bundle (dist/index.html, vendor chunks) with zero errors."

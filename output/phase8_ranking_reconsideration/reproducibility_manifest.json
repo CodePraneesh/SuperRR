@@ -1,0 +1,47 @@
+{
+  "pipeline_version": "Phase-8-Official-Selection-v1.0.0",
+  "random_seed": 42,
+  "bootstrap_iterations": 1000,
+  "execution_timestamp": "2026-11-15T11:30:32+0530",
+  "parameters": {
+    "pressure_threshold": 50.0,
+    "wicket_value_runs": 12.0,
+    "wpa_multiplier": 25.0,
+    "weights": {
+      "pressure_impact": 0.4,
+      "adaptability": 0.25,
+      "consistency": 0.2,
+      "reliability": 0.15
+    },
+    "prior_m_balls": 120.0,
+    "prior_m_matches": 8.0
+  },
+  "source_data_verification": {
+    "total_matches": 883,
+    "total_deliveries": 200999,
+    "active_matches_with_ball_data": 867,
+    "missing_matches_abandoned": 16,
+    "in_scope_deliveries": 194014,
+    "excluded_emerging_matches": 30,
+    "excluded_emerging_deliveries": 6985
+  },
+  "deliverable_hashes": {
+    "source_data_coverage_report.md": "7206efff647eb0c0c16c046d0de1a07f51b511414c4bdc2d25a3ab24ec6c650a",
+    "pressure_definition_report.md": "a456d1d1d9c647b392481460136603eabf847846a0a1da8677292617c1cfb49f",
+    "batter_full_population.csv": "ff99304539b8cca7ed861f44a8500fdaa97503d3417634c3d66ee9d405844812",
+    "bowler_full_population.csv": "67e68b6eb455a08a21cb3966ba5a29d86e5b2be6693406a5309bbe3fe33e5a23",
+    "batter_candidate_comparison.csv": "fd10c9dc3137a0038e5def3ba7bd9115cc90f7f9c25e9f4b006312b52019293c",
+    "bowler_candidate_comparison.csv": "1d8a0a8d06649b55c6fe570f1a7c67a30b3e9c270c1446a8f097fc8daf7bdcf1",
+    "official_top10_batters.csv": "1f31c173817404395f84b25b2e563592d6eecb3830e0c145bfba2b54d1745666",
+    "official_top10_bowlers.csv": "edb8c1c201e0af377838455441b480c8e9bc11b5167cd6f4466473d51de9275d",
+    "ipl_only_batter_rankings.csv": "653b82f27590104d858799981540791d02b1c6654ff236c1ff417ce26bbbde12",
+    "ipl_only_bowler_rankings.csv": "23a074f098ba5e7476e5a84ee5146e506d71c04aef03fc00a15df86cf001d47c",
+    "t20i_only_batter_rankings.csv": "34da4b6999f23f2d1edd751a3269b87a6d4a4dd5b4f2bd405094ceff13f0fcbc",
+    "t20i_only_bowler_rankings.csv": "df67ffe84d2198a1db509b3dc50250aa54e256a25923e285cd9127b55cea7329",
+    "batter_rank_uncertainty.csv": "d8a0df3a0924c6745ebd2557ce3f28745db9f7855c3ab1d45e87c6180ab0bda9",
+    "bowler_rank_uncertainty.csv": "43b9da9734e42929c2ac7d7afda1188f5957199b5cc0fed7e565e7ed9beb6e6a",
+    "old_vs_new_rankings.csv": "14a161c3397c8253606ede41a38c39d0c444d2d12d3a92283a94af5f06369cfd",
+    "final_methodology_report.md": "95929074901d4be1ec886c876233200c401a7dfaf70dff8c7783766c8558aa97",
+    "phase8_reconsideration_summary.md": "92c518a0c629be5e67dd1b927776571e544548c678d1213ee7fb3ed0d5e72a1f"
+  }
+}

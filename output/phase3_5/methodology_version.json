@@ -1,0 +1,51 @@
+{
+  "methodology_version": "CPRI-v1.0.0-PROD-FREEZE",
+  "freeze_timestamp": "2026-11-14T20:55:00+05:30",
+  "phase": "3.5",
+  "verdict": "FREEZE APPROVED WITH DOCUMENTED LIMITATIONS",
+  "component_weights": {
+    "pressure_impact": 0.4,
+    "pressure_adaptability": 0.25,
+    "clutch_consistency": 0.2,
+    "reliability_confidence": 0.15
+  },
+  "weights_sum_to_one": true,
+  "pressure_threshold": 50.0,
+  "eligibility_thresholds": {
+    "Batter": {
+      "pressure_deliveries": 100,
+      "pressure_matches": 8,
+      "total_deliveries": 150,
+      "nonpressure_deliveries": 40
+    },
+    "Bowler": {
+      "pressure_deliveries": 80,
+      "pressure_matches": 8,
+      "total_deliveries": 180,
+      "balls_per_match": 12.0
+    }
+  },
+  "resampling_standards": {
+    "IPL": "Match-Level Bootstrap (mandatory primary standard due to 5-season cluster sparsity)",
+    "T20I": "Series-Cluster Bootstrap (131 distinct international series/tournaments via comp_id)"
+  },
+  "official_champions": {
+    "IPL Batters": "Rinku Singh (89.03)",
+    "T20I Batters": "Matthew Wade (97.42)",
+    "IPL Bowlers": "Matheesha Pathirana (83.50)",
+    "T20I Bowlers": "Sufiyan Muqeem (86.44)"
+  },
+  "validation_counts": {
+    "official_cohorts": 4,
+    "official_players_per_cohort": 10,
+    "total_official_players": 40,
+    "provisional_players_per_cohort": 5,
+    "total_provisional_players": 20
+  },
+  "ai_immutability_guarantee": {
+    "scores_mutable": false,
+    "ranks_mutable": false,
+    "weights_mutable": false,
+    "policy": "CPRI scores and rankings are deterministic frozen historical constants. Generative AI layers cannot alter, perturb, or override them."
+  }
+}

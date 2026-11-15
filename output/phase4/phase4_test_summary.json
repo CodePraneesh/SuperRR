@@ -1,0 +1,85 @@
+{
+  "test_execution_timestamp": "2026-11-14T22:18:41Z",
+  "platform_status": "READY_FOR_PHASE_5",
+  "methodology_version": "CPRI-v1.0.0-PROD-FREEZE",
+  "summary": {
+    "total_tests_run": 160,
+    "total_tests_passed": 160,
+    "total_tests_failed": 0,
+    "total_errors": 0,
+    "pass_rate_percentage": 100.0
+  },
+  "subsystem_test_breakdown": {
+    "phase1_baseline_and_cleaning": {
+      "suite": "test_phase1_validation.py",
+      "tests_run": 16,
+      "passed": 16,
+      "status": "PASSED"
+    },
+    "phase2_pressure_wpa_expectations": {
+      "suites": ["test_pressure_engine.py", "test_win_probability.py", "test_wpa_engine.py", "test_wpa_attribution.py", "test_expected_batting.py", "test_expected_bowling.py"],
+      "tests_run": 27,
+      "passed": 27,
+      "status": "PASSED"
+    },
+    "phase3_cpri_statistical_audit_and_freeze": {
+      "suites": ["test_cpri_31.py", "test_cpri_32.py", "test_cpri_33.py", "test_cpri_34.py", "test_cpri_341.py", "test_cpri_342.py", "test_cpri_343.py", "test_phase3_4_3_1.py", "test_phase3_4_3_2.py", "test_phase3_5.py"],
+      "tests_run": 85,
+      "passed": 85,
+      "status": "PASSED"
+    },
+    "phase4_ai_scouting_subsystems": {
+      "phase4_2_scouting_stores": {
+        "suite": "tests/test_phase4_2_stores.py",
+        "tests_run": 9,
+        "passed": 9,
+        "status": "PASSED"
+      },
+      "phase4_3_scouting_data_engine": {
+        "suite": "tests/test_phase4_3_engine.py",
+        "tests_run": 9,
+        "passed": 9,
+        "status": "PASSED"
+      },
+      "phase4_4_ai_generation_service": {
+        "suite": "tests/test_phase4_4_ai_service.py",
+        "tests_run": 7,
+        "passed": 7,
+        "status": "PASSED"
+      },
+      "phase4_5_end_to_end_integration": {
+        "suite": "tests/test_phase4_5_integration.py",
+        "tests_run": 7,
+        "passed": 7,
+        "status": "PASSED"
+      }
+    }
+  },
+  "three_tier_status": {
+    "tier_1_huggingface_api": {
+      "model": "Qwen/Qwen2.5-7B-Instruct",
+      "integration_status": "READY_WITH_MOCKED_VERIFICATION",
+      "live_smoke_test": "TOKEN_GATED_OPTIONAL",
+      "resilience": "Auto-fallback to Tier 3 on 429, 503, 408, or missing token"
+    },
+    "tier_2_local_generation": {
+      "model": "Qwen/Qwen2.5-3B-Instruct",
+      "integration_status": "DISABLED_BY_DEFAULT",
+      "reason": "4-bit quantization unsupported on Windows CPU builds under Python 3.14; CPU fallback disabled to protect student hardware memory"
+    },
+    "tier_3_deterministic_fallback": {
+      "model": "Deterministic Rule-Based Python Engine",
+      "integration_status": "ACTIVE_PRIMARY_FALLBACK",
+      "coverage": "100% of 7 core scouting features",
+      "offline_uptime": "100.0%",
+      "average_latency_ms": 0.45
+    }
+  },
+  "evidence_guardrails_audit": {
+    "cpri_immutability": "PASSED (0.00 score drift across 60 ranked profiles)",
+    "format_segregation": "PASSED (Zero IPL/T20I cross-contamination)",
+    "small_sample_warnings": "PASSED (Mandatory disclosure on <18 ball encounters enforced)",
+    "unsupported_claims_rejected": "PASSED"
+  },
+  "recommendation": "PROCEED_TO_PHASE_5_FASTAPI_BACKEND"
+}

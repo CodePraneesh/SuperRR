@@ -1,0 +1,61 @@
+player_name,role,old_scope,old_rank,old_cpri,phase8_rank,phase8_cpri,status,audit_justification
+Rinku Singh,Batter,IPL,1,89.03,5,77.18,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #5 (CPRI 77.18), robust sample (457 balls, 30 matches)."
+Ashutosh Sharma,Batter,IPL,2,88.86,12,72.52,Borderline,Close contender: Phase 8 Rank #12 (CPRI 72.52). Edged out by players with higher net impact rate or larger sample depth.
+Suryakumar Yadav,Batter,IPL,3,88.41,3,81.42,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #3 (CPRI 81.42), robust sample (749 balls, 41 matches)."
+Ravindra Jadeja,Batter,IPL,4,87.78,10,73.7,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #10 (CPRI 73.70), robust sample (467 balls, 34 matches)."
+Dinesh Karthik,Batter,IPL,5,87.75,9,74.54,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #9 (CPRI 74.54), robust sample (277 balls, 23 matches)."
+Tim David,Batter,IPL,6,87.59,2,82.44,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #2 (CPRI 82.44), robust sample (476 balls, 37 matches)."
+Namboori Tilak Varma,Batter,IPL,7,86.34,8,74.81,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #8 (CPRI 74.81), robust sample (777 balls, 43 matches)."
+Rashid Khan,Batter,IPL,8,85.59,32,63.16,Replace,Replaced by superior dual-format performers: Phase 8 Rank #32. Old ranking was distorted by single-format scaling artifacts or baseline-penalty distortions.
+Shashank Singh,Batter,IPL,9,85.57,11,72.83,Borderline,Close contender: Phase 8 Rank #11 (CPRI 72.83). Edged out by players with higher net impact rate or larger sample depth.
+Ayush Badoni,Batter,IPL,10,84.97,14,69.6,Borderline,Close contender: Phase 8 Rank #14 (CPRI 69.60). Edged out by players with higher net impact rate or larger sample depth.
+Arshad Khan,Batter,IPL,1,82.33,Unranked,N/A,Insufficient Evidence,Failed strict workload threshold: Insufficient pressure balls (94 < 100)
+Karun Nair,Batter,IPL,2,81.79,Unranked,N/A,Insufficient Evidence,Failed strict workload threshold: Insufficient pressure balls (65 < 100)
+Vipraj Nigam,Batter,IPL,3,80.27,Unranked,N/A,Insufficient Evidence,Failed strict workload threshold: Insufficient pressure balls (89 < 100)
+Sikandar Raza,Batter,IPL,4,79.73,27,65.9,Replace,Replaced by superior dual-format performers: Phase 8 Rank #27. Old ranking was distorted by single-format scaling artifacts or baseline-penalty distortions.
+Cooper Connolly,Batter,IPL,5,79.19,82,53.4,Replace,Replaced by superior dual-format performers: Phase 8 Rank #82. Old ranking was distorted by single-format scaling artifacts or baseline-penalty distortions.
+Matthew Wade,Batter,T20I,1,97.42,1,85.36,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #1 (CPRI 85.36), robust sample (191 balls, 15 matches)."
+Romario Shepherd,Batter,T20I,2,83.85,7,75.33,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #7 (CPRI 75.33), robust sample (428 balls, 38 matches)."
+Suryakumar Yadav,Batter,T20I,3,82.34,3,81.42,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #3 (CPRI 81.42), robust sample (749 balls, 41 matches)."
+Mohammad Nabi,Batter,T20I,4,82.08,16,69.5,Replace,Replaced by superior dual-format performers: Phase 8 Rank #16. Old ranking was distorted by single-format scaling artifacts or baseline-penalty distortions.
+Phil Salt,Batter,T20I,5,81.81,6,76.96,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #6 (CPRI 76.96), robust sample (261 balls, 20 matches)."
+Reeza Hendricks,Batter,T20I,6,81.77,4,77.45,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #4 (CPRI 77.45), robust sample (378 balls, 16 matches)."
+Tim David,Batter,T20I,7,81.4,2,82.44,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #2 (CPRI 82.44), robust sample (476 balls, 37 matches)."
+Quinton de Kock,Batter,T20I,8,79.19,42,60.44,Replace,Replaced by superior dual-format performers: Phase 8 Rank #42. Old ranking was distorted by single-format scaling artifacts or baseline-penalty distortions.
+Fakhar Zaman,Batter,T20I,9,78.05,21,67.67,Replace,Replaced by superior dual-format performers: Phase 8 Rank #21. Old ranking was distorted by single-format scaling artifacts or baseline-penalty distortions.
+Akeal Hosein,Batter,T20I,10,77.61,28,64.45,Replace,Replaced by superior dual-format performers: Phase 8 Rank #28. Old ranking was distorted by single-format scaling artifacts or baseline-penalty distortions.
+Muhammad Waseem,Batter,T20I,1,81.52,Unranked,N/A,Insufficient Evidence,Failed strict workload threshold: Insufficient pressure matches (6 < 8)
+Shan Masood,Batter,T20I,2,75.4,Unranked,N/A,Insufficient Evidence,Failed strict workload threshold: Insufficient pressure balls (91 < 100)
+Tom Banton,Batter,T20I,3,74.26,Unranked,N/A,Insufficient Evidence,Failed strict workload threshold: Insufficient pressure balls (67 < 100)
+Gulbadin Naib,Batter,T20I,4,74.23,Unranked,N/A,Insufficient Evidence,Failed strict workload threshold: Insufficient pressure balls (51 < 100)
+Shakib Al Hasan,Batter,T20I,5,71.65,Unranked,N/A,Insufficient Evidence,Failed strict workload threshold: Insufficient pressure matches (4 < 8)
+Matheesha Pathirana,Bowler,IPL,1,83.5,5,75.77,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #5 (CPRI 75.77), robust sample (557 balls, 29 matches)."
+Mohit Sharma,Bowler,IPL,2,79.15,12,72.71,Borderline,Close contender: Phase 8 Rank #12 (CPRI 72.71). Edged out by players with higher net impact rate or larger sample depth.
+Eshan Malinga,Bowler,IPL,3,76.57,79,53.18,Replace,Replaced by superior dual-format performers: Phase 8 Rank #79. Old ranking was distorted by single-format scaling artifacts or baseline-penalty distortions.
+Sai Kishore,Bowler,IPL,4,76.53,22,68.19,Replace,Replaced by superior dual-format performers: Phase 8 Rank #22. Old ranking was distorted by single-format scaling artifacts or baseline-penalty distortions.
+Sunil Narine,Bowler,IPL,5,76.2,6,75.63,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #6 (CPRI 75.63), robust sample (511 balls, 35 matches)."
+Yuzvendra Chahal,Bowler,IPL,6,74.72,10,73.01,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #10 (CPRI 73.01), robust sample (859 balls, 53 matches)."
+Umran Malik,Bowler,IPL,7,74.05,19,70.05,Replace,Replaced by superior dual-format performers: Phase 8 Rank #19. Old ranking was distorted by single-format scaling artifacts or baseline-penalty distortions.
+Varun Chakravarthy,Bowler,IPL,8,73.26,9,73.02,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #9 (CPRI 73.02), robust sample (892 balls, 57 matches)."
+Mitchell Santner,Bowler,IPL,9,72.57,1,79.84,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #1 (CPRI 79.84), robust sample (653 balls, 40 matches)."
+Wanindu Hasaranga,Bowler,IPL,10,72.07,14,71.86,Borderline,Close contender: Phase 8 Rank #14 (CPRI 71.86). Edged out by players with higher net impact rate or larger sample depth.
+Lungi Ngidi,Bowler,IPL,1,86.28,38,61.61,Replace,Replaced by superior dual-format performers: Phase 8 Rank #38. Old ranking was distorted by single-format scaling artifacts or baseline-penalty distortions.
+Ashwani Kumar,Bowler,IPL,2,75.56,Unranked,N/A,Insufficient Evidence,Failed strict workload threshold: Insufficient pressure matches (5 < 8)
+Sakib Hussain,Bowler,IPL,3,74.64,Unranked,N/A,Insufficient Evidence,Failed strict workload threshold: Insufficient pressure matches (7 < 8)
+Jamie Overton,Bowler,IPL,4,72.42,4,76.92,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #4 (CPRI 76.92), robust sample (168 balls, 16 matches)."
+Akeal Hosein,Bowler,IPL,5,71.45,66,56.1,Replace,Replaced by superior dual-format performers: Phase 8 Rank #66. Old ranking was distorted by single-format scaling artifacts or baseline-penalty distortions.
+Sufiyan Muqeem,Bowler,T20I,1,86.44,2,78.78,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #2 (CPRI 78.78), robust sample (151 balls, 10 matches)."
+Kuldeep Yadav,Bowler,T20I,2,81.72,15,71.29,Borderline,Close contender: Phase 8 Rank #15 (CPRI 71.29). Edged out by players with higher net impact rate or larger sample depth.
+Mustafizur Rahman,Bowler,T20I,3,79.31,13,72.12,Borderline,Close contender: Phase 8 Rank #13 (CPRI 72.12). Edged out by players with higher net impact rate or larger sample depth.
+Washington Sundar,Bowler,T20I,4,76.87,44,60.64,Replace,Replaced by superior dual-format performers: Phase 8 Rank #44. Old ranking was distorted by single-format scaling artifacts or baseline-penalty distortions.
+Rashid Khan,Bowler,T20I,5,76.84,3,77.9,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #3 (CPRI 77.90), robust sample (970 balls, 65 matches)."
+Matthew Humphreys,Bowler,T20I,6,76.72,16,70.31,Replace,Replaced by superior dual-format performers: Phase 8 Rank #16. Old ranking was distorted by single-format scaling artifacts or baseline-penalty distortions.
+Mitchell Santner,Bowler,T20I,7,75.78,1,79.84,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #1 (CPRI 79.84), robust sample (653 balls, 40 matches)."
+Reece Topley,Bowler,T20I,8,74.79,25,66.67,Replace,Replaced by superior dual-format performers: Phase 8 Rank #25. Old ranking was distorted by single-format scaling artifacts or baseline-penalty distortions.
+Mohammad Nawaz,Bowler,T20I,9,74.61,7,75.51,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #7 (CPRI 75.51), robust sample (301 balls, 24 matches)."
+Gudakesh Motie,Bowler,T20I,10,73.9,18,70.09,Replace,Replaced by superior dual-format performers: Phase 8 Rank #18. Old ranking was distorted by single-format scaling artifacts or baseline-penalty distortions.
+Jamie Overton,Bowler,T20I,1,78.21,4,76.92,Retain,"Confirmed top-tier pressure performer: Phase 8 Rank #4 (CPRI 76.92), robust sample (168 balls, 16 matches)."
+Tabraiz Shamsi,Bowler,T20I,2,76.49,Unranked,N/A,Insufficient Evidence,Failed strict workload threshold: Insufficient pressure matches (4 < 8)
+Corbin Bosch,Bowler,T20I,3,73.46,92,50.13,Replace,Replaced by superior dual-format performers: Phase 8 Rank #92. Old ranking was distorted by single-format scaling artifacts or baseline-penalty distortions.
+Mitchell Starc,Bowler,T20I,4,71.74,67,55.77,Replace,Replaced by superior dual-format performers: Phase 8 Rank #67. Old ranking was distorted by single-format scaling artifacts or baseline-penalty distortions.
+George Linde,Bowler,T20I,5,69.37,Unranked,N/A,Insufficient Evidence,Failed strict workload threshold: Insufficient pressure matches (6 < 8)

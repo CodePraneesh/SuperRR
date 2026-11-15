@@ -1,0 +1,27 @@
+﻿severity,code,count,detail,remediation_status
+WARNING,MATCHES_WITHOUT_BALL_DATA,16,"Match metadata has no ball-by-ball rows; verified all 16 matches were officially abandoned without a ball bowled.",RESOLVED_EXCLUDED
+INFO,ORPHAN_BALL_MATCHES,0,"Ball records whose match_id is absent from matches.",VERIFIED_CLEAN
+INFO,MATCH_COMPETITION_JOIN,0,"Every match maps to exactly one competition.",VERIFIED_CLEAN
+INFO,OUT_OF_SCOPE_T20_COMPETITIONS,30,"Emerging Teams T20 competitions (30 matches, 6,985 balls) are retained for audit but excluded from official rankings and baselines.",RESOLVED_EXCLUDED
+WARNING,XI_UNKNOWN_MATCH,0,"Playing XI rows refer to unknown match IDs.",VERIFIED_CLEAN
+WARNING,BALL_UNKNOWN_MATCH,0,"Ball rows refer to unknown match IDs.",VERIFIED_CLEAN
+WARNING,DUPLICATE_PLAYER_MAPPING,0,"Duplicate competition/team/player mapping keys.",VERIFIED_CLEAN
+WARNING,DUPLICATE_XI_PLAYER,40,"A player appears more than once for a team/match in playing_eleven; reflects impact player / substitution variants. Diagnostic table produced; raw preserved.",DIAGNOSED_PRESERVED
+INFO,NEGATIVE_RUN_VALUES,0,"Negative batter-run or extras values.",VERIFIED_CLEAN
+WARNING,MISSING_CORE_DELIVERY_FIELDS,0,"Missing match/innings/sequence/striker/bowler identifiers.",VERIFIED_CLEAN
+WARNING,WICKET_WITHOUT_DISMISSAL,0,"Wicket flag true but dismissal type missing.",VERIFIED_CLEAN
+WARNING,DISMISSAL_WITHOUT_WICKET,0,"Dismissal type populated while wicket flag false.",VERIFIED_CLEAN
+WARNING,FOUR_FLAG_MISMATCH,20,"is_four does not match batter runs == 4 (e.g. 1 run scored with is_four==True). Derived four uses runs == 4.",RESOLVED_DERIVED
+WARNING,SIX_FLAG_MISMATCH,3,"is_six does not match batter runs == 6 (e.g. 1 run scored with is_six==True). Derived six uses runs == 6.",RESOLVED_DERIVED
+WARNING,UNKNOWN_EXTRAS_TYPES,0,"Unrecognized extras_type values require review.",VERIFIED_CLEAN
+WARNING,UNLABELLED_NONZERO_EXTRAS,2,"Extras runs exist while extras_type is missing. Flagged as ambiguous extras and excluded from legal balls and bowler concession.",RESOLVED_FLAGGED
+INFO,INNINGS_SEQUENCE_DUPLICATES,0,"Innings have repeated innings_ball_num values.",VERIFIED_CLEAN
+WARNING,STRIKER_MAPPING_MISSING,0,"Striker player ID has no competition-specific mapping.",VERIFIED_CLEAN
+WARNING,BOWLER_MAPPING_MISSING,0,"Bowler player ID has no competition-specific mapping.",VERIFIED_CLEAN
+WARNING,BATTING_TEAM_MAPPING_MISSING,0,"Batting team ID has no competition-specific team mapping.",VERIFIED_CLEAN
+WARNING,STRIKER_NOT_IN_XI,83,"Striker not found in playing XI mapping; attributable to mid-match impact player substitutions. Source name fallback applied.",RESOLVED_FALLBACK
+INFO,BOWLER_WICKET_NON_CREDITED_MODES,609,"Run Out (600), Retired Out (6), and Obstructing Field (3) dismissals excluded from bowler wicket credits.",RESOLVED_EXCLUDED
+INFO,BOWLER_WICKET_NO_BALL_DISMISSALS,5,"Dismissals occurring on no-ball deliveries excluded from bowler wicket credits.",RESOLVED_EXCLUDED
+INFO,BOWLER_WICKET_AMBIGUOUS_EXTRAS,3,"Dismissals occurring on ambiguous-extra deliveries excluded from bowler wicket credits.",RESOLVED_EXCLUDED
+INFO,SUPER_OVERS_EXCLUSION,38,"38 deliveries across 6 matches in innings 3 and 4 excluded from player baseline calculations.",RESOLVED_EXCLUDED
+INFO,COMPETITION_SCOPE_SEGREGATION,2,"Official scope segregated into IPL (371 matches, 87,687 balls) and T20I (482 matches, 106,327 balls).",RESOLVED_SEGREGATED

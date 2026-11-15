@@ -1,0 +1,28 @@
+{
+  "batting": {
+    "qualified_players_in_test_pressure": 98,
+    "spearman_rank_correlation": {
+      "baseline_vs_catboost": 0.9943,
+      "baseline_vs_xgboost": 0.9961,
+      "catboost_vs_xgboost": 0.9965
+    },
+    "top_10_overlap_count": {
+      "baseline_and_catboost": 9,
+      "baseline_and_xgboost": 10,
+      "catboost_and_xgboost": 9
+    }
+  },
+  "bowling": {
+    "qualified_players_in_test_pressure": 123,
+    "spearman_rank_correlation": {
+      "baseline_vs_catboost": 0.9954,
+      "baseline_vs_xgboost": 0.9982,
+      "catboost_vs_xgboost": 0.9974
+    },
+    "top_10_overlap_count": {
+      "baseline_and_catboost": 9,
+      "baseline_and_xgboost": 10,
+      "catboost_and_xgboost": 9
+    }
+  }
+}

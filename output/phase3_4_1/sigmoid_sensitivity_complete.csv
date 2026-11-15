@@ -1,0 +1,73 @@
+role,competition_scope,cohort,slope_k,scale_estimator,scale_value,adaptability_mean,adaptability_std,spearman_correlation_with_baseline,top10_overlap_with_baseline,champion,champion_stable,saturation_lower_pct,saturation_upper_pct,total_saturation_pct
+Batter,IPL,IPL Batters,0.3,IQR/1.349,15.0143,53.66,11.1,0.9956,9,Suryakumar Yadav,False,0.0,0.0,0.0
+Batter,IPL,IPL Batters,0.45,IQR/1.349,15.0143,55.02,15.12,0.9986,9,Rinku Singh,True,0.0,1.17,1.17
+Batter,IPL,IPL Batters,0.6,IQR/1.349,15.0143,56.09,18.34,1.0,10,Rinku Singh,True,0.29,1.76,2.05
+Batter,IPL,IPL Batters,0.75,IQR/1.349,15.0143,56.94,20.97,0.9993,10,Rinku Singh,True,0.59,3.52,4.11
+Batter,IPL,IPL Batters,0.9,IQR/1.349,15.0143,57.61,23.13,0.9985,9,Suryakumar Yadav,False,1.47,6.45,7.92
+Batter,IPL,IPL Batters,1.2,IQR/1.349,15.0143,58.59,26.44,0.9972,8,Suryakumar Yadav,False,1.76,11.44,13.2
+Batter,IPL,IPL Batters,0.3,MAD/0.6745,17.1265,53.27,9.96,0.9943,9,Suryakumar Yadav,False,0.0,0.0,0.0
+Batter,IPL,IPL Batters,0.45,MAD/0.6745,17.1265,54.55,13.73,0.9982,9,Rinku Singh,True,0.0,0.59,0.59
+Batter,IPL,IPL Batters,0.6,MAD/0.6745,17.1265,55.59,16.84,0.9995,9,Rinku Singh,True,0.0,1.47,1.47
+Batter,IPL,IPL Batters,0.75,MAD/0.6745,17.1265,56.44,19.41,0.9998,10,Rinku Singh,True,0.29,2.05,2.35
+Batter,IPL,IPL Batters,0.9,MAD/0.6745,17.1265,57.13,21.57,0.9991,9,Rinku Singh,True,0.59,4.11,4.69
+Batter,IPL,IPL Batters,1.2,MAD/0.6745,17.1265,58.16,24.95,0.9979,9,Suryakumar Yadav,False,1.76,8.5,10.26
+Batter,IPL,IPL Batters,0.3,Winsorized Std,20.1296,52.84,8.68,0.9908,9,Suryakumar Yadav,False,0.0,0.0,0.0
+Batter,IPL,IPL Batters,0.45,Winsorized Std,20.1296,54.01,12.14,0.9966,9,Rinku Singh,True,0.0,0.29,0.29
+Batter,IPL,IPL Batters,0.6,Winsorized Std,20.1296,55.0,15.06,0.9985,9,Rinku Singh,True,0.0,1.17,1.17
+Batter,IPL,IPL Batters,0.75,Winsorized Std,20.1296,55.82,17.54,0.9998,9,Rinku Singh,True,0.29,1.47,1.76
+Batter,IPL,IPL Batters,0.9,Winsorized Std,20.1296,56.52,19.66,0.9998,10,Rinku Singh,True,0.29,2.05,2.35
+Batter,IPL,IPL Batters,1.2,Winsorized Std,20.1296,57.6,23.07,0.9985,9,Suryakumar Yadav,False,1.17,6.45,7.62
+Batter,T20I,T20I Batters,0.3,IQR/1.349,14.639,53.21,12.23,0.9949,10,Matthew Wade,True,0.0,0.0,0.0
+Batter,T20I,T20I Batters,0.45,IQR/1.349,14.639,54.33,16.63,0.9986,10,Matthew Wade,True,0.15,0.45,0.6
+Batter,T20I,T20I Batters,0.6,IQR/1.349,14.639,55.14,20.03,1.0,10,Matthew Wade,True,0.15,2.26,2.41
+Batter,T20I,T20I Batters,0.75,IQR/1.349,14.639,55.71,22.67,0.9995,10,Matthew Wade,True,0.9,4.81,5.71
+Batter,T20I,T20I Batters,0.9,IQR/1.349,14.639,56.12,24.76,0.9988,10,Matthew Wade,True,1.95,8.42,10.38
+Batter,T20I,T20I Batters,1.2,IQR/1.349,14.639,56.62,27.8,0.997,10,Matthew Wade,True,4.21,14.14,18.35
+Batter,T20I,T20I Batters,0.3,MAD/0.6745,13.3862,53.45,13.14,0.9961,10,Matthew Wade,True,0.0,0.0,0.0
+Batter,T20I,T20I Batters,0.45,MAD/0.6745,13.3862,54.58,17.67,0.9991,10,Matthew Wade,True,0.15,0.9,1.05
+Batter,T20I,T20I Batters,0.6,MAD/0.6745,13.3862,55.38,21.09,0.9999,10,Matthew Wade,True,0.45,3.01,3.46
+Batter,T20I,T20I Batters,0.75,MAD/0.6745,13.3862,55.92,23.71,0.9991,10,Matthew Wade,True,1.35,6.02,7.37
+Batter,T20I,T20I Batters,0.9,MAD/0.6745,13.3862,56.3,25.74,0.9985,10,Matthew Wade,True,2.86,9.92,12.78
+Batter,T20I,T20I Batters,1.2,MAD/0.6745,13.3862,56.73,28.66,0.9965,10,Matthew Wade,True,4.51,15.79,20.3
+Batter,T20I,T20I Batters,0.3,Winsorized Std,22.5144,52.22,8.44,0.9872,10,Matthew Wade,True,0.0,0.0,0.0
+Batter,T20I,T20I Batters,0.45,Winsorized Std,22.5144,53.15,11.99,0.9944,10,Matthew Wade,True,0.0,0.0,0.0
+Batter,T20I,T20I Batters,0.6,Winsorized Std,22.5144,53.92,15.01,0.9975,10,Matthew Wade,True,0.0,0.3,0.3
+Batter,T20I,T20I Batters,0.75,Winsorized Std,22.5144,54.56,17.57,0.999,10,Matthew Wade,True,0.15,0.9,1.05
+Batter,T20I,T20I Batters,0.9,Winsorized Std,22.5144,55.07,19.73,1.0,10,Matthew Wade,True,0.15,2.11,2.26
+Batter,T20I,T20I Batters,1.2,Winsorized Std,22.5144,55.81,23.13,0.9993,10,Matthew Wade,True,1.2,5.26,6.47
+Bowler,IPL,IPL Bowlers,0.3,IQR/1.349,22.0396,48.71,9.35,0.9964,10,Matheesha Pathirana,True,0.0,0.0,0.0
+Bowler,IPL,IPL Bowlers,0.45,IQR/1.349,22.0396,48.13,13.35,0.9989,10,Matheesha Pathirana,True,0.0,0.0,0.0
+Bowler,IPL,IPL Bowlers,0.6,IQR/1.349,22.0396,47.62,16.78,1.0,10,Matheesha Pathirana,True,0.0,0.0,0.0
+Bowler,IPL,IPL Bowlers,0.75,IQR/1.349,22.0396,47.17,19.68,0.9992,9,Matheesha Pathirana,True,0.77,0.0,0.77
+Bowler,IPL,IPL Bowlers,0.9,IQR/1.349,22.0396,46.78,22.13,0.9983,9,Matheesha Pathirana,True,1.54,1.15,2.69
+Bowler,IPL,IPL Bowlers,1.2,IQR/1.349,22.0396,46.15,25.95,0.9962,8,Matheesha Pathirana,True,4.62,3.46,8.08
+Bowler,IPL,IPL Bowlers,0.3,MAD/0.6745,21.0151,48.65,9.77,0.9966,10,Matheesha Pathirana,True,0.0,0.0,0.0
+Bowler,IPL,IPL Bowlers,0.45,MAD/0.6745,21.0151,48.06,13.89,0.9993,10,Matheesha Pathirana,True,0.0,0.0,0.0
+Bowler,IPL,IPL Bowlers,0.6,MAD/0.6745,21.0151,47.53,17.39,0.9998,10,Matheesha Pathirana,True,0.0,0.0,0.0
+Bowler,IPL,IPL Bowlers,0.75,MAD/0.6745,21.0151,47.07,20.32,0.9989,9,Matheesha Pathirana,True,0.77,0.0,0.77
+Bowler,IPL,IPL Bowlers,0.9,MAD/0.6745,21.0151,46.68,22.77,0.998,9,Matheesha Pathirana,True,1.92,1.15,3.08
+Bowler,IPL,IPL Bowlers,1.2,MAD/0.6745,21.0151,46.05,26.57,0.996,8,Matheesha Pathirana,True,5.38,4.23,9.62
+Bowler,IPL,IPL Bowlers,0.3,Winsorized Std,25.3266,48.87,8.23,0.9949,10,Matheesha Pathirana,True,0.0,0.0,0.0
+Bowler,IPL,IPL Bowlers,0.45,Winsorized Std,25.3266,48.35,11.86,0.9983,10,Matheesha Pathirana,True,0.0,0.0,0.0
+Bowler,IPL,IPL Bowlers,0.6,Winsorized Std,25.3266,47.88,15.07,0.9997,10,Matheesha Pathirana,True,0.0,0.0,0.0
+Bowler,IPL,IPL Bowlers,0.75,Winsorized Std,25.3266,47.46,17.86,0.9998,10,Matheesha Pathirana,True,0.0,0.0,0.0
+Bowler,IPL,IPL Bowlers,0.9,Winsorized Std,25.3266,47.08,20.26,0.9989,9,Matheesha Pathirana,True,0.77,0.0,0.77
+Bowler,IPL,IPL Bowlers,1.2,Winsorized Std,25.3266,46.46,24.12,0.9973,8,Matheesha Pathirana,True,1.92,2.69,4.62
+Bowler,T20I,T20I Bowlers,0.3,IQR/1.349,22.0243,50.09,9.06,0.994,10,Sufiyan Muqeem,True,0.0,0.0,0.0
+Bowler,T20I,T20I Bowlers,0.45,IQR/1.349,22.0243,50.11,12.95,0.9987,10,Sufiyan Muqeem,True,0.0,0.0,0.0
+Bowler,T20I,T20I Bowlers,0.6,IQR/1.349,22.0243,50.13,16.31,1.0,10,Sufiyan Muqeem,True,0.0,0.0,0.0
+Bowler,T20I,T20I Bowlers,0.75,IQR/1.349,22.0243,50.13,19.19,0.9988,10,Sufiyan Muqeem,True,0.21,0.63,0.84
+Bowler,T20I,T20I Bowlers,0.9,IQR/1.349,22.0243,50.12,21.66,0.9969,10,Sufiyan Muqeem,True,0.84,1.25,2.09
+Bowler,T20I,T20I Bowlers,1.2,IQR/1.349,22.0243,50.1,25.58,0.9937,10,Sufiyan Muqeem,True,3.34,3.13,6.47
+Bowler,T20I,T20I Bowlers,0.3,MAD/0.6745,21.8091,50.09,9.14,0.9942,10,Sufiyan Muqeem,True,0.0,0.0,0.0
+Bowler,T20I,T20I Bowlers,0.45,MAD/0.6745,21.8091,50.12,13.05,0.9988,10,Sufiyan Muqeem,True,0.0,0.0,0.0
+Bowler,T20I,T20I Bowlers,0.6,MAD/0.6745,21.8091,50.13,16.44,1.0,10,Sufiyan Muqeem,True,0.0,0.0,0.0
+Bowler,T20I,T20I Bowlers,0.75,MAD/0.6745,21.8091,50.13,19.33,0.9987,10,Sufiyan Muqeem,True,0.21,0.63,0.84
+Bowler,T20I,T20I Bowlers,0.9,MAD/0.6745,21.8091,50.12,21.79,0.9968,10,Sufiyan Muqeem,True,0.84,1.46,2.3
+Bowler,T20I,T20I Bowlers,1.2,MAD/0.6745,21.8091,50.1,25.71,0.9934,10,Sufiyan Muqeem,True,3.34,3.13,6.47
+Bowler,T20I,T20I Bowlers,0.3,Winsorized Std,23.8043,50.09,8.43,0.993,10,Sufiyan Muqeem,True,0.0,0.0,0.0
+Bowler,T20I,T20I Bowlers,0.45,Winsorized Std,23.8043,50.11,12.12,0.9977,10,Sufiyan Muqeem,True,0.0,0.0,0.0
+Bowler,T20I,T20I Bowlers,0.6,Winsorized Std,23.8043,50.12,15.36,0.9997,10,Sufiyan Muqeem,True,0.0,0.0,0.0
+Bowler,T20I,T20I Bowlers,0.75,Winsorized Std,23.8043,50.13,18.17,0.9993,10,Sufiyan Muqeem,True,0.0,0.42,0.42
+Bowler,T20I,T20I Bowlers,0.9,Winsorized Std,23.8043,50.12,20.6,0.9978,10,Sufiyan Muqeem,True,0.84,1.04,1.88
+Bowler,T20I,T20I Bowlers,1.2,Winsorized Std,23.8043,50.11,24.53,0.995,10,Sufiyan Muqeem,True,2.51,2.51,5.01

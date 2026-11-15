@@ -1,0 +1,12 @@
+item,decision,status
+bowler_wickets,"Bowled, caught, LBW, stumped, hit wicket credited; run out, retire out, obstruction, no-ball deliveries, and ambiguous-extra deliveries strictly excluded.",rule_based
+runs,"Treat ball_by_ball.runs as batter runs. Source boundary flags disagree on 23 rows; derived four/six counts use runs==4/6, not source flags.",validated_with_flag_exceptions
+team_total,Provisional total_delivery_runs = runs + extras1_runs + extras_2_runs. Must reconcile to innings scorecards if available.,needs_scorecard_reconciliation
+legal_ball,"wide and Overstep treated as illegal; other, Penalty and unlabelled nonzero extras treated as unknown/non-legal pending feed documentation.",partially_validated
+batter_ball_faced,Wides and standalone Penalty/unlabelled-extra events excluded; Overstep and other count as faced balls provisionally. Confirm other with feed documentation.,partially_validated
+bowler_runs,"Batter runs + wide extras + Overstep penalty; byes/legbyes excluded. other, Penalty and unlabelled extras are flagged and excluded from known-concession baseline totals.",partially_validated
+pressure,Continuous pre-delivery state index created separately for chases and first innings; provisional threshold 0.60 only for baseline preview.,provisional
+first_innings_par,Not calculated in Phase 1; needs historical expected-score model in Phase 2.,pending_phase_2
+playing_eleven_duplicates,"Do not treat repeated match/player rows as separate players; retain one diagnostic row using earliest batting_order, while preserving raw source and reporting conflicts.",rule_based
+missing_ball_data,16 match metadata rows have no ball-by-ball records; exclude from delivery-based analysis and document.,validated
+competition_scope_separation,Official scope separated into IPL and T20I. Emerging Teams T20 tournaments excluded from official rankings.,validated

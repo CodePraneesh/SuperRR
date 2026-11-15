@@ -1,0 +1,22 @@
+severity,code,count,detail
+WARNING,MATCHES_WITHOUT_BALL_DATA,16,Match metadata has no ball-by-ball rows; exclude from delivery-based analysis.
+INFO,ORPHAN_BALL_MATCHES,0,Ball records whose match_id is absent from matches.
+INFO,MATCH_COMPETITION_JOIN,0,Every match should map to exactly one competition.
+INFO,OUT_OF_SCOPE_T20_COMPETITIONS,30,Emerging Teams T20 competitions are retained for audit but excluded because the brief specifies IPL and T20I.
+WARNING,XI_UNKNOWN_MATCH,0,Playing XI rows refer to unknown match IDs.
+WARNING,BALL_UNKNOWN_MATCH,0,Ball rows refer to unknown match IDs.
+WARNING,DUPLICATE_PLAYER_MAPPING,0,Duplicate competition/team/player mapping keys.
+WARNING,DUPLICATE_XI_PLAYER,40,A player appears more than once for a team/match in playing_eleven; may reflect impact/substitution or source batting-order variants. Preserve and inspect.
+INFO,NEGATIVE_RUN_VALUES,0,Negative batter-run or extras values.
+WARNING,MISSING_CORE_DELIVERY_FIELDS,0,Missing match/innings/sequence/striker/bowler identifiers.
+WARNING,WICKET_WITHOUT_DISMISSAL,0,Wicket flag true but dismissal type missing.
+WARNING,DISMISSAL_WITHOUT_WICKET,0,Dismissal type populated while wicket flag false.
+WARNING,FOUR_FLAG_MISMATCH,20,is_four does not match batter runs == 4.
+WARNING,SIX_FLAG_MISMATCH,3,is_six does not match batter runs == 6.
+WARNING,UNKNOWN_EXTRAS_TYPES,0,Unrecognized extras_type values require review.
+WARNING,UNLABELLED_NONZERO_EXTRAS,2,Extras runs exist while extras_type is missing.
+INFO,INNINGS_SEQUENCE_DUPLICATES,0,Innings have repeated innings_ball_num values.
+WARNING,STRIKER_MAPPING_MISSING,0,Striker player ID has no competition-specific mapping; use source name fallback.
+WARNING,BOWLER_MAPPING_MISSING,0,Bowler player ID has no competition-specific mapping; use source name fallback.
+WARNING,BATTING_TEAM_MAPPING_MISSING,0,Batting team ID has no competition-specific team mapping.
+WARNING,STRIKER_NOT_IN_XI,83,Striker not found in playing XI mapping; impact/substitution/source coverage may explain.

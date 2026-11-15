@@ -1,0 +1,124 @@
+{
+  "tables": [
+    {
+      "table": "competitions",
+      "rows": 141,
+      "columns": 4,
+      "duplicate_full_rows": 0,
+      "missing_cells": 0,
+      "columns_with_missing": {}
+    },
+    {
+      "table": "teams",
+      "rows": 353,
+      "columns": 3,
+      "duplicate_full_rows": 0,
+      "missing_cells": 0,
+      "columns_with_missing": {}
+    },
+    {
+      "table": "matches",
+      "rows": 883,
+      "columns": 22,
+      "duplicate_full_rows": 0,
+      "missing_cells": 2736,
+      "columns_with_missing": {
+        "home_team_captain_id": 44,
+        "away_team_captain_id": 45,
+        "toss_win_team_id": 15,
+        "toss_opted": 15,
+        "first_inn_revised_overs": 858,
+        "second_inn_revised_overs": 858,
+        "revised_target": 860,
+        "win_team_id": 41
+      }
+    },
+    {
+      "table": "playing_eleven",
+      "rows": 28381,
+      "columns": 9,
+      "duplicate_full_rows": 0,
+      "missing_cells": 8678,
+      "columns_with_missing": {
+        "batting_order": 8678
+      }
+    },
+    {
+      "table": "competition_team_player_mapping",
+      "rows": 6413,
+      "columns": 6,
+      "duplicate_full_rows": 0,
+      "missing_cells": 0,
+      "columns_with_missing": {}
+    },
+    {
+      "table": "ball_by_ball",
+      "rows": 200999,
+      "columns": 33,
+      "duplicate_full_rows": 0,
+      "missing_cells": 766466,
+      "columns_with_missing": {
+        "dismissal_type_id": 190118,
+        "dismissal_type": 190118,
+        "dismissed_player_id": 190107,
+        "extras_type": 189167,
+        "stroke": 6158,
+        "delivery_style": 391,
+        "over_or_around": 407
+      }
+    }
+  ],
+  "matches_rows": 883,
+  "matches_with_ball_data": 867,
+  "matches_without_ball_data": 16,
+  "official_scope_matches": 853,
+  "official_scope_matches_with_ball_data": 837,
+  "out_of_scope_t20_matches": 30,
+  "official_scope_deliveries": 194014,
+  "ball_rows": 200999,
+  "innings_rows": 1724,
+  "competition_formats": {
+    "T20I": 482,
+    "T20": 401
+  },
+  "extras_types": {
+    "(none)": 189167,
+    "wide": 7714,
+    "legbyes": 2748,
+    "Overstep": 576,
+    "byes": 529,
+    "other": 264,
+    "Penalty": 1
+  },
+  "dismissal_types": {
+    "Caught": 7557,
+    "Bowled": 1775,
+    "LBW": 709,
+    "RunOut": 600,
+    "Stump": 214,
+    "Hit Wicket": 17,
+    "Retire Out": 6,
+    "Obstracting the field": 2,
+    "Obstructing the field": 1
+  },
+  "duplicate_xi_player_keys": 40,
+  "duplicate_mapping_keys": 0,
+  "unknown_ball_match_rows": 0,
+  "unknown_xi_match_rows": 0,
+  "four_flag_mismatches": 20,
+  "six_flag_mismatches": 3,
+  "unlabelled_nonzero_extras": 2,
+  "wicket_without_type": 0,
+  "nonwicket_with_type": 0,
+  "innings_sequence_duplicates": 0,
+  "pressure_threshold_preview": 0.6,
+  "outputs": [
+    "processed/deliveries_enriched.csv",
+    "processed/matches_enriched.csv",
+    "features/batter_baselines_provisional.csv",
+    "features/bowler_baselines_provisional.csv",
+    "features/match_innings_summary.csv",
+    "audit/issues.csv",
+    "audit/assumption_register.csv"
+  ]
+}

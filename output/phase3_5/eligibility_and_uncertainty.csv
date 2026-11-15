@@ -1,0 +1,41 @@
+cohort,role,competition_scope,official_rank,player_name,baseline_cpri_score,primary_resampling_standard,prob_eligibility_pct,prob_rank_1_pct,prob_top10_pct,conditional_rank_median,conditional_rank_95_interval,unconditional_rank_median,unconditional_rank_95_interval,conditional_cpri_mean,conditional_cpri_std_dev,conditional_cpri_95_ci,mc_standard_error_rank1_pct,mc_standard_error_top10_pct
+IPL Batters,Batter,IPL,1,Rinku Singh,89.03,IPL Match-Level Resampling,100.0,10.8,59.7,7,"[1, 46]",7,"[1, 46]",84.15,7.48,"[67.03, 95.36]",0.982,1.551
+IPL Batters,Batter,IPL,2,Ashutosh Sharma,88.86,IPL Match-Level Resampling,96.2,7.4,41.7,13,"[1, 60]",14,"[1, 80]",80.78,8.88,"[61.06, 95.12]",0.828,1.559
+IPL Batters,Batter,IPL,3,Suryakumar Yadav,88.41,IPL Match-Level Resampling,100.0,8.3,67.8,7,"[1, 33]",7,"[1, 33]",85.11,5.51,"[72.81, 94.55]",0.872,1.478
+IPL Batters,Batter,IPL,4,Ravindra Jadeja,87.78,IPL Match-Level Resampling,100.0,7.0,63.6,8,"[1, 35]",8,"[1, 35]",84.6,5.9,"[72.3, 94.63]",0.807,1.522
+IPL Batters,Batter,IPL,5,Dinesh Karthik,87.75,IPL Match-Level Resampling,98.4,13.3,55.0,8,"[1, 53]",9,"[1, 63]",83.64,8.45,"[63.67, 96.9]",1.074,1.573
+IPL Batters,Batter,IPL,6,Tim David,87.59,IPL Match-Level Resampling,99.9,10.2,52.1,10,"[1, 57]",10,"[1, 58]",82.48,8.74,"[62.33, 95.47]",0.957,1.58
+IPL Batters,Batter,IPL,7,Namboori Tilak Varma,86.34,IPL Match-Level Resampling,100.0,3.5,44.5,12,"[1, 43]",12,"[1, 43]",81.87,6.48,"[68.06, 92.47]",0.581,1.572
+IPL Batters,Batter,IPL,8,Rashid Khan,85.59,IPL Match-Level Resampling,56.4,4.3,27.4,11,"[1, 49]",34,"[1, 88]",82.25,7.54,"[65.98, 93.67]",0.641,1.41
+IPL Batters,Batter,IPL,9,Shashank Singh,85.57,IPL Match-Level Resampling,100.0,2.9,29.4,18,"[1, 65]",18,"[1, 65]",78.2,8.98,"[57.38, 92.54]",0.531,1.441
+IPL Batters,Batter,IPL,10,Ayush Badoni,84.97,IPL Match-Level Resampling,100.0,4.3,52.4,10,"[1, 44]",10,"[1, 44]",83.06,6.51,"[68.68, 94.05]",0.641,1.579
+T20I Batters,Batter,T20I,1,Matthew Wade,97.42,T20I Series-Cluster Resampling,66.4,55.1,66.4,1,"[1, 4]",1,"[1, 91]",96.53,2.83,"[89.32, 99.53]",1.573,1.494
+T20I Batters,Batter,T20I,2,Romario Shepherd,83.85,T20I Series-Cluster Resampling,99.2,10.0,80.2,4,"[1, 37]",4,"[1, 41]",86.27,6.61,"[69.19, 96.47]",0.949,1.26
+T20I Batters,Batter,T20I,3,Suryakumar Yadav,82.34,T20I Series-Cluster Resampling,87.6,2.0,48.8,9,"[2, 47]",11,"[2, 83]",81.94,7.29,"[65.11, 93.71]",0.443,1.581
+T20I Batters,Batter,T20I,4,Mohammad Nabi,82.08,T20I Series-Cluster Resampling,98.9,0.2,51.9,10,"[2, 45]",10,"[2, 52]",81.24,6.35,"[65.87, 91.71]",0.141,1.58
+T20I Batters,Batter,T20I,5,Phil Salt,81.81,T20I Series-Cluster Resampling,74.9,8.4,57.1,5,"[1, 27]",7,"[1, 88]",86.36,6.46,"[73.18, 97.15]",0.877,1.565
+T20I Batters,Batter,T20I,6,Reeza Hendricks,81.77,T20I Series-Cluster Resampling,97.4,2.0,53.7,9,"[2, 52]",9,"[2, 72]",81.64,7.58,"[64.61, 93.5]",0.443,1.577
+T20I Batters,Batter,T20I,7,Tim David,81.4,T20I Series-Cluster Resampling,65.9,7.7,41.5,6,"[1, 38]",15,"[1, 90]",84.08,7.87,"[68.17, 96.47]",0.843,1.558
+T20I Batters,Batter,T20I,8,Quinton de Kock,79.19,T20I Series-Cluster Resampling,51.8,0.2,24.0,11,"[2, 36]",34,"[3, 92]",81.37,4.9,"[71.19, 90.26]",0.141,1.351
+T20I Batters,Batter,T20I,9,Fakhar Zaman,78.05,T20I Series-Cluster Resampling,93.6,0.1,29.5,16,"[3, 50]",16,"[3, 78]",78.72,6.22,"[64.73, 89.72]",0.1,1.442
+T20I Batters,Batter,T20I,10,Akeal Hosein,77.61,T20I Series-Cluster Resampling,55.2,0.8,27.4,11,"[2, 45]",30,"[3, 92]",81.72,6.45,"[67.8, 93.01]",0.282,1.41
+IPL Bowlers,Bowler,IPL,1,Matheesha Pathirana,83.5,IPL Match-Level Resampling,100.0,13.9,79.0,5,"[1, 24]",5,"[1, 24]",77.26,6.91,"[63.18, 90.01]",1.094,1.288
+IPL Bowlers,Bowler,IPL,2,Mohit Sharma,79.15,IPL Match-Level Resampling,100.0,12.7,62.3,8,"[1, 48]",8,"[1, 48]",74.35,9.94,"[52.46, 93.19]",1.053,1.533
+IPL Bowlers,Bowler,IPL,3,Eshan Malinga,76.57,IPL Match-Level Resampling,85.8,1.8,36.2,13,"[2, 47]",16,"[2, 91]",69.94,8.57,"[52.75, 85.49]",0.42,1.52
+IPL Bowlers,Bowler,IPL,4,Sai Kishore,76.53,IPL Match-Level Resampling,86.9,3.5,43.1,11,"[1, 43]",13,"[1, 91]",71.42,8.37,"[54.32, 86.25]",0.581,1.566
+IPL Bowlers,Bowler,IPL,5,Sunil Narine,76.2,IPL Match-Level Resampling,79.3,0.0,0.1,77,"[44, 86]",78,"[46, 87]",47.63,10.23,"[29.2, 68.26]",0.0,0.1
+IPL Bowlers,Bowler,IPL,6,Yuzvendra Chahal,74.72,IPL Match-Level Resampling,100.0,5.9,54.9,9,"[1, 38]",9,"[1, 38]",72.51,8.12,"[56.98, 88.19]",0.745,1.574
+IPL Bowlers,Bowler,IPL,7,Umran Malik,74.05,IPL Match-Level Resampling,92.3,9.5,40.5,13,"[1, 72]",15,"[1, 88]",69.43,12.68,"[42.05, 90.59]",0.927,1.552
+IPL Bowlers,Bowler,IPL,8,Varun Chakravarthy,73.26,IPL Match-Level Resampling,100.0,1.6,32.3,15,"[2, 48]",15,"[2, 48]",68.32,8.29,"[51.81, 84.45]",0.397,1.479
+IPL Bowlers,Bowler,IPL,9,Mitchell Santner,72.57,IPL Match-Level Resampling,93.2,0.9,23.3,20,"[3, 61]",21,"[3, 89]",65.56,9.59,"[46.67, 82.72]",0.299,1.337
+IPL Bowlers,Bowler,IPL,10,Wanindu Hasaranga,72.07,IPL Match-Level Resampling,99.9,3.7,26.7,20,"[1, 65]",20,"[1, 65]",65.96,10.62,"[45.15, 87.98]",0.597,1.399
+T20I Bowlers,Bowler,T20I,1,Sufiyan Muqeem,86.44,T20I Series-Cluster Resampling,68.0,23.8,54.9,3,"[1, 26]",7,"[1, 104]",81.39,9.71,"[62.58, 97.16]",1.347,1.574
+T20I Bowlers,Bowler,T20I,2,Kuldeep Yadav,81.72,T20I Series-Cluster Resampling,75.3,18.2,47.2,5,"[1, 80]",13,"[1, 103]",74.25,14.65,"[40.25, 95.28]",1.22,1.579
+T20I Bowlers,Bowler,T20I,3,Mustafizur Rahman,79.31,T20I Series-Cluster Resampling,99.9,2.2,55.7,9,"[2, 32]",9,"[2, 32]",72.42,6.56,"[59.89, 85.24]",0.464,1.571
+T20I Bowlers,Bowler,T20I,4,Washington Sundar,76.87,T20I Series-Cluster Resampling,88.3,6.5,42.5,11,"[1, 69]",14,"[1, 102]",69.97,11.88,"[45.69, 89.46]",0.78,1.563
+T20I Bowlers,Bowler,T20I,5,Rashid Khan,76.84,T20I Series-Cluster Resampling,75.9,0.0,0.0,67,"[31, 83]",70,"[33, 88]",54.59,9.11,"[39.34, 72.62]",0.0,0.0
+T20I Bowlers,Bowler,T20I,6,Matthew Humphreys,76.72,T20I Series-Cluster Resampling,61.3,5.6,42.0,6,"[1, 52]",17,"[1, 106]",74.64,9.48,"[51.88, 89.26]",0.727,1.561
+T20I Bowlers,Bowler,T20I,7,Mitchell Santner,75.78,T20I Series-Cluster Resampling,97.6,0.1,4.2,41,"[8, 72]",42,"[8, 76]",67.68,9.08,"[47.56, 84.29]",0.1,0.634
+T20I Bowlers,Bowler,T20I,8,Reece Topley,74.79,T20I Series-Cluster Resampling,72.6,0.2,16.7,16,"[4, 36]",20,"[5, 103]",68.14,5.51,"[57.57, 79.61]",0.141,1.179
+T20I Bowlers,Bowler,T20I,9,Mohammad Nawaz,74.61,T20I Series-Cluster Resampling,94.8,0.2,9.3,29,"[5, 68]",30,"[6, 77]",72.22,8.29,"[53.05, 86.36]",0.141,0.918
+T20I Bowlers,Bowler,T20I,10,Gudakesh Motie,73.9,T20I Series-Cluster Resampling,89.0,3.9,36.0,15,"[1, 70]",17,"[1, 100]",68.11,10.76,"[44.0, 86.62]",0.612,1.518

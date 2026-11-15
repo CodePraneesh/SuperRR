@@ -1,0 +1,29 @@
+role,competition_scope,configuration_name,w_pressure_impact,w_adaptability,w_consistency,w_reliability,weights_sum_exact,sums_to_100_pct,spearman_correlation_with_baseline,top10_overlap_with_baseline,champion,champion_stable,implementation_status,notes
+Batter,IPL,Baseline (40/25/20/15),0.4,0.25,0.2,0.15,1.0,True,1.0,10,Rinku Singh,True,Verified Correct,Official production baseline
+Batter,IPL,Impact-heavy Raw (55/15/15/10),0.55,0.15,0.15,0.1,0.95,False,0.995,9,Rinku Singh,True,Verified Correct,Prompt text variant (Sums to 95.0% - Unnormalized)
+Batter,IPL,Impact-heavy Normalized (57.9/15.8/15.8/10.5),0.5789,0.1579,0.1579,0.1053,1.0,True,0.995,9,Rinku Singh,True,Verified Correct,Normalized to sum to exactly 100.0%
+Batter,IPL,Impact-heavy Adjusted (55/20/15/10),0.55,0.2,0.15,0.1,1.0,True,0.9969,9,Rinku Singh,True,Verified Correct,Balanced integer variant (Sums to 100.0%)
+Batter,IPL,Adaptability-heavy (30/40/15/15),0.3,0.4,0.15,0.15,1.0,True,0.9904,10,Rinku Singh,True,Verified Correct,Prioritizes delta over non-pressure baseline
+Batter,IPL,Consistency-heavy (30/20/35/15),0.3,0.2,0.35,0.15,1.0,True,0.9847,8,Suryakumar Yadav,False,Verified Correct,Prioritizes match-by-match repeatability
+Batter,IPL,Reliability-heavy (30/20/15/35),0.3,0.2,0.15,0.35,1.0,True,0.9784,10,Rinku Singh,True,Verified Correct,Prioritizes long-term sample depth
+Batter,T20I,Baseline (40/25/20/15),0.4,0.25,0.2,0.15,1.0,True,1.0,10,Matthew Wade,True,Verified Correct,Official production baseline
+Batter,T20I,Impact-heavy Raw (55/15/15/10),0.55,0.15,0.15,0.1,0.95,False,0.992,10,Matthew Wade,True,Verified Correct,Prompt text variant (Sums to 95.0% - Unnormalized)
+Batter,T20I,Impact-heavy Normalized (57.9/15.8/15.8/10.5),0.5789,0.1579,0.1579,0.1053,1.0,True,0.992,10,Matthew Wade,True,Verified Correct,Normalized to sum to exactly 100.0%
+Batter,T20I,Impact-heavy Adjusted (55/20/15/10),0.55,0.2,0.15,0.1,1.0,True,0.9958,10,Matthew Wade,True,Verified Correct,Balanced integer variant (Sums to 100.0%)
+Batter,T20I,Adaptability-heavy (30/40/15/15),0.3,0.4,0.15,0.15,1.0,True,0.9875,10,Matthew Wade,True,Verified Correct,Prioritizes delta over non-pressure baseline
+Batter,T20I,Consistency-heavy (30/20/35/15),0.3,0.2,0.35,0.15,1.0,True,0.9882,10,Matthew Wade,True,Verified Correct,Prioritizes match-by-match repeatability
+Batter,T20I,Reliability-heavy (30/20/15/35),0.3,0.2,0.15,0.35,1.0,True,0.978,9,Matthew Wade,True,Verified Correct,Prioritizes long-term sample depth
+Bowler,IPL,Baseline (40/25/20/15),0.4,0.25,0.2,0.15,1.0,True,1.0,10,Matheesha Pathirana,True,Verified Correct,Official production baseline
+Bowler,IPL,Impact-heavy Raw (55/15/15/10),0.55,0.15,0.15,0.1,0.95,False,0.9941,9,Matheesha Pathirana,True,Verified Correct,Prompt text variant (Sums to 95.0% - Unnormalized)
+Bowler,IPL,Impact-heavy Normalized (57.9/15.8/15.8/10.5),0.5789,0.1579,0.1579,0.1053,1.0,True,0.9941,9,Matheesha Pathirana,True,Verified Correct,Normalized to sum to exactly 100.0%
+Bowler,IPL,Impact-heavy Adjusted (55/20/15/10),0.55,0.2,0.15,0.1,1.0,True,0.996,9,Matheesha Pathirana,True,Verified Correct,Balanced integer variant (Sums to 100.0%)
+Bowler,IPL,Adaptability-heavy (30/40/15/15),0.3,0.4,0.15,0.15,1.0,True,0.9942,8,Matheesha Pathirana,True,Verified Correct,Prioritizes delta over non-pressure baseline
+Bowler,IPL,Consistency-heavy (30/20/35/15),0.3,0.2,0.35,0.15,1.0,True,0.9852,9,Matheesha Pathirana,True,Verified Correct,Prioritizes match-by-match repeatability
+Bowler,IPL,Reliability-heavy (30/20/15/35),0.3,0.2,0.15,0.35,1.0,True,0.979,8,Matheesha Pathirana,True,Verified Correct,Prioritizes long-term sample depth
+Bowler,T20I,Baseline (40/25/20/15),0.4,0.25,0.2,0.15,1.0,True,1.0,10,Sufiyan Muqeem,True,Verified Correct,Official production baseline
+Bowler,T20I,Impact-heavy Raw (55/15/15/10),0.55,0.15,0.15,0.1,0.95,False,0.9938,8,Sufiyan Muqeem,True,Verified Correct,Prompt text variant (Sums to 95.0% - Unnormalized)
+Bowler,T20I,Impact-heavy Normalized (57.9/15.8/15.8/10.5),0.5789,0.1579,0.1579,0.1053,1.0,True,0.9938,8,Sufiyan Muqeem,True,Verified Correct,Normalized to sum to exactly 100.0%
+Bowler,T20I,Impact-heavy Adjusted (55/20/15/10),0.55,0.2,0.15,0.1,1.0,True,0.9952,9,Sufiyan Muqeem,True,Verified Correct,Balanced integer variant (Sums to 100.0%)
+Bowler,T20I,Adaptability-heavy (30/40/15/15),0.3,0.4,0.15,0.15,1.0,True,0.9888,9,Sufiyan Muqeem,True,Verified Correct,Prioritizes delta over non-pressure baseline
+Bowler,T20I,Consistency-heavy (30/20/35/15),0.3,0.2,0.35,0.15,1.0,True,0.9856,8,Sufiyan Muqeem,True,Verified Correct,Prioritizes match-by-match repeatability
+Bowler,T20I,Reliability-heavy (30/20/15/35),0.3,0.2,0.15,0.35,1.0,True,0.9809,9,Sufiyan Muqeem,True,Verified Correct,Prioritizes long-term sample depth

@@ -1,0 +1,17 @@
+role,official_rank,player_id,player_name,cpri_score,margin_to_rank10,pressure_deliveries,pressure_matches,pressure_strike_rate,pressure_run_res,top10_inclusion_freq,median_resampled_rank,cutoff_status,pressure_economy,pressure_wkts_above_exp,paired_boot_diff_mean,paired_boot_p_win_vs_rank10,paired_boot_95_ci
+Batter,8,7897,Namboori Tilak Varma,74.81,1.11,777,43,146.07,64.26,0.353,14,Official Top 10 Qualifier,,,,,
+Batter,9,143,Dinesh Karthik,74.54,0.84,277,23,166.43,76.17,0.374,15,Official Top 10 Qualifier,,,,,
+Batter,10,152,Ravindra Jadeja,73.7,0.0,467,34,137.47,-21.09,0.169,21,Official Top 10 Qualifier,,,0.0,0.5,"[0.00, 0.00]"
+Batter,11,2756,Shashank Singh,72.83,-0.87,327,23,154.13,53.02,0.394,15,Contender Outside Cutoff,,,-6.37,0.583,"[-61.34, 47.69]"
+Batter,12,8101,Ashutosh Sharma,72.52,-1.18,261,21,165.52,77.56,0.339,18,Contender Outside Cutoff,,,,,
+Batter,13,8,Mahendra Singh Dhoni,69.85,-3.85,360,28,141.11,-2.28,0.285,19,Contender Outside Cutoff,,,,,
+Batter,14,6460,Ayush Badoni,69.6,-4.1,416,28,145.19,23.27,0.064,36,Contender Outside Cutoff,,,,,
+Batter,15,20702,Tristan Stubbs,69.55,-4.15,579,40,145.6,63.39,0.217,22,Contender Outside Cutoff,,,,,
+Bowler,8,2933,Jasprit Bumrah,73.36,0.35,606,44,,,0.309,19,Official Top 10 Qualifier,6.96,3.31,,,
+Bowler,9,6256,Varun Chakravarthy,73.02,0.01,892,57,,,0.224,18,Official Top 10 Qualifier,7.82,15.98,,,
+Bowler,10,1612,Yuzvendra Chahal,73.01,0.0,859,53,,,0.33,16,Official Top 10 Qualifier,7.92,15.71,0.0,0.5,"[0.00, 0.00]"
+Bowler,11,5979,Abrar Ahmed,72.93,-0.08,291,21,,,0.33,19,Contender Outside Cutoff,5.3,1.88,0.92,0.499,"[-56.39, 55.39]"
+Bowler,12,2878,Mohit Sharma,72.71,-0.3,282,22,,,0.391,16,Contender Outside Cutoff,8.11,9.27,,,
+Bowler,13,4373,Mustafizur Rahman,72.12,-0.89,527,41,,,0.177,23,Contender Outside Cutoff,6.77,2.08,,,
+Bowler,14,4900,Wanindu Hasaranga,71.86,-1.15,639,41,,,0.196,21,Contender Outside Cutoff,8.01,17.77,,,
+Bowler,15,3644,Kuldeep Yadav,71.29,-1.72,627,44,,,0.437,12,Contender Outside Cutoff,7.43,12.87,,,

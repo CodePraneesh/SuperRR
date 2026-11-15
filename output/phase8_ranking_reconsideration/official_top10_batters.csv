@@ -1,0 +1,11 @@
+official_rank,player_id,player_name,competition_evidence,cpri_score,score_pressure_impact,score_adaptability,score_consistency,score_reliability,pressure_deliveries,pressure_matches,pressure_strike_rate,pressure_run_res,pressure_surv_res,pressure_wpa
+1,796,Matthew Wade,Dual-Format,85.36,89.98,94.81,89.38,51.96,191,15,165.97,49.92,12.11,0.6375
+2,6396,Tim David,Dual-Format,82.44,85.07,84.16,70.39,88.64,476,37,172.9,135.1,13.58,1.4344
+3,1699,Suryakumar Yadav,Dual-Format,81.42,78.09,74.65,85.57,96.02,749,41,162.22,197.16,13.78,0.4826
+4,768,Reeza Hendricks,T20I-Only,77.45,79.78,84.57,67.34,72.85,378,16,158.47,82.32,11.72,0.1252
+5,4708,Rinku Singh,Dual-Format,77.18,78.9,78.22,65.8,86.06,457,30,148.14,64.88,13.89,0.9104
+6,5553,Phil Salt,Dual-Format,76.96,80.11,80.83,74.3,65.64,261,20,188.51,121.13,4.48,-0.0504
+7,6726,Romario Shepherd,Dual-Format,75.33,75.52,75.55,66.41,86.36,428,38,140.19,50.66,12.66,0.3488
+8,7897,Namboori Tilak Varma,Dual-Format,74.81,72.31,70.76,68.52,96.58,777,43,146.07,64.26,18.94,0.6507
+9,143,Dinesh Karthik,Dual-Format,74.54,75.91,77.92,71.57,69.23,277,23,166.43,76.17,6.07,0.1861
+10,152,Ravindra Jadeja,Dual-Format,73.7,69.39,73.59,72.03,87.62,467,34,137.47,-21.09,15.21,0.5677

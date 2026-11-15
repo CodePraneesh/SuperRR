@@ -1,0 +1,44 @@
+{
+  "Statistical Baseline": {
+    "bat_dismissal": {
+      "total_brier": 0.04869232194183821,
+      "uncertainty": 0.04900718888832416,
+      "reliability": 4.593983230927252e-06,
+      "resolution": 0.00017868690258020662
+    },
+    "bowler_wicket": {
+      "total_brier": 0.04741768433168027,
+      "uncertainty": 0.047627253998638694,
+      "reliability": 3.0671545851082355e-06,
+      "resolution": 4.3963642807103105e-05
+    }
+  },
+  "CatBoost": {
+    "bat_dismissal": {
+      "total_brier": 0.04866833359692101,
+      "uncertainty": 0.04900718888832416,
+      "reliability": 2.1708204724143704e-06,
+      "resolution": 0.00019014208121595028
+    },
+    "bowler_wicket": {
+      "total_brier": 0.047400598517868375,
+      "uncertainty": 0.047627253998638694,
+      "reliability": 2.9456046234673137e-05,
+      "resolution": 0.00014859107730981927
+    }
+  },
+  "XGBoost": {
+    "bat_dismissal": {
+      "total_brier": 0.04868648573756218,
+      "uncertainty": 0.04900718888832416,
+      "reliability": 1.064890402397753e-06,
+      "resolution": 0.00015596585616965626
+    },
+    "bowler_wicket": {
+      "total_brier": 0.04739882051944733,
+      "uncertainty": 0.047627253998638694,
+      "reliability": 1.4477804922210115e-06,
+      "resolution": 8.025750031745088e-05
+    }
+  }
+}

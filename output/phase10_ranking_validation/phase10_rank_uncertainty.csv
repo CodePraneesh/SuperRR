@@ -1,0 +1,31 @@
+role,official_rank,player_id,player_name,cpri_score,top10_inclusion_freq,median_rank,rank_p5,rank_p95,rank_std
+Batter,1,796,Matthew Wade,85.36,0.879,2,1,22,9.88
+Batter,2,6396,Tim David,82.44,0.871,3,1,19,8.14
+Batter,3,1699,Suryakumar Yadav,81.42,0.68,7,2,25,7.6
+Batter,4,768,Reeza Hendricks,77.45,0.611,8,2,49,16.98
+Batter,5,4708,Rinku Singh,77.18,0.577,8,1,51,17.67
+Batter,6,5553,Phil Salt,76.96,0.494,11,2,70,23.33
+Batter,7,6726,Romario Shepherd,75.33,0.453,12,2,48,16.55
+Batter,8,7897,Namboori Tilak Varma,74.81,0.353,14,4,44,13.58
+Batter,9,143,Dinesh Karthik,74.54,0.374,15,2,73,23.21
+Batter,10,152,Ravindra Jadeja,73.7,0.169,21,7,63,18.34
+Batter,11,2756,Shashank Singh,72.83,0.394,15,2,76,24.55
+Batter,12,8101,Ashutosh Sharma,72.52,0.339,18,2,81,26.29
+Batter,13,8,Mahendra Singh Dhoni,69.85,0.285,19,3,73,22.73
+Batter,14,6460,Ayush Badoni,69.6,0.064,36,9,94,26.52
+Batter,15,20702,Tristan Stubbs,69.55,0.217,22,5,67,20.41
+Bowler,1,4101,Mitchell Santner,79.84,0.534,10,2,36,11.71
+Bowler,2,34485,Sufiyan Muqeem,78.78,0.559,8,1,74,23.92
+Bowler,3,4722,Rashid Khan,77.9,0.489,11,2,33,10.11
+Bowler,4,2382,Jamie Overton,76.92,0.515,10,1,71,23.62
+Bowler,5,8661,Matheesha Pathirana,75.77,0.303,16,4,49,14.85
+Bowler,6,781,Sunil Narine,75.63,0.293,16,4,47,14.57
+Bowler,7,2490,Mohammad Nawaz,75.51,0.688,5,1,38,14.94
+Bowler,8,2933,Jasprit Bumrah,73.36,0.309,19,3,67,20.69
+Bowler,9,6256,Varun Chakravarthy,73.02,0.224,18,5,46,12.9
+Bowler,10,1612,Yuzvendra Chahal,73.01,0.33,16,3,48,14.35
+Bowler,11,5979,Abrar Ahmed,72.93,0.33,19,2,73,23.61
+Bowler,12,2878,Mohit Sharma,72.71,0.391,16,1,82,26.56
+Bowler,13,4373,Mustafizur Rahman,72.12,0.177,23,5,60,17.7
+Bowler,14,4900,Wanindu Hasaranga,71.86,0.196,21,4,60,17.63
+Bowler,15,3644,Kuldeep Yadav,71.29,0.437,12,2,48,15.18

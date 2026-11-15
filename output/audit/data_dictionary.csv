@@ -1,0 +1,20 @@
+field,definition
+runs,Batter runs scored from the delivery; use for batter scoring and boundary derivation.
+extras1_runs,First extras component; type depends on extras_type.
+extras_2_runs,Second extras component; retained separately because source semantics are not fully documented.
+total_delivery_runs,Provisional team runs = runs + extras1_runs + extras_2_runs.
+legal_ball,"Provisional legal-ball indicator; wide/Overstep are illegal, ambiguous labels excluded."
+batter_faced_ball,"Provisional batter ball-faced indicator; wide excluded, no-ball included."
+bowler_runs_conceded,Provisional bowler charge: batter runs + wide extras + Overstep penalty.
+bowler_wicket,Wicket types credited to bowler under standard T20 rules.
+score_before,Team total before the current delivery.
+wickets_lost_before,Team wickets lost before the current delivery.
+legal_balls_before,Legal deliveries bowled before the current delivery.
+balls_remaining,Configured innings legal-ball limit less legal balls before current delivery.
+target_runs,"Second-innings target, revised target if supplied."
+runs_required,Target runs less score before current delivery.
+required_run_rate,Runs required divided by overs remaining.
+current_run_rate,Score before current delivery divided by overs elapsed.
+chase_pressure_index,Provisional continuous chasing-state feature.
+first_innings_pressure_index,Provisional first-innings phase/wicket-state feature.
+pre_delivery_pressure_index,Combined provisional pressure feature; not final calibrated pressure.

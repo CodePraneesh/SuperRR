@@ -1,0 +1,28 @@
+{
+  "split": {
+    "train_matches": 568,
+    "val_matches": 122,
+    "test_matches": 122,
+    "train_deliveries": 135085,
+    "test_deliveries": 28639,
+    "test_period": "2026-02-01 to 2026-11-01"
+  },
+  "chase_win_probability_model": {
+    "model_log_loss": 0.5596,
+    "baseline_log_loss": 0.7052,
+    "model_brier_score": 0.1775,
+    "baseline_brier_score": 0.256,
+    "model_roc_auc": 0.85,
+    "calibration_mean_observed": 0.5655,
+    "calibration_mean_predicted": 0.4707
+  },
+  "first_innings_win_probability_model": {
+    "model_log_loss": 0.7025,
+    "baseline_log_loss": 0.699,
+    "model_brier_score": 0.2508,
+    "baseline_brier_score": 0.2529,
+    "model_roc_auc": 0.67,
+    "calibration_mean_observed": 0.4189,
+    "calibration_mean_predicted": 0.5694
+  }
+}

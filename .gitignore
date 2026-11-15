@@ -1,0 +1,94 @@
+# ==============================================================================
+# SupeRR Intelligence — Production .gitignore
+# Target: SupeRR_Intelligence_Phase1/SupeRR_Phase1/.gitignore
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Environment Variables & Secret Credentials (Zero Leakage)
+# ------------------------------------------------------------------------------
+.env
+*.env
+.env.local
+.env.production
+.env.*.local
+*.pem
+*.key
+*.token
+
+# ------------------------------------------------------------------------------
+# 2. Large Analytical Intermediate Datasets (> 50 MB / > 100 MB GitHub Limit)
+# NOTE: These files remain intact on local disk. Runtime backend does not need them.
+# ------------------------------------------------------------------------------
+output/phase2/*.csv
+output/processed/deliveries_enriched.csv
+*.zip
+*.tar.gz
+
+# ------------------------------------------------------------------------------
+# 3. Model Training Logs, Checkpoints & Scratch Files
+# ------------------------------------------------------------------------------
+catboost_info/
+lightning_logs/
+wandb/
+*.safetensors
+*.bin
+*.gguf
+*.onnx
+models/
+hf_cache/
+
+# ------------------------------------------------------------------------------
+# 4. Python Bytecode, Caches & Virtual Environments
+# ------------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+
+# ------------------------------------------------------------------------------
+# 5. Frontend Node.js Dependencies, Bundles & Build Info
+# ------------------------------------------------------------------------------
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/*.tsbuildinfo
+frontend/vite.config.d.ts
+frontend/vite.config.js
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# ------------------------------------------------------------------------------
+# 6. IDE, Operating System & Workspace Metadata
+# ------------------------------------------------------------------------------
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.suo
+*.user
+
+# ------------------------------------------------------------------------------
+# 7. Explicit Whitelist: MUST BE TRACKED (Critical Runtime & Official Outputs)
+# ------------------------------------------------------------------------------
+!output/phase4/data/*.json
+!output/phase4/data/*.md
+!output/phase8_ranking_reconsideration/*.csv
+!output/phase8_ranking_reconsideration/*.md
+!output/phase8_ranking_reconsideration/*.json
+!output/final_application_testing/*.csv
+!output/final_application_testing/*.md
+!output/deployment_readiness/*.md
+!output/repository_inspection/*.csv
+!output/repository_inspection/*.md

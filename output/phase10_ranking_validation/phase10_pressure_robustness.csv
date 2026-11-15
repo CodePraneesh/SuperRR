@@ -1,0 +1,91 @@
+role,official_rank,player_id,player_name,pressure_tier,tier_balls,run_residual_total,run_residual_per_ball,strike_rate,runs_saved_total,runs_saved_per_ball,economy
+Batter,1,796,Matthew Wade,Low Pressure (PI < 25),105,-16.46,-0.1567,109.52,,,
+Batter,1,796,Matthew Wade,Medium Pressure (25 <= PI < 50),150,-44.34,-0.2956,106.67,,,
+Batter,1,796,Matthew Wade,High Pressure (PI >= 50),191,49.92,0.2614,165.97,,,
+Batter,2,6396,Tim David,Low Pressure (PI < 25),477,116.86,0.245,165.83,,,
+Batter,2,6396,Tim David,Medium Pressure (25 <= PI < 50),340,69.82,0.2053,165.88,,,
+Batter,2,6396,Tim David,High Pressure (PI >= 50),476,135.1,0.2838,172.9,,,
+Batter,3,1699,Suryakumar Yadav,Low Pressure (PI < 25),1454,298.74,0.2055,159.83,,,
+Batter,3,1699,Suryakumar Yadav,Medium Pressure (25 <= PI < 50),621,187.39,0.3018,163.77,,,
+Batter,3,1699,Suryakumar Yadav,High Pressure (PI >= 50),749,197.16,0.2632,162.22,,,
+Batter,4,768,Reeza Hendricks,Low Pressure (PI < 25),353,-16.18,-0.0458,126.63,,,
+Batter,4,768,Reeza Hendricks,Medium Pressure (25 <= PI < 50),129,7.29,0.0565,137.98,,,
+Batter,4,768,Reeza Hendricks,High Pressure (PI >= 50),378,82.32,0.2178,158.47,,,
+Batter,5,4708,Rinku Singh,Low Pressure (PI < 25),443,-8.56,-0.0193,140.63,,,
+Batter,5,4708,Rinku Singh,Medium Pressure (25 <= PI < 50),451,2.95,0.0065,146.78,,,
+Batter,5,4708,Rinku Singh,High Pressure (PI >= 50),457,64.88,0.142,148.14,,,
+Batter,6,5553,Phil Salt,Low Pressure (PI < 25),1004,219.34,0.2185,162.55,,,
+Batter,6,5553,Phil Salt,Medium Pressure (25 <= PI < 50),431,96.82,0.2247,151.97,,,
+Batter,6,5553,Phil Salt,High Pressure (PI >= 50),261,121.13,0.4641,188.51,,,
+Batter,7,6726,Romario Shepherd,Low Pressure (PI < 25),102,-1.42,-0.0139,138.24,,,
+Batter,7,6726,Romario Shepherd,Medium Pressure (25 <= PI < 50),197,24.55,0.1246,161.42,,,
+Batter,7,6726,Romario Shepherd,High Pressure (PI >= 50),428,50.66,0.1184,140.19,,,
+Batter,8,7897,Namboori Tilak Varma,Low Pressure (PI < 25),944,-67.97,-0.072,133.69,,,
+Batter,8,7897,Namboori Tilak Varma,Medium Pressure (25 <= PI < 50),787,47.43,0.0603,134.94,,,
+Batter,8,7897,Namboori Tilak Varma,High Pressure (PI >= 50),777,64.26,0.0827,146.07,,,
+Batter,9,143,Dinesh Karthik,Low Pressure (PI < 25),113,-16.79,-0.1486,144.25,,,
+Batter,9,143,Dinesh Karthik,Medium Pressure (25 <= PI < 50),293,-6.5,-0.0222,151.88,,,
+Batter,9,143,Dinesh Karthik,High Pressure (PI >= 50),277,76.17,0.275,166.43,,,
+Batter,10,152,Ravindra Jadeja,Low Pressure (PI < 25),234,-45.74,-0.1954,119.66,,,
+Batter,10,152,Ravindra Jadeja,Medium Pressure (25 <= PI < 50),301,-64.01,-0.2126,123.59,,,
+Batter,10,152,Ravindra Jadeja,High Pressure (PI >= 50),467,-21.09,-0.0452,137.47,,,
+Batter,11,2756,Shashank Singh,Low Pressure (PI < 25),130,-32.45,-0.2496,119.23,,,
+Batter,11,2756,Shashank Singh,Medium Pressure (25 <= PI < 50),131,42.36,0.3233,187.79,,,
+Batter,11,2756,Shashank Singh,High Pressure (PI >= 50),327,53.02,0.1622,154.13,,,
+Batter,12,8101,Ashutosh Sharma,Low Pressure (PI < 25),14,8.98,0.6412,228.57,,,
+Batter,12,8101,Ashutosh Sharma,Medium Pressure (25 <= PI < 50),81,-28.64,-0.3535,123.46,,,
+Batter,12,8101,Ashutosh Sharma,High Pressure (PI >= 50),233,70.76,0.3037,167.81,,,
+Batter,13,8,Mahendra Singh Dhoni,Low Pressure (PI < 25),41,-26.82,-0.6542,92.68,,,
+Batter,13,8,Mahendra Singh Dhoni,Medium Pressure (25 <= PI < 50),96,-5.82,-0.0606,153.12,,,
+Batter,13,8,Mahendra Singh Dhoni,High Pressure (PI >= 50),360,-2.28,-0.0063,141.11,,,
+Batter,14,6460,Ayush Badoni,Low Pressure (PI < 25),199,-32.96,-0.1656,125.13,,,
+Batter,14,6460,Ayush Badoni,Medium Pressure (25 <= PI < 50),270,-43.45,-0.1609,120.37,,,
+Batter,14,6460,Ayush Badoni,High Pressure (PI >= 50),381,5.91,0.0155,143.04,,,
+Batter,15,20702,Tristan Stubbs,Low Pressure (PI < 25),277,-37.66,-0.136,130.32,,,
+Batter,15,20702,Tristan Stubbs,Medium Pressure (25 <= PI < 50),258,51.72,0.2005,162.02,,,
+Batter,15,20702,Tristan Stubbs,High Pressure (PI >= 50),543,62.75,0.1156,147.7,,,
+Bowler,1,4101,Mitchell Santner,Low Pressure (PI < 25),770,,,,34.06,0.0442,8.08
+Bowler,1,4101,Mitchell Santner,Medium Pressure (25 <= PI < 50),349,,,,44.36,0.1271,6.81
+Bowler,1,4101,Mitchell Santner,High Pressure (PI >= 50),650,,,,125.42,0.193,6.48
+Bowler,2,34485,Sufiyan Muqeem,Low Pressure (PI < 25),107,,,,-4.55,-0.0425,8.19
+Bowler,2,34485,Sufiyan Muqeem,Medium Pressure (25 <= PI < 50),93,,,,27.74,0.2983,5.48
+Bowler,2,34485,Sufiyan Muqeem,High Pressure (PI >= 50),151,,,,49.77,0.3296,5.6
+Bowler,3,4722,Rashid Khan,Low Pressure (PI < 25),1080,,,,120.76,0.1118,7.86
+Bowler,3,4722,Rashid Khan,Medium Pressure (25 <= PI < 50),730,,,,102.08,0.1398,6.99
+Bowler,3,4722,Rashid Khan,High Pressure (PI >= 50),970,,,,137.22,0.1415,7.03
+Bowler,4,2382,Jamie Overton,Low Pressure (PI < 25),214,,,,-21.32,-0.0996,9.2
+Bowler,4,2382,Jamie Overton,Medium Pressure (25 <= PI < 50),137,,,,-20.14,-0.147,9.15
+Bowler,4,2382,Jamie Overton,High Pressure (PI >= 50),168,,,,56.01,0.3334,6.25
+Bowler,5,8661,Matheesha Pathirana,Low Pressure (PI < 25),402,,,,35.55,0.0884,8.61
+Bowler,5,8661,Matheesha Pathirana,Medium Pressure (25 <= PI < 50),320,,,,45.83,0.1432,8.16
+Bowler,5,8661,Matheesha Pathirana,High Pressure (PI >= 50),535,,,,137.84,0.2576,7.05
+Bowler,6,781,Sunil Narine,Low Pressure (PI < 25),608,,,,119.26,0.1961,7.51
+Bowler,6,781,Sunil Narine,Medium Pressure (25 <= PI < 50),412,,,,128.81,0.3126,6.15
+Bowler,6,781,Sunil Narine,High Pressure (PI >= 50),511,,,,156.61,0.3065,6.29
+Bowler,7,2490,Mohammad Nawaz,Low Pressure (PI < 25),411,,,,32.33,0.0787,7.62
+Bowler,7,2490,Mohammad Nawaz,Medium Pressure (25 <= PI < 50),305,,,,-12.9,-0.0423,7.22
+Bowler,7,2490,Mohammad Nawaz,High Pressure (PI >= 50),301,,,,55.94,0.1858,6.04
+Bowler,8,2933,Jasprit Bumrah,Low Pressure (PI < 25),699,,,,217.64,0.3114,6.87
+Bowler,8,2933,Jasprit Bumrah,Medium Pressure (25 <= PI < 50),475,,,,132.17,0.2783,7.14
+Bowler,8,2933,Jasprit Bumrah,High Pressure (PI >= 50),606,,,,140.88,0.2325,6.96
+Bowler,9,6256,Varun Chakravarthy,Low Pressure (PI < 25),861,,,,94.15,0.1094,7.96
+Bowler,9,6256,Varun Chakravarthy,Medium Pressure (25 <= PI < 50),405,,,,46.64,0.1152,7.24
+Bowler,9,6256,Varun Chakravarthy,High Pressure (PI >= 50),892,,,,40.23,0.0451,7.82
+Bowler,10,1612,Yuzvendra Chahal,Low Pressure (PI < 25),861,,,,-19.96,-0.0232,8.56
+Bowler,10,1612,Yuzvendra Chahal,Medium Pressure (25 <= PI < 50),498,,,,-37.22,-0.0747,8.54
+Bowler,10,1612,Yuzvendra Chahal,High Pressure (PI >= 50),859,,,,69.49,0.0809,7.92
+Bowler,11,5979,Abrar Ahmed,Low Pressure (PI < 25),282,,,,-12.36,-0.0438,8.3
+Bowler,11,5979,Abrar Ahmed,Medium Pressure (25 <= PI < 50),203,,,,47.21,0.2325,6.03
+Bowler,11,5979,Abrar Ahmed,High Pressure (PI >= 50),291,,,,95.97,0.3298,5.3
+Bowler,12,2878,Mohit Sharma,Low Pressure (PI < 25),232,,,,-25.67,-0.1107,9.78
+Bowler,12,2878,Mohit Sharma,Medium Pressure (25 <= PI < 50),162,,,,-28.29,-0.1746,10.44
+Bowler,12,2878,Mohit Sharma,High Pressure (PI >= 50),282,,,,26.34,0.0934,8.11
+Bowler,13,4373,Mustafizur Rahman,Low Pressure (PI < 25),594,,,,82.72,0.1393,7.71
+Bowler,13,4373,Mustafizur Rahman,Medium Pressure (25 <= PI < 50),513,,,,73.21,0.1427,7.85
+Bowler,13,4373,Mustafizur Rahman,High Pressure (PI >= 50),527,,,,120.67,0.229,6.77
+Bowler,14,4900,Wanindu Hasaranga,Low Pressure (PI < 25),984,,,,74.04,0.0752,7.95
+Bowler,14,4900,Wanindu Hasaranga,Medium Pressure (25 <= PI < 50),431,,,,21.04,0.0488,7.48
+Bowler,14,4900,Wanindu Hasaranga,High Pressure (PI >= 50),639,,,,-41.64,-0.0652,8.01
+Bowler,15,3644,Kuldeep Yadav,Low Pressure (PI < 25),799,,,,4.94,0.0062,8.48
+Bowler,15,3644,Kuldeep Yadav,Medium Pressure (25 <= PI < 50),526,,,,72.52,0.1379,7.11
+Bowler,15,3644,Kuldeep Yadav,High Pressure (PI >= 50),627,,,,70.75,0.1128,7.43

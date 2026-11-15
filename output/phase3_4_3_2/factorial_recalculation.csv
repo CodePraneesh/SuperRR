@@ -1,0 +1,7 @@
+cohort,player_name,baseline_cpri,cond1_recomp_priors_recomp_norm_Y11,cond2_recomp_priors_fixed_norm_Y01,cond3_fixed_priors_recomp_norm_Y10,cond4_fixed_priors_fixed_norm_Y00,effect_norm_given_fixed_priors_alpha_A,effect_priors_given_fixed_norm_alpha_B,interaction_effect_alpha_AB,avg_main_effect_normalization,avg_main_effect_priors,factorial_identity_verified,pct_drop_reduction_holding_priors_recomputed,pct_drop_reduction_holding_priors_fixed,pct_drop_reduction_total_C1_to_C4
+IPL Batters,Rinku Singh,89.03,-4.83,-1.17,-4.99,-0.77,-4.22,-0.4,0.56,-3.94,-0.12,True,75.78,84.57,84.06
+IPL Batters,Ashutosh Sharma,88.86,-8.3,-4.19,-7.64,-4.41,-3.23,0.22,-0.88,-3.67,-0.22,True,49.52,42.28,46.87
+IPL Batters,Suryakumar Yadav,88.41,-3.2,1.11,-3.23,1.21,-4.44,-0.1,0.13,-4.375,-0.035,True,134.69,137.46,137.81
+T20I Batters,Matthew Wade,97.42,-1.14,-1.82,-0.95,-1.6,0.65,-0.22,0.03,0.665,-0.205,True,-59.65,-68.42,-40.35
+IPL Bowlers,Matheesha Pathirana,83.5,-6.4,-2.14,-6.28,-1.91,-4.37,-0.23,0.11,-4.315,-0.175,True,66.56,69.59,70.16
+T20I Bowlers,Sufiyan Muqeem,86.44,-8.26,-2.74,-8.39,-2.02,-6.37,-0.72,0.85,-5.945,-0.295,True,66.83,75.92,75.54

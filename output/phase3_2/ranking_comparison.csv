@@ -1,0 +1,1007 @@
+player_id,player_name,competition_scope,rank_p3,cpri_p3,tier_p3,rank_p31,cpri_p31,tier_p31,rank_p32,cpri_p32,tier_p32,rank_change_p31_to_p32,status_note
+4708,Rinku Singh,IPL,210,46.21,High Confidence,2,82.12,High Confidence,1,89.03,High Confidence,1,Stable ranking.
+8101,Ashutosh Sharma,IPL,62,59.18,High Confidence,3,81.76,High Confidence,2,88.86,High Confidence,1,Stable ranking.
+1699,Suryakumar Yadav,IPL,95,55.56,High Confidence,4,81.76,High Confidence,3,88.41,High Confidence,1,Stable ranking.
+152,Ravindra Jadeja,IPL,300,37.41,High Confidence,5,80.76,High Confidence,4,87.78,High Confidence,1,Stable ranking.
+143,Dinesh Karthik,IPL,131,52.97,High Confidence,6,80.61,High Confidence,5,87.75,High Confidence,1,Stable ranking.
+6396,Tim David,IPL,187,48.67,High Confidence,7,80.44,High Confidence,6,87.59,High Confidence,1,Stable ranking.
+7897,Namboori Tilak Varma,IPL,257,42.53,High Confidence,9,79.19,High Confidence,7,86.34,High Confidence,2,Stable ranking.
+4722,Rashid Khan,IPL,217,45.5,High Confidence,1,85.68,High Confidence,8,85.59,High Confidence,-7,"Adjusted from #1 to #8 in IPL: Uncompressed adaptability reveals elite finishers (Rinku, Ashutosh, SKY)."
+2756,Shashank Singh,IPL,194,47.85,High Confidence,11,78.55,High Confidence,9,85.57,High Confidence,2,Stable ranking.
+6460,Ayush Badoni,IPL,208,46.24,High Confidence,12,78.14,High Confidence,10,84.97,High Confidence,2,Stable ranking.
+4260,Heinrich Klaasen,IPL,41,62.42,High Confidence,8,79.79,High Confidence,11,84.89,High Confidence,-3,Stable ranking.
+8,Mahendra Singh Dhoni,IPL,279,40.21,High Confidence,14,76.23,High Confidence,12,83.38,High Confidence,2,Stable ranking.
+3647,Shreyas Iyer,IPL,97,55.46,High Confidence,13,76.46,High Confidence,13,83.11,High Confidence,0,Stable ranking.
+20005,Arshad Khan,IPL,333,29.2,Moderate Confidence,15,76.13,High Confidence,14,82.33,Moderate Confidence,1,Stable ranking.
+1077,David Miller,IPL,106,54.88,High Confidence,18,74.76,High Confidence,15,81.83,High Confidence,3,Stable ranking.
+930,Karun Nair,IPL,173,49.78,High Confidence,10,79.15,High Confidence,16,81.79,Moderate Confidence,-6,Demoted from Top 10 to Moderate Confidence: Only 4 pressure matches (fails M_p >= 8 eligibility).
+47,Virat Kohli,IPL,100,55.38,High Confidence,16,75.66,High Confidence,17,81.65,High Confidence,-1,Stable ranking.
+813,Jos Buttler,IPL,104,54.96,High Confidence,19,74.5,High Confidence,18,81.4,High Confidence,1,Stable ranking.
+3125,Nicholas Pooran,IPL,86,56.11,High Confidence,20,74.44,High Confidence,19,81.04,High Confidence,1,Stable ranking.
+46066,Vipraj Nigam,IPL,159,50.57,Moderate Confidence,22,73.44,Moderate Confidence,20,80.27,Moderate Confidence,2,Stable ranking.
+2984,Sikandar Raza,IPL,228,44.56,Moderate Confidence,24,72.99,High Confidence,21,79.73,Moderate Confidence,3,Stable ranking.
+23450,Sai Sudharsan,IPL,247,43.17,High Confidence,23,73.22,High Confidence,22,79.72,High Confidence,1,Stable ranking.
+20702,Tristan Stubbs,IPL,230,44.28,High Confidence,17,74.93,High Confidence,23,79.55,High Confidence,-6,Stable ranking.
+6819,Yashasvi Jaiswal,IPL,11,70.21,High Confidence,25,72.88,High Confidence,24,79.49,High Confidence,1,Stable ranking.
+8654,Cooper Connolly,IPL,172,49.8,High Confidence,26,72.11,High Confidence,25,79.19,Moderate Confidence,1,Stable ranking.
+6272,William Jacks,IPL,158,50.57,High Confidence,27,71.91,High Confidence,26,79.04,High Confidence,1,Stable ranking.
+25139,Shubham Dubey,IPL,152,51.07,Moderate Confidence,21,73.69,High Confidence,27,78.45,Moderate Confidence,-6,Stable ranking.
+7544,Venkatesh Iyer,IPL,231,44.27,High Confidence,28,71.66,High Confidence,28,77.6,High Confidence,0,Stable ranking.
+3926,Rahul Tewatia,IPL,202,47.41,High Confidence,30,70.98,High Confidence,29,76.77,High Confidence,1,Stable ranking.
+4007,Ryan Rickelton,IPL,10,70.41,High Confidence,34,69.82,High Confidence,30,76.59,High Confidence,4,Stable ranking.
+953,Lokesh Rahul,IPL,171,49.8,High Confidence,29,71.57,High Confidence,31,76.13,High Confidence,-2,Stable ranking.
+2639,Marcus Stoinis,IPL,70,58.14,High Confidence,33,69.92,High Confidence,32,76.03,High Confidence,1,Stable ranking.
+6423,Riyan Parag,IPL,47,62.04,High Confidence,37,69.1,High Confidence,33,75.44,High Confidence,4,Stable ranking.
+7325,Harpreet Brar,IPL,296,37.84,Moderate Confidence,35,69.41,High Confidence,34,75.37,Moderate Confidence,1,Stable ranking.
+50284,Vaibhav Sooryavanshi,IPL,5,76.21,High Confidence,32,70.07,High Confidence,35,75.2,High Confidence,-3,Stable ranking.
+2382,Jamie Overton,IPL,197,47.58,Moderate Confidence,36,69.36,Moderate Confidence,36,75.15,Moderate Confidence,0,Stable ranking.
+4246,Nitish Rana,IPL,74,57.71,High Confidence,38,68.93,High Confidence,37,75.13,High Confidence,1,Stable ranking.
+6288,Shubman Gill,IPL,203,47.4,High Confidence,31,70.43,High Confidence,38,75.01,High Confidence,-7,Stable ranking.
+7216,Prabhsimran Singh,IPL,112,54.6,High Confidence,41,68.39,High Confidence,39,74.65,High Confidence,2,Stable ranking.
+126,Rohit Sharma,IPL,186,49.01,High Confidence,43,67.45,High Confidence,40,74.38,High Confidence,3,Stable ranking.
+88,Faf du Plessis,IPL,22,66.43,High Confidence,39,68.92,High Confidence,41,74.16,High Confidence,-2,Stable ranking.
+6467,Anuj Rawat,IPL,277,40.41,High Confidence,45,66.92,High Confidence,42,73.93,High Confidence,3,Stable ranking.
+1071,Jaydev Unadkat,IPL,325,31.05,Moderate Confidence,42,67.8,Moderate Confidence,43,73.79,Moderate Confidence,-1,Stable ranking.
+992,Mayank Agarwal,IPL,244,43.31,High Confidence,48,66.44,High Confidence,44,73.59,Moderate Confidence,4,Stable ranking.
+6931,Pathum Nissanka,IPL,65,58.78,High Confidence,50,65.56,High Confidence,45,72.66,Moderate Confidence,5,Stable ranking.
+1187,Jason Roy,IPL,45,62.18,High Confidence,51,65.34,High Confidence,46,72.49,Moderate Confidence,5,Stable ranking.
+5553,Phil Salt,IPL,40,62.66,High Confidence,44,67.05,High Confidence,47,72.46,Moderate Confidence,-3,Stable ranking.
+6281,Abhishek Sharma,IPL,49,61.91,High Confidence,46,66.59,High Confidence,48,72.3,High Confidence,-2,Stable ranking.
+4703,Rishabh Pant,IPL,48,61.96,High Confidence,47,66.59,High Confidence,49,72.16,High Confidence,-2,Stable ranking.
+2573,Evin Lewis,IPL,334,28.52,Moderate Confidence,40,68.47,Moderate Confidence,50,71.45,Low Confidence,-10,Stable ranking.
+4391,Liam Livingstone,IPL,54,60.68,High Confidence,54,64.9,High Confidence,51,71.34,High Confidence,3,Stable ranking.
+4736,Josh Inglis,IPL,76,57.4,High Confidence,49,65.8,High Confidence,52,71.32,Moderate Confidence,-3,Stable ranking.
+45749,Mukul Choudhary,IPL,121,53.52,Moderate Confidence,56,64.1,High Confidence,53,71.23,Moderate Confidence,3,Stable ranking.
+167,Ajinkya Rahane,IPL,193,47.9,High Confidence,55,64.73,High Confidence,54,70.46,High Confidence,1,Stable ranking.
+7059,Nehal Wadhera,IPL,135,52.84,High Confidence,57,64.07,High Confidence,55,70.38,High Confidence,2,Stable ranking.
+142,Shikhar Dhawan,IPL,117,53.95,High Confidence,63,63.22,High Confidence,56,70.3,High Confidence,7,Stable ranking.
+1318,Andre Russell,IPL,33,63.78,High Confidence,52,65.33,High Confidence,57,70.24,High Confidence,-5,Stable ranking.
+6725,Sherfane Rutherford,IPL,323,31.3,High Confidence,67,62.87,High Confidence,58,69.78,High Confidence,9,Stable ranking.
+6466,Atharwa Taide,IPL,320,32.2,High Confidence,68,62.72,High Confidence,59,69.76,Moderate Confidence,9,Stable ranking.
+6314,Devdutt Padikkal,IPL,66,58.73,High Confidence,65,62.99,High Confidence,60,69.7,High Confidence,5,Stable ranking.
+3629,Corbin Bosch,IPL,299,37.6,Moderate Confidence,61,63.28,Moderate Confidence,61,69.19,Moderate Confidence,0,Stable ranking.
+27964,Anshul Kamboj,IPL,309,34.99,Low Confidence,60,63.64,Moderate Confidence,62,68.82,Low Confidence,-2,Stable ranking.
+8085,Suyash Prabhudessai,IPL,287,39.01,Moderate Confidence,72,62.09,High Confidence,63,68.78,Moderate Confidence,9,Stable ranking.
+250,Aaron Finch,IPL,265,41.97,Moderate Confidence,53,65.09,Moderate Confidence,64,68.71,Low Confidence,-11,Demoted by -11 ranks.
+3330,Hardik Pandya,IPL,110,54.76,High Confidence,66,62.95,High Confidence,65,68.51,High Confidence,1,Stable ranking.
+220,David Warner,IPL,132,52.9,High Confidence,62,63.28,High Confidence,66,68.15,High Confidence,-4,Stable ranking.
+3297,Shimron Hetmyer,IPL,161,50.54,High Confidence,64,63.06,High Confidence,67,68.08,High Confidence,-3,Stable ranking.
+7260,Dhruv Jurel,IPL,93,55.66,High Confidence,59,63.71,High Confidence,68,68.04,High Confidence,-9,Stable ranking.
+5939,Cameron Green,IPL,162,50.3,High Confidence,58,63.79,High Confidence,69,67.91,High Confidence,-11,Demoted by -11 ranks.
+45966,Prashant Veer,IPL,222,45.01,Moderate Confidence,76,60.85,Moderate Confidence,70,67.8,Low Confidence,6,Stable ranking.
+4821,Mahipal Lomror,IPL,6,76.0,High Confidence,79,60.4,High Confidence,71,67.54,Moderate Confidence,8,Stable ranking.
+4117,Ishan Kishan,IPL,149,51.88,High Confidence,71,62.53,High Confidence,72,67.42,High Confidence,-1,Stable ranking.
+1205,Jonny Bairstow,IPL,52,61.31,High Confidence,80,59.96,High Confidence,73,67.01,Moderate Confidence,7,Stable ranking.
+109,Wriddhiman Saha,IPL,60,59.46,High Confidence,78,60.51,High Confidence,74,66.85,High Confidence,4,Stable ranking.
+4823,Washington Sundar,IPL,71,57.93,High Confidence,74,60.95,High Confidence,75,66.77,High Confidence,-1,Stable ranking.
+818,Mitchell Marsh,IPL,141,52.42,High Confidence,69,62.69,High Confidence,76,66.69,High Confidence,-7,Stable ranking.
+3916,Jitesh Sharma,IPL,12,70.18,High Confidence,73,61.5,High Confidence,77,66.61,High Confidence,-4,Stable ranking.
+3782,M Shahrukh Khan,IPL,13,69.69,High Confidence,75,60.88,High Confidence,78,66.21,High Confidence,-3,Stable ranking.
+5039,Rajat Patidar,IPL,123,53.47,High Confidence,70,62.62,High Confidence,79,65.67,High Confidence,-9,Stable ranking.
+3648,Deepak Hooda,IPL,84,56.15,High Confidence,86,58.27,High Confidence,80,64.45,High Confidence,6,Stable ranking.
+37052,Naman Dhir,IPL,18,67.43,High Confidence,82,58.91,High Confidence,81,64.05,High Confidence,1,Stable ranking.
+1219,David Willey,IPL,316,32.89,Moderate Confidence,88,56.83,Moderate Confidence,82,63.97,Low Confidence,6,Stable ranking.
+4755,Shivam Dube,IPL,90,56.02,High Confidence,77,60.74,High Confidence,83,63.92,High Confidence,-6,Stable ranking.
+2876,Axar Patel,IPL,115,54.28,High Confidence,81,59.83,High Confidence,84,63.22,High Confidence,-3,Stable ranking.
+20894,Aman Khan,IPL,239,43.45,Moderate Confidence,94,56.04,High Confidence,85,63.2,Moderate Confidence,9,Stable ranking.
+2258,Sanju Samson,IPL,26,65.87,High Confidence,83,58.71,High Confidence,86,61.97,High Confidence,-3,Stable ranking.
+6683,Mayank Markande,IPL,322,31.94,Low Confidence,85,58.55,Low Confidence,87,61.91,Low Confidence,-2,Stable ranking.
+7312,Nandre Burger,IPL,292,38.33,Low Confidence,98,55.02,Low Confidence,88,61.78,Low Confidence,10,Stable ranking.
+26906,Angkrish Raghuvanshi,IPL,127,53.42,High Confidence,93,56.22,High Confidence,89,61.49,Moderate Confidence,4,Stable ranking.
+4840,Odean Smith,IPL,331,30.43,Low Confidence,101,54.23,Moderate Confidence,90,61.29,Low Confidence,11,Promoted by +11 ranks as adaptability was uncompressed.
+25669,Priyansh Arya,IPL,7,74.58,High Confidence,90,56.55,High Confidence,91,61.17,High Confidence,-1,Stable ranking.
+3645,Sarfaraz Khan,IPL,150,51.72,High Confidence,96,55.41,High Confidence,92,61.04,Moderate Confidence,4,Stable ranking.
+838,Glenn Maxwell,IPL,25,66.27,High Confidence,97,55.15,High Confidence,93,60.78,High Confidence,4,Stable ranking.
+4219,Krunal Pandya,IPL,125,53.45,High Confidence,92,56.36,High Confidence,94,60.68,High Confidence,-2,Stable ranking.
+7625,Suryansh Shedge,IPL,55,60.67,Moderate Confidence,103,54.13,High Confidence,95,60.6,Moderate Confidence,8,Stable ranking.
+3644,Kuldeep Yadav,IPL,340,25.16,High Confidence,87,58.17,High Confidence,96,60.09,High Confidence,-9,Stable ranking.
+7341,Jake McGurk,IPL,1,92.32,High Confidence,110,53.14,Moderate Confidence,97,60.07,Low Confidence,13,Promoted by +13 ranks as adaptability was uncompressed.
+1758,Patrick Cummins,IPL,221,45.02,High Confidence,84,58.59,High Confidence,98,60.06,High Confidence,-14,Demoted by -14 ranks.
+494,Kieron Pollard,IPL,212,46.11,Moderate Confidence,112,52.92,High Confidence,99,60.03,Moderate Confidence,13,Promoted by +13 ranks as adaptability was uncompressed.
+3653,Avesh Khan,IPL,302,37.04,Low Confidence,91,56.52,Moderate Confidence,100,59.97,Low Confidence,-9,Stable ranking.
+6671,Lalit Yadav,IPL,207,46.29,High Confidence,99,54.63,High Confidence,101,59.89,High Confidence,-2,Stable ranking.
+8221,Nitish Reddy,IPL,75,57.67,High Confidence,95,55.96,High Confidence,102,59.04,High Confidence,-7,Stable ranking.
+5029,Prerak Mankad,IPL,233,44.16,Moderate Confidence,118,51.93,Moderate Confidence,103,59.0,Low Confidence,15,Promoted by +15 ranks as adaptability was uncompressed.
+2985,Mark Wood,IPL,216,45.64,Low Confidence,119,51.87,Low Confidence,104,58.99,Low Confidence,15,Promoted by +15 ranks as adaptability was uncompressed.
+5928,Prithvi Shaw,IPL,32,63.94,High Confidence,104,53.91,High Confidence,105,58.85,High Confidence,-1,Stable ranking.
+198,Manish Pandey,IPL,37,63.41,High Confidence,105,53.61,High Confidence,106,58.56,High Confidence,-1,Stable ranking.
+7472,Shahbaz Ahmed,IPL,211,46.2,High Confidence,89,56.66,High Confidence,107,58.12,High Confidence,-18,Demoted by -18 ranks.
+25679,Salil Arora,IPL,177,49.38,Moderate Confidence,117,51.95,Moderate Confidence,108,58.06,Moderate Confidence,9,Stable ranking.
+48504,Ayush Mhatre,IPL,36,63.52,High Confidence,113,52.72,High Confidence,109,57.88,Moderate Confidence,4,Stable ranking.
+2334,Dwaine Pretorius,IPL,157,50.63,Low Confidence,125,50.78,Low Confidence,110,57.62,Low Confidence,15,Promoted by +15 ranks as adaptability was uncompressed.
+4106,Daryl Mitchell,IPL,44,62.23,High Confidence,121,51.71,High Confidence,111,57.53,Moderate Confidence,10,Stable ranking.
+1941,Devon Conway,IPL,250,42.87,High Confidence,102,54.21,High Confidence,112,57.02,Moderate Confidence,-10,Stable ranking.
+360,Bhuvneshwar Kumar,IPL,317,32.66,High Confidence,100,54.29,High Confidence,113,56.87,High Confidence,-13,Demoted by -13 ranks.
+1617,Rishi Dhawan,IPL,341,21.82,Low Confidence,123,51.13,Moderate Confidence,114,56.72,Low Confidence,9,Stable ranking.
+305,Ravichandran Ashwin,IPL,146,52.23,High Confidence,108,53.47,High Confidence,115,56.6,High Confidence,-7,Stable ranking.
+2436,Dasun Shanaka,IPL,168,49.88,Moderate Confidence,131,50.25,Moderate Confidence,116,56.53,Low Confidence,15,Promoted by +15 ranks as adaptability was uncompressed.
+4854,Rachin Ravindra,IPL,190,48.16,High Confidence,106,53.6,High Confidence,117,56.48,Moderate Confidence,-11,Demoted by -11 ranks.
+796,Matthew Wade,IPL,196,47.8,High Confidence,136,49.41,Moderate Confidence,118,56.45,Low Confidence,18,Promoted by +18 ranks as adaptability was uncompressed.
+3605,Aiden Markram,IPL,130,53.0,High Confidence,107,53.5,High Confidence,119,56.22,High Confidence,-12,Demoted by -12 ranks.
+2877,Vijay Shankar,IPL,164,50.23,High Confidence,109,53.33,High Confidence,120,56.07,High Confidence,-11,Demoted by -11 ranks.
+7240,FazalHaq Farooqi,IPL,332,29.43,Low Confidence,114,52.69,Low Confidence,121,56.05,Low Confidence,-7,Stable ranking.
+5809,Naveen ul Haq,IPL,336,27.03,Low Confidence,115,52.21,Low Confidence,122,55.57,Low Confidence,-7,Stable ranking.
+3298,Jofra Archer,IPL,268,41.86,Moderate Confidence,132,49.95,High Confidence,123,55.48,Moderate Confidence,9,Stable ranking.
+1039,Mandeep Singh,IPL,140,52.55,Low Confidence,142,48.62,Low Confidence,124,55.41,Low Confidence,18,Promoted by +18 ranks as adaptability was uncompressed.
+58246,Prince Yadav,IPL,335,27.66,Low Confidence,120,51.75,Low Confidence,125,55.11,Low Confidence,-5,Stable ranking.
+4986,Rovman Powell,IPL,81,56.56,High Confidence,111,53.11,High Confidence,126,54.92,High Confidence,-15,Demoted by -15 ranks.
+2416,Kyle Mayers,IPL,227,44.74,High Confidence,126,50.76,High Confidence,127,54.91,Moderate Confidence,-1,Stable ranking.
+1596,Moeen Ali,IPL,34,63.71,High Confidence,129,50.5,High Confidence,128,54.83,High Confidence,1,Stable ranking.
+27959,Hrithik Shokeen,IPL,303,36.87,Moderate Confidence,141,48.77,Moderate Confidence,129,54.49,Moderate Confidence,12,Promoted by +12 ranks as adaptability was uncompressed.
+1568,Kane Williamson,IPL,243,43.33,High Confidence,137,49.4,High Confidence,130,54.49,Moderate Confidence,7,Stable ranking.
+7250,Mukesh Choudhary,IPL,295,37.91,Low Confidence,124,50.97,Low Confidence,131,54.34,Low Confidence,-7,Stable ranking.
+23311,Jacob Bethell,IPL,109,54.8,Moderate Confidence,140,48.81,Low Confidence,132,54.14,Low Confidence,8,Stable ranking.
+6059,Ruturaj Gaikwad,IPL,29,64.45,High Confidence,122,51.5,High Confidence,133,54.06,High Confidence,-11,Demoted by -11 ranks.
+2399,Dushmantha Chameera,IPL,305,35.24,Low Confidence,128,50.55,Moderate Confidence,134,54.05,Low Confidence,-6,Stable ranking.
+4487,Vyshak Kumar,IPL,327,30.9,Low Confidence,153,47.26,Low Confidence,135,53.9,Low Confidence,18,Promoted by +18 ranks as adaptability was uncompressed.
+2003,Bhanuka Rajapaksa,IPL,39,62.99,High Confidence,150,47.44,Moderate Confidence,136,53.8,Low Confidence,14,Promoted by +14 ranks as adaptability was uncompressed.
+1701,Swapnil Singh,IPL,330,30.72,Low Confidence,148,47.58,Low Confidence,137,53.76,Low Confidence,11,Promoted by +11 ranks as adaptability was uncompressed.
+8177,Akash Madhwal,IPL,315,33.19,Low Confidence,130,50.29,Low Confidence,138,53.66,Low Confidence,-8,Stable ranking.
+6457,Urvil Patel,IPL,8,74.21,Moderate Confidence,149,47.45,Low Confidence,139,53.61,Low Confidence,10,Stable ranking.
+2101,Quinton de Kock,IPL,113,54.38,High Confidence,116,52.2,High Confidence,140,53.19,High Confidence,-24,Demoted by -24 ranks.
+8182,Donovan Ferreira,IPL,139,52.65,High Confidence,127,50.58,High Confidence,141,53.18,Moderate Confidence,-14,Demoted by -14 ranks.
+8040,Ripal Patel,IPL,297,37.8,Low Confidence,133,49.61,Moderate Confidence,142,52.98,Low Confidence,-9,Stable ranking.
+28,Ishant Sharma,IPL,318,32.54,Low Confidence,134,49.51,Low Confidence,143,52.87,Low Confidence,-9,Stable ranking.
+2054,Jason Behrendorff,IPL,304,36.28,Low Confidence,138,49.39,Low Confidence,144,52.76,Low Confidence,-6,Stable ranking.
+29888,Harshit Rana,IPL,293,38.3,Low Confidence,162,46.25,Moderate Confidence,145,52.31,Low Confidence,17,Promoted by +17 ranks as adaptability was uncompressed.
+4369,Shai Hope,IPL,176,49.38,Moderate Confidence,152,47.27,Low Confidence,146,51.98,Low Confidence,6,Stable ranking.
+772,Rilee Rossouw,IPL,31,64.21,High Confidence,143,48.61,High Confidence,147,51.19,High Confidence,-4,Stable ranking.
+2320,Trent Boult,IPL,249,42.98,Moderate Confidence,144,48.58,Moderate Confidence,148,51.11,Moderate Confidence,-4,Stable ranking.
+47370,Aniket Verma,IPL,128,53.32,High Confidence,135,49.41,High Confidence,149,51.11,Moderate Confidence,-14,Demoted by -14 ranks.
+6526,Himmat Singh,IPL,133,52.88,Moderate Confidence,145,48.1,Moderate Confidence,150,51.1,Low Confidence,-5,Stable ranking.
+1813,Deepak Chahar,IPL,236,43.75,Low Confidence,151,47.28,Moderate Confidence,151,50.45,Low Confidence,0,Stable ranking.
+3727,Matthew Short,IPL,20,66.78,High Confidence,173,45.24,Moderate Confidence,152,50.44,Low Confidence,21,Promoted by +21 ranks as adaptability was uncompressed.
+2930,Rassie van der Dussen,IPL,324,31.1,Low Confidence,182,44.33,Low Confidence,153,50.41,Low Confidence,29,Promoted by +29 ranks as adaptability was uncompressed.
+25048,Umran Malik,IPL,278,40.35,Low Confidence,154,46.99,Low Confidence,154,50.36,Low Confidence,0,Stable ranking.
+830,Josh Hazlewood,IPL,338,26.34,Low Confidence,156,46.68,Low Confidence,155,50.04,Low Confidence,1,Stable ranking.
+26663,Kwena Maphaka,IPL,261,42.27,Low Confidence,157,46.63,Low Confidence,156,50.0,Low Confidence,1,Stable ranking.
+7446,Abdul Samad,IPL,58,60.0,High Confidence,139,48.96,High Confidence,157,49.96,High Confidence,-18,Demoted by -18 ranks.
+5041,Mukesh Kumar,IPL,337,26.91,Low Confidence,160,46.53,Low Confidence,158,49.9,Low Confidence,2,Stable ranking.
+1924,Sam Billings,IPL,137,52.74,Moderate Confidence,158,46.63,Moderate Confidence,159,49.83,Moderate Confidence,-1,Stable ranking.
+25213,Dewald Brevis,IPL,72,57.9,High Confidence,155,46.77,High Confidence,160,49.5,High Confidence,-5,Stable ranking.
+2847,Shardul Thakur,IPL,136,52.8,High Confidence,159,46.62,High Confidence,161,49.44,High Confidence,-2,Stable ranking.
+35318,Sakib Hussain,IPL,290,38.68,Low Confidence,164,46.0,Low Confidence,162,49.37,Low Confidence,2,Stable ranking.
+5944,Mohammed Siraj,IPL,276,41.0,Moderate Confidence,166,45.85,Moderate Confidence,163,49.22,Moderate Confidence,3,Stable ranking.
+3660,Luke Wood,IPL,248,43.0,Low Confidence,167,45.82,Low Confidence,164,49.19,Low Confidence,3,Stable ranking.
+67036,Brijesh Sharma,IPL,306,35.11,Low Confidence,168,45.74,Low Confidence,165,49.1,Low Confidence,3,Stable ranking.
+1040,Harpreet Bhatia,IPL,270,41.63,Moderate Confidence,163,46.03,Moderate Confidence,166,48.97,Moderate Confidence,-3,Stable ranking.
+3628,Kagiso Rabada,IPL,77,57.08,Moderate Confidence,147,47.73,High Confidence,167,48.83,Moderate Confidence,-20,Demoted by -20 ranks.
+19315,Vijayakanth Viyaskanth,IPL,258,42.33,Low Confidence,170,45.41,Low Confidence,168,48.78,Low Confidence,2,Stable ranking.
+6256,Varun Chakravarthy,IPL,329,30.75,Low Confidence,171,45.35,Low Confidence,169,48.72,Low Confidence,2,Stable ranking.
+8238,Sameer Rizvi,IPL,50,61.71,High Confidence,146,47.8,High Confidence,170,48.71,High Confidence,-24,Demoted by -24 ranks.
+6806,Tushar Deshpande,IPL,229,44.5,Low Confidence,172,45.27,Low Confidence,171,48.64,Low Confidence,1,Stable ranking.
+1556,David Payne,IPL,283,39.99,Low Confidence,174,45.22,Low Confidence,172,48.58,Low Confidence,2,Stable ranking.
+3469,Shreyas Gopal,IPL,286,39.25,Low Confidence,177,45.19,Low Confidence,173,48.56,Low Confidence,4,Stable ranking.
+4101,Mitchell Santner,IPL,312,33.75,Moderate Confidence,165,45.86,High Confidence,174,48.47,Moderate Confidence,-9,Stable ranking.
+4837,Obed McCoy,IPL,264,42.1,Low Confidence,178,45.1,Low Confidence,175,48.46,Low Confidence,3,Stable ranking.
+6284,Anukul Roy,IPL,144,52.32,Moderate Confidence,195,42.35,Moderate Confidence,176,48.4,Moderate Confidence,19,Promoted by +19 ranks as adaptability was uncompressed.
+2411,Sandeep Sharma,IPL,314,33.47,Low Confidence,179,44.93,Low Confidence,177,48.29,Low Confidence,2,Stable ranking.
+56830,Madhav Tiwari,IPL,101,55.23,Low Confidence,187,43.72,Low Confidence,178,47.84,Low Confidence,9,Stable ranking.
+4489,Prasidh Krishna,IPL,308,35.05,Low Confidence,180,44.43,Low Confidence,179,47.8,Low Confidence,1,Stable ranking.
+28021,Saurabh Dubey,IPL,185,49.1,Low Confidence,184,44.08,Low Confidence,180,47.45,Low Confidence,4,Stable ranking.
+5608,Narayan Jagadeesan,IPL,165,50.14,Moderate Confidence,199,42.2,Moderate Confidence,181,47.32,Moderate Confidence,18,Promoted by +18 ranks as adaptability was uncompressed.
+7304,Sanvir Singh,IPL,271,41.36,Low Confidence,194,42.36,Low Confidence,182,47.24,Low Confidence,12,Promoted by +12 ranks as adaptability was uncompressed.
+2315,Reece Topley,IPL,291,38.53,Low Confidence,188,43.66,Low Confidence,183,47.02,Low Confidence,5,Stable ranking.
+403,Umesh Yadav,IPL,240,43.45,Moderate Confidence,169,45.7,Moderate Confidence,184,47.01,Moderate Confidence,-15,Demoted by -15 ranks.
+19714,Abishek Porel,IPL,68,58.4,High Confidence,161,46.41,High Confidence,185,46.87,High Confidence,-24,Demoted by -24 ranks.
+2373,Ashton Turner,IPL,107,54.86,Low Confidence,216,40.32,Low Confidence,186,46.53,Low Confidence,30,Promoted by +30 ranks as adaptability was uncompressed.
+8634,Ashwani Kumar,IPL,301,37.2,Low Confidence,189,43.1,Low Confidence,187,46.46,Low Confidence,2,Stable ranking.
+5562,Richard Gleeson,IPL,266,41.92,Low Confidence,191,43.01,Low Confidence,188,46.38,Low Confidence,3,Stable ranking.
+7808,Marco Jansen,IPL,256,42.53,High Confidence,181,44.39,High Confidence,189,46.32,High Confidence,-8,Stable ranking.
+6512,Michael Bracewell,IPL,289,38.71,Low Confidence,190,43.1,Moderate Confidence,190,46.18,Low Confidence,0,Stable ranking.
+32862,Allah Ghazanfar,IPL,272,41.3,Low Confidence,192,42.8,Low Confidence,191,46.17,Low Confidence,1,Stable ranking.
+2884,Manan Vohra,IPL,78,56.79,Low Confidence,215,40.35,Low Confidence,192,46.13,Low Confidence,23,Promoted by +23 ranks as adaptability was uncompressed.
+2367,Travis Head,IPL,15,69.36,High Confidence,183,44.08,High Confidence,193,45.76,High Confidence,-10,Stable ranking.
+1487,Adam Milne,IPL,273,41.27,Low Confidence,193,42.39,Low Confidence,194,45.76,Low Confidence,-1,Stable ranking.
+3967,Tom Kohler,IPL,178,49.37,Low Confidence,210,40.99,Low Confidence,195,45.63,Low Confidence,15,Promoted by +15 ranks as adaptability was uncompressed.
+7270,Anrich Nortje,IPL,259,42.31,Low Confidence,197,42.24,Moderate Confidence,196,45.6,Low Confidence,1,Stable ranking.
+1440,Rahul Tripathi,IPL,53,61.13,High Confidence,176,45.2,High Confidence,197,45.55,High Confidence,-21,Demoted by -21 ranks.
+45381,PV Satyanarayan Raju,IPL,251,42.82,Low Confidence,200,42.06,Low Confidence,198,45.43,Low Confidence,2,Stable ranking.
+4265,T Natarajan,IPL,269,41.69,Low Confidence,201,42.0,Low Confidence,199,45.36,Low Confidence,2,Stable ranking.
+535,Ambati Rayudu,IPL,46,62.16,High Confidence,203,41.73,High Confidence,200,45.32,Moderate Confidence,3,Stable ranking.
+6697,Shams Mulani,IPL,255,42.62,Low Confidence,202,41.75,Low Confidence,201,45.12,Low Confidence,1,Stable ranking.
+2483,Lizaad Williams,IPL,267,41.91,Low Confidence,205,41.69,Low Confidence,202,45.06,Low Confidence,3,Stable ranking.
+43917,Krish Bhagat,IPL,326,30.95,Low Confidence,204,41.69,Low Confidence,203,45.05,Low Confidence,1,Stable ranking.
+20006,Ramandeep Singh,IPL,69,58.15,High Confidence,175,45.22,High Confidence,204,45.05,High Confidence,-29,Demoted by -29 ranks.
+7545,Kuldeep Sen,IPL,281,40.1,Low Confidence,206,41.66,Low Confidence,205,45.02,Low Confidence,1,Stable ranking.
+7473,Akash Deep,IPL,142,52.37,Low Confidence,217,40.1,Low Confidence,206,45.01,Low Confidence,11,Promoted by +11 ranks as adaptability was uncompressed.
+6161,Rahul Chahar,IPL,122,53.51,Moderate Confidence,196,42.31,Moderate Confidence,207,44.87,Moderate Confidence,-11,Demoted by -11 ranks.
+20802,Abdul Basith,IPL,254,42.65,Low Confidence,207,41.43,Low Confidence,208,44.8,Low Confidence,-1,Stable ranking.
+36983,Mohit Rathee,IPL,262,42.2,Low Confidence,208,41.39,Low Confidence,209,44.75,Low Confidence,-1,Stable ranking.
+1566,Mohammed Shami,IPL,120,53.65,Low Confidence,226,38.06,Moderate Confidence,210,44.51,Low Confidence,16,Promoted by +16 ranks as adaptability was uncompressed.
+158,Amit Mishra,IPL,275,41.13,Low Confidence,211,40.88,Low Confidence,211,44.47,Low Confidence,0,Stable ranking.
+3275,Alzarri Joseph,IPL,328,30.77,Low Confidence,209,41.06,Low Confidence,212,44.42,Low Confidence,-3,Stable ranking.
+5940,Riley Meredith,IPL,284,39.71,Low Confidence,212,40.83,Low Confidence,213,44.19,Low Confidence,-1,Stable ranking.
+2933,Jasprit Bumrah,IPL,339,25.9,Low Confidence,198,42.22,Low Confidence,214,44.16,Low Confidence,-16,Demoted by -16 ranks.
+39657,Eshan Malinga,IPL,311,34.26,Low Confidence,213,40.72,Low Confidence,215,44.08,Low Confidence,-2,Stable ranking.
+19316,Maheesh Theekshana,IPL,321,32.11,Low Confidence,214,40.55,Low Confidence,216,43.91,Low Confidence,-2,Stable ranking.
+6726,Romario Shepherd,IPL,310,34.73,High Confidence,186,44.0,High Confidence,217,43.77,Moderate Confidence,-31,Demoted by -31 ranks.
+4409,Sam Curran,IPL,17,68.46,High Confidence,185,44.0,High Confidence,218,43.58,High Confidence,-33,Demoted by -33 ranks.
+786,Chris Jordan,IPL,220,45.31,Low Confidence,229,37.96,Low Confidence,219,43.35,Low Confidence,10,Stable ranking.
+1107,Mohammad Nabi,IPL,294,38.04,Low Confidence,236,36.93,Low Confidence,220,43.31,Low Confidence,16,Promoted by +16 ranks as adaptability was uncompressed.
+2860,KS Bharat,IPL,147,52.13,Low Confidence,254,36.57,Low Confidence,221,42.82,Low Confidence,33,Promoted by +33 ranks as adaptability was uncompressed.
+6676,Azmatullah Omarzai,IPL,21,66.5,Moderate Confidence,218,39.27,Moderate Confidence,222,42.79,Moderate Confidence,-4,Stable ranking.
+3672,Kusal Mendis,IPL,119,53.68,Low Confidence,219,39.14,Low Confidence,223,42.51,Low Confidence,-4,Stable ranking.
+31529,Robin Minz,IPL,214,45.78,Low Confidence,237,36.84,Low Confidence,224,42.48,Low Confidence,13,Promoted by +13 ranks as adaptability was uncompressed.
+58134,Digvesh Rathi,IPL,288,38.81,Low Confidence,220,39.09,Low Confidence,225,42.45,Low Confidence,-5,Stable ranking.
+56817,Shivang Kumar,IPL,179,49.35,Low Confidence,231,37.56,Moderate Confidence,226,42.31,Low Confidence,5,Stable ranking.
+8647,Sediqullah Atal,IPL,170,49.85,Low Confidence,222,38.7,Low Confidence,227,42.07,Low Confidence,-5,Stable ranking.
+7327,Rasikh Salam,IPL,209,46.23,Low Confidence,228,38.01,Low Confidence,228,42.03,Low Confidence,0,Stable ranking.
+20023,Karan Sharma,IPL,191,48.15,Low Confidence,258,36.17,Low Confidence,229,41.69,Low Confidence,29,Promoted by +29 ranks as adaptability was uncompressed.
+6464,Arshdeep Singh,IPL,282,40.06,Low Confidence,225,38.3,Moderate Confidence,230,41.66,Low Confidence,-5,Stable ranking.
+7060,Arjun Tendulkar,IPL,154,50.95,Low Confidence,223,38.69,Low Confidence,231,41.66,Low Confidence,-8,Stable ranking.
+48575,Sahil Parakh,IPL,30,64.27,Low Confidence,232,37.25,Low Confidence,232,41.59,Low Confidence,0,Stable ranking.
+4229,George Linde,IPL,80,56.67,Low Confidence,227,38.04,Low Confidence,233,41.4,Low Confidence,-6,Stable ranking.
+3323,Jimmy Neesham,IPL,225,44.92,Low Confidence,221,38.89,Low Confidence,234,41.27,Low Confidence,-13,Demoted by -13 ranks.
+3697,Kyle Jamieson,IPL,285,39.41,Low Confidence,230,37.88,Low Confidence,235,41.25,Low Confidence,-5,Stable ranking.
+7269,Sushant Mishra,IPL,298,37.69,Low Confidence,233,37.14,Low Confidence,236,40.5,Low Confidence,-3,Stable ranking.
+28018,Ashok Sharma,IPL,313,33.7,Low Confidence,234,37.13,Low Confidence,237,40.49,Low Confidence,-3,Stable ranking.
+6354,Spencer Johnson,IPL,307,35.05,Low Confidence,235,36.97,Low Confidence,238,40.34,Low Confidence,-3,Stable ranking.
+1195,Ben Stokes,IPL,155,50.84,Low Confidence,238,36.75,Low Confidence,239,40.11,Low Confidence,-1,Stable ranking.
+820,Nathan Coulter Nile,IPL,234,44.16,Low Confidence,240,36.75,Low Confidence,240,40.11,Low Confidence,0,Stable ranking.
+31518,Akshat Raghuwanshi,IPL,205,46.8,Low Confidence,245,36.75,Low Confidence,241,40.11,Low Confidence,4,Stable ranking.
+393,Kedar Jadhav,IPL,224,44.93,Low Confidence,242,36.75,Low Confidence,242,40.11,Low Confidence,0,Stable ranking.
+20989,Vivrant Sharma,IPL,192,48.14,Low Confidence,244,36.75,Low Confidence,243,40.11,Low Confidence,1,Stable ranking.
+19781,Mitchell Owen,IPL,182,49.13,Low Confidence,243,36.75,Low Confidence,244,40.11,Low Confidence,-1,Stable ranking.
+60700,Ravi Singh,IPL,183,49.13,Low Confidence,241,36.75,Low Confidence,245,40.11,Low Confidence,-4,Stable ranking.
+6342,Matthew Breetzke,IPL,166,50.09,Low Confidence,239,36.75,Low Confidence,246,40.11,Low Confidence,-7,Stable ranking.
+6486,Tanush Kotian,IPL,204,46.84,Low Confidence,253,36.75,Low Confidence,247,40.11,Low Confidence,6,Stable ranking.
+2417,Akeal Hosein,IPL,241,43.41,Low Confidence,248,36.75,Low Confidence,248,40.11,Low Confidence,0,Stable ranking.
+43774,Shivam Singh,IPL,232,44.26,Low Confidence,251,36.75,Low Confidence,249,40.11,Low Confidence,2,Stable ranking.
+2671,Liton Das,IPL,180,49.33,Low Confidence,249,36.75,Low Confidence,250,40.11,Low Confidence,-1,Stable ranking.
+4486,BR Sharath,IPL,174,49.42,Low Confidence,250,36.75,Low Confidence,251,40.11,Low Confidence,-1,Stable ranking.
+1944,Keshav Maharaj,IPL,184,49.13,Low Confidence,247,36.75,Low Confidence,252,40.11,Low Confidence,-5,Stable ranking.
+2214,Gulbadin Naib,IPL,218,45.39,Low Confidence,246,36.75,Low Confidence,253,40.11,Low Confidence,-7,Stable ranking.
+4288,Navdeep Saini,IPL,181,49.13,Low Confidence,252,36.75,Low Confidence,254,40.11,Low Confidence,-2,Stable ranking.
+3700,Tim Seifert,IPL,145,52.25,Low Confidence,257,36.31,Low Confidence,255,39.92,Low Confidence,2,Stable ranking.
+42845,Arshin Kulkarni,IPL,88,56.05,Low Confidence,266,35.13,Low Confidence,256,39.77,Low Confidence,10,Stable ranking.
+4716,Mayank Dagar,IPL,253,42.65,Low Confidence,256,36.41,Low Confidence,257,39.77,Low Confidence,-1,Stable ranking.
+26913,Shaik Rasheed,IPL,189,48.28,Moderate Confidence,259,36.01,Low Confidence,258,39.62,Low Confidence,1,Stable ranking.
+2531,Joe Root,IPL,242,43.33,Low Confidence,260,35.96,Low Confidence,259,39.32,Low Confidence,1,Stable ranking.
+6772,Chetan Sakariya,IPL,223,45.01,Low Confidence,265,35.52,Low Confidence,260,38.88,Low Confidence,5,Stable ranking.
+161,Dwayne Bravo,IPL,280,40.19,Low Confidence,255,36.42,Low Confidence,261,38.86,Low Confidence,-6,Stable ranking.
+781,Sunil Narine,IPL,3,82.55,High Confidence,224,38.55,High Confidence,262,38.66,High Confidence,-38,Demoted by -38 ranks.
+26909,Yash Dhull,IPL,226,44.79,Low Confidence,280,32.66,Low Confidence,263,38.53,Low Confidence,17,Promoted by +17 ranks as adaptability was uncompressed.
+4900,Wanindu Hasaranga,IPL,91,55.94,Moderate Confidence,283,32.27,Moderate Confidence,264,38.46,Moderate Confidence,19,Promoted by +19 ranks as adaptability was uncompressed.
+4373,Mustafizur Rahman,IPL,263,42.11,Low Confidence,267,35.09,Low Confidence,265,38.45,Low Confidence,2,Stable ranking.
+1612,Yuzvendra Chahal,IPL,246,43.25,Low Confidence,269,34.93,Low Confidence,266,38.3,Low Confidence,3,Stable ranking.
+914,Krishnappa Gowtham,IPL,319,32.53,Low Confidence,261,35.91,Moderate Confidence,267,38.06,Low Confidence,-6,Stable ranking.
+2790,Praveen Dubey,IPL,201,47.43,Low Confidence,263,35.82,Low Confidence,268,37.99,Low Confidence,-5,Stable ranking.
+3272,Fabian Allen,IPL,163,50.27,Low Confidence,271,34.47,Low Confidence,269,37.84,Low Confidence,2,Stable ranking.
+4779,Pieter Willem Mulder,IPL,102,55.13,Low Confidence,268,34.97,Low Confidence,270,37.81,Low Confidence,-2,Stable ranking.
+7967,Noor Ahmad,IPL,215,45.66,Low Confidence,292,30.64,Moderate Confidence,271,37.75,Low Confidence,21,Promoted by +21 ranks as adaptability was uncompressed.
+2261,Harshal Patel,IPL,89,56.04,Moderate Confidence,272,34.34,High Confidence,272,37.5,Moderate Confidence,0,Stable ranking.
+1389,Sean Abbott,IPL,138,52.68,Low Confidence,274,33.75,Low Confidence,273,37.12,Low Confidence,1,Stable ranking.
+27960,Mayank Yadav,IPL,153,51.07,Low Confidence,275,33.65,Low Confidence,274,37.02,Low Confidence,1,Stable ranking.
+479,Adil Rashid,IPL,134,52.88,Low Confidence,276,33.51,Low Confidence,275,36.88,Low Confidence,1,Stable ranking.
+8746,Vaibhav Arora,IPL,235,44.07,Low Confidence,277,33.43,Low Confidence,276,36.72,Low Confidence,1,Stable ranking.
+6280,Harry Brook,IPL,169,49.87,High Confidence,270,34.85,Moderate Confidence,277,36.41,Low Confidence,-7,Stable ranking.
+25132,Praful Hinge,IPL,260,42.31,Low Confidence,278,32.96,Low Confidence,278,36.33,Low Confidence,0,Stable ranking.
+5738,Xavier Bartlett,IPL,198,47.55,Low Confidence,264,35.64,Low Confidence,279,36.19,Low Confidence,-15,Demoted by -15 ranks.
+4847,Finn Allen,IPL,2,83.31,High Confidence,262,35.86,Moderate Confidence,280,36.07,Low Confidence,-18,Demoted by -18 ranks.
+7498,Abhijeet Tomar,IPL,175,49.39,Low Confidence,281,32.53,Low Confidence,281,35.89,Low Confidence,0,Stable ranking.
+295,Wayne Parnell,IPL,252,42.67,Low Confidence,286,31.79,Low Confidence,282,35.15,Low Confidence,4,Stable ranking.
+4853,Glenn Phillips,IPL,4,77.1,Moderate Confidence,285,32.0,Moderate Confidence,283,34.57,Low Confidence,2,Stable ranking.
+147,Pradeep Sangwan,IPL,167,49.99,Low Confidence,287,31.19,Low Confidence,284,34.55,Low Confidence,3,Stable ranking.
+46137,Kartik Sharma,IPL,9,70.54,High Confidence,273,34.3,Moderate Confidence,285,34.51,Moderate Confidence,-12,Demoted by -12 ranks.
+4505,Jhye Richardson,IPL,124,53.46,Low Confidence,288,31.13,Low Confidence,286,34.5,Low Confidence,2,Stable ranking.
+6494,Manoj Bhandage,IPL,151,51.58,Low Confidence,291,30.96,Low Confidence,287,34.32,Low Confidence,4,Stable ranking.
+34969,Manav Suthar,IPL,126,53.45,Low Confidence,293,30.51,Low Confidence,288,33.87,Low Confidence,5,Stable ranking.
+2304,Tymal Mills,IPL,219,45.37,Low Confidence,294,30.41,Low Confidence,289,33.77,Low Confidence,5,Stable ranking.
+6628,Gerald Coetzee,IPL,200,47.48,Low Confidence,304,28.65,Low Confidence,290,33.66,Low Confidence,14,Promoted by +14 ranks as adaptability was uncompressed.
+4211,Vishnu Vinod,IPL,213,46.06,Low Confidence,279,32.9,Moderate Confidence,291,33.66,Low Confidence,-12,Demoted by -12 ranks.
+6669,Mohsin Khan,IPL,237,43.61,Low Confidence,290,30.99,Low Confidence,292,33.48,Low Confidence,-2,Stable ranking.
+37731,Musheer Khan,IPL,129,53.09,Low Confidence,299,29.94,Low Confidence,293,33.3,Low Confidence,6,Stable ranking.
+35071,Kunal Rathore,IPL,160,50.56,Low Confidence,300,29.93,Low Confidence,294,33.29,Low Confidence,6,Stable ranking.
+6591,KM Asif,IPL,118,53.87,Low Confidence,301,29.71,Low Confidence,295,33.07,Low Confidence,6,Stable ranking.
+1045,David Wiese,IPL,63,59.07,Low Confidence,284,32.02,Low Confidence,296,32.67,Low Confidence,-12,Demoted by -12 ranks.
+2633,Jason Holder,IPL,23,66.39,Moderate Confidence,289,31.06,Moderate Confidence,297,32.66,Moderate Confidence,-8,Stable ranking.
+4641,Lungi Ngidi,IPL,206,46.51,Low Confidence,302,29.28,Low Confidence,298,32.65,Low Confidence,4,Stable ranking.
+3174,Matt Henry,IPL,111,54.73,Low Confidence,303,29.21,Low Confidence,299,32.57,Low Confidence,4,Stable ranking.
+23,Piyush Chawla,IPL,85,56.13,Low Confidence,297,29.99,Low Confidence,300,32.5,Low Confidence,-3,Stable ranking.
+4494,Abhinav Manohar,IPL,61,59.29,High Confidence,282,32.29,High Confidence,301,32.44,Moderate Confidence,-19,Demoted by -19 ranks.
+7503,Ravi Bishnoi,IPL,98,55.44,Low Confidence,311,27.77,Moderate Confidence,302,32.23,Low Confidence,9,Stable ranking.
+7533,Simarjeet Singh,IPL,195,47.81,Low Confidence,305,28.38,Low Confidence,303,31.74,Low Confidence,2,Stable ranking.
+5034,Murugan Ashwin,IPL,245,43.26,Low Confidence,307,28.22,Low Confidence,304,31.59,Low Confidence,3,Stable ranking.
+6489,Darshan Nalkande,IPL,92,55.88,Low Confidence,308,28.04,Low Confidence,305,31.4,Low Confidence,3,Stable ranking.
+5665,Sanjay Yadav,IPL,156,50.7,Low Confidence,310,27.83,Low Confidence,306,31.2,Low Confidence,4,Stable ranking.
+6487,Priyam Garg,IPL,16,69.33,Low Confidence,296,30.14,Low Confidence,307,30.88,Low Confidence,-11,Demoted by -11 ranks.
+395,Karn Sharma,IPL,43,62.33,Low Confidence,298,29.96,Low Confidence,308,30.81,Low Confidence,-10,Stable ranking.
+7574,Kumar Kartikeya Singh,IPL,116,54.08,Low Confidence,309,27.93,Low Confidence,309,30.56,Low Confidence,0,Stable ranking.
+6674,Rahmanullah Gurbaz,IPL,28,64.52,High Confidence,295,30.26,High Confidence,310,30.18,Moderate Confidence,-15,Demoted by -15 ranks.
+8580,Yudhvir Singh,IPL,27,65.36,Low Confidence,314,26.75,Low Confidence,311,30.11,Low Confidence,3,Stable ranking.
+5577,Sai Kishore,IPL,83,56.2,Low Confidence,313,26.78,Low Confidence,312,29.42,Low Confidence,1,Stable ranking.
+8266,Sumit Kumar 1,IPL,238,43.47,Low Confidence,306,28.31,Low Confidence,313,28.66,Low Confidence,-7,Stable ranking.
+58135,Tejasvi Dahiya,IPL,143,52.32,Low Confidence,312,27.43,Low Confidence,314,28.07,Low Confidence,-2,Stable ranking.
+2636,Adam Zampa,IPL,79,56.68,Low Confidence,326,23.99,Low Confidence,315,27.36,Low Confidence,11,Promoted by +11 ranks as adaptability was uncompressed.
+4816,Khaleel Ahmed,IPL,108,54.83,Low Confidence,327,23.96,Low Confidence,316,27.33,Low Confidence,11,Promoted by +11 ranks as adaptability was uncompressed.
+48953,Danish Malewar,IPL,64,58.83,Low Confidence,316,26.67,Low Confidence,317,27.3,Low Confidence,-1,Stable ranking.
+344,Sheldon Jackson,IPL,148,51.93,Low Confidence,323,25.21,Low Confidence,318,26.99,Low Confidence,5,Stable ranking.
+43798,Lhuan Pretorius,IPL,96,55.49,Low Confidence,317,26.66,Low Confidence,319,26.8,Low Confidence,-2,Stable ranking.
+3451,Baba Indrajith,IPL,73,57.8,Low Confidence,318,26.18,Low Confidence,320,26.48,Low Confidence,-2,Stable ranking.
+2852,Jagadeesha Suchith,IPL,188,48.33,Low Confidence,328,23.08,Low Confidence,321,26.45,Low Confidence,7,Stable ranking.
+25138,Harsh Dubey,IPL,103,55.11,Low Confidence,319,26.18,Low Confidence,322,26.37,Low Confidence,-3,Stable ranking.
+27962,Saurav Chauhan,IPL,51,61.42,Low Confidence,320,26.07,Low Confidence,323,26.3,Low Confidence,-3,Stable ranking.
+4904,Kamindu Mendis,IPL,42,62.34,Moderate Confidence,315,26.71,Moderate Confidence,324,26.29,Low Confidence,-9,Stable ranking.
+26834,Raj Bawa,IPL,82,56.55,Low Confidence,321,25.96,Low Confidence,325,26.08,Low Confidence,-4,Stable ranking.
+3651,Ricky Bhui,IPL,94,55.61,Low Confidence,322,25.64,Low Confidence,326,26.03,Low Confidence,-4,Stable ranking.
+4817,Anmolpreet Singh,IPL,35,63.68,Moderate Confidence,324,24.94,Moderate Confidence,327,25.34,Low Confidence,-3,Stable ranking.
+7322,Yash Dayal,IPL,87,56.1,Low Confidence,331,21.79,Low Confidence,328,25.16,Low Confidence,3,Stable ranking.
+4692,Lockie Ferguson,IPL,19,66.79,Low Confidence,332,21.76,Low Confidence,329,25.13,Low Confidence,3,Stable ranking.
+2878,Mohit Sharma,IPL,199,47.52,Low Confidence,330,22.06,Low Confidence,330,23.79,Low Confidence,0,Stable ranking.
+8251,Kumar Kushagra,IPL,56,60.62,Low Confidence,333,20.32,Low Confidence,331,23.69,Low Confidence,2,Stable ranking.
+8141,Auqib Nabi,IPL,114,54.33,Low Confidence,325,24.04,Low Confidence,332,23.65,Low Confidence,-7,Stable ranking.
+33067,Ravichandran Smaran,IPL,274,41.16,Low Confidence,329,22.85,Low Confidence,333,23.36,Low Confidence,-4,Stable ranking.
+7920,Nathan Ellis,IPL,57,60.14,Low Confidence,335,18.12,Low Confidence,334,21.48,Low Confidence,1,Stable ranking.
+8530,Kartik Tyagi,IPL,14,69.65,Low Confidence,338,16.45,Low Confidence,335,19.81,Low Confidence,3,Stable ranking.
+278,Tim Southee,IPL,59,59.72,Low Confidence,340,15.58,Low Confidence,336,18.95,Low Confidence,4,Stable ranking.
+6286,Shivam Mavi,IPL,105,54.91,Low Confidence,336,18.0,Low Confidence,337,18.85,Low Confidence,-1,Stable ranking.
+6518,Daniel Sams,IPL,99,55.42,Low Confidence,337,17.08,Moderate Confidence,338,18.82,Low Confidence,-1,Stable ranking.
+169,Robin Uthappa,IPL,24,66.33,High Confidence,334,18.96,Moderate Confidence,339,18.66,Low Confidence,-5,Stable ranking.
+26830,Nishant Kumar Sindhu,IPL,67,58.66,Low Confidence,339,16.04,Low Confidence,340,15.86,Low Confidence,-1,Stable ranking.
+829,Mitchell Starc,IPL,38,63.24,Low Confidence,341,5.97,Low Confidence,341,6.96,Low Confidence,0,Stable ranking.
+796,Matthew Wade,T20I,620,34.64,High Confidence,1,95.96,High Confidence,1,97.42,High Confidence,0,Confirmed #1 in T20I: Exceptional delivery-level clutch record across 12 pressure matches (100% positive match ratio).
+6726,Romario Shepherd,T20I,520,41.84,High Confidence,2,79.89,High Confidence,2,83.85,High Confidence,0,Stable ranking.
+1699,Suryakumar Yadav,T20I,231,53.18,High Confidence,7,76.97,High Confidence,3,82.34,High Confidence,4,Stable ranking.
+1107,Mohammad Nabi,T20I,69,60.58,High Confidence,3,77.74,High Confidence,4,82.08,High Confidence,-1,Stable ranking.
+5553,Phil Salt,T20I,38,63.9,High Confidence,6,77.33,High Confidence,5,81.81,High Confidence,1,Stable ranking.
+768,Reeza Hendricks,T20I,505,42.74,High Confidence,4,77.74,High Confidence,6,81.77,High Confidence,-2,Stable ranking.
+22565,Muhammad Waseem,T20I,198,54.54,High Confidence,5,77.5,High Confidence,7,81.52,Moderate Confidence,-2,"High performance in Moderate Confidence: 6 pressure matches (qualifies if M_p >= 6, top tier candidate)."
+6396,Tim David,T20I,124,57.86,High Confidence,8,76.34,High Confidence,8,81.4,High Confidence,0,Stable ranking.
+2101,Quinton de Kock,T20I,609,35.67,High Confidence,9,76.08,High Confidence,9,79.19,High Confidence,0,Stable ranking.
+2921,Fakhar Zaman,T20I,247,52.66,High Confidence,12,72.94,High Confidence,10,78.05,High Confidence,2,Stable ranking.
+2417,Akeal Hosein,T20I,528,41.35,High Confidence,11,73.95,High Confidence,11,77.61,High Confidence,0,Stable ranking.
+2436,Dasun Shanaka,T20I,435,45.91,High Confidence,14,70.68,High Confidence,12,75.61,High Confidence,2,Stable ranking.
+3097,Shan Masood,T20I,645,32.44,High Confidence,10,75.54,High Confidence,13,75.4,Moderate Confidence,-3,Demoted from Top 10 to Moderate Confidence: Only 3 pressure matches (fails M_p >= 8 eligibility).
+6931,Pathum Nissanka,T20I,280,51.54,High Confidence,15,69.68,High Confidence,14,75.03,High Confidence,1,Stable ranking.
+6273,Tom Banton,T20I,225,53.28,High Confidence,16,69.25,High Confidence,15,74.26,Moderate Confidence,1,Stable ranking.
+2214,Gulbadin Naib,T20I,587,37.74,High Confidence,13,71.19,High Confidence,16,74.23,Moderate Confidence,-3,Stable ranking.
+5379,Mark Adair,T20I,297,51.18,High Confidence,17,69.08,High Confidence,17,73.96,High Confidence,0,Stable ranking.
+3024,Mohammad Rizwan,T20I,458,44.67,High Confidence,18,68.94,High Confidence,18,73.73,High Confidence,0,Stable ranking.
+6651,Towhid Hridoy,T20I,452,45.09,High Confidence,20,67.74,High Confidence,19,73.0,High Confidence,1,Stable ranking.
+7897,Namboori Tilak Varma,T20I,485,43.67,High Confidence,19,67.77,High Confidence,20,72.99,High Confidence,-1,Stable ranking.
+4773,Jaker Ali Anik,T20I,401,47.49,High Confidence,21,67.48,High Confidence,21,72.82,High Confidence,0,Stable ranking.
+1596,Moeen Ali,T20I,299,51.18,High Confidence,22,67.35,High Confidence,22,72.7,High Confidence,0,Stable ranking.
+1101,George Dockrell,T20I,393,47.77,High Confidence,23,66.8,High Confidence,23,72.1,High Confidence,0,Stable ranking.
+499,Shakib Al Hasan,T20I,646,32.36,High Confidence,24,66.29,High Confidence,24,71.65,Moderate Confidence,0,Stable ranking.
+3374,Mark Chapman,T20I,171,55.42,High Confidence,25,66.11,High Confidence,25,71.43,High Confidence,0,Stable ranking.
+838,Glenn Maxwell,T20I,75,60.29,High Confidence,26,65.97,High Confidence,26,71.34,High Confidence,0,Stable ranking.
+6448,Ibrahim Zadran,T20I,538,40.82,High Confidence,29,65.76,High Confidence,27,71.12,High Confidence,2,Stable ranking.
+8221,Nitish Reddy,T20I,473,44.05,Moderate Confidence,31,65.01,Moderate Confidence,28,70.37,Moderate Confidence,3,Stable ranking.
+3605,Aiden Markram,T20I,40,63.46,High Confidence,28,65.85,High Confidence,29,70.34,High Confidence,-1,Stable ranking.
+2258,Sanju Samson,T20I,45,63.16,High Confidence,32,64.94,High Confidence,30,70.32,Moderate Confidence,2,Stable ranking.
+4409,Sam Curran,T20I,286,51.41,High Confidence,33,64.79,High Confidence,31,70.12,High Confidence,2,Stable ranking.
+4986,Rovman Powell,T20I,191,54.81,High Confidence,30,65.29,High Confidence,32,69.96,High Confidence,-2,Stable ranking.
+7690,Saim Ayub,T20I,29,64.66,High Confidence,35,64.37,High Confidence,33,69.72,High Confidence,2,Stable ranking.
+2930,Rassie van der Dussen,T20I,451,45.11,High Confidence,34,64.4,High Confidence,34,69.58,Moderate Confidence,0,Stable ranking.
+2984,Sikandar Raza,T20I,51,62.05,High Confidence,38,64.21,High Confidence,35,69.49,High Confidence,3,Stable ranking.
+2633,Jason Holder,T20I,170,55.48,High Confidence,40,63.64,High Confidence,36,69.01,High Confidence,4,Stable ranking.
+2680,Nurul Hasan,T20I,468,44.22,High Confidence,39,64.04,High Confidence,37,68.92,High Confidence,2,Stable ranking.
+5839,Yasir Ali Chowdhury,T20I,331,50.17,Moderate Confidence,36,64.34,High Confidence,38,68.09,Moderate Confidence,-2,Stable ranking.
+2490,Mohammad Nawaz,T20I,324,50.28,High Confidence,41,62.97,High Confidence,39,68.07,High Confidence,2,Stable ranking.
+7094,Curtis Campher,T20I,71,60.42,High Confidence,44,62.56,High Confidence,40,67.92,High Confidence,4,Stable ranking.
+22137,Fionn Hand,T20I,411,46.93,Low Confidence,27,65.87,Low Confidence,41,67.75,Low Confidence,-14,Demoted by -14 ranks.
+2463,Ryan Burl,T20I,269,51.86,High Confidence,46,62.16,High Confidence,42,67.53,High Confidence,4,Stable ranking.
+19147,Faraz Akram,T20I,606,35.74,Moderate Confidence,47,62.14,Moderate Confidence,43,67.5,Moderate Confidence,4,Stable ranking.
+3700,Tim Seifert,T20I,301,51.12,High Confidence,43,62.58,High Confidence,44,67.38,High Confidence,-1,Stable ranking.
+4842,Shamar Springer,T20I,512,42.25,Moderate Confidence,42,62.64,Moderate Confidence,45,67.31,Moderate Confidence,-3,Stable ranking.
+6674,Rahmanullah Gurbaz,T20I,104,59.0,High Confidence,49,61.69,High Confidence,46,66.96,High Confidence,3,Stable ranking.
+3125,Nicholas Pooran,T20I,130,57.58,High Confidence,45,62.36,High Confidence,47,66.83,High Confidence,-2,Stable ranking.
+20702,Tristan Stubbs,T20I,133,57.38,High Confidence,51,61.52,High Confidence,48,66.72,High Confidence,3,Stable ranking.
+22134,Luke Jongwe,T20I,432,46.05,Moderate Confidence,55,61.01,High Confidence,49,66.19,Moderate Confidence,6,Stable ranking.
+6985,Bas de Leede,T20I,611,35.39,High Confidence,56,60.7,Moderate Confidence,50,66.03,Low Confidence,6,Stable ranking.
+5837,Mahedi Hasan,T20I,582,38.16,High Confidence,53,61.15,High Confidence,51,66.0,High Confidence,2,Stable ranking.
+4101,Mitchell Santner,T20I,486,43.63,High Confidence,52,61.47,High Confidence,52,65.91,High Confidence,0,Stable ranking.
+6280,Harry Brook,T20I,37,63.99,High Confidence,48,61.81,High Confidence,53,65.71,High Confidence,-5,Stable ranking.
+2639,Marcus Stoinis,T20I,318,50.51,High Confidence,54,61.09,High Confidence,54,65.63,Moderate Confidence,0,Stable ranking.
+8741,Mohammad Haris,T20I,22,65.58,High Confidence,50,61.59,High Confidence,55,65.48,Moderate Confidence,-5,Stable ranking.
+4904,Kamindu Mendis,T20I,238,52.99,High Confidence,57,60.16,High Confidence,56,65.31,High Confidence,1,Stable ranking.
+4641,Lungi Ngidi,T20I,665,16.61,Low Confidence,37,64.21,Moderate Confidence,57,65.3,Low Confidence,-20,Demoted by -20 ranks.
+2876,Axar Patel,T20I,92,59.43,High Confidence,58,59.99,High Confidence,58,65.18,High Confidence,0,Stable ranking.
+6725,Sherfane Rutherford,T20I,145,56.68,High Confidence,60,59.81,High Confidence,59,64.56,High Confidence,1,Stable ranking.
+3323,Jimmy Neesham,T20I,100,59.16,High Confidence,62,59.09,High Confidence,60,64.28,High Confidence,2,Stable ranking.
+20327,Usman Khan,T20I,50,62.27,High Confidence,65,58.54,High Confidence,61,63.89,Moderate Confidence,4,Stable ranking.
+22187,Ryan Klein,T20I,572,39.25,Moderate Confidence,64,58.79,Moderate Confidence,62,63.85,Moderate Confidence,2,Stable ranking.
+3330,Hardik Pandya,T20I,570,39.31,High Confidence,59,59.92,High Confidence,63,63.79,High Confidence,-4,Stable ranking.
+3282,Mehidy Hasan Miraz,T20I,428,46.17,High Confidence,66,58.11,High Confidence,64,63.48,Moderate Confidence,2,Stable ranking.
+3954,Andrew Balbirnie,T20I,389,48.07,High Confidence,68,58.0,High Confidence,65,63.31,High Confidence,3,Stable ranking.
+4823,Washington Sundar,T20I,619,34.67,High Confidence,61,59.13,High Confidence,66,63.21,Moderate Confidence,-5,Stable ranking.
+4117,Ishan Kishan,T20I,262,52.11,High Confidence,69,57.95,High Confidence,67,63.05,High Confidence,2,Stable ranking.
+6355,Shaheen Afridi,T20I,462,44.43,High Confidence,72,57.55,High Confidence,68,62.81,High Confidence,4,Stable ranking.
+25507,Edson Silva,T20I,369,48.88,Low Confidence,74,57.45,Moderate Confidence,69,62.6,Low Confidence,5,Stable ranking.
+3578,Imad Wasim,T20I,595,37.12,High Confidence,71,57.76,High Confidence,70,62.5,Moderate Confidence,1,Stable ranking.
+6574,Alick Athanaze,T20I,416,46.69,High Confidence,81,56.65,High Confidence,71,61.86,Moderate Confidence,10,Stable ranking.
+8295,Matthew Forde,T20I,163,55.83,Moderate Confidence,82,56.36,High Confidence,72,61.56,Moderate Confidence,10,Stable ranking.
+4854,Rachin Ravindra,T20I,132,57.38,High Confidence,83,56.22,High Confidence,73,61.43,High Confidence,10,Stable ranking.
+28967,Tim Robinson,T20I,162,55.92,High Confidence,77,57.0,High Confidence,74,61.14,Moderate Confidence,3,Stable ranking.
+4780,Mohammad Saif Hassan,T20I,236,53.1,High Confidence,87,55.79,High Confidence,75,61.08,Moderate Confidence,12,Promoted by +12 ranks as adaptability was uncompressed.
+7741,Gareth Delany,T20I,233,53.17,High Confidence,85,55.96,High Confidence,76,61.0,High Confidence,9,Stable ranking.
+3297,Shimron Hetmyer,T20I,107,58.77,High Confidence,75,57.13,High Confidence,77,60.8,High Confidence,-2,Stable ranking.
+2485,Babar Azam,T20I,293,51.27,High Confidence,80,56.81,High Confidence,78,60.58,High Confidence,2,Stable ranking.
+24017,Brian Bennett,T20I,46,63.14,High Confidence,84,55.98,High Confidence,79,60.57,High Confidence,5,Stable ranking.
+21790,Tashinga Musekiwa,T20I,110,58.57,High Confidence,95,55.22,High Confidence,80,60.52,High Confidence,15,Promoted by +15 ranks as adaptability was uncompressed.
+818,Mitchell Marsh,T20I,387,48.31,High Confidence,63,58.9,High Confidence,81,60.44,High Confidence,-18,Demoted by -18 ranks.
+3550,Sharafuddin Ashraf,T20I,640,33.13,Low Confidence,97,55.02,Low Confidence,82,60.39,Low Confidence,15,Promoted by +15 ranks as adaptability was uncompressed.
+3272,Fabian Allen,T20I,615,35.02,Low Confidence,79,56.88,Moderate Confidence,83,60.3,Low Confidence,-4,Stable ranking.
+3629,Corbin Bosch,T20I,607,35.72,Moderate Confidence,88,55.72,Moderate Confidence,84,60.26,Moderate Confidence,4,Stable ranking.
+4106,Daryl Mitchell,T20I,47,63.13,High Confidence,67,58.04,High Confidence,85,60.1,High Confidence,-18,Demoted by -18 ranks.
+143,Dinesh Karthik,T20I,372,48.79,High Confidence,96,55.08,High Confidence,86,60.1,Moderate Confidence,10,Stable ranking.
+4867,Wesley Madhevere,T20I,409,47.09,High Confidence,101,54.64,High Confidence,87,60.02,High Confidence,14,Promoted by +14 ranks as adaptability was uncompressed.
+2573,Evin Lewis,T20I,600,36.92,High Confidence,91,55.39,High Confidence,88,59.76,Moderate Confidence,3,Stable ranking.
+223,Steven Smith,T20I,585,38.05,High Confidence,108,54.23,Moderate Confidence,89,59.59,Moderate Confidence,19,Promoted by +19 ranks as adaptability was uncompressed.
+6464,Arshdeep Singh,T20I,617,34.69,Moderate Confidence,102,54.33,Moderate Confidence,90,59.58,Moderate Confidence,12,Promoted by +12 ranks as adaptability was uncompressed.
+4853,Glenn Phillips,T20I,82,60.06,High Confidence,73,57.53,High Confidence,91,59.55,High Confidence,-18,Demoted by -18 ranks.
+2367,Travis Head,T20I,33,64.34,High Confidence,90,55.44,High Confidence,92,59.47,Moderate Confidence,-2,Stable ranking.
+6676,Azmatullah Omarzai,T20I,84,60.02,High Confidence,86,55.89,High Confidence,93,59.36,High Confidence,-7,Stable ranking.
+4229,George Linde,T20I,26,65.23,Moderate Confidence,107,54.24,High Confidence,94,59.2,Moderate Confidence,13,Promoted by +13 ranks as adaptability was uncompressed.
+2533,Najibullah Zadran,T20I,122,57.98,High Confidence,103,54.32,High Confidence,95,59.16,Moderate Confidence,8,Stable ranking.
+3275,Alzarri Joseph,T20I,608,35.7,Moderate Confidence,70,57.86,High Confidence,96,59.1,Moderate Confidence,-26,Demoted by -26 ranks.
+3871,Aamir Kaleem,T20I,651,31.38,Moderate Confidence,111,53.67,Low Confidence,97,59.03,Low Confidence,14,Promoted by +14 ranks as adaptability was uncompressed.
+7808,Marco Jansen,T20I,111,58.52,Moderate Confidence,105,54.29,High Confidence,98,59.0,Moderate Confidence,7,Stable ranking.
+1813,Deepak Chahar,T20I,561,39.72,Low Confidence,110,53.71,Low Confidence,99,58.85,Low Confidence,11,Promoted by +11 ranks as adaptability was uncompressed.
+37052,Naman Dhir,T20I,27,64.94,Moderate Confidence,93,55.26,Moderate Confidence,100,58.76,Moderate Confidence,-7,Stable ranking.
+8638,Basil Hameed,T20I,650,31.9,Moderate Confidence,115,53.33,High Confidence,101,58.7,Moderate Confidence,14,Promoted by +14 ranks as adaptability was uncompressed.
+3415,Matthew Cross,T20I,136,57.21,Moderate Confidence,116,53.29,Low Confidence,102,58.65,Low Confidence,14,Promoted by +14 ranks as adaptability was uncompressed.
+39374,Muhammad Zohaib,T20I,554,39.9,High Confidence,113,53.42,High Confidence,103,58.59,Moderate Confidence,10,Stable ranking.
+29066,Zakary Foulkes,T20I,573,39.17,Moderate Confidence,112,53.49,Moderate Confidence,104,58.56,Moderate Confidence,8,Stable ranking.
+5939,Cameron Green,T20I,108,58.72,High Confidence,89,55.62,High Confidence,105,58.55,High Confidence,-16,Demoted by -16 ranks.
+2671,Liton Das,T20I,64,60.99,High Confidence,94,55.25,High Confidence,106,58.45,High Confidence,-12,Demoted by -12 ranks.
+220,David Warner,T20I,476,43.98,High Confidence,78,56.99,High Confidence,107,58.43,Moderate Confidence,-29,Demoted by -29 ranks.
+6643,Hasan Mahmud,T20I,660,26.36,Low Confidence,76,57.1,Moderate Confidence,108,58.19,Low Confidence,-32,Demoted by -32 ranks.
+1318,Andre Russell,T20I,230,53.2,High Confidence,104,54.31,High Confidence,109,57.92,Moderate Confidence,-5,Stable ranking.
+6160,Chamika Karunaratne,T20I,598,36.99,High Confidence,100,54.87,High Confidence,110,57.9,High Confidence,-10,Stable ranking.
+24887,Innocent Kaia,T20I,536,40.88,High Confidence,123,52.49,High Confidence,111,57.86,Moderate Confidence,12,Promoted by +12 ranks as adaptability was uncompressed.
+4391,Liam Livingstone,T20I,30,64.62,High Confidence,98,54.9,High Confidence,112,57.74,High Confidence,-14,Demoted by -14 ranks.
+8739,Muhammad Irfan,T20I,349,49.69,Moderate Confidence,119,52.85,Moderate Confidence,113,57.59,Moderate Confidence,6,Stable ranking.
+4369,Shai Hope,T20I,60,61.21,High Confidence,99,54.87,High Confidence,114,57.54,High Confidence,-15,Demoted by -15 ranks.
+2526,Ish Sodhi,T20I,210,53.84,Moderate Confidence,121,52.62,High Confidence,115,57.3,Moderate Confidence,6,Stable ranking.
+4812,Harry Tector,T20I,268,51.88,High Confidence,106,54.26,High Confidence,116,57.27,High Confidence,-10,Stable ranking.
+47,Virat Kohli,T20I,276,51.65,High Confidence,127,52.09,Moderate Confidence,117,57.21,Low Confidence,10,Stable ranking.
+7406,Rizwan CP,T20I,631,33.73,Moderate Confidence,132,51.89,Moderate Confidence,118,57.17,Low Confidence,14,Promoted by +14 ranks as adaptability was uncompressed.
+4007,Ryan Rickelton,T20I,135,57.33,High Confidence,114,53.35,High Confidence,119,57.15,High Confidence,-5,Stable ranking.
+1327,Johnson Charles,T20I,417,46.65,High Confidence,118,52.97,High Confidence,120,57.07,High Confidence,-2,Stable ranking.
+7967,Noor Ahmad,T20I,564,39.58,Low Confidence,133,51.86,Moderate Confidence,121,57.03,Low Confidence,12,Promoted by +12 ranks as adaptability was uncompressed.
+3647,Shreyas Iyer,T20I,259,52.21,High Confidence,109,54.0,High Confidence,122,56.72,High Confidence,-13,Demoted by -13 ranks.
+5441,Barry McCarthy,T20I,383,48.38,Moderate Confidence,134,51.85,High Confidence,123,56.67,Moderate Confidence,11,Promoted by +11 ranks as adaptability was uncompressed.
+23311,Jacob Bethell,T20I,169,55.62,High Confidence,124,52.37,High Confidence,124,56.63,Moderate Confidence,0,Stable ranking.
+15629,Shayan Jahangir,T20I,567,39.38,Low Confidence,136,51.66,Moderate Confidence,125,56.57,Low Confidence,11,Promoted by +11 ranks as adaptability was uncompressed.
+26646,Rahul Chopra,T20I,404,47.38,High Confidence,144,51.21,High Confidence,126,56.48,Moderate Confidence,18,Promoted by +18 ranks as adaptability was uncompressed.
+1568,Kane Williamson,T20I,643,32.56,High Confidence,140,51.49,Low Confidence,127,56.33,Low Confidence,13,Promoted by +13 ranks as adaptability was uncompressed.
+22188,Aryan Dutt,T20I,495,43.3,Low Confidence,137,51.54,Moderate Confidence,128,56.29,Low Confidence,9,Stable ranking.
+7903,Shamim Hossain,T20I,95,59.36,High Confidence,122,52.6,High Confidence,129,56.23,High Confidence,-7,Stable ranking.
+8005,Zawar Farid,T20I,178,55.2,Low Confidence,143,51.35,Low Confidence,130,56.21,Low Confidence,13,Promoted by +13 ranks as adaptability was uncompressed.
+4111,Khushdil Shah,T20I,356,49.48,High Confidence,146,50.99,High Confidence,131,56.0,High Confidence,15,Promoted by +15 ranks as adaptability was uncompressed.
+2351,Danushka Gunathilaka,T20I,284,51.43,Moderate Confidence,149,50.52,Low Confidence,132,55.89,Low Confidence,17,Promoted by +17 ranks as adaptability was uncompressed.
+7052,Dunith Wellalage,T20I,568,39.34,Moderate Confidence,150,50.32,Low Confidence,133,55.69,Low Confidence,17,Promoted by +17 ranks as adaptability was uncompressed.
+3489,Salman Agha,T20I,457,44.78,High Confidence,125,52.32,High Confidence,134,55.67,High Confidence,-9,Stable ranking.
+1077,David Miller,T20I,455,44.92,High Confidence,92,55.28,High Confidence,135,55.53,High Confidence,-43,Demoted by -43 ranks.
+7905,Tanzim Sakib,T20I,442,45.38,High Confidence,129,51.97,High Confidence,136,55.32,High Confidence,-7,Stable ranking.
+4662,Cole McConchie,T20I,463,44.36,Moderate Confidence,157,49.95,High Confidence,137,55.0,Moderate Confidence,20,Promoted by +20 ranks as adaptability was uncompressed.
+1210,James Vince,T20I,120,58.18,Moderate Confidence,155,50.06,Moderate Confidence,138,54.97,Low Confidence,17,Promoted by +17 ranks as adaptability was uncompressed.
+7634,Aaron Jones,T20I,90,59.48,Low Confidence,164,49.35,Low Confidence,139,54.67,Low Confidence,25,Promoted by +25 ranks as adaptability was uncompressed.
+34466,Arafat Minhas,T20I,622,34.62,Low Confidence,141,51.46,Moderate Confidence,140,54.65,Low Confidence,1,Stable ranking.
+7709,Ainsley Ndlovu,T20I,657,27.98,Low Confidence,117,53.01,Low Confidence,141,54.1,Low Confidence,-24,Demoted by -24 ranks.
+8600,Tadiwanashe Marumani,T20I,54,61.83,High Confidence,169,48.73,High Confidence,142,54.04,High Confidence,27,Promoted by +27 ranks as adaptability was uncompressed.
+27466,Dhruv Parashar,T20I,616,34.84,Moderate Confidence,170,48.63,Moderate Confidence,143,53.94,Moderate Confidence,27,Promoted by +27 ranks as adaptability was uncompressed.
+24779,Ijaz Ahmadzai,T20I,290,51.36,Moderate Confidence,142,51.46,Moderate Confidence,144,53.51,Moderate Confidence,-2,Stable ranking.
+4876,Milton Shumba,T20I,602,36.38,Moderate Confidence,175,48.12,Moderate Confidence,145,53.44,Low Confidence,30,Promoted by +30 ranks as adaptability was uncompressed.
+2003,Bhanuka Rajapaksa,T20I,182,55.14,High Confidence,138,51.54,High Confidence,146,53.4,Moderate Confidence,-8,Stable ranking.
+2750,Alex Carey,T20I,529,41.31,Low Confidence,176,48.1,Low Confidence,147,53.29,Low Confidence,29,Promoted by +29 ranks as adaptability was uncompressed.
+4373,Mustafizur Rahman,T20I,644,32.45,Low Confidence,126,52.12,Moderate Confidence,148,53.21,Low Confidence,-22,Demoted by -22 ranks.
+2681,Taskin Ahmed,T20I,482,43.73,Moderate Confidence,159,49.63,Moderate Confidence,149,53.19,Moderate Confidence,10,Stable ranking.
+17432,Ross Adair,T20I,597,37.03,High Confidence,172,48.49,Low Confidence,150,53.15,Low Confidence,22,Promoted by +22 ranks as adaptability was uncompressed.
+7240,FazalHaq Farooqi,T20I,663,20.57,Low Confidence,128,52.04,Low Confidence,151,53.13,Low Confidence,-23,Demoted by -23 ranks.
+15280,Sayed Monib,T20I,459,44.59,Low Confidence,168,48.94,Low Confidence,152,53.12,Low Confidence,16,Promoted by +16 ranks as adaptability was uncompressed.
+47050,Shamar Joseph,T20I,626,34.24,Low Confidence,130,51.95,Low Confidence,153,53.05,Low Confidence,-23,Demoted by -23 ranks.
+7364,Haris Rauf,T20I,461,44.49,Moderate Confidence,131,51.94,High Confidence,154,53.04,Moderate Confidence,-23,Demoted by -23 ranks.
+34522,Brandon McMullen,T20I,479,43.92,Moderate Confidence,166,49.14,Low Confidence,155,52.99,Low Confidence,11,Promoted by +11 ranks as adaptability was uncompressed.
+3056,Iftikhar Ahmed,T20I,212,53.72,High Confidence,148,50.73,High Confidence,156,52.97,High Confidence,-8,Stable ranking.
+3276,Gudakesh Motie,T20I,164,55.83,High Confidence,147,50.92,High Confidence,157,52.9,High Confidence,-10,Stable ranking.
+4807,Joshua Little,T20I,661,25.83,Low Confidence,135,51.75,Low Confidence,158,52.84,Low Confidence,-23,Demoted by -23 ranks.
+29558,Muhammad Arfan,T20I,627,34.2,Low Confidence,139,51.54,Low Confidence,159,52.63,Low Confidence,-20,Demoted by -20 ranks.
+43250,Dilpreet Singh Bajwa,T20I,367,48.99,Low Confidence,182,47.37,Low Confidence,160,52.32,Low Confidence,22,Promoted by +22 ranks as adaptability was uncompressed.
+27464,Aayan Afzal Khan,T20I,543,40.36,Moderate Confidence,151,50.29,Moderate Confidence,161,52.27,Moderate Confidence,-10,Stable ranking.
+6995,Saad Zafar,T20I,647,32.34,Low Confidence,145,51.18,Low Confidence,162,52.27,Low Confidence,-17,Demoted by -17 ranks.
+6281,Abhishek Sharma,T20I,10,71.23,High Confidence,120,52.82,High Confidence,163,52.19,High Confidence,-43,Demoted by -43 ranks.
+4755,Shivam Dube,T20I,9,73.14,High Confidence,152,50.27,High Confidence,164,51.8,Moderate Confidence,-12,Demoted by -12 ranks.
+15269,Mohammed Aslam,T20I,232,53.17,Low Confidence,190,46.49,Moderate Confidence,165,51.76,Low Confidence,25,Promoted by +25 ranks as adaptability was uncompressed.
+4840,Odean Smith,T20I,357,49.42,Moderate Confidence,171,48.5,Moderate Confidence,166,51.73,Moderate Confidence,5,Stable ranking.
+418,Richard Berrington,T20I,448,45.14,Moderate Confidence,192,46.35,Moderate Confidence,167,51.72,Low Confidence,25,Promoted by +25 ranks as adaptability was uncompressed.
+2687,Roston Chase,T20I,294,51.24,High Confidence,154,50.11,High Confidence,168,51.71,High Confidence,-14,Demoted by -14 ranks.
+7702,Chamindu Wickramasinghe,T20I,560,39.79,Low Confidence,158,49.68,Low Confidence,169,51.5,Low Confidence,-11,Demoted by -11 ranks.
+58246,Prince Yadav,T20I,624,34.5,Low Confidence,156,50.01,Low Confidence,170,51.44,Low Confidence,-14,Demoted by -14 ranks.
+1159,Tendai Chatara,T20I,662,21.58,Low Confidence,153,50.18,Low Confidence,171,51.27,Low Confidence,-18,Demoted by -18 ranks.
+7761,Ravinderpal Singh,T20I,384,48.36,Low Confidence,199,45.91,Low Confidence,172,51.09,Low Confidence,27,Promoted by +27 ranks as adaptability was uncompressed.
+3539,Ben McDermott,T20I,418,46.63,Moderate Confidence,195,46.21,Low Confidence,173,50.96,Low Confidence,22,Promoted by +22 ranks as adaptability was uncompressed.
+4639,Wellington Masakadza,T20I,239,52.99,High Confidence,179,47.96,High Confidence,174,50.96,High Confidence,5,Stable ranking.
+6664,Dion Myers,T20I,258,52.24,High Confidence,197,46.11,High Confidence,175,50.91,High Confidence,22,Promoted by +22 ranks as adaptability was uncompressed.
+2315,Reece Topley,T20I,556,39.83,Low Confidence,194,46.22,Low Confidence,176,50.71,Low Confidence,18,Promoted by +18 ranks as adaptability was uncompressed.
+4947,Kasun Rajitha,T20I,601,36.8,Low Confidence,162,49.51,Low Confidence,177,50.6,Low Confidence,-15,Demoted by -15 ranks.
+4926,Shadab Khan,T20I,195,54.6,High Confidence,163,49.47,High Confidence,178,50.42,High Confidence,-15,Demoted by -15 ranks.
+6677,Mohammad Hasnain,T20I,649,31.93,Low Confidence,165,49.27,Low Confidence,179,50.36,Low Confidence,-14,Demoted by -14 ranks.
+21781,Clive Madande,T20I,283,51.43,High Confidence,173,48.25,High Confidence,180,50.24,High Confidence,-7,Stable ranking.
+3672,Kusal Mendis,T20I,422,46.46,High Confidence,160,49.59,High Confidence,181,50.16,High Confidence,-21,Demoted by -21 ranks.
+1758,Patrick Cummins,T20I,583,38.1,Low Confidence,206,45.59,Low Confidence,182,50.12,Low Confidence,24,Promoted by +24 ranks as adaptability was uncompressed.
+786,Chris Jordan,T20I,523,41.66,Moderate Confidence,174,48.14,High Confidence,183,50.09,Moderate Confidence,-9,Stable ranking.
+7002,Nicholas Kirton,T20I,406,47.37,Moderate Confidence,198,45.98,Moderate Confidence,184,49.94,Low Confidence,14,Promoted by +14 ranks as adaptability was uncompressed.
+7894,Tony Munyonga,T20I,298,51.18,Moderate Confidence,203,45.73,Moderate Confidence,185,49.9,Moderate Confidence,18,Promoted by +18 ranks as adaptability was uncompressed.
+2661,Shamarh Brooks,T20I,321,50.41,High Confidence,191,46.38,High Confidence,186,49.75,Moderate Confidence,5,Stable ranking.
+4636,Bjorn Fortuin,T20I,623,34.54,Moderate Confidence,218,44.48,Moderate Confidence,187,49.56,Moderate Confidence,31,Promoted by +31 ranks as adaptability was uncompressed.
+5738,Xavier Bartlett,T20I,379,48.52,Moderate Confidence,225,44.07,Moderate Confidence,188,49.44,Low Confidence,37,Promoted by +37 ranks as adaptability was uncompressed.
+21784,Brad Evans,T20I,223,53.31,Moderate Confidence,213,45.16,High Confidence,189,49.38,Moderate Confidence,24,Promoted by +24 ranks as adaptability was uncompressed.
+479,Adil Rashid,T20I,510,42.33,Moderate Confidence,167,49.12,High Confidence,190,49.35,Moderate Confidence,-23,Demoted by -23 ranks.
+3281,Mosaddek Hossain,T20I,553,39.95,Moderate Confidence,202,45.77,High Confidence,191,49.29,Moderate Confidence,11,Promoted by +11 ranks as adaptability was uncompressed.
+2261,Harshal Patel,T20I,625,34.31,Low Confidence,226,43.96,Moderate Confidence,192,49.05,Low Confidence,34,Promoted by +34 ranks as adaptability was uncompressed.
+7338,Haider Ali,T20I,35,64.08,Moderate Confidence,227,43.75,Low Confidence,193,48.97,Low Confidence,34,Promoted by +34 ranks as adaptability was uncompressed.
+3091,Sahibzada Farhan,T20I,86,59.91,High Confidence,180,47.56,High Confidence,194,48.96,Moderate Confidence,-14,Demoted by -14 ranks.
+19781,Mitchell Owen,T20I,424,46.41,Moderate Confidence,207,45.5,Moderate Confidence,195,48.82,Low Confidence,12,Promoted by +12 ranks as adaptability was uncompressed.
+5808,Karim Janat,T20I,282,51.46,High Confidence,215,44.97,High Confidence,196,48.63,Moderate Confidence,19,Promoted by +19 ranks as adaptability was uncompressed.
+3916,Jitesh Sharma,T20I,355,49.49,Moderate Confidence,217,44.52,Low Confidence,197,48.55,Low Confidence,20,Promoted by +20 ranks as adaptability was uncompressed.
+15551,Ackeem Auguste,T20I,535,41.0,Moderate Confidence,211,45.26,Moderate Confidence,198,48.52,Moderate Confidence,13,Promoted by +13 ranks as adaptability was uncompressed.
+19312,Nuwan Thushara,T20I,664,19.0,Low Confidence,181,47.42,Low Confidence,199,48.51,Low Confidence,-18,Demoted by -18 ranks.
+3377,Babar Hayat,T20I,610,35.44,High Confidence,188,46.83,High Confidence,200,48.47,Moderate Confidence,-12,Demoted by -12 ranks.
+295,Wayne Parnell,T20I,547,40.24,Moderate Confidence,228,43.72,Moderate Confidence,201,48.43,Moderate Confidence,27,Promoted by +27 ranks as adaptability was uncompressed.
+26519,Janith Liyanage,T20I,586,37.9,Moderate Confidence,208,45.48,High Confidence,202,48.31,Moderate Confidence,6,Stable ranking.
+29888,Harshit Rana,T20I,546,40.26,Moderate Confidence,201,45.84,Moderate Confidence,203,48.19,Moderate Confidence,-2,Stable ranking.
+403,Umesh Yadav,T20I,641,33.1,Low Confidence,187,46.9,Low Confidence,204,47.99,Low Confidence,-17,Demoted by -17 ranks.
+37201,Jewel Andrew,T20I,28,64.86,Moderate Confidence,230,43.29,Moderate Confidence,205,47.86,Low Confidence,25,Promoted by +25 ranks as adaptability was uncompressed.
+25128,Nqabayomzi Peter,T20I,534,41.04,Low Confidence,239,42.82,Low Confidence,206,47.68,Low Confidence,33,Promoted by +33 ranks as adaptability was uncompressed.
+8408,Shreyas Movva,T20I,374,48.68,Moderate Confidence,204,45.67,Moderate Confidence,207,47.36,Low Confidence,-3,Stable ranking.
+507,Mohammad Mahmudullah,T20I,488,43.52,High Confidence,185,46.96,High Confidence,208,47.33,High Confidence,-23,Demoted by -23 ranks.
+28185,Kamil Pooran,T20I,358,49.36,Low Confidence,242,42.72,Moderate Confidence,209,47.24,Low Confidence,33,Promoted by +33 ranks as adaptability was uncompressed.
+3622,Hayden Walsh,T20I,659,26.67,Low Confidence,196,46.14,Low Confidence,210,47.23,Low Confidence,-14,Demoted by -14 ranks.
+494,Kieron Pollard,T20I,654,28.55,Moderate Confidence,214,45.04,Moderate Confidence,211,47.14,Low Confidence,3,Stable ranking.
+36553,Jediah Blades,T20I,655,28.21,Low Confidence,200,45.86,Low Confidence,212,46.96,Low Confidence,-12,Demoted by -12 ranks.
+8301,Asif Khan,T20I,39,63.87,High Confidence,183,47.29,High Confidence,213,46.91,High Confidence,-30,Demoted by -30 ranks.
+25213,Dewald Brevis,T20I,21,66.21,High Confidence,209,45.47,High Confidence,214,46.87,Moderate Confidence,-5,Stable ranking.
+4708,Rinku Singh,T20I,375,48.63,High Confidence,189,46.58,Moderate Confidence,215,46.86,Moderate Confidence,-26,Demoted by -26 ranks.
+6628,Gerald Coetzee,T20I,102,59.06,Moderate Confidence,240,42.81,Moderate Confidence,216,46.85,Moderate Confidence,24,Promoted by +24 ranks as adaptability was uncompressed.
+3544,Usman Ghani,T20I,472,44.12,Moderate Confidence,232,43.14,Moderate Confidence,217,46.83,Low Confidence,15,Promoted by +15 ranks as adaptability was uncompressed.
+6922,Abdul Samad,T20I,260,52.14,Moderate Confidence,219,44.46,Moderate Confidence,218,46.82,Moderate Confidence,1,Stable ranking.
+4736,Josh Inglis,T20I,126,57.71,High Confidence,186,46.9,High Confidence,219,46.77,High Confidence,-33,Demoted by -33 ranks.
+4722,Rashid Khan,T20I,308,50.96,High Confidence,161,49.53,High Confidence,220,46.57,High Confidence,-59,Demoted by -59 ranks.
+6342,Matthew Breetzke,T20I,155,56.21,Moderate Confidence,260,41.54,High Confidence,221,46.56,Moderate Confidence,39,Promoted by +39 ranks as adaptability was uncompressed.
+28915,Trevor Gwandu,T20I,656,28.17,Low Confidence,205,45.6,Low Confidence,222,46.51,Low Confidence,-17,Demoted by -17 ranks.
+19012,Zeeshan Ali,T20I,205,54.18,Moderate Confidence,235,43.0,Moderate Confidence,223,46.49,Moderate Confidence,12,Promoted by +12 ranks as adaptability was uncompressed.
+31107,Yasin Patel,T20I,380,48.47,Low Confidence,236,42.91,Low Confidence,224,46.47,Low Confidence,12,Promoted by +12 ranks as adaptability was uncompressed.
+19902,Tim Pringle,T20I,454,45.07,Low Confidence,210,45.31,Low Confidence,225,46.4,Low Confidence,-15,Demoted by -15 ranks.
+22920,Jacob Duffy,T20I,565,39.41,Low Confidence,212,45.2,Low Confidence,226,46.3,Low Confidence,-14,Demoted by -14 ranks.
+3697,Kyle Jamieson,T20I,295,51.2,Low Confidence,263,41.42,Moderate Confidence,227,46.01,Low Confidence,36,Promoted by +36 ranks as adaptability was uncompressed.
+6450,Mujeeb Ur Rahman,T20I,589,37.6,Moderate Confidence,177,48.05,Moderate Confidence,228,45.96,Moderate Confidence,-51,Demoted by -51 ranks.
+4686,Joshua Clarkson,T20I,480,43.76,Moderate Confidence,178,48.04,High Confidence,229,45.62,Moderate Confidence,-51,Demoted by -51 ranks.
+25011,Liam Mccarthy,T20I,604,36.12,Low Confidence,259,41.55,Low Confidence,230,45.44,Low Confidence,29,Promoted by +29 ranks as adaptability was uncompressed.
+813,Jos Buttler,T20I,20,66.43,High Confidence,184,47.27,High Confidence,231,45.35,High Confidence,-47,Demoted by -47 ranks.
+25030,Zaman Khan,T20I,613,35.18,Low Confidence,221,44.26,Low Confidence,232,45.35,Low Confidence,-11,Demoted by -11 ranks.
+3613,Shakeel Ahmed,T20I,618,34.68,Low Confidence,222,44.16,Low Confidence,233,45.25,Low Confidence,-11,Demoted by -11 ranks.
+4235,Sisanda Magala,T20I,250,52.56,Low Confidence,224,44.08,Low Confidence,234,45.17,Low Confidence,-10,Stable ranking.
+38855,Mohammad Saifuddin,T20I,642,32.85,Moderate Confidence,193,46.25,Moderate Confidence,235,45.14,Moderate Confidence,-42,Demoted by -42 ranks.
+1116,Craig Ervine,T20I,49,62.93,High Confidence,268,40.87,High Confidence,236,45.13,Moderate Confidence,32,Promoted by +32 ranks as adaptability was uncompressed.
+722,Liam Dawson,T20I,550,40.05,Low Confidence,249,41.95,Moderate Confidence,237,45.01,Low Confidence,12,Promoted by +12 ranks as adaptability was uncompressed.
+5882,Afif Hossain,T20I,141,56.94,High Confidence,216,44.88,High Confidence,238,44.84,Moderate Confidence,-22,Demoted by -22 ranks.
+4658,Nasum Ahmed,T20I,242,52.93,Moderate Confidence,294,39.49,Moderate Confidence,239,44.78,Moderate Confidence,55,Promoted by +55 ranks as adaptability was uncompressed.
+2320,Trent Boult,T20I,465,44.29,Low Confidence,229,43.61,Low Confidence,240,44.7,Low Confidence,-11,Demoted by -11 ranks.
+2892,Asif Ali,T20I,402,47.46,Moderate Confidence,290,39.6,Moderate Confidence,241,44.53,Moderate Confidence,49,Promoted by +49 ranks as adaptability was uncompressed.
+33969,Tinotenda Maposa,T20I,497,43.27,Low Confidence,220,44.4,Moderate Confidence,242,44.37,Low Confidence,-22,Demoted by -22 ranks.
+4837,Obed McCoy,T20I,636,33.53,Low Confidence,231,43.23,Low Confidence,243,44.32,Low Confidence,-12,Demoted by -12 ranks.
+3772,Logan van Beek,T20I,571,39.27,Low Confidence,275,40.45,Low Confidence,244,44.24,Low Confidence,31,Promoted by +31 ranks as adaptability was uncompressed.
+6819,Yashasvi Jaiswal,T20I,4,75.08,High Confidence,256,41.6,Low Confidence,245,44.17,Low Confidence,11,Promoted by +11 ranks as adaptability was uncompressed.
+27743,DT Doram,T20I,632,33.73,Low Confidence,234,43.04,Low Confidence,246,44.13,Low Confidence,-12,Demoted by -12 ranks.
+278,Tim Southee,T20I,549,40.13,Low Confidence,223,44.14,Moderate Confidence,247,44.0,Low Confidence,-24,Demoted by -24 ranks.
+2296,Safyaan Sharif,T20I,630,33.86,Low Confidence,237,42.87,Low Confidence,248,43.97,Low Confidence,-11,Demoted by -11 ranks.
+2364,Ashton Agar,T20I,427,46.21,Low Confidence,269,40.87,Low Confidence,249,43.89,Low Confidence,20,Promoted by +20 ranks as adaptability was uncompressed.
+7756,Kaleem Sana,T20I,492,43.37,Low Confidence,241,42.79,Low Confidence,250,43.88,Low Confidence,-9,Stable ranking.
+8380,Mohammad Rishad Hossain,T20I,15,67.91,High Confidence,291,39.57,High Confidence,251,43.82,High Confidence,40,Promoted by +40 ranks as adaptability was uncompressed.
+3858,Jatinder Singh,T20I,652,29.56,Low Confidence,283,39.9,Low Confidence,252,43.82,Low Confidence,31,Promoted by +31 ranks as adaptability was uncompressed.
+39657,Eshan Malinga,T20I,596,37.05,Low Confidence,243,42.67,Low Confidence,253,43.76,Low Confidence,-10,Stable ranking.
+7201,Haroon Arshad,T20I,447,45.24,Low Confidence,245,42.62,Low Confidence,254,43.71,Low Confidence,-9,Stable ranking.
+250,Aaron Finch,T20I,83,60.04,High Confidence,246,42.15,Moderate Confidence,255,43.7,Low Confidence,-9,Stable ranking.
+152,Ravindra Jadeja,T20I,494,43.31,Moderate Confidence,250,41.73,Moderate Confidence,256,43.6,Low Confidence,-6,Stable ranking.
+3995,Donald Tiripano,T20I,522,41.76,Low Confidence,296,39.48,Low Confidence,257,43.13,Low Confidence,39,Promoted by +39 ranks as adaptability was uncompressed.
+4856,Benjamin Sears,T20I,648,31.98,Low Confidence,248,42.03,Low Confidence,258,43.12,Low Confidence,-10,Stable ranking.
+3669,Sadeera Samarawickrama,T20I,106,58.87,High Confidence,272,40.76,Low Confidence,259,42.91,Low Confidence,13,Promoted by +13 ranks as adaptability was uncompressed.
+26988,Jitenkumar Ramanandi,T20I,456,44.92,Low Confidence,251,41.68,Low Confidence,260,42.77,Low Confidence,-9,Stable ranking.
+25048,Umran Malik,T20I,466,44.29,Low Confidence,252,41.67,Low Confidence,261,42.76,Low Confidence,-9,Stable ranking.
+20175,Nandan Yadav,T20I,314,50.64,Low Confidence,253,41.66,Low Confidence,262,42.75,Low Confidence,-9,Stable ranking.
+3135,Yannic Cariah,T20I,591,37.49,Low Confidence,254,41.64,Low Confidence,263,42.73,Low Confidence,-9,Stable ranking.
+778,Darren Bravo,T20I,579,38.3,Low Confidence,257,41.58,Low Confidence,264,42.67,Low Confidence,-7,Stable ranking.
+59045,Jai Moondra,T20I,540,40.65,Low Confidence,258,41.57,Low Confidence,265,42.66,Low Confidence,-7,Stable ranking.
+7912,Vikramjit Singh,T20I,113,58.41,Moderate Confidence,276,40.16,Low Confidence,266,42.65,Low Confidence,10,Stable ranking.
+4901,Asitha Fernando,T20I,628,33.96,Low Confidence,238,42.86,Low Confidence,267,42.64,Low Confidence,-29,Demoted by -29 ranks.
+4665,Tom Blundell,T20I,304,51.03,Low Confidence,282,39.93,Low Confidence,268,42.59,Low Confidence,14,Promoted by +14 ranks as adaptability was uncompressed.
+50062,Nqobani Mokoena,T20I,515,42.1,Low Confidence,262,41.47,Low Confidence,269,42.56,Low Confidence,-7,Stable ranking.
+2997,Paul van Meekeren,T20I,537,40.88,Low Confidence,336,37.99,Low Confidence,270,42.53,Low Confidence,66,Promoted by +66 ranks as adaptability was uncompressed.
+2416,Kyle Mayers,T20I,44,63.25,High Confidence,233,43.04,High Confidence,271,42.51,Moderate Confidence,-38,Demoted by -38 ranks.
+1219,David Willey,T20I,392,47.88,Low Confidence,281,39.95,Low Confidence,272,42.38,Low Confidence,9,Stable ranking.
+2985,Mark Wood,T20I,594,37.17,Low Confidence,264,41.05,Low Confidence,273,42.14,Low Confidence,-9,Stable ranking.
+4489,Prasidh Krishna,T20I,525,41.56,Low Confidence,265,41.03,Low Confidence,274,42.12,Low Confidence,-9,Stable ranking.
+47724,Jahandad Khan,T20I,498,43.24,Low Confidence,354,37.3,Low Confidence,275,42.01,Low Confidence,79,Promoted by +79 ranks as adaptability was uncompressed.
+6025,Henry Shipley,T20I,566,39.41,Low Confidence,267,40.89,Low Confidence,276,41.98,Low Confidence,-9,Stable ranking.
+6645,Mohammad Sheikh,T20I,551,39.99,Moderate Confidence,292,39.56,Moderate Confidence,277,41.94,Low Confidence,15,Promoted by +15 ranks as adaptability was uncompressed.
+19530,Shahnawaz Dhani,T20I,157,56.13,Low Confidence,270,40.84,Low Confidence,278,41.93,Low Confidence,-8,Stable ranking.
+478,Eoin Morgan,T20I,544,40.32,Low Confidence,326,38.33,Low Confidence,279,41.87,Low Confidence,47,Promoted by +47 ranks as adaptability was uncompressed.
+7503,Ravi Bishnoi,T20I,562,39.7,Low Confidence,311,38.97,Moderate Confidence,280,41.86,Low Confidence,31,Promoted by +31 ranks as adaptability was uncompressed.
+772,Rilee Rossouw,T20I,19,66.43,High Confidence,244,42.64,Moderate Confidence,281,41.86,Low Confidence,-37,Demoted by -37 ranks.
+27516,Ihsanullah Ihsanullah,T20I,559,39.82,Low Confidence,273,40.69,Low Confidence,282,41.78,Low Confidence,-9,Stable ranking.
+6795,Terrance Hinds,T20I,542,40.49,Low Confidence,274,40.51,Low Confidence,283,41.6,Low Confidence,-9,Stable ranking.
+25216,Andile Simelane,T20I,140,56.99,Low Confidence,366,36.54,Low Confidence,284,41.51,Low Confidence,82,Promoted by +82 ranks as adaptability was uncompressed.
+4102,George Munsey,T20I,16,67.8,Moderate Confidence,285,39.85,Low Confidence,285,41.5,Low Confidence,0,Stable ranking.
+8014,Avi Dixit,T20I,408,47.14,Low Confidence,320,38.56,Low Confidence,286,41.47,Low Confidence,34,Promoted by +34 ranks as adaptability was uncompressed.
+1924,Sam Billings,T20I,410,46.99,Low Confidence,293,39.52,Moderate Confidence,287,41.33,Low Confidence,6,Stable ranking.
+4814,Lorcan Tucker,T20I,23,65.47,High Confidence,271,40.83,High Confidence,288,41.12,High Confidence,-17,Demoted by -17 ranks.
+7227,Nijat Masood,T20I,577,38.71,Low Confidence,279,40.01,Low Confidence,289,41.1,Low Confidence,-10,Stable ranking.
+2407,Dhananjaya de Silva,T20I,220,53.38,High Confidence,341,37.84,Low Confidence,290,40.96,Low Confidence,51,Promoted by +51 ranks as adaptability was uncompressed.
+25231,Samay Shrivastava,T20I,639,33.25,Low Confidence,284,39.86,Low Confidence,291,40.95,Low Confidence,-7,Stable ranking.
+6423,Riyan Parag,T20I,98,59.28,Moderate Confidence,339,37.85,Low Confidence,292,40.95,Low Confidence,47,Promoted by +47 ranks as adaptability was uncompressed.
+7920,Nathan Ellis,T20I,612,35.26,Low Confidence,286,39.83,Moderate Confidence,293,40.93,Low Confidence,-7,Stable ranking.
+8639,Kartik Meiyappan,T20I,545,40.31,Low Confidence,287,39.82,Low Confidence,294,40.91,Low Confidence,-7,Stable ranking.
+66103,Noor Rahman,T20I,592,37.44,Low Confidence,370,36.18,Low Confidence,295,40.89,Low Confidence,75,Promoted by +75 ranks as adaptability was uncompressed.
+20310,Ahmed Daniyal,T20I,378,48.53,Low Confidence,288,39.72,Low Confidence,296,40.81,Low Confidence,-8,Stable ranking.
+3720,Craig Young,T20I,658,26.9,Low Confidence,289,39.67,Low Confidence,297,40.76,Low Confidence,-8,Stable ranking.
+2382,Jamie Overton,T20I,166,55.66,Low Confidence,373,35.97,Moderate Confidence,298,40.74,Low Confidence,75,Promoted by +75 ranks as adaptability was uncompressed.
+6518,Daniel Sams,T20I,342,49.89,Low Confidence,313,38.87,Low Confidence,299,40.73,Low Confidence,14,Promoted by +14 ranks as adaptability was uncompressed.
+28970,Connor Esterhuizen,T20I,338,49.96,Moderate Confidence,306,39.13,Low Confidence,300,40.57,Low Confidence,6,Stable ranking.
+7755,Harsh Thaker,T20I,539,40.7,Low Confidence,352,37.37,Low Confidence,301,40.55,Low Confidence,51,Promoted by +51 ranks as adaptability was uncompressed.
+7710,Brandon Glover,T20I,345,49.83,Low Confidence,300,39.33,Low Confidence,302,40.42,Low Confidence,-2,Stable ranking.
+19145,Aamer Jamal,T20I,354,49.63,Low Confidence,301,39.3,Low Confidence,303,40.39,Low Confidence,-2,Stable ranking.
+5809,Naveen ul Haq,T20I,633,33.7,Low Confidence,303,39.22,Moderate Confidence,304,40.32,Low Confidence,-1,Stable ranking.
+26663,Kwena Maphaka,T20I,635,33.6,Low Confidence,295,39.48,Low Confidence,305,40.3,Low Confidence,-10,Stable ranking.
+34527,Jasper John Davidson,T20I,541,40.62,Low Confidence,304,39.21,Low Confidence,306,40.3,Low Confidence,-2,Stable ranking.
+988,Graeme Cremer,T20I,555,39.89,Low Confidence,305,39.18,Low Confidence,307,40.27,Low Confidence,-2,Stable ranking.
+6395,Josh Philippe,T20I,322,50.37,Low Confidence,368,36.2,Moderate Confidence,308,40.24,Low Confidence,60,Promoted by +60 ranks as adaptability was uncompressed.
+7046,Tinashe Kamunhukamwe,T20I,366,49.05,Moderate Confidence,323,38.42,Low Confidence,309,40.23,Low Confidence,14,Promoted by +14 ranks as adaptability was uncompressed.
+21777,Tafadzwa Tsiga,T20I,574,39.1,Low Confidence,307,39.07,Low Confidence,310,40.16,Low Confidence,-3,Stable ranking.
+2439,Akila Dananjaya,T20I,333,50.15,Low Confidence,308,39.04,Low Confidence,311,40.13,Low Confidence,-3,Stable ranking.
+8424,Tanveer Sangha,T20I,527,41.36,Low Confidence,309,39.04,Low Confidence,312,40.13,Low Confidence,-3,Stable ranking.
+6705,Scott McKechnie,T20I,504,42.76,Low Confidence,312,38.96,Low Confidence,313,40.12,Low Confidence,-1,Stable ranking.
+3280,Nazmul Hossain Shanto,T20I,311,50.84,High Confidence,266,40.95,High Confidence,314,40.08,Moderate Confidence,-48,Demoted by -48 ranks.
+3641,Ben Dwarshuis,T20I,335,50.05,Moderate Confidence,377,35.74,Moderate Confidence,315,40.06,Low Confidence,62,Promoted by +62 ranks as adaptability was uncompressed.
+3304,Munim Shahriar,T20I,394,47.72,Low Confidence,378,35.72,Low Confidence,316,40.05,Low Confidence,62,Promoted by +62 ranks as adaptability was uncompressed.
+1205,Jonny Bairstow,T20I,621,34.62,High Confidence,247,42.12,High Confidence,317,40.0,Moderate Confidence,-70,Demoted by -70 ranks.
+30925,Bradley Currie,T20I,533,41.04,Low Confidence,314,38.8,Low Confidence,318,39.89,Low Confidence,-4,Stable ranking.
+5561,Brad Wheal,T20I,575,39.07,Low Confidence,316,38.77,Low Confidence,319,39.86,Low Confidence,-3,Stable ranking.
+6203,Surendran Chandramohan,T20I,213,53.67,Low Confidence,375,35.79,Low Confidence,320,39.84,Low Confidence,55,Promoted by +55 ranks as adaptability was uncompressed.
+7001,Dilon Heyliger,T20I,158,56.08,Low Confidence,277,40.14,Low Confidence,321,39.75,Low Confidence,-44,Demoted by -44 ranks.
+332,Angelo Mathews,T20I,334,50.13,High Confidence,278,40.1,Moderate Confidence,322,39.74,Low Confidence,-44,Demoted by -44 ranks.
+42548,Muhammad Jawadullah,T20I,506,42.74,Low Confidence,318,38.63,Low Confidence,323,39.72,Low Confidence,-5,Stable ranking.
+5979,Abrar Ahmed,T20I,599,36.98,Low Confidence,319,38.61,Low Confidence,324,39.7,Low Confidence,-5,Stable ranking.
+4604,Mitchell Swepson,T20I,478,43.93,Low Confidence,321,38.51,Low Confidence,325,39.6,Low Confidence,-4,Stable ranking.
+2054,Jason Behrendorff,T20I,518,41.92,Low Confidence,322,38.46,Low Confidence,326,39.55,Low Confidence,-4,Stable ranking.
+7008,Gus Atkinson,T20I,637,33.5,Low Confidence,324,38.4,Low Confidence,327,39.49,Low Confidence,-3,Stable ranking.
+3653,Avesh Khan,T20I,407,47.26,Low Confidence,325,38.39,Low Confidence,328,39.37,Low Confidence,-3,Stable ranking.
+4260,Heinrich Klaasen,T20I,93,59.41,High Confidence,255,41.62,High Confidence,329,39.36,High Confidence,-74,Demoted by -74 ranks.
+60609,Navin Bidaisee,T20I,439,45.52,Low Confidence,342,37.81,Low Confidence,330,39.33,Low Confidence,12,Promoted by +12 ranks as adaptability was uncompressed.
+27504,Dushan Hemantha,T20I,576,38.8,Low Confidence,298,39.42,Low Confidence,331,39.32,Low Confidence,-33,Demoted by -33 ranks.
+8771,Rubin Hermann,T20I,115,58.34,Moderate Confidence,359,37.03,Low Confidence,332,39.28,Low Confidence,27,Promoted by +27 ranks as adaptability was uncompressed.
+32401,Akhil Kumar,T20I,499,43.17,Low Confidence,329,38.16,Low Confidence,333,39.25,Low Confidence,-4,Stable ranking.
+34485,Sufiyan Muqeem,T20I,511,42.31,Low Confidence,328,38.16,Low Confidence,334,39.25,Low Confidence,-6,Stable ranking.
+35506,Quentin Sampson,T20I,419,46.61,Low Confidence,337,37.98,Moderate Confidence,335,39.24,Low Confidence,2,Stable ranking.
+8009,Junaid Siddique,T20I,526,41.56,Low Confidence,330,38.14,Moderate Confidence,336,39.23,Low Confidence,-6,Stable ranking.
+4703,Rishabh Pant,T20I,57,61.61,High Confidence,349,37.5,Low Confidence,337,39.21,Low Confidence,12,Promoted by +12 ranks as adaptability was uncompressed.
+25809,Juanoy Drysdale,T20I,501,42.86,Low Confidence,335,38.01,Low Confidence,338,39.11,Low Confidence,-3,Stable ranking.
+4221,Chris Green,T20I,521,41.8,Low Confidence,334,38.01,Low Confidence,339,39.11,Low Confidence,-5,Stable ranking.
+8182,Donovan Ferreira,T20I,5,73.96,High Confidence,261,41.5,High Confidence,340,39.11,Moderate Confidence,-79,Demoted by -79 ranks.
+8664,Victor Nyauchi,T20I,548,40.24,Low Confidence,333,38.02,Low Confidence,341,39.11,Low Confidence,-8,Stable ranking.
+3839,Amjad Mahboob,T20I,471,44.13,Low Confidence,338,37.94,Low Confidence,342,39.03,Low Confidence,-4,Stable ranking.
+48616,Abdul Saqlain,T20I,509,42.37,Low Confidence,343,37.76,Low Confidence,343,38.98,Low Confidence,0,Stable ranking.
+34546,Aryan Bisht,T20I,581,38.2,Low Confidence,340,37.85,Low Confidence,344,38.94,Low Confidence,-4,Stable ranking.
+7900,Tanzid Hasan,T20I,43,63.25,High Confidence,280,39.98,High Confidence,345,38.94,Moderate Confidence,-65,Demoted by -65 ranks.
+4684,Dane Cleaver,T20I,323,50.36,High Confidence,362,36.78,Low Confidence,346,38.9,Low Confidence,16,Promoted by +16 ranks as adaptability was uncompressed.
+7927,Janak Prakash,T20I,513,42.12,Moderate Confidence,317,38.66,Moderate Confidence,347,38.88,Low Confidence,-30,Demoted by -30 ranks.
+4871,Brandon Mavuta,T20I,629,33.96,Low Confidence,344,37.74,Low Confidence,348,38.83,Low Confidence,-4,Stable ranking.
+26916,Yasir Mohammad,T20I,265,51.97,Low Confidence,399,34.4,Low Confidence,349,38.76,Low Confidence,50,Promoted by +50 ranks as adaptability was uncompressed.
+3648,Deepak Hooda,T20I,196,54.57,High Confidence,327,38.27,Moderate Confidence,350,38.67,Low Confidence,-23,Demoted by -23 ranks.
+20229,Mohammad Ali,T20I,464,44.3,Low Confidence,346,37.57,Low Confidence,351,38.66,Low Confidence,-5,Stable ranking.
+7914,Clayton Floyd,T20I,475,44.01,Low Confidence,347,37.56,Low Confidence,352,38.65,Low Confidence,-5,Stable ranking.
+4847,Finn Allen,T20I,32,64.38,High Confidence,331,38.11,High Confidence,353,38.55,Moderate Confidence,-22,Demoted by -22 ranks.
+4838,Keemo Paul,T20I,569,39.33,Low Confidence,351,37.44,Low Confidence,354,38.53,Low Confidence,-3,Stable ranking.
+4895,Charith Asalanka,T20I,61,61.04,High Confidence,302,39.28,High Confidence,355,38.46,High Confidence,-53,Demoted by -53 ranks.
+1481,Kusal Perera,T20I,76,60.24,High Confidence,350,37.48,High Confidence,356,38.42,Moderate Confidence,-6,Stable ranking.
+1187,Jason Roy,T20I,638,33.34,High Confidence,332,38.07,High Confidence,357,38.41,Moderate Confidence,-25,Demoted by -25 ranks.
+6389,Tanvir Islam,T20I,444,45.36,Low Confidence,345,37.6,Low Confidence,358,38.38,Low Confidence,-13,Demoted by -13 ranks.
+29075,Aadil Ansari,T20I,588,37.73,Low Confidence,376,35.75,Low Confidence,359,38.36,Low Confidence,17,Promoted by +17 ranks as adaptability was uncompressed.
+286,Kane Richardson,T20I,507,42.66,Low Confidence,357,37.19,Low Confidence,360,38.28,Low Confidence,-3,Stable ranking.
+6503,Zahoor Khan,T20I,516,42.09,Low Confidence,358,37.11,Low Confidence,361,38.2,Low Confidence,-3,Stable ranking.
+24475,Rehan Ahmed,T20I,399,47.55,Low Confidence,390,34.81,Low Confidence,362,38.19,Low Confidence,28,Promoted by +28 ranks as adaptability was uncompressed.
+2218,Anamul Haque,T20I,441,45.44,Moderate Confidence,389,34.82,Moderate Confidence,363,38.15,Low Confidence,26,Promoted by +26 ranks as adaptability was uncompressed.
+4900,Wanindu Hasaranga,T20I,97,59.28,High Confidence,299,39.38,High Confidence,364,38.14,High Confidence,-65,Demoted by -65 ranks.
+25534,Chad Bowes,T20I,319,50.5,High Confidence,360,36.97,High Confidence,365,38.09,Moderate Confidence,-5,Stable ranking.
+1612,Yuzvendra Chahal,T20I,531,41.29,Low Confidence,361,36.83,Low Confidence,366,37.92,Low Confidence,-5,Stable ranking.
+3635,Jason Smith,T20I,474,44.03,Moderate Confidence,356,37.23,Low Confidence,367,37.88,Low Confidence,-11,Demoted by -11 ranks.
+4460,Jeffrey Vandersay,T20I,508,42.39,Low Confidence,363,36.75,Low Confidence,368,37.84,Low Confidence,-5,Stable ranking.
+6286,Shivam Mavi,T20I,420,46.6,Low Confidence,365,36.66,Low Confidence,369,37.75,Low Confidence,-4,Stable ranking.
+773,Shadley Van Schalkwyk,T20I,241,52.94,Low Confidence,392,34.76,Low Confidence,370,37.75,Low Confidence,22,Promoted by +22 ranks as adaptability was uncompressed.
+443,Paul Stirling,T20I,1,82.57,High Confidence,355,37.25,High Confidence,371,37.49,Moderate Confidence,-16,Demoted by -16 ranks.
+6256,Varun Chakravarthy,T20I,467,44.25,Low Confidence,489,33.26,Low Confidence,372,37.45,Low Confidence,117,Promoted by +117 ranks as adaptability was uncompressed.
+3639,Brandon King,T20I,412,46.9,High Confidence,310,39.0,High Confidence,373,37.37,High Confidence,-63,Demoted by -63 ranks.
+27137,Hammad Mirza,T20I,271,51.79,Moderate Confidence,348,37.51,Moderate Confidence,374,37.26,Moderate Confidence,-26,Demoted by -26 ranks.
+39640,Sineth Jayawardena,T20I,514,42.11,Low Confidence,364,36.68,Low Confidence,375,37.05,Low Confidence,-11,Demoted by -11 ranks.
+7696,Mohammad Wasim,T20I,653,29.02,Low Confidence,315,38.78,Low Confidence,376,37.04,Low Confidence,-61,Demoted by -61 ranks.
+19316,Maheesh Theekshana,T20I,400,47.49,High Confidence,396,34.53,High Confidence,377,36.85,High Confidence,19,Promoted by +19 ranks as adaptability was uncompressed.
+5189,Faheem Ashraf,T20I,109,58.71,High Confidence,297,39.42,High Confidence,378,36.8,High Confidence,-81,Demoted by -81 ranks.
+3595,Andy McBrine,T20I,285,51.41,Low Confidence,380,35.69,Low Confidence,379,36.78,Low Confidence,1,Stable ranking.
+2213,Soumya Sarkar,T20I,80,60.15,High Confidence,374,35.83,Moderate Confidence,380,36.59,Low Confidence,-6,Stable ranking.
+7915,Monank Patel,T20I,206,54.12,Low Confidence,395,34.56,Low Confidence,381,36.58,Low Confidence,14,Promoted by +14 ranks as adaptability was uncompressed.
+33440,Adwitya Bhargava,T20I,429,46.08,Low Confidence,382,35.42,Low Confidence,382,36.51,Low Confidence,0,Stable ranking.
+3727,Matthew Short,T20I,167,55.65,High Confidence,369,36.18,High Confidence,383,36.48,Moderate Confidence,-14,Demoted by -14 ranks.
+3775,Sompal Kami,T20I,490,43.43,Low Confidence,385,35.19,Low Confidence,384,36.28,Low Confidence,1,Stable ranking.
+8726,Alishan Sharafu,T20I,204,54.32,High Confidence,353,37.31,High Confidence,385,36.21,Moderate Confidence,-32,Demoted by -32 ranks.
+8217,Ansh Tandon,T20I,483,43.7,Low Confidence,400,34.27,Low Confidence,386,35.98,Low Confidence,14,Promoted by +14 ranks as adaptability was uncompressed.
+64604,Kalhan Challu,T20I,491,43.41,Low Confidence,391,34.78,Low Confidence,387,35.87,Low Confidence,4,Stable ranking.
+7355,Tayyab Tahir,T20I,502,42.85,Moderate Confidence,388,34.97,Low Confidence,388,35.85,Low Confidence,0,Stable ranking.
+8326,Jayden Seales,T20I,434,45.92,Low Confidence,393,34.74,Low Confidence,389,35.84,Low Confidence,4,Stable ranking.
+3628,Kagiso Rabada,T20I,365,49.18,Low Confidence,408,33.79,Low Confidence,390,35.75,Low Confidence,18,Promoted by +18 ranks as adaptability was uncompressed.
+8241,Lokesh Bam,T20I,503,42.77,Low Confidence,394,34.65,Low Confidence,391,35.74,Low Confidence,3,Stable ranking.
+6433,Darwish Rasooli,T20I,8,73.31,High Confidence,386,35.05,Moderate Confidence,392,35.67,Low Confidence,-6,Stable ranking.
+19894,Mitchell Hay,T20I,222,53.32,Moderate Confidence,401,34.23,Low Confidence,393,35.65,Low Confidence,8,Stable ranking.
+830,Josh Hazlewood,T20I,590,37.5,Low Confidence,397,34.49,Low Confidence,394,35.58,Low Confidence,3,Stable ranking.
+4695,Nick Kelly,T20I,500,43.17,Moderate Confidence,407,33.91,Low Confidence,395,35.25,Low Confidence,12,Promoted by +12 ranks as adaptability was uncompressed.
+29833,Bashir Ahmad,T20I,605,35.78,Low Confidence,403,34.12,Low Confidence,396,35.22,Low Confidence,7,Stable ranking.
+1944,Keshav Maharaj,T20I,199,54.44,Moderate Confidence,379,35.71,Moderate Confidence,397,35.15,Moderate Confidence,-18,Demoted by -18 ranks.
+27390,Matiullah Khan,T20I,614,35.17,Low Confidence,402,34.16,Low Confidence,398,34.98,Low Confidence,4,Stable ranking.
+1487,Adam Milne,T20I,316,50.59,Low Confidence,513,30.96,Moderate Confidence,399,34.89,Low Confidence,114,Promoted by +114 ranks as adaptability was uncompressed.
+7978,Johnathan Campbell,T20I,55,61.72,Moderate Confidence,367,36.39,High Confidence,400,34.83,Moderate Confidence,-33,Demoted by -33 ranks.
+6398,Aaron Hardie,T20I,469,44.18,Moderate Confidence,381,35.47,Moderate Confidence,401,34.8,Low Confidence,-20,Demoted by -20 ranks.
+19315,Vijayakanth Viyaskanth,T20I,519,41.86,Low Confidence,409,33.69,Low Confidence,402,34.78,Low Confidence,7,Stable ranking.
+19020,Ateeq Iqbal,T20I,517,42.06,Low Confidence,410,33.68,Low Confidence,403,34.77,Low Confidence,7,Stable ranking.
+8647,Sediqullah Atal,T20I,320,50.43,High Confidence,383,35.39,Moderate Confidence,404,34.77,Moderate Confidence,-21,Demoted by -21 ranks.
+5750,Ehsan Khan,T20I,578,38.64,Low Confidence,411,33.65,Low Confidence,405,34.74,Low Confidence,6,Stable ranking.
+5041,Mukesh Kumar,T20I,266,51.96,Low Confidence,406,34.01,Low Confidence,406,34.74,Low Confidence,0,Stable ranking.
+2379,Ben Duckett,T20I,14,68.42,High Confidence,371,36.01,Moderate Confidence,407,34.72,Moderate Confidence,-36,Demoted by -36 ranks.
+28908,Vincent Masekesa,T20I,530,41.29,Low Confidence,413,33.59,Low Confidence,408,34.68,Low Confidence,5,Stable ranking.
+3382,Nizakat Khan,T20I,360,49.25,High Confidence,372,36.0,Moderate Confidence,409,34.65,Low Confidence,-37,Demoted by -37 ranks.
+20316,Shahab Alam,T20I,489,43.45,Low Confidence,414,33.54,Low Confidence,410,34.63,Low Confidence,4,Stable ranking.
+31513,Ethan Dsouza,T20I,415,46.71,Low Confidence,501,31.91,Low Confidence,411,34.6,Low Confidence,90,Promoted by +90 ranks as adaptability was uncompressed.
+71727,Razaullah Razaullah,T20I,350,49.68,Low Confidence,481,33.47,Low Confidence,412,34.57,Low Confidence,69,Promoted by +69 ranks as adaptability was uncompressed.
+4793,Dean Foxcroft,T20I,254,52.32,Moderate Confidence,426,33.47,Low Confidence,413,34.57,Low Confidence,13,Promoted by +13 ranks as adaptability was uncompressed.
+34929,Lachlan Lake,T20I,337,49.97,Low Confidence,424,33.47,Low Confidence,414,34.57,Low Confidence,10,Stable ranking.
+34928,Kendel Fleming,T20I,312,50.82,Low Confidence,423,33.47,Low Confidence,415,34.57,Low Confidence,8,Stable ranking.
+32399,Aaron Johnson,T20I,359,49.29,Low Confidence,467,33.47,Low Confidence,416,34.57,Low Confidence,51,Promoted by +51 ranks as adaptability was uncompressed.
+29699,Ibrahim Takahashi,T20I,344,49.88,Low Confidence,433,33.47,Low Confidence,417,34.57,Low Confidence,16,Promoted by +16 ranks as adaptability was uncompressed.
+30927,Saiteja Mukkamalla,T20I,153,56.25,Low Confidence,464,33.47,Low Confidence,418,34.57,Low Confidence,46,Promoted by +46 ranks as adaptability was uncompressed.
+4880,Aarif Sheikh,T20I,343,49.88,Low Confidence,447,33.47,Low Confidence,419,34.57,Low Confidence,28,Promoted by +28 ranks as adaptability was uncompressed.
+4857,Nathan Smith,T20I,484,43.68,Low Confidence,441,33.47,Low Confidence,420,34.57,Low Confidence,21,Promoted by +21 ranks as adaptability was uncompressed.
+6035,Chirag Suri,T20I,219,53.4,Moderate Confidence,448,33.47,Low Confidence,421,34.57,Low Confidence,27,Promoted by +27 ranks as adaptability was uncompressed.
+6172,Lasith Croospulle,T20I,352,49.68,Low Confidence,472,33.47,Low Confidence,422,34.57,Low Confidence,50,Promoted by +50 ranks as adaptability was uncompressed.
+6059,Ruturaj Gaikwad,T20I,68,60.61,High Confidence,449,33.47,Low Confidence,423,34.57,Low Confidence,26,Promoted by +26 ranks as adaptability was uncompressed.
+26843,Maaz Sadaqat,T20I,229,53.21,Moderate Confidence,484,33.47,Low Confidence,424,34.57,Low Confidence,60,Promoted by +60 ranks as adaptability was uncompressed.
+25501,Meet Bhavsar,T20I,327,50.21,Low Confidence,417,33.47,Low Confidence,425,34.57,Low Confidence,-8,Stable ranking.
+25502,Adnan Idrees,T20I,341,49.9,Low Confidence,419,33.47,Low Confidence,426,34.57,Low Confidence,-7,Stable ranking.
+24978,Jack Jarvis,T20I,329,50.18,Low Confidence,486,33.47,Low Confidence,427,34.57,Low Confidence,59,Promoted by +59 ranks as adaptability was uncompressed.
+24803,Gulshan Jha,T20I,391,47.91,Low Confidence,485,33.47,Low Confidence,428,34.57,Low Confidence,57,Promoted by +57 ranks as adaptability was uncompressed.
+26839,Haseebullah Khan,T20I,246,52.77,Low Confidence,437,33.47,Low Confidence,429,34.57,Low Confidence,8,Stable ranking.
+26795,Joel Davies,T20I,443,45.36,Low Confidence,436,33.47,Low Confidence,430,34.57,Low Confidence,6,Stable ranking.
+3306,Afsar Zazai,T20I,395,47.64,Low Confidence,434,33.47,Low Confidence,431,34.57,Low Confidence,3,Stable ranking.
+4974,Mohammad Nadeem,T20I,326,50.26,Low Confidence,473,33.47,Low Confidence,432,34.57,Low Confidence,41,Promoted by +41 ranks as adaptability was uncompressed.
+4505,Jhye Richardson,T20I,413,46.79,Low Confidence,463,33.47,Low Confidence,433,34.57,Low Confidence,30,Promoted by +30 ranks as adaptability was uncompressed.
+4458,AHT Donald,T20I,256,52.26,Low Confidence,466,33.47,Low Confidence,434,34.57,Low Confidence,32,Promoted by +32 ranks as adaptability was uncompressed.
+4412,Max ODowd,T20I,121,58.0,High Confidence,455,33.47,Low Confidence,435,34.57,Low Confidence,20,Promoted by +20 ranks as adaptability was uncompressed.
+4372,Rony Talukder,T20I,179,55.19,High Confidence,456,33.47,Low Confidence,436,34.57,Low Confidence,20,Promoted by +20 ranks as adaptability was uncompressed.
+4882,Kushal Bhurtel,T20I,264,51.97,Low Confidence,451,33.47,Low Confidence,437,34.57,Low Confidence,14,Promoted by +14 ranks as adaptability was uncompressed.
+2534,Rahmat Shah,T20I,330,50.17,Low Confidence,487,33.47,Low Confidence,438,34.57,Low Confidence,49,Promoted by +49 ranks as adaptability was uncompressed.
+2650,Raymon Reifer,T20I,388,48.19,Low Confidence,478,33.47,Low Confidence,439,34.57,Low Confidence,39,Promoted by +39 ranks as adaptability was uncompressed.
+2996,Stephanus Myburgh,T20I,373,48.76,Low Confidence,443,33.47,Low Confidence,440,34.57,Low Confidence,3,Stable ranking.
+274,Martin Guptill,T20I,137,57.14,High Confidence,422,33.47,Low Confidence,441,34.57,Low Confidence,-19,Demoted by -19 ranks.
+232,Tom Cooper,T20I,244,52.81,Low Confidence,420,33.47,Low Confidence,442,34.57,Low Confidence,-22,Demoted by -22 ranks.
+54404,Benjamin Ito,T20I,437,45.7,Low Confidence,469,33.47,Low Confidence,443,34.57,Low Confidence,26,Promoted by +26 ranks as adaptability was uncompressed.
+4802,Stephen Doheny,T20I,240,52.97,Low Confidence,468,33.47,Low Confidence,444,34.57,Low Confidence,24,Promoted by +24 ranks as adaptability was uncompressed.
+6506,Mohammad Imran Randhawa,T20I,426,46.27,Low Confidence,454,33.47,Low Confidence,445,34.57,Low Confidence,9,Stable ranking.
+20006,Ramandeep Singh,T20I,440,45.5,Low Confidence,475,33.47,Low Confidence,446,34.57,Low Confidence,29,Promoted by +29 ranks as adaptability was uncompressed.
+20163,Aasif Sheikh,T20I,348,49.73,Low Confidence,476,33.47,Low Confidence,447,34.57,Low Confidence,29,Promoted by +29 ranks as adaptability was uncompressed.
+2373,Ashton Turner,T20I,449,45.12,Low Confidence,429,33.47,Low Confidence,448,34.57,Low Confidence,-19,Demoted by -19 ranks.
+6440,Omair Yousuf,T20I,287,51.4,Low Confidence,444,33.47,Low Confidence,449,34.57,Low Confidence,-5,Stable ranking.
+6441,Abdullah Shafique,T20I,278,51.56,Low Confidence,445,33.47,Low Confidence,450,34.57,Low Confidence,-5,Stable ranking.
+21791,J Gumbie,T20I,291,51.32,Low Confidence,477,33.47,Low Confidence,451,34.57,Low Confidence,26,Promoted by +26 ranks as adaptability was uncompressed.
+6436,Qais Ahmad,T20I,325,50.26,Low Confidence,453,33.47,Low Confidence,452,34.57,Low Confidence,1,Stable ranking.
+1233,Gary Ballance,T20I,396,47.64,Low Confidence,431,33.47,Low Confidence,453,34.57,Low Confidence,-22,Demoted by -22 ranks.
+16559,Alexander Patmore,T20I,445,45.31,Low Confidence,442,33.47,Low Confidence,454,34.57,Low Confidence,-12,Demoted by -12 ranks.
+7120,Rohit Paudel,T20I,368,48.91,Moderate Confidence,418,33.47,Low Confidence,455,34.57,Low Confidence,-37,Demoted by -37 ranks.
+7544,Venkatesh Iyer,T20I,390,48.02,Low Confidence,435,33.47,Low Confidence,456,34.57,Low Confidence,-21,Demoted by -21 ranks.
+2210,Sabbir Rahman,T20I,302,51.09,Low Confidence,450,33.47,Low Confidence,457,34.57,Low Confidence,-7,Stable ranking.
+17937,Zubaid Akbari,T20I,346,49.8,Low Confidence,470,33.47,Low Confidence,458,34.57,Low Confidence,12,Promoted by +12 ranks as adaptability was uncompressed.
+7003,Rayyan Pathan,T20I,279,51.56,Low Confidence,416,33.47,Low Confidence,459,34.57,Low Confidence,-43,Demoted by -43 ranks.
+2321,Olly Stone,T20I,351,49.68,Low Confidence,483,33.47,Low Confidence,460,34.57,Low Confidence,23,Promoted by +23 ranks as adaptability was uncompressed.
+17910,Mohammad Akram,T20I,305,51.01,Low Confidence,471,33.47,Low Confidence,461,34.57,Low Confidence,10,Stable ranking.
+1195,Ben Stokes,T20I,362,49.19,Low Confidence,430,33.47,Low Confidence,462,34.57,Low Confidence,-32,Demoted by -32 ranks.
+1183,Alex Hales,T20I,147,56.53,High Confidence,425,33.47,Low Confidence,463,34.57,Low Confidence,-38,Demoted by -38 ranks.
+15274,Ravija Sandaruwan,T20I,148,56.52,Low Confidence,446,33.47,Low Confidence,464,34.57,Low Confidence,-18,Demoted by -18 ranks.
+15271,Usmangani Ibrahim Patel,T20I,340,49.91,Low Confidence,452,33.47,Low Confidence,465,34.57,Low Confidence,-13,Demoted by -13 ranks.
+8652,Mohammad Ishaq,T20I,296,51.18,Moderate Confidence,461,33.47,Low Confidence,466,34.57,Low Confidence,-5,Stable ranking.
+7704,Pavan Rathnayake,T20I,272,51.74,Moderate Confidence,428,33.47,Low Confidence,467,34.57,Low Confidence,-39,Demoted by -39 ranks.
+7692,Qasim Akram,T20I,306,51.01,Low Confidence,427,33.47,Low Confidence,468,34.57,Low Confidence,-41,Demoted by -41 ranks.
+7925,Rohan Rangarajan,T20I,315,50.64,Low Confidence,460,33.47,Low Confidence,469,34.57,Low Confidence,-9,Stable ranking.
+7926,Manpreet Singh,T20I,425,46.34,Low Confidence,459,33.47,Low Confidence,470,34.57,Low Confidence,-11,Demoted by -11 ranks.
+7924,Kushal Malla,T20I,421,46.54,Low Confidence,432,33.47,Low Confidence,471,34.57,Low Confidence,-39,Demoted by -39 ranks.
+3832,Rezza Gaznavi,T20I,243,52.82,Low Confidence,465,33.47,Low Confidence,472,34.57,Low Confidence,-7,Stable ranking.
+3545,Ihsanullah Janat,T20I,309,50.92,Low Confidence,474,33.47,Low Confidence,473,34.57,Low Confidence,1,Stable ranking.
+8405,Kanwarpal Tathgur,T20I,436,45.79,Low Confidence,439,33.47,Low Confidence,474,34.57,Low Confidence,-35,Demoted by -35 ranks.
+8093,Nikhil Chaudhary,T20I,245,52.78,Low Confidence,458,33.47,Low Confidence,475,34.57,Low Confidence,-17,Demoted by -17 ranks.
+8311,Dan Mousley,T20I,332,50.17,Low Confidence,440,33.47,Low Confidence,476,34.57,Low Confidence,-36,Demoted by -36 ranks.
+7931,Aritra Dutta,T20I,180,55.18,Moderate Confidence,462,33.47,Low Confidence,477,34.57,Low Confidence,-15,Demoted by -15 ranks.
+7937,Wasim Ali,T20I,347,49.78,Low Confidence,457,33.47,Low Confidence,478,34.57,Low Confidence,-21,Demoted by -21 ranks.
+757,Sybrand Engelbrecht,T20I,328,50.18,Low Confidence,479,33.47,Low Confidence,479,34.57,Low Confidence,0,Stable ranking.
+505,Mushfiqur Rahim,T20I,274,51.68,Low Confidence,480,33.47,Low Confidence,480,34.57,Low Confidence,0,Stable ranking.
+42811,Michael Levitt,T20I,228,53.22,High Confidence,415,33.47,Low Confidence,481,34.57,Low Confidence,-66,Demoted by -66 ranks.
+55747,Benjamin Calitz,T20I,127,57.69,Moderate Confidence,421,33.47,Low Confidence,482,34.57,Low Confidence,-61,Demoted by -61 ranks.
+37879,Khawaja Nafay,T20I,255,52.28,Low Confidence,438,33.47,Low Confidence,483,34.57,Low Confidence,-45,Demoted by -45 ranks.
+47314,Wafiullah Tarakhil,T20I,303,51.08,Low Confidence,482,33.47,Low Confidence,484,34.57,Low Confidence,-2,Stable ranking.
+4816,Khaleel Ahmed,T20I,487,43.58,Low Confidence,488,33.36,Low Confidence,485,34.46,Low Confidence,3,Stable ranking.
+2334,Dwaine Pretorius,T20I,119,58.19,Low Confidence,404,34.11,Moderate Confidence,486,34.1,Low Confidence,-82,Demoted by -82 ranks.
+3660,Luke Wood,T20I,438,45.66,Low Confidence,492,33.0,Low Confidence,487,34.09,Low Confidence,5,Stable ranking.
+2246,Tom Latham,T20I,371,48.8,High Confidence,387,34.98,High Confidence,488,34.06,Moderate Confidence,-101,Demoted by -101 ranks.
+47403,Newman Nyamhuri,T20I,376,48.55,Low Confidence,493,32.97,Low Confidence,489,34.06,Low Confidence,4,Stable ranking.
+6919,Tyrone Kane,T20I,288,51.39,Low Confidence,494,32.75,Low Confidence,490,33.84,Low Confidence,4,Stable ranking.
+4499,Saqib Mahmood,T20I,563,39.65,Low Confidence,496,32.45,Low Confidence,491,33.54,Low Confidence,5,Stable ranking.
+7929,Aryaman Sunil Uchil,T20I,414,46.75,Low Confidence,497,32.44,Low Confidence,492,33.53,Low Confidence,5,Stable ranking.
+5866,Patrick Kruger,T20I,36,64.01,Moderate Confidence,384,35.35,Moderate Confidence,493,33.46,Moderate Confidence,-109,Demoted by -109 ranks.
+126,Rohit Sharma,T20I,25,65.37,High Confidence,398,34.43,Moderate Confidence,494,33.46,Low Confidence,-96,Demoted by -96 ranks.
+470,Mohammad Amir,T20I,363,49.18,Low Confidence,498,32.32,Low Confidence,495,33.41,Low Confidence,3,Stable ranking.
+46929,Dian Forrester,T20I,74,60.3,Moderate Confidence,405,34.1,Moderate Confidence,496,33.39,Low Confidence,-91,Demoted by -91 ranks.
+3673,Ramesh Mendis,T20I,172,55.38,Low Confidence,499,32.17,Low Confidence,497,33.27,Low Confidence,2,Stable ranking.
+7049,Kamil Mishara,T20I,481,43.76,High Confidence,490,33.13,Low Confidence,498,33.19,Low Confidence,-8,Stable ranking.
+7935,Mohammad Ghazanfar,T20I,382,48.43,Low Confidence,502,31.87,Low Confidence,499,32.96,Low Confidence,3,Stable ranking.
+4201,Fareed Malik,T20I,634,33.67,Low Confidence,503,31.79,Low Confidence,500,32.88,Low Confidence,3,Stable ranking.
+27960,Mayank Yadav,T20I,558,39.82,Low Confidence,505,31.74,Low Confidence,501,32.83,Low Confidence,4,Stable ranking.
+492,Andre Fletcher,T20I,430,46.07,Low Confidence,514,30.89,Low Confidence,502,32.55,Low Confidence,12,Promoted by +12 ranks as adaptability was uncompressed.
+4790,Lutho Sipamla,T20I,377,48.53,Low Confidence,509,31.32,Low Confidence,503,32.42,Low Confidence,6,Stable ranking.
+31836,Aman Desai,T20I,129,57.59,Low Confidence,495,32.64,Low Confidence,504,32.16,Low Confidence,-9,Stable ranking.
+39991,Parveen Kumar,T20I,339,49.94,Low Confidence,511,31.06,Low Confidence,505,32.16,Low Confidence,6,Stable ranking.
+6473,Nuwanidu Fernando,T20I,317,50.55,Low Confidence,529,30.35,Low Confidence,506,32.03,Low Confidence,23,Promoted by +23 ranks as adaptability was uncompressed.
+31835,Akshay Roopak Puri,T20I,493,43.35,Low Confidence,515,30.88,Low Confidence,507,31.97,Low Confidence,8,Stable ranking.
+8049,Naseem Shah,T20I,189,54.88,Low Confidence,535,30.06,Moderate Confidence,508,31.97,Low Confidence,27,Promoted by +27 ranks as adaptability was uncompressed.
+3686,CB Sole,T20I,532,41.28,Low Confidence,517,30.79,Low Confidence,509,31.88,Low Confidence,8,Stable ranking.
+6097,Brydon Carse,T20I,370,48.83,Low Confidence,507,31.44,Low Confidence,510,31.85,Low Confidence,-3,Stable ranking.
+1649,Regis Chakabva,T20I,215,53.66,Low Confidence,508,31.43,Low Confidence,511,31.78,Low Confidence,-3,Stable ranking.
+49027,Bevon Jacobs,T20I,150,56.46,High Confidence,412,33.6,Moderate Confidence,512,31.72,Low Confidence,-100,Demoted by -100 ranks.
+360,Bhuvneshwar Kumar,T20I,397,47.62,Low Confidence,524,30.45,Low Confidence,513,31.66,Low Confidence,11,Promoted by +11 ranks as adaptability was uncompressed.
+6166,Jack Edwards,T20I,273,51.73,Low Confidence,521,30.53,Low Confidence,514,31.62,Low Confidence,7,Stable ranking.
+16498,Sultan Ahmad,T20I,173,55.35,Low Confidence,553,29.36,Low Confidence,515,31.57,Low Confidence,38,Promoted by +38 ranks as adaptability was uncompressed.
+19125,Ayush Shukla,T20I,460,44.55,Low Confidence,528,30.36,Low Confidence,516,31.45,Low Confidence,12,Promoted by +12 ranks as adaptability was uncompressed.
+1566,Mohammed Shami,T20I,224,53.29,Low Confidence,510,31.23,Low Confidence,517,31.38,Low Confidence,-7,Stable ranking.
+41110,Mayank Kumar,T20I,364,49.18,Low Confidence,530,30.27,Low Confidence,518,31.36,Low Confidence,12,Promoted by +12 ranks as adaptability was uncompressed.
+1801,Nitish Kumar,T20I,149,56.48,Low Confidence,527,30.36,Low Confidence,519,31.28,Low Confidence,8,Stable ranking.
+3373,Aizaz Khan,T20I,453,45.08,Low Confidence,534,30.17,Moderate Confidence,520,31.24,Low Confidence,14,Promoted by +14 ranks as adaptability was uncompressed.
+42810,Noah Croes,T20I,181,55.15,Low Confidence,491,33.02,Moderate Confidence,521,31.12,Low Confidence,-30,Demoted by -30 ranks.
+17911,Nangeyalia Kharote,T20I,477,43.97,Low Confidence,526,30.41,Low Confidence,522,31.11,Low Confidence,4,Stable ranking.
+8727,Sanchit Sharma,T20I,261,52.12,Low Confidence,540,29.9,Low Confidence,523,30.99,Low Confidence,17,Promoted by +17 ranks as adaptability was uncompressed.
+4438,Jasdeep Singh,T20I,263,52.08,Low Confidence,512,31.05,Low Confidence,524,30.93,Low Confidence,-12,Demoted by -12 ranks.
+7312,Nandre Burger,T20I,557,39.83,Low Confidence,542,29.7,Low Confidence,525,30.8,Low Confidence,17,Promoted by +17 ranks as adaptability was uncompressed.
+28655,Muhammad Rohid,T20I,300,51.16,Low Confidence,543,29.69,Low Confidence,526,30.78,Low Confidence,17,Promoted by +17 ranks as adaptability was uncompressed.
+2304,Tymal Mills,T20I,403,47.44,Low Confidence,545,29.66,Low Confidence,527,30.75,Low Confidence,18,Promoted by +18 ranks as adaptability was uncompressed.
+1791,Wesley Barresi,T20I,275,51.67,Low Confidence,550,29.49,Low Confidence,528,30.64,Low Confidence,22,Promoted by +22 ranks as adaptability was uncompressed.
+36551,Zishan Motara,T20I,234,53.14,Low Confidence,547,29.52,Low Confidence,529,30.61,Low Confidence,18,Promoted by +18 ranks as adaptability was uncompressed.
+8805,Ottneil Baartman,T20I,552,39.97,Low Confidence,548,29.5,Low Confidence,530,30.59,Low Confidence,18,Promoted by +18 ranks as adaptability was uncompressed.
+50284,Vaibhav Sooryavanshi,T20I,7,73.62,Moderate Confidence,506,31.67,Low Confidence,531,30.58,Low Confidence,-25,Demoted by -25 ranks.
+37939,Nahid Rana,T20I,353,49.68,Low Confidence,551,29.44,Low Confidence,532,30.53,Low Confidence,19,Promoted by +19 ranks as adaptability was uncompressed.
+1100,Dinesh Chandimal,T20I,450,45.11,Moderate Confidence,500,31.97,Moderate Confidence,533,30.39,Moderate Confidence,-33,Demoted by -33 ranks.
+5892,Blair Tickner,T20I,289,51.37,Low Confidence,555,29.27,Low Confidence,534,30.36,Low Confidence,21,Promoted by +21 ranks as adaptability was uncompressed.
+8661,Matheesha Pathirana,T20I,431,46.06,Low Confidence,556,29.15,Low Confidence,535,30.25,Low Confidence,21,Promoted by +21 ranks as adaptability was uncompressed.
+6350,Matthew Kuhnemann,T20I,423,46.46,Low Confidence,560,28.97,Low Confidence,536,30.06,Low Confidence,24,Promoted by +24 ranks as adaptability was uncompressed.
+4826,George Garton,T20I,307,50.97,Low Confidence,562,28.84,Low Confidence,537,29.93,Low Confidence,25,Promoted by +25 ranks as adaptability was uncompressed.
+2418,Justin Greaves,T20I,193,54.64,Low Confidence,536,30.01,Low Confidence,538,29.92,Low Confidence,-2,Stable ranking.
+57747,Charlie Cassell,T20I,251,52.51,Low Confidence,563,28.79,Low Confidence,539,29.88,Low Confidence,24,Promoted by +24 ranks as adaptability was uncompressed.
+4983,Sikander Zulfiqar,T20I,190,54.84,Low Confidence,564,28.73,Low Confidence,540,29.82,Low Confidence,24,Promoted by +24 ranks as adaptability was uncompressed.
+2399,Dushmantha Chameera,T20I,48,63.03,Low Confidence,602,25.93,Moderate Confidence,541,29.8,Low Confidence,61,Promoted by +61 ranks as adaptability was uncompressed.
+8298,Ramon Simmonds,T20I,200,54.42,Low Confidence,566,28.63,Low Confidence,542,29.72,Low Confidence,24,Promoted by +24 ranks as adaptability was uncompressed.
+49268,Sohaib Khan,T20I,361,49.22,Low Confidence,567,28.62,Low Confidence,543,29.71,Low Confidence,24,Promoted by +24 ranks as adaptability was uncompressed.
+6932,Pramod Madushan,T20I,237,53.05,Low Confidence,568,28.57,Low Confidence,544,29.66,Low Confidence,24,Promoted by +24 ranks as adaptability was uncompressed.
+3664,Binura Fernando,T20I,603,36.16,Low Confidence,549,29.5,Low Confidence,545,29.65,Low Confidence,4,Stable ranking.
+35102,Zikria Islam,T20I,593,37.39,Low Confidence,569,28.54,Low Confidence,546,29.63,Low Confidence,23,Promoted by +23 ranks as adaptability was uncompressed.
+1171,Chris Woakes,T20I,580,38.29,Low Confidence,518,30.68,Moderate Confidence,547,29.61,Low Confidence,-29,Demoted by -29 ranks.
+24812,Chris Greaves,T20I,281,51.47,Low Confidence,544,29.67,Low Confidence,548,29.58,Low Confidence,-4,Stable ranking.
+2887,Harmeet Singh,T20I,146,56.58,Low Confidence,538,29.95,Low Confidence,549,29.53,Low Confidence,-11,Demoted by -11 ranks.
+3040,Kashif Daud,T20I,208,54.05,Low Confidence,571,28.29,Low Confidence,550,29.38,Low Confidence,21,Promoted by +21 ranks as adaptability was uncompressed.
+4815,Benjamin White,T20I,381,48.45,Low Confidence,541,29.72,Low Confidence,551,29.31,Low Confidence,-10,Stable ranking.
+24346,Mohamed Shafeeq,T20I,214,53.66,Low Confidence,533,30.21,Low Confidence,552,29.13,Low Confidence,-19,Demoted by -19 ranks.
+27071,Vinayak Shukla,T20I,292,51.29,Low Confidence,575,28.02,Low Confidence,553,29.11,Low Confidence,22,Promoted by +22 ranks as adaptability was uncompressed.
+7744,Jordan Cox,T20I,131,57.44,Moderate Confidence,531,30.24,Low Confidence,554,29.08,Low Confidence,-23,Demoted by -23 ranks.
+6881,Scott Edwards,T20I,52,62.02,High Confidence,532,30.23,Low Confidence,555,28.97,Low Confidence,-23,Demoted by -23 ranks.
+6354,Spencer Johnson,T20I,192,54.71,Low Confidence,577,27.79,Low Confidence,556,28.89,Low Confidence,21,Promoted by +21 ranks as adaptability was uncompressed.
+3689,Mark Watt,T20I,186,54.97,Low Confidence,516,30.85,Moderate Confidence,557,28.86,Low Confidence,-41,Demoted by -41 ranks.
+3771,Vivian Kingma,T20I,183,55.09,Low Confidence,579,27.67,Low Confidence,558,28.76,Low Confidence,21,Promoted by +21 ranks as adaptability was uncompressed.
+4237,Tabraiz Shamsi,T20I,336,50.03,Low Confidence,578,27.67,Low Confidence,559,28.76,Low Confidence,19,Promoted by +19 ranks as adaptability was uncompressed.
+3683,Gavin Main,T20I,174,55.3,Low Confidence,580,27.61,Low Confidence,560,28.7,Low Confidence,20,Promoted by +20 ranks as adaptability was uncompressed.
+7699,Abbas Afridi,T20I,123,57.96,Moderate Confidence,504,31.75,Moderate Confidence,561,28.63,Moderate Confidence,-57,Demoted by -57 ranks.
+7625,Suryansh Shedge,T20I,216,53.59,Low Confidence,582,27.48,Low Confidence,562,28.57,Low Confidence,20,Promoted by +20 ranks as adaptability was uncompressed.
+47371,Zuhaid Zubair,T20I,235,53.11,Low Confidence,583,27.45,Low Confidence,563,28.55,Low Confidence,20,Promoted by +20 ranks as adaptability was uncompressed.
+8623,Kristian Clarke,T20I,185,55.02,Low Confidence,585,27.43,Low Confidence,564,28.52,Low Confidence,21,Promoted by +21 ranks as adaptability was uncompressed.
+4874,Richard Ngarava,T20I,257,52.25,Moderate Confidence,519,30.63,Moderate Confidence,565,28.51,Moderate Confidence,-46,Demoted by -46 ranks.
+24767,Ripon Mondol,T20I,177,55.2,Low Confidence,586,27.38,Low Confidence,566,28.47,Low Confidence,20,Promoted by +20 ranks as adaptability was uncompressed.
+20704,Salman Mirza,T20I,159,56.06,Low Confidence,589,27.35,Low Confidence,567,28.44,Low Confidence,22,Promoted by +22 ranks as adaptability was uncompressed.
+6739,Amir Jangoo,T20I,226,53.24,Moderate Confidence,525,30.44,Moderate Confidence,568,28.44,Low Confidence,-43,Demoted by -43 ranks.
+8719,Aryan Lakra,T20I,386,48.33,Low Confidence,557,29.08,Low Confidence,569,28.4,Low Confidence,-12,Demoted by -12 ranks.
+7155,Sahan Arachchige,T20I,227,53.24,Low Confidence,587,27.37,Low Confidence,570,28.24,Low Confidence,17,Promoted by +17 ranks as adaptability was uncompressed.
+6272,William Jacks,T20I,34,64.22,High Confidence,520,30.57,High Confidence,571,28.17,Moderate Confidence,-51,Demoted by -51 ranks.
+17419,Tim Tector,T20I,207,54.05,Moderate Confidence,552,29.39,Low Confidence,572,28.13,Low Confidence,-20,Demoted by -20 ranks.
+305,Ravichandran Ashwin,T20I,79,60.17,Low Confidence,522,30.5,Low Confidence,573,28.1,Low Confidence,-51,Demoted by -51 ranks.
+35122,Shah Faisal,T20I,221,53.33,Low Confidence,593,27.01,Low Confidence,574,28.1,Low Confidence,19,Promoted by +19 ranks as adaptability was uncompressed.
+7409,Sundeep Jora,T20I,313,50.71,Moderate Confidence,523,30.49,Moderate Confidence,575,27.92,Low Confidence,-52,Demoted by -52 ranks.
+3383,Kinchit Shah,T20I,470,44.18,Moderate Confidence,546,29.55,Moderate Confidence,576,27.91,Moderate Confidence,-30,Demoted by -30 ranks.
+3260,Hashmatullah Shahidi,T20I,143,56.87,Low Confidence,559,29.0,Low Confidence,577,27.88,Low Confidence,-18,Demoted by -18 ranks.
+7911,Oliver Hairs,T20I,203,54.35,Low Confidence,570,28.38,Low Confidence,578,27.71,Low Confidence,-8,Stable ranking.
+7928,Vinoth Baskaran,T20I,202,54.36,Low Confidence,598,26.41,Low Confidence,579,27.51,Low Confidence,19,Promoted by +19 ranks as adaptability was uncompressed.
+7260,Dhruv Jurel,T20I,310,50.87,Low Confidence,574,28.02,Low Confidence,580,27.47,Low Confidence,-6,Stable ranking.
+829,Mitchell Starc,T20I,405,47.38,Low Confidence,558,29.07,Low Confidence,581,27.41,Low Confidence,-23,Demoted by -23 ranks.
+3543,Shahidullah Kamal,T20I,134,57.34,Moderate Confidence,561,28.87,Low Confidence,582,27.26,Low Confidence,-21,Demoted by -21 ranks.
+4881,Dipendra Airee,T20I,252,52.46,Low Confidence,565,28.67,Low Confidence,583,27.26,Low Confidence,-18,Demoted by -18 ranks.
+27469,Aryansh Sharma,T20I,56,61.62,Moderate Confidence,554,29.27,Low Confidence,584,27.17,Low Confidence,-30,Demoted by -30 ranks.
+2972,Yasim Murtaza,T20I,584,38.09,High Confidence,537,29.97,Moderate Confidence,585,27.12,Moderate Confidence,-48,Demoted by -48 ranks.
+28756,Haider Ali,T20I,176,55.21,Low Confidence,584,27.43,Moderate Confidence,586,27.04,Low Confidence,-2,Stable ranking.
+15279,Shiraz Khan,T20I,175,55.26,Low Confidence,581,27.56,Low Confidence,587,26.96,Low Confidence,-6,Stable ranking.
+3038,Hussain Talat,T20I,168,55.64,Low Confidence,573,28.16,Low Confidence,588,26.95,Low Confidence,-15,Demoted by -15 ranks.
+24982,Charlie Tear,T20I,128,57.61,Low Confidence,590,27.31,Low Confidence,589,26.94,Low Confidence,1,Stable ranking.
+728,Dawid Malan,T20I,267,51.92,High Confidence,539,29.93,High Confidence,590,26.86,Moderate Confidence,-51,Demoted by -51 ranks.
+8723,Mohammed Faraazuddin,T20I,446,45.27,Low Confidence,604,25.67,Low Confidence,591,26.76,Low Confidence,13,Promoted by +13 ranks as adaptability was uncompressed.
+56685,Abdullah Ahmadzai,T20I,217,53.46,Low Confidence,605,25.49,Low Confidence,592,26.58,Low Confidence,13,Promoted by +13 ranks as adaptability was uncompressed.
+27364,Simranjeet Kang,T20I,152,56.35,Low Confidence,607,25.39,Low Confidence,593,26.48,Low Confidence,14,Promoted by +14 ranks as adaptability was uncompressed.
+7566,Ben Curran,T20I,184,55.06,Low Confidence,596,26.48,Moderate Confidence,594,26.38,Low Confidence,2,Stable ranking.
+3627,Andile Phehlukwayo,T20I,496,43.28,Low Confidence,572,28.24,Moderate Confidence,595,26.37,Low Confidence,-23,Demoted by -23 ranks.
+7270,Anrich Nortje,T20I,385,48.35,Low Confidence,608,25.24,Low Confidence,596,26.33,Low Confidence,12,Promoted by +12 ranks as adaptability was uncompressed.
+32862,Allah Ghazanfar,T20I,154,56.23,Low Confidence,612,25.15,Low Confidence,597,26.24,Low Confidence,15,Promoted by +15 ranks as adaptability was uncompressed.
+5977,Khary Pierre,T20I,161,55.96,Low Confidence,614,25.14,Low Confidence,598,26.24,Low Confidence,16,Promoted by +16 ranks as adaptability was uncompressed.
+29080,Muhammad Khan,T20I,81,60.13,Low Confidence,615,25.11,Low Confidence,599,26.21,Low Confidence,16,Promoted by +16 ranks as adaptability was uncompressed.
+19307,Tharindu Rathnayake,T20I,433,46.0,Low Confidence,595,26.55,Low Confidence,600,26.15,Low Confidence,-5,Stable ranking.
+985,Brendan Taylor,T20I,103,59.04,Moderate Confidence,600,26.22,Low Confidence,601,25.86,Low Confidence,-1,Stable ranking.
+43798,Lhuan Pretorius,T20I,62,61.0,Moderate Confidence,588,27.35,Low Confidence,602,25.79,Low Confidence,-14,Demoted by -14 ranks.
+5547,Nosthush Kenjige,T20I,218,53.45,Low Confidence,592,27.04,Low Confidence,603,25.2,Low Confidence,-11,Demoted by -11 ranks.
+21780,Ernest Masuku,T20I,99,59.22,Low Confidence,624,23.95,Low Confidence,604,25.04,Low Confidence,20,Promoted by +20 ranks as adaptability was uncompressed.
+27460,Ali Naseer,T20I,58,61.51,Low Confidence,594,26.61,Low Confidence,605,24.73,Low Confidence,-11,Demoted by -11 ranks.
+7344,Shoriful Islam,T20I,65,60.99,Moderate Confidence,576,27.81,Moderate Confidence,606,24.65,Moderate Confidence,-30,Demoted by -30 ranks.
+27004,Hassnain Shah,T20I,144,56.7,Low Confidence,627,23.52,Low Confidence,607,24.61,Low Confidence,20,Promoted by +20 ranks as adaptability was uncompressed.
+6797,Dominic Drakes,T20I,270,51.82,Low Confidence,628,23.48,Low Confidence,608,24.57,Low Confidence,20,Promoted by +20 ranks as adaptability was uncompressed.
+3623,Hasan Ali,T20I,524,41.63,Low Confidence,603,25.69,Low Confidence,609,24.54,Low Confidence,-6,Stable ranking.
+8637,Vriitya Aravind,T20I,59,61.46,Moderate Confidence,599,26.37,Low Confidence,610,24.52,Low Confidence,-11,Demoted by -11 ranks.
+6512,Michael Bracewell,T20I,91,59.48,High Confidence,591,27.2,High Confidence,611,24.49,Moderate Confidence,-20,Demoted by -20 ranks.
+6297,Matthew Parkinson,T20I,197,54.55,Low Confidence,632,23.2,Low Confidence,612,24.29,Low Confidence,20,Promoted by +20 ranks as adaptability was uncompressed.
+7044,Jamie Smith,T20I,77,60.21,Moderate Confidence,597,26.41,Low Confidence,613,24.01,Low Confidence,-16,Demoted by -16 ranks.
+7341,Jake McGurk,T20I,209,53.87,Moderate Confidence,601,26.07,Low Confidence,614,23.97,Low Confidence,-13,Demoted by -13 ranks.
+2636,Adam Zampa,T20I,398,47.58,Low Confidence,609,25.24,Low Confidence,615,23.88,Low Confidence,-6,Stable ranking.
+3033,Usman Qadir,T20I,187,54.94,Low Confidence,634,22.7,Low Confidence,616,23.79,Low Confidence,18,Promoted by +18 ranks as adaptability was uncompressed.
+5944,Mohammed Siraj,T20I,249,52.61,Low Confidence,622,24.1,Low Confidence,617,23.71,Low Confidence,5,Stable ranking.
+2933,Jasprit Bumrah,T20I,63,61.0,Low Confidence,635,22.5,Low Confidence,618,23.59,Low Confidence,17,Promoted by +17 ranks as adaptability was uncompressed.
+5562,Richard Gleeson,T20I,116,58.3,Low Confidence,638,22.23,Low Confidence,619,23.32,Low Confidence,19,Promoted by +19 ranks as adaptability was uncompressed.
+6900,Michael Jones,T20I,160,56.05,Low Confidence,613,25.15,Low Confidence,620,23.07,Low Confidence,-7,Stable ranking.
+4417,Karan KC,T20I,87,59.82,Low Confidence,640,21.93,Low Confidence,621,23.03,Low Confidence,19,Promoted by +19 ranks as adaptability was uncompressed.
+4784,Tony de Zorzi,T20I,94,59.38,Moderate Confidence,610,25.2,Low Confidence,622,22.99,Low Confidence,-12,Demoted by -12 ranks.
+45457,Zach Lion Cachet,T20I,277,51.59,Low Confidence,616,25.04,Low Confidence,623,22.88,Low Confidence,-7,Stable ranking.
+6523,Blessing Muzarabani,T20I,13,70.18,Low Confidence,641,21.78,Moderate Confidence,624,22.87,Low Confidence,17,Promoted by +17 ranks as adaptability was uncompressed.
+6515,Benjamin Lister,T20I,248,52.66,Low Confidence,642,21.63,Low Confidence,625,22.73,Low Confidence,17,Promoted by +17 ranks as adaptability was uncompressed.
+5877,Andries Gous,T20I,211,53.73,Low Confidence,611,25.2,Low Confidence,626,22.67,Low Confidence,-15,Demoted by -15 ranks.
+2523,Will Young,T20I,85,59.93,High Confidence,606,25.44,Moderate Confidence,627,22.45,Moderate Confidence,-21,Demoted by -21 ranks.
+6514,Anil Nidamanuru,T20I,112,58.44,Low Confidence,618,24.6,Low Confidence,628,22.27,Low Confidence,-10,Stable ranking.
+4692,Lockie Ferguson,T20I,101,59.09,Low Confidence,643,21.11,Low Confidence,629,22.2,Low Confidence,14,Promoted by +14 ranks as adaptability was uncompressed.
+3077,Usama Mir,T20I,88,59.65,Low Confidence,644,21.1,Low Confidence,630,22.19,Low Confidence,14,Promoted by +14 ranks as adaptability was uncompressed.
+6565,Katene Clarke,T20I,201,54.4,Low Confidence,617,24.66,Low Confidence,631,22.17,Low Confidence,-14,Demoted by -14 ranks.
+7140,Senuran Muthusamy,T20I,117,58.28,Low Confidence,620,24.45,Low Confidence,632,22.1,Low Confidence,-12,Demoted by -12 ranks.
+953,Lokesh Rahul,T20I,67,60.83,High Confidence,619,24.46,Low Confidence,633,21.75,Low Confidence,-14,Demoted by -14 ranks.
+3802,Anshuman Rath,T20I,78,60.18,Low Confidence,623,23.97,Low Confidence,634,21.39,Low Confidence,-11,Demoted by -11 ranks.
+15303,Bilal Tahir,T20I,138,57.12,Low Confidence,626,23.76,Low Confidence,635,21.1,Low Confidence,-9,Stable ranking.
+6288,Shubman Gill,T20I,11,71.06,High Confidence,621,24.12,Moderate Confidence,636,21.02,Low Confidence,-15,Demoted by -15 ranks.
+3361,Michael Leask,T20I,72,60.34,Moderate Confidence,631,23.34,Low Confidence,637,20.85,Low Confidence,-6,Stable ranking.
+22471,Matthew Humphreys,T20I,89,59.62,Low Confidence,645,20.62,Low Confidence,638,20.7,Low Confidence,7,Stable ranking.
+46378,Kyle Klein,T20I,42,63.3,Low Confidence,637,22.27,Low Confidence,639,20.65,Low Confidence,-2,Stable ranking.
+7901,Parvez Emon,T20I,3,75.94,High Confidence,625,23.78,Moderate Confidence,640,20.59,Moderate Confidence,-15,Demoted by -15 ranks.
+19309,Lahiru Udara,T20I,165,55.73,Moderate Confidence,629,23.43,Low Confidence,641,20.4,Low Confidence,-12,Demoted by -12 ranks.
+49003,Hasan Nawaz,T20I,24,65.41,High Confidence,630,23.4,Moderate Confidence,642,20.3,Low Confidence,-12,Demoted by -12 ranks.
+3876,Sufyan Mehmood,T20I,118,58.2,Low Confidence,633,22.95,Low Confidence,643,20.15,Low Confidence,-10,Stable ranking.
+3298,Jofra Archer,T20I,253,52.35,Low Confidence,636,22.28,Moderate Confidence,644,19.45,Low Confidence,-8,Stable ranking.
+1810,Devon Thomas,T20I,156,56.16,Low Confidence,639,21.94,Moderate Confidence,645,18.75,Low Confidence,-6,Stable ranking.
+7689,Dilshan Madushanka,T20I,96,59.3,Low Confidence,656,17.44,Low Confidence,646,18.53,Low Confidence,10,Stable ranking.
+4902,Avishka Fernando,T20I,70,60.56,Moderate Confidence,648,19.86,Low Confidence,647,17.63,Low Confidence,1,Stable ranking.
+1941,Devon Conway,T20I,53,61.91,High Confidence,646,20.61,Moderate Confidence,648,17.43,Low Confidence,-2,Stable ranking.
+1440,Rahul Tripathi,T20I,139,57.1,Moderate Confidence,647,19.98,Low Confidence,649,16.81,Low Confidence,-2,Stable ranking.
+3986,Matthew Renshaw,T20I,142,56.89,Moderate Confidence,649,19.25,Low Confidence,650,16.14,Low Confidence,-1,Stable ranking.
+6783,Azam Khan,T20I,31,64.57,Moderate Confidence,651,19.15,Moderate Confidence,651,16.08,Low Confidence,0,Stable ranking.
+4779,Pieter Willem Mulder,T20I,194,54.6,Moderate Confidence,650,19.15,Moderate Confidence,652,15.99,Low Confidence,-2,Stable ranking.
+17424,Graham Hume,T20I,73,60.34,Low Confidence,652,19.05,Low Confidence,653,15.85,Low Confidence,-1,Stable ranking.
+24381,Shariz Ahmad,T20I,17,67.36,Low Confidence,653,18.41,Low Confidence,654,15.29,Low Confidence,-1,Stable ranking.
+2361,Temba Bavuma,T20I,125,57.76,Moderate Confidence,654,17.7,Moderate Confidence,655,14.53,Low Confidence,-1,Stable ranking.
+17413,Neil Rock,T20I,41,63.39,Moderate Confidence,655,17.52,Low Confidence,656,14.33,Low Confidence,-1,Stable ranking.
+8654,Cooper Connolly,T20I,18,66.64,Moderate Confidence,657,17.2,Low Confidence,657,14.03,Low Confidence,0,Stable ranking.
+4830,Keacy Carty,T20I,66,60.84,Moderate Confidence,658,16.41,Low Confidence,658,13.36,Low Confidence,0,Stable ranking.
+3644,Kuldeep Yadav,T20I,114,58.41,Low Confidence,660,14.5,Low Confidence,659,12.74,Low Confidence,1,Stable ranking.
+2483,Lizaad Williams,T20I,105,58.87,Low Confidence,663,14.23,Low Confidence,660,12.48,Low Confidence,3,Stable ranking.
+7152,Hazratullah Zazai,T20I,12,70.39,High Confidence,659,15.32,Low Confidence,661,12.2,Low Confidence,-2,Stable ranking.
+27380,Harshit Kaushik,T20I,151,56.37,Low Confidence,662,14.34,Moderate Confidence,662,11.71,Low Confidence,0,Stable ranking.
+1541,Sean Williams,T20I,2,77.14,High Confidence,661,14.44,Low Confidence,663,11.3,Low Confidence,-2,Stable ranking.
+1389,Sean Abbott,T20I,188,54.94,Low Confidence,664,12.79,Low Confidence,664,9.88,Low Confidence,0,Stable ranking.
+3174,Matt Henry,T20I,6,73.77,Low Confidence,665,4.31,Low Confidence,665,4.63,Low Confidence,0,Stable ranking.

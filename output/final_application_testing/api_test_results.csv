@@ -1,0 +1,43 @@
+test_id,test_category,endpoint,method,status_code_expected,status_code_received,latency_ms,result,details
+BE-HLT-01,Health,/api/v1/health,GET,200,200,10.76,PASS,"Status: healthy, Tier: Tier 3: Deterministic Fallback Engine (Offline Safe), Version: 1.0.0"
+BE-HLT-02,Root Welcoming,/,GET,200,200,19.16,PASS,"Service: SupeRR Intelligence API, API v1: /api/v1"
+BE-RNK-IPL-BAT,Rankings,/api/v1/players/IPL/Batter,GET,200,200,6.43,PASS,"Cohort 'IPL Batters' count=15, #1=Rinku Singh (CPRI 89.03)"
+BE-RNK-IPL-BOW,Rankings,/api/v1/players/IPL/Bowler,GET,200,200,4.75,PASS,"Cohort 'IPL Bowlers' count=15, #1=Matheesha Pathirana (CPRI 83.5)"
+BE-RNK-T20I-BAT,Rankings,/api/v1/players/T20I/Batter,GET,200,200,44.96,PASS,"Cohort 'T20I Batters' count=15, #1=Matthew Wade (CPRI 97.42)"
+BE-RNK-T20I-BOW,Rankings,/api/v1/players/T20I/Bowler,GET,200,200,5.05,PASS,"Cohort 'T20I Bowlers' count=15, #1=Sufiyan Muqeem (CPRI 86.44)"
+BE-RNK-OFFICIAL-ONLY,Rankings,/api/v1/players/IPL/Batter?official_only=true,GET,200,200,4.71,PASS,Exactly 10 official Top 10 players returned
+BE-RNK-PAGINATION,Rankings,/api/v1/players/IPL/Batter?limit=5&offset=5,GET,200,200,4.56,PASS,"Limit=5, Offset=5 returned players ranks [6, 7, 8, 9, 10]"
+BE-RNK-FILTER-CONF,Rankings,/api/v1/players/IPL/Batter?confidence_tier=High%20Confidence,GET,200,200,5.06,PASS,Returned 10 high confidence players
+BE-DET-IPL-BAT,Player Detail,/api/v1/players/IPL/Batter/Rinku Singh,GET,200,200,5.68,PASS,"Profile 'Rinku Singh' CPRI=89.03, Benchmarks=['player_name', 'cohort', 'competition_scope', 'role', 'official_rank', 'ranking_tier', 'total_cohort_peers', 'player_scores', 'cohort_percentiles', 'cohort_benchmarks']"
+BE-DET-IPL-BOW,Player Detail,/api/v1/players/IPL/Bowler/Matheesha Pathirana,GET,200,200,3.97,PASS,"Profile 'Matheesha Pathirana' CPRI=83.5, Benchmarks=['player_name', 'cohort', 'competition_scope', 'role', 'official_rank', 'ranking_tier', 'total_cohort_peers', 'player_scores', 'cohort_percentiles', 'cohort_benchmarks']"
+BE-DET-T20I-BAT,Player Detail,/api/v1/players/T20I/Batter/Matthew Wade,GET,200,200,4.86,PASS,"Profile 'Matthew Wade' CPRI=97.42, Benchmarks=['player_name', 'cohort', 'competition_scope', 'role', 'official_rank', 'ranking_tier', 'total_cohort_peers', 'player_scores', 'cohort_percentiles', 'cohort_benchmarks']"
+BE-DET-T20I-BOW,Player Detail,/api/v1/players/T20I/Bowler/Sufiyan Muqeem,GET,200,200,4.96,PASS,"Profile 'Sufiyan Muqeem' CPRI=86.44, Benchmarks=['player_name', 'cohort', 'competition_scope', 'role', 'official_rank', 'ranking_tier', 'total_cohort_peers', 'player_scores', 'cohort_percentiles', 'cohort_benchmarks']"
+BE-SPL-IPL-BAT,Player Splits,/api/v1/players/IPL/Batter/Rinku Singh/splits,GET,200,200,5.3,PASS,"Splits for 'Rinku Singh': Phases=['powerplay', 'middle', 'death']"
+BE-SPL-IPL-BOW,Player Splits,/api/v1/players/IPL/Bowler/Matheesha Pathirana/splits,GET,200,200,4.15,PASS,"Splits for 'Matheesha Pathirana': Phases=['powerplay', 'middle', 'death']"
+BE-SPL-T20I-BAT,Player Splits,/api/v1/players/T20I/Batter/Matthew Wade/splits,GET,200,200,4.14,PASS,"Splits for 'Matthew Wade': Phases=['powerplay', 'middle', 'death']"
+BE-SPL-T20I-BOW,Player Splits,/api/v1/players/T20I/Bowler/Sufiyan Muqeem/splits,GET,200,200,4.9,PASS,"Splits for 'Sufiyan Muqeem': Phases=['powerplay', 'middle', 'death']"
+BE-REP-IPL-BAT,Scouting Report,/api/v1/scouting/report/IPL/Batter/Rinku Singh,GET,200,200,6.16,PASS,"Verified=True, Tier=Tier 3: Deterministic Fallback Engine, Length=1472 chars"
+BE-PRS-IPL-BAT,Pressure Explanation,/api/v1/scouting/pressure/IPL/Batter/Rinku Singh,GET,200,200,5.54,PASS,"Verified=True, Tier=Tier 3: Deterministic Fallback Engine, Length=718 chars"
+BE-REP-IPL-BOW,Scouting Report,/api/v1/scouting/report/IPL/Bowler/Matheesha Pathirana,GET,200,200,4.61,PASS,"Verified=True, Tier=Tier 3: Deterministic Fallback Engine, Length=1288 chars"
+BE-PRS-IPL-BOW,Pressure Explanation,/api/v1/scouting/pressure/IPL/Bowler/Matheesha Pathirana,GET,200,200,4.17,PASS,"Verified=True, Tier=Tier 3: Deterministic Fallback Engine, Length=726 chars"
+BE-REP-T20I-BAT,Scouting Report,/api/v1/scouting/report/T20I/Batter/Matthew Wade,GET,200,200,4.29,PASS,"Verified=True, Tier=Tier 3: Deterministic Fallback Engine, Length=1390 chars"
+BE-PRS-T20I-BAT,Pressure Explanation,/api/v1/scouting/pressure/T20I/Batter/Matthew Wade,GET,200,200,5.04,PASS,"Verified=True, Tier=Tier 3: Deterministic Fallback Engine, Length=722 chars"
+BE-REP-T20I-BOW,Scouting Report,/api/v1/scouting/report/T20I/Bowler/Sufiyan Muqeem,GET,200,200,4.78,PASS,"Verified=True, Tier=Tier 3: Deterministic Fallback Engine, Length=1369 chars"
+BE-PRS-T20I-BOW,Pressure Explanation,/api/v1/scouting/pressure/T20I/Bowler/Sufiyan Muqeem,GET,200,200,4.26,PASS,"Verified=True, Tier=Tier 3: Deterministic Fallback Engine, Length=717 chars"
+BE-CMP-IPL-BAT,Comparison,/api/v1/scouting/compare,POST,200,200,5.09,PASS,Compared Rinku Singh vs Suryakumar Yadav: CPRI Delta=0.62
+BE-CMP-IPL-BWL,Comparison,/api/v1/scouting/compare,POST,200,200,4.3,PASS,Compared Matheesha Pathirana vs Sunil Narine: CPRI Delta=7.3
+BE-CMP-T20I-BAT,Comparison,/api/v1/scouting/compare,POST,200,200,4.72,PASS,Compared Matthew Wade vs Romario Shepherd: CPRI Delta=13.57
+BE-CMP-T20I-BWL,Comparison,/api/v1/scouting/compare,POST,200,200,4.29,PASS,Compared Sufiyan Muqeem vs Kuldeep Yadav: CPRI Delta=4.72
+BE-MU-LARGE-SAMPLE,Matchup,/api/v1/scouting/matchup/IPL/Virat%20Kohli/Jasprit%20Bumrah,GET,200,200,4.18,PASS,"Balls faced=24, Runs=33, Dismissals=1, SmallSample=False"
+BE-MU-SMALL-SAMPLE,Matchup,/api/v1/scouting/matchup/IPL/Ashutosh%20Sharma/Jasprit%20Bumrah,GET,200,200,4.44,PASS,Small sample confirmed (Balls=14): 'Sample size is exploratory (14 balls < 18 balls). Statistica...'
+BE-MU-T20I,Matchup,/api/v1/scouting/matchup/T20I/Virat%20Kohli/Akeal%20Hosein,GET,200,200,4.55,PASS,"T20I matchup: Balls=19, Runs=28"
+BE-ASK-GENERAL,Scouting Ask,/api/v1/scouting/ask,POST,200,200,4.8,PASS,"Verified=True, Tier=Tier 3: Deterministic Fallback Engine, AnswerLen=408"
+BE-ASK-SPECIFIC,Scouting Ask,/api/v1/scouting/ask,POST,200,200,3.61,PASS,"Verified=True, Tier=Tier 3: Deterministic Fallback Engine, Answer includes Rinku Singh"
+BE-ERR-INVALID-SCOPE,Error Handling,/api/v1/players/BBL/Batter,GET,422,422,4.06,PASS,"Error type: INVALID_SCOPE, Detail: Invalid competition scope 'BBL'. Allowed scopes: 'IPL', 'T20I'."
+BE-ERR-INVALID-ROLE,Error Handling,/api/v1/players/IPL/AllRounder,GET,422,422,4.12,PASS,"Error type: INVALID_ROLE, Detail: Invalid role 'AllRounder'. Allowed roles: 'Batter', 'Bowler'."
+BE-ERR-MISSING-PLAYER,Error Handling,/api/v1/players/IPL/Batter/NonExistentPlayerXYZ,GET,404,404,3.17,PASS,"Error type: PLAYER_NOT_FOUND, Detail: Player 'NonExistentPlayerXYZ' not found in IPL as Batter."
+BE-ERR-MISSING-SPLITS,Error Handling,/api/v1/players/IPL/Batter/NonExistentPlayerXYZ/splits,GET,404,404,4.14,PASS,"Error type: PLAYER_NOT_FOUND, Detail: Player 'NonExistentPlayerXYZ' not found in IPL as Batter."
+BE-ERR-COMPARE-ROLE-MISMATCH,Error Handling,/api/v1/scouting/compare,POST,404,404,3.68,PASS,Correctly rejected: Player 'Jasprit Bumrah' not found in IPL as Batter.
+BE-ERR-COMPARE-MISSING-BODY,Error Handling,/api/v1/scouting/compare,POST,422,422,3.5,PASS,Validation errors returned: 78 missing fields
+BE-ERR-ASK-MISSING-BODY,Error Handling,/api/v1/scouting/ask,POST,422,422,3.49,PASS,Validation error returned: missing query
+BE-ERR-MATCHUP-UNKNOWN,Error Handling,/api/v1/scouting/matchup/IPL/UnknownPlayerA/UnknownPlayerB,GET,200,200,13.85,PASS,Handled unknown encounter cleanly with 0 balls and small-sample flag

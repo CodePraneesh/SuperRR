@@ -1,0 +1,11 @@
+# SupeRR Intelligence — Production Runtime Dependencies
+pandas>=2.0.0
+numpy>=1.24.0
+scipy>=1.10.0
+huggingface-hub>=0.20.0
+scikit-learn>=1.2.0
+lightgbm>=3.3.0
+fastapi>=0.110.0
+uvicorn>=0.28.0
+pydantic>=2.0.0
+httpx>=0.25.0
