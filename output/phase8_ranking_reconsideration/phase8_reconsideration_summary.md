@@ -63,7 +63,7 @@ The table below represents the official, evidence-grounded Top 10 Bowlers ordere
 ## 4. Key Methodological Correctives & Defense of Selections
 1. **Unified Dual-Format Evaluation**:
    - In Phase 3.5, separate IPL and T20I scaling split dominant superstars. When evaluated across all in-scope matches, **Tim David** (+135.10 run residual, +1.434 WPA on 476 balls) and **Suryakumar Yadav** (+197.16 run residual on 749 balls) represent the absolute global benchmark of T20 clutch batting.
-2. **Elimination of Bowler Adaptability Baseline Penalty**:
-   - Previously, $\Delta = \text{Pressure} - \text{NonPressure}$ penalized bowlers with world-class non-pressure economies. Phase 8 calibrated adaptability recognizes retention of elite performance. **Jasprit Bumrah** (606 pressure balls, 6.96 economy, +140.88 runs saved) and **Sunil Narine** (511 pressure balls, 6.29 economy, +156.61 runs saved) are rightfully restored to the official Top 10.
+2. **Calibrated Bowler Adaptability Formulation**:
+   - Previously, raw differential $\Delta = \text{Pressure} - \text{NonPressure}$ mathematically penalized bowlers who maintained world-class economy rates across non-pressure deliveries. Phase 8 calibrated adaptability incorporates absolute pressure impact alongside floor-bounded delta, accurately evaluating sustained elite performance. Under this formulation, high-volume contributors such as **Jasprit Bumrah** (606 pressure balls, 6.96 economy, +140.88 runs saved) and **Sunil Narine** (511 pressure balls, 6.29 economy, +156.61 runs saved) qualify for the official Top 10.
 3. **Transparent Uncertainty Gating**:
    - Small-sample candidates such as Sufiyan Muqeem (151 balls, 90% CI [1, 74]) and Jamie Overton (168 balls, 90% CI [1, 71]) demonstrate elite talent but carry wide rank confidence intervals, properly disclosed to analysts.
