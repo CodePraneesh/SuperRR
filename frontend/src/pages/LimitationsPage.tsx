@@ -138,7 +138,7 @@ export const LimitationsPage: React.FC = () => {
                 <td className="py-2.5 px-3 font-mono font-bold text-[#EC008C]">#1 (Bowler)</td>
                 <td className="py-2.5 px-3 font-mono font-bold text-emerald-600">[2, 36]</td>
                 <td className="py-2.5 px-3 font-mono">34 ranks</td>
-                <td className="py-2.5 px-3 font-mono">511 balls</td>
+                <td className="py-2.5 px-3 font-mono">653 balls</td>
                 <td className="py-2.5 px-3"><Badge variant="high" size="sm">High Confidence</Badge></td>
                 <td className="py-2.5 px-3 text-slate-600">Large volume dual-format spine with peerless middle/death economy restraint.</td>
               </tr>
@@ -147,7 +147,7 @@ export const LimitationsPage: React.FC = () => {
                 <td className="py-2.5 px-3 font-mono font-bold text-[#EC008C]">#5 (Batter)</td>
                 <td className="py-2.5 px-3 font-mono font-bold text-emerald-600">[1, 51]</td>
                 <td className="py-2.5 px-3 font-mono">50 ranks</td>
-                <td className="py-2.5 px-3 font-mono">342 balls</td>
+                <td className="py-2.5 px-3 font-mono">457 balls</td>
                 <td className="py-2.5 px-3"><Badge variant="high" size="sm">High Confidence</Badge></td>
                 <td className="py-2.5 px-3 text-slate-600">Proven multi-season match finisher; ranks #1 in isolated IPL pressure cohorts.</td>
               </tr>

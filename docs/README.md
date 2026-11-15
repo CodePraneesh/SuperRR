@@ -45,25 +45,25 @@ flowchart TD
 | **1** | **Matthew Wade** | **85.36** | [1, 22] | Exploratory | Dual-Format | 191 |
 | **2** | **Tim David** | **82.44** | [1, 19] | High Confidence | Dual-Format | 476 |
 | **3** | **Suryakumar Yadav** | **81.42** | [2, 25] | High Confidence | Dual-Format | 749 |
-| **4** | **Reeza Hendricks** | **77.45** | [2, 49] | High Confidence | Dual-Format | 398 |
-| **5** | **Rinku Singh** | **77.18** | [1, 51] | High Confidence | Dual-Format | 342 |
-| **6** | **Phil Salt** | **76.96** | [2, 46] | High Confidence | Dual-Format | 358 |
-| **7** | **Romario Shepherd** | **75.33** | [2, 47] | High Confidence | Dual-Format | 309 |
-| **8** | **Namboori Tilak Varma** | **74.81** | [3, 49] | High Confidence | Dual-Format | 496 |
-| **9** | **Dinesh Karthik** | **74.54** | [3, 44] | High Confidence | Dual-Format | 288 |
-| **10** | **Ravindra Jadeja** | **73.70** | [3, 56] | High Confidence | Dual-Format | 370 |
+| **4** | **Reeza Hendricks** | **77.45** | [2, 49] | High Confidence | Dual-Format | 378 |
+| **5** | **Rinku Singh** | **77.18** | [1, 51] | High Confidence | Dual-Format | 457 |
+| **6** | **Phil Salt** | **76.96** | [2, 46] | High Confidence | Dual-Format | 261 |
+| **7** | **Romario Shepherd** | **75.33** | [2, 47] | High Confidence | Dual-Format | 428 |
+| **8** | **Namboori Tilak Varma** | **74.81** | [3, 49] | High Confidence | Dual-Format | 777 |
+| **9** | **Dinesh Karthik** | **74.54** | [3, 44] | High Confidence | Dual-Format | 277 |
+| **10** | **Ravindra Jadeja** | **73.70** | [3, 56] | High Confidence | Dual-Format | 467 |
 
 ### Official Top 10 Bowlers
 
 | Rank | Player | Unified CPRI | 90% Bootstrap CI | Confidence Tier | Evidence Scope | Pressure Balls |
 | :---: | :--- | :---: | :---: | :---: | :---: | :---: |
-| **1** | **Mitchell Santner** | **79.84** | [2, 36] | High Confidence | Dual-Format | 511 |
+| **1** | **Mitchell Santner** | **79.84** | [2, 36] | High Confidence | Dual-Format | 653 |
 | **2** | **Sufiyan Muqeem** | **78.78** | [1, 74] | Exploratory | T20I-Only | 151 |
-| **3** | **Rashid Khan** | **77.90** | [2, 33] | High Confidence | Dual-Format | 871 |
+| **3** | **Rashid Khan** | **77.90** | [2, 33] | High Confidence | Dual-Format | 970 |
 | **4** | **Jamie Overton** | **76.92** | [1, 71] | Exploratory | T20I-Only | 168 |
-| **5** | **Matheesha Pathirana** | **75.77** | [4, 49] | High Confidence | IPL-Only | 569 |
+| **5** | **Matheesha Pathirana** | **75.77** | [4, 49] | High Confidence | IPL-Only | 557 |
 | **6** | **Sunil Narine** | **75.63** | [3, 52] | High Confidence | Dual-Format | 511 |
-| **7** | **Mohammad Nawaz** | **75.51** | [2, 60] | High Confidence | Dual-Format | 316 |
+| **7** | **Mohammad Nawaz** | **75.51** | [2, 60] | High Confidence | Dual-Format | 301 |
 | **8** | **Jasprit Bumrah** | **73.36** | [3, 67] | High Confidence | Dual-Format | 606 |
-| **9** | **Varun Chakravarthy** | **73.02** | [3, 68] | High Confidence | Dual-Format | 585 |
-| **10** | **Yuzvendra Chahal** | **73.01** | [3, 48] | High Confidence | Dual-Format | 674 |
+| **9** | **Varun Chakravarthy** | **73.02** | [3, 68] | High Confidence | Dual-Format | 892 |
+| **10** | **Yuzvendra Chahal** | **73.01** | [3, 48] | High Confidence | Dual-Format | 859 |
