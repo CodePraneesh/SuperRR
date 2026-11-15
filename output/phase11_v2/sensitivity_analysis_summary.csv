@@ -1,0 +1,58 @@
+role,pressure_threshold,min_deliveries_cutoff,eligible_player_count,top1_player,top10_roster
+batter,40.0,30,401,Suryakumar Yadav,Suryakumar Yadav; Yashasvi Jaiswal; Namboori Tilak Varma; Tim David; Rinku Singh; Riyan Parag; Rovman Powell; Sai Sudharsan; Reeza Hendricks; Hardik Pandya
+batter,40.0,60,297,Suryakumar Yadav,Suryakumar Yadav; Yashasvi Jaiswal; Namboori Tilak Varma; Tim David; Riyan Parag; Rinku Singh; Rovman Powell; Sai Sudharsan; Hardik Pandya; Akeal Hosein
+batter,40.0,100,223,Suryakumar Yadav,Suryakumar Yadav; Yashasvi Jaiswal; Namboori Tilak Varma; Tim David; Rinku Singh; Riyan Parag; Rovman Powell; Sai Sudharsan; Hardik Pandya; Akeal Hosein
+batter,50.0,30,370,Suryakumar Yadav,Suryakumar Yadav; Tim David; Namboori Tilak Varma; Yashasvi Jaiswal; Ayush Badoni; Phil Salt; Rinku Singh; Sai Sudharsan; Dasun Shanaka; Reeza Hendricks
+batter,50.0,60,269,Suryakumar Yadav,Suryakumar Yadav; Tim David; Namboori Tilak Varma; Yashasvi Jaiswal; Ayush Badoni; Sikandar Raza; Dasun Shanaka; Rinku Singh; Sai Sudharsan; Nicholas Pooran
+batter,50.0,100,193,Suryakumar Yadav,Suryakumar Yadav; Tim David; Namboori Tilak Varma; Yashasvi Jaiswal; Ayush Badoni; Sikandar Raza; Dasun Shanaka; Rinku Singh; Nicholas Pooran; Tristan Stubbs
+batter,60.0,30,319,Namboori Tilak Varma,Namboori Tilak Varma; Suryakumar Yadav; Tim David; Janith Liyanage; Faraz Akram; Dasun Shanaka; Sai Sudharsan; Reeza Hendricks; David Miller; Mahendra Singh Dhoni
+batter,60.0,60,227,Namboori Tilak Varma,Namboori Tilak Varma; Suryakumar Yadav; Tim David; Dasun Shanaka; Sai Sudharsan; David Miller; Reeza Hendricks; Tristan Stubbs; Sikandar Raza; Mahendra Singh Dhoni
+batter,60.0,100,142,Namboori Tilak Varma,Namboori Tilak Varma; Suryakumar Yadav; Tim David; Dasun Shanaka; Sai Sudharsan; David Miller; Tristan Stubbs; Sikandar Raza; Mahendra Singh Dhoni; Shimron Hetmyer
+batter_player_stability,Cross-Perturbation,Multiple,9,Suryakumar Yadav,Stable (Core) (Appeared in 9/9 = 100.0% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,6,Yashasvi Jaiswal,Moderate (Appeared in 6/9 = 66.7% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,9,Namboori Tilak Varma,Stable (Core) (Appeared in 9/9 = 100.0% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,9,Tim David,Stable (Core) (Appeared in 9/9 = 100.0% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,6,Rinku Singh,Moderate (Appeared in 6/9 = 66.7% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,3,Riyan Parag,Marginal (Sensitive) (Appeared in 3/9 = 33.3% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,3,Rovman Powell,Marginal (Sensitive) (Appeared in 3/9 = 33.3% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,8,Sai Sudharsan,Stable (Core) (Appeared in 8/9 = 88.9% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,4,Reeza Hendricks,Marginal (Sensitive) (Appeared in 4/9 = 44.4% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,3,Hardik Pandya,Marginal (Sensitive) (Appeared in 3/9 = 33.3% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,2,Akeal Hosein,Marginal (Sensitive) (Appeared in 2/9 = 22.2% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,3,Ayush Badoni,Marginal (Sensitive) (Appeared in 3/9 = 33.3% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,1,Phil Salt,Marginal (Sensitive) (Appeared in 1/9 = 11.1% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,6,Dasun Shanaka,Moderate (Appeared in 6/9 = 66.7% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,4,Sikandar Raza,Marginal (Sensitive) (Appeared in 4/9 = 44.4% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,2,Nicholas Pooran,Marginal (Sensitive) (Appeared in 2/9 = 22.2% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,3,Tristan Stubbs,Marginal (Sensitive) (Appeared in 3/9 = 33.3% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,1,Janith Liyanage,Marginal (Sensitive) (Appeared in 1/9 = 11.1% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,1,Faraz Akram,Marginal (Sensitive) (Appeared in 1/9 = 11.1% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,3,David Miller,Marginal (Sensitive) (Appeared in 3/9 = 33.3% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,3,Mahendra Singh Dhoni,Marginal (Sensitive) (Appeared in 3/9 = 33.3% of perturbations)
+batter_player_stability,Cross-Perturbation,Multiple,1,Shimron Hetmyer,Marginal (Sensitive) (Appeared in 1/9 = 11.1% of perturbations)
+bowler,40.0,30,307,Varun Chakravarthy,Varun Chakravarthy; Sunil Narine; Mitchell Santner; Rashid Khan; Bhuvneshwar Kumar; Abrar Ahmed; Mohammad Nawaz; Matheesha Pathirana; Wanindu Hasaranga; Kuldeep Yadav
+bowler,40.0,60,253,Varun Chakravarthy,Varun Chakravarthy; Sunil Narine; Mitchell Santner; Rashid Khan; Bhuvneshwar Kumar; Matheesha Pathirana; Wanindu Hasaranga; Mohammad Nawaz; Abrar Ahmed; Khaleel Ahmed
+bowler,40.0,100,200,Varun Chakravarthy,Varun Chakravarthy; Sunil Narine; Rashid Khan; Mitchell Santner; Bhuvneshwar Kumar; Matheesha Pathirana; Khaleel Ahmed; Wanindu Hasaranga; Mohammad Nawaz; Abrar Ahmed
+bowler,50.0,30,278,Rashid Khan,Rashid Khan; Varun Chakravarthy; Sunil Narine; Yuzvendra Chahal; Matheesha Pathirana; Mitchell Santner; Jasprit Bumrah; Wanindu Hasaranga; Bhuvneshwar Kumar; Khaleel Ahmed
+bowler,50.0,60,219,Rashid Khan,Rashid Khan; Varun Chakravarthy; Sunil Narine; Yuzvendra Chahal; Matheesha Pathirana; Mitchell Santner; Jasprit Bumrah; Bhuvneshwar Kumar; Khaleel Ahmed; Wanindu Hasaranga
+bowler,50.0,100,163,Rashid Khan,Rashid Khan; Varun Chakravarthy; Sunil Narine; Yuzvendra Chahal; Matheesha Pathirana; Mitchell Santner; Jasprit Bumrah; Bhuvneshwar Kumar; Khaleel Ahmed; Wanindu Hasaranga
+bowler,60.0,30,240,Sunil Narine,Sunil Narine; Rashid Khan; Varun Chakravarthy; Yuzvendra Chahal; Mitchell Santner; Mohit Sharma; Sai Kishore; Matheesha Pathirana; Jasprit Bumrah; Matthew Humphreys
+bowler,60.0,60,184,Sunil Narine,Sunil Narine; Rashid Khan; Varun Chakravarthy; Yuzvendra Chahal; Mitchell Santner; Mohit Sharma; Matheesha Pathirana; Sai Kishore; Jasprit Bumrah; Tushar Deshpande
+bowler,60.0,100,134,Sunil Narine,Sunil Narine; Rashid Khan; Varun Chakravarthy; Yuzvendra Chahal; Mitchell Santner; Matheesha Pathirana; Jasprit Bumrah; Tushar Deshpande; Bhuvneshwar Kumar; Mohit Sharma
+bowler_player_stability,Cross-Perturbation,Multiple,9,Varun Chakravarthy,Stable (Core) (Appeared in 9/9 = 100.0% of perturbations)
+bowler_player_stability,Cross-Perturbation,Multiple,9,Sunil Narine,Stable (Core) (Appeared in 9/9 = 100.0% of perturbations)
+bowler_player_stability,Cross-Perturbation,Multiple,9,Mitchell Santner,Stable (Core) (Appeared in 9/9 = 100.0% of perturbations)
+bowler_player_stability,Cross-Perturbation,Multiple,9,Rashid Khan,Stable (Core) (Appeared in 9/9 = 100.0% of perturbations)
+bowler_player_stability,Cross-Perturbation,Multiple,7,Bhuvneshwar Kumar,Moderate (Appeared in 7/9 = 77.8% of perturbations)
+bowler_player_stability,Cross-Perturbation,Multiple,3,Abrar Ahmed,Marginal (Sensitive) (Appeared in 3/9 = 33.3% of perturbations)
+bowler_player_stability,Cross-Perturbation,Multiple,3,Mohammad Nawaz,Marginal (Sensitive) (Appeared in 3/9 = 33.3% of perturbations)
+bowler_player_stability,Cross-Perturbation,Multiple,9,Matheesha Pathirana,Stable (Core) (Appeared in 9/9 = 100.0% of perturbations)
+bowler_player_stability,Cross-Perturbation,Multiple,6,Wanindu Hasaranga,Moderate (Appeared in 6/9 = 66.7% of perturbations)
+bowler_player_stability,Cross-Perturbation,Multiple,1,Kuldeep Yadav,Marginal (Sensitive) (Appeared in 1/9 = 11.1% of perturbations)
+bowler_player_stability,Cross-Perturbation,Multiple,5,Khaleel Ahmed,Moderate (Appeared in 5/9 = 55.6% of perturbations)
+bowler_player_stability,Cross-Perturbation,Multiple,6,Yuzvendra Chahal,Moderate (Appeared in 6/9 = 66.7% of perturbations)
+bowler_player_stability,Cross-Perturbation,Multiple,6,Jasprit Bumrah,Moderate (Appeared in 6/9 = 66.7% of perturbations)
+bowler_player_stability,Cross-Perturbation,Multiple,3,Mohit Sharma,Marginal (Sensitive) (Appeared in 3/9 = 33.3% of perturbations)
+bowler_player_stability,Cross-Perturbation,Multiple,2,Sai Kishore,Marginal (Sensitive) (Appeared in 2/9 = 22.2% of perturbations)
+bowler_player_stability,Cross-Perturbation,Multiple,1,Matthew Humphreys,Marginal (Sensitive) (Appeared in 1/9 = 11.1% of perturbations)
+bowler_player_stability,Cross-Perturbation,Multiple,2,Tushar Deshpande,Marginal (Sensitive) (Appeared in 2/9 = 22.2% of perturbations)

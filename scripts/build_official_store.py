@@ -23,6 +23,7 @@ Enforces:
 import os
 import sys
 import json
+import argparse
 import datetime
 from pathlib import Path
 import pandas as pd
@@ -31,6 +32,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 os.chdir(REPO_ROOT)
 
 PHASE8_DIR = REPO_ROOT / "output" / "phase8_ranking_reconsideration"
+PHASE11_DIR = REPO_ROOT / "output" / "phase11_v2"
 DATA_DIR = REPO_ROOT / "output" / "phase4" / "data"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 OUT_PATH = DATA_DIR / "official_scouting_store.json"
@@ -348,5 +350,53 @@ def build_store():
     return store_payload
 
 
+def build_store_v2():
+    print("=" * 60)
+    print("BUILDING SUPERR INTELLIGENCE V2 SCOUTING STORE")
+    print("=" * 60)
+    out_v2_path = DATA_DIR / "official_scouting_store_v2.json"
+
+    b_v2_csv = PHASE11_DIR / "official_top10_batters_v2.csv"
+    bw_v2_csv = PHASE11_DIR / "official_top10_bowlers_v2.csv"
+
+    if not b_v2_csv.exists() or not bw_v2_csv.exists():
+        raise FileNotFoundError(f"v2 CSVs not found in {PHASE11_DIR}. Run `python ml/phase11_v2/run_v2_pipeline.py` first.")
+
+    b_df = pd.read_csv(b_v2_csv)
+    bw_df = pd.read_csv(bw_v2_csv)
+
+    official_batters = b_df.to_dict(orient="records")
+    official_bowlers = bw_df.to_dict(orient="records")
+
+    store_payload = {
+        "version": "CPRI-v2.0.0-ORTHOGONAL-COMPOSITE",
+        "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        "metadata": {
+            "description": "Authoritative unified v2 Top 10 batters and bowlers for SupeRR Selector Season 2.",
+            "source": "Phase 11 v2 Re-evaluation",
+            "total_official_batters": len(official_batters),
+            "total_official_bowlers": len(official_bowlers),
+        },
+        "official_top10_batters": official_batters,
+        "official_top10_bowlers": official_bowlers,
+    }
+
+    with open(out_v2_path, "w", encoding="utf-8") as f:
+        json.dump(store_payload, f, indent=2)
+
+    print(f"Generated v2 official store at: {out_v2_path}")
+    print(f"  Official Batters v2: {len(official_batters)}")
+    print(f"  Official Bowlers v2: {len(official_bowlers)}")
+    print("=" * 60)
+    return store_payload
+
+
 if __name__ == "__main__":
-    build_store()
+    parser = argparse.ArgumentParser(description="Build SupeRR Intelligence Scouting Store")
+    parser.add_argument("--version", choices=["phase8", "v2"], default="phase8", help="Version to build (default: phase8)")
+    args = parser.parse_args()
+
+    if args.version == "v2":
+        build_store_v2()
+    else:
+        build_store()

@@ -1,0 +1,16 @@
+{
+  "pipeline_version": "v2.0.0-STATISTICAL-REVALUATION",
+  "winning_method": "Method_A (Phase 8 Baseline)",
+  "random_seed": 42,
+  "bootstrap_iterations": 2000,
+  "in_scope_matches": 853,
+  "in_scope_deliveries": 194014,
+  "deliverable_hashes": {
+    "candidate_methods_evaluation.csv": "6f1eeb0c1f5bb6983c257b3a454cafd85db9a6b037da9df02b1da841a3b775e0",
+    "official_top10_batters_v2.csv": "cfbccb35db6814242bc96bc212468bfdb274cac1d3c4ed9dd967129086183a4c",
+    "official_top10_bowlers_v2.csv": "043d8dba18d5634d7f5248cd047074d2078659f9768f7f277f9b2627e166a8f6",
+    "all_eligible_players_v2.csv": "650203f5dadf65ae22d2c751a898f1742838d30cf4ad2a0eeaf4d13d95318dc7",
+    "old_vs_new_comparison_ranks_1_to_25.csv": "b4500b6160d4eccb0d48fa50d84ec1b66dad025de4a11b0434f3690c6db7c9b2",
+    "sensitivity_analysis_summary.csv": "0316d06eaba74ac6ddcbb9010c30f715c38b48279e0896be88b403143fe4aa89"
+  }
+}

@@ -1,0 +1,11 @@
+v2_rank,player_id,player_name,league_evidence,v2_score,pressure_deliveries,pressure_matches,score_ci_lower_90,score_ci_upper_90,rank_ci_lower_90,rank_ci_upper_90,p_top10,expected_rank,confidence_tier,statistical_tie_flag
+1,1699,Suryakumar Yadav,IPL + T20I,64.4729,749,41,59.0,68.2,1,6,0.987,2.04,Tier 1 (N >= 300),True
+2,7897,Namboori Tilak Varma,IPL + T20I,60.01128,777,43,54.18,64.08,1,26,0.745,8.5,Tier 1 (N >= 300),True
+3,6396,Tim David,IPL + T20I,59.290726,476,37,52.86,64.16,1,38,0.6475,11.35,Tier 1 (N >= 300),True
+4,152,Ravindra Jadeja,IPL + T20I,58.263817,467,34,51.81,62.95,2,44,0.549,14.51,Tier 1 (N >= 300),True
+5,6726,Romario Shepherd,IPL + T20I,57.390556,428,38,51.02,61.73,3,53,0.447,17.96,Tier 1 (N >= 300),True
+6,20702,Tristan Stubbs,IPL + T20I,57.195076,579,40,51.13,61.4,3,52,0.401,18.66,Tier 1 (N >= 300),True
+7,796,Matthew Wade,IPL + T20I,57.020958,191,15,49.18,62.88,2,73,0.3985,23.38,Tier 2 (150 <= N < 300),True
+8,6460,Ayush Badoni,IPL Only,57.003944,416,28,50.27,61.28,3,62,0.3745,20.99,Tier 1 (N >= 300),True
+9,3125,Nicholas Pooran,IPL + T20I,56.583485,673,46,50.75,60.61,3,55,0.3235,21.17,Tier 1 (N >= 300),True
+10,4260,Heinrich Klaasen,IPL + T20I,55.825336,467,33,49.64,60.34,4,69,0.245,26.52,Tier 1 (N >= 300),True
