@@ -4,7 +4,7 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/React-18-61DAFB.svg)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6.svg)](https://www.typescriptlang.org/)
-[![Tests](https://img.shields.io/badge/Tests-214%20Passing-success.svg)]()
+[![Tests](https://img.shields.io/badge/Tests-221%20Passing-success.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
 **SupeRR Intelligence** is an advanced, evidence-grounded cricket scouting and clutch performance platform built for **SupeRR Selector Season 2 (Round 1)**.
@@ -164,10 +164,10 @@ To re-run Phase 1 from raw source files:
 
 ## 6. Test Suite & Verification Metrics
 
-SupeRR Intelligence maintains an exhaustive test suite with **214 passing unit tests**:
+SupeRR Intelligence maintains an exhaustive test suite with **221 passing unit tests**:
 - **Phase 1 Data Validation:** 16 tests (`test_phase1_validation.py`)
-- **Phase 2–10 Engine & API Tests:** 198 tests (`tests/test_*.py`)
-- **Total Combined Tests:** **214 tests, 0 failures, 0 errors**
+- **Phase 2–10 Engine & API Tests:** 205 tests (`tests/test_*.py`)
+- **Total Combined Tests:** **221 tests, 0 failures, 0 errors**
 
 Run the full test suite with:
 ```bash

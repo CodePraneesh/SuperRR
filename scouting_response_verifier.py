@@ -63,25 +63,49 @@ class ScoutingResponseVerifier:
             for m in cpri_matches:
                 try:
                     val = float(m)
-                    if not any(abs(val - exp) <= 0.15 for exp in expected_cpris):
+                    if not any(abs(val - exp) <= self.tolerance for exp in expected_cpris):
                         violations.append(
                             f"CPRI IMMUTABILITY VIOLATION: Model cited CPRI {val}, but official frozen score(s) are {expected_cpris}."
                         )
                 except ValueError:
                     pass
 
-            # Check rank if mentioned
-            rank_matches = re.findall(r"(?:ranked|rank)\s+#?([0-9]+)", text_lower)
-            for r in rank_matches:
-                try:
-                    r_val = int(r)
-                    if f"rank {r_val}" in text_lower or f"ranked #{r_val}" in text_lower:
-                        if r_val not in expected_ranks and r_val not in (10, 5, 1):
-                            violations.append(
-                                f"RANK INTEGRITY VIOLATION: Model cited rank {r_val}, but official frozen rank(s) are {expected_ranks}."
-                            )
-                except ValueError:
-                    pass
+            # Check rank if mentioned (numeric, prefixed, or ordinals)
+            ORDINAL_MAP = {
+                "first": 1, "1st": 1, "second": 2, "2nd": 2, "third": 3, "3rd": 3,
+                "fourth": 4, "4th": 4, "fifth": 5, "5th": 5, "sixth": 6, "6th": 6,
+                "seventh": 7, "7th": 7, "eighth": 8, "8th": 8, "ninth": 9, "9th": 9,
+                "tenth": 10, "10th": 10
+            }
+
+            # 1. Direct patterns like 'rank 3', 'ranked #3', 'number 3', '#3'
+            direct_rank_matches = re.findall(r"(?:(?:ranked|rank)\s+(?:at\s+|as\s+)?#?([0-9]+)|number\s+([0-9]+))", text_lower)
+            found_ranks = set()
+            for g1, g2 in direct_rank_matches:
+                r_str = g1 or g2
+                if r_str:
+                    try:
+                        found_ranks.add(int(r_str))
+                    except ValueError:
+                        pass
+
+            # 2. Ordinal patterns like '3rd ranked', 'ranked 3rd', 'third best', '3rd in'
+            ordinal_pattern = r"\b(1st|2nd|3rd|[4-9]th|10th|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth)\s+(?:ranked|rank|in|place|position|batter|bowler|player)\b"
+            for m in re.findall(ordinal_pattern, text_lower):
+                if m in ORDINAL_MAP:
+                    found_ranks.add(ORDINAL_MAP[m])
+
+            ranked_ordinal_pattern = r"\b(?:ranked|rank)\s+(1st|2nd|3rd|[4-9]th|10th|first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth)\b"
+            for m in re.findall(ranked_ordinal_pattern, text_lower):
+                if m in ORDINAL_MAP:
+                    found_ranks.add(ORDINAL_MAP[m])
+
+            # Audit all detected ranks strictly without exemptions
+            for r_val in found_ranks:
+                if r_val not in expected_ranks:
+                    violations.append(
+                        f"RANK INTEGRITY VIOLATION: Model cited rank {r_val}, but official frozen rank(s) are {expected_ranks}."
+                    )
 
         # ---------------------------------------------------------------------
         # 2. Format Preservation Audit
@@ -109,11 +133,13 @@ class ScoutingResponseVerifier:
             is_reliable = h2h.get("is_statistically_reliable", True)
 
             if not is_reliable or balls < 18:
-                # Text must acknowledge sample limitation or small sample
-                has_warning = any(w in text_lower for w in [
-                    "sample", "low sample", "small sample", "limited", "exploratory", "balls", "caveat", "cautious"
+                # Text must acknowledge sample limitation explicitly or state actual sample size
+                has_sample_warning = any(w in text_lower for w in [
+                    "low sample", "small sample", "limited sample", "exploratory sample",
+                    "sample size limitation", "sample is small", "sample is limited",
+                    "sample size", f"{balls} ball", f"{balls} deliveries", f"sample of {balls}"
                 ])
-                if not has_warning:
+                if not has_sample_warning:
                     violations.append(
                         f"SMALL SAMPLE WARNING VIOLATION: Matchup has only {balls} balls faced, but response omitted sample limitation disclosure."
                     )

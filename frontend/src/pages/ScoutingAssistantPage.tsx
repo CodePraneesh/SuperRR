@@ -191,6 +191,19 @@ export const ScoutingAssistantPage: React.FC = () => {
         ))}
       </div>
 
+      {/* Engine Architecture Indicator */}
+      <div className="bg-[#101F43]/40 border border-[#EC008C]/30 rounded-xl px-4 py-2.5 flex items-center justify-between text-xs">
+        <div className="flex items-center gap-2">
+          <ShieldCheck className="w-4 h-4 text-emerald-400" />
+          <span className="text-slate-300">
+            <strong className="text-white">Default Engine:</strong> Deterministic Python Engine (Offline Safe, Zero Hallucination, Guardrail-Verified)
+          </span>
+        </div>
+        <span className="text-[10px] font-mono text-slate-400 hidden sm:inline">
+          Optional LLM Tier (Qwen-2.5-7B)
+        </span>
+      </div>
+
       {/* Message History Container */}
       <div className="flex-1 overflow-y-auto space-y-4 pr-2 rounded-2xl bg-[#070b18]/80 border border-[#182752] p-4 md:p-6">
         {messages.map((msg) => (
