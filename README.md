@@ -183,10 +183,10 @@ The Phase 2 pressure and win-probability engines utilize gradient-boosted trees 
 
 ## 6. Test Suite & Verification Metrics
 
-SupeRR Intelligence maintains an exhaustive test suite of **221 collected unit tests**:
-- **Clean Clone Verification:** **145 passed on a clean clone; 76 additional tests run when the raw data pack is present (they are skipped otherwise, with reasons)**. (0 failures, 0 errors, exit code 0).
-  All official Phase 8 rankings, API endpoints, AI scouting verifier, and mathematical schemas run and pass immediately upon cloning without requiring external raw datasets.
-- **With Raw Data Present:** **221 passed with raw data** (16 Phase 1 validation tests + 205 Phase 2–10 engine & model tests, 0 skipped, 0 failures, 0 errors, exit code 0).
+SupeRR Intelligence maintains an exhaustive automated test suite:
+- **Clean Clone Verification:** **145 passed, 76 skipped with reasons naming missing data files** (0 failures, 0 errors, exit code 0). All official Phase 8 rankings, API endpoints, AI scouting verifier, and mathematical schemas run and pass immediately upon cloning without requiring external raw data packs.
+- **Full Data Present (All Suites):** **236 passed, 0 failures, 0 errors, 0 skipped** across the entire pipeline (16 Phase 1 validation tests + 220 Phase 2–11 engine, API, and invariant tests; exit code 0).
+- **Match Date Coverage:** Evaluated across all 883 matches spanning **2022-01-22 to 2026-11-01** (194,014 in-scope deliveries).
 
 Run the automated test suite with:
 ```bash

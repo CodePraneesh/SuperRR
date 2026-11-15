@@ -1,8 +1,8 @@
 # SupeRR Intelligence: Pressure Definition Validation & Challenger Analysis (Phase 11 v3)
 
-**Evaluation Scope**: 883 Matches, 194,014 In-Scope Deliveries (IPL + T20I)  
+**Evaluation Scope**: 883 Matches, 194,014 In-Scope Deliveries (IPL + T20I, 2022-01-22 to 2026-11-01)  
 **Date**: November 15, 2026  
-**Status**: Completed & Pre-Registered Audit  
+**Status**: Pre-Registered Challenger Audit & Decision Gate Review  
 
 ---
 
@@ -23,37 +23,68 @@ The empirical audit of the frozen Phase 8 pressure definition ($PI \ge 50$) conf
 
 ## 2. Pre-Registered Validation Matrix Across Candidate Formulations
 
-All candidate definitions were pre-registered and evaluated under 95% cluster-bootstrap confidence intervals:
+All candidate definitions were pre-registered in `docs/methodology/v3/PREREGISTRATION.md` before evaluation.
 
-| Candidate Definition | Flagged Balls | Flagged % | Mean $|\text{WPA}|$ [95% CI] | Contested % [95% CI] | Innings Balance (1st/2nd) | Tier Monotonic? | Environment Invariant? |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Def_A (Phase 8 Baseline)** | 61,719 | 31.81% | 0.0062 [0.0061, 0.0064] | 15.70% [15.2%, 16.2%] | 0.313 [0.298, 0.328] | **NO** (Extreme < High) | No (F1 sensitivity) |
-| **Def_B (Role-Aware Leverage)** | 38,803 | 20.00% | **0.0215 [0.0208, 0.0222]** | 44.12% [42.8%, 45.4%] | 0.884 [0.841, 0.927] | **YES** | No (learned WPA) |
-| **Def_C (Contest Closeness x Urgency)** | 38,803 | 20.00% | 0.0124 [0.0120, 0.0128] | **68.45% [66.9%, 70.0%]** | **0.962 [0.925, 0.998]** | **YES** | **YES (Closed-Form)** |
-| **Def_D (Knockout Leverage)** | 38,803 | 20.00% | 0.0214 [0.0207, 0.0221] | 44.05% [42.7%, 45.3%] | 0.881 [0.838, 0.924] | **YES** | No (learned WPA) |
+### Model-Dependent vs Model-Independent Validity Metrics (95% Cluster-Bootstrap CIs)
+*Important Methodological Disclosure:* Criterion 1 metrics are partly built into the candidates: Contested Share ($P_{\text{win}} \in [0.35, 0.65]$) is mathematically built into Def_C (which directly maximizes closeness to 0.50), while Mean $|\text{WPA}|$ shares the same win-probability model used by Def_B and Def_D. To ensure honesty, we include model-independent outcome volatility metrics: **Wicket Rate per Legal Ball**, **Run Variance ($\sigma^2$)**, **Dot Ball %**, and **Boundary %**.
+
+| Candidate Definition | Flagged Balls | Flagged % | Mean $|\text{WPA}|$ [95% CI] | Contested % [95% CI] | Innings Ratio | Wicket Rate [95% CI] | Run Variance [95% CI] | Dot % | Boundary % |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Def_A (Phase 8 Baseline)** | 61,719 | 31.81% | 0.0064 [0.0061, 0.0066] | 15.70% [15.2%, 16.2%] | 0.313 | 6.52% [6.41%, 6.64%] | 2.9799 [2.944, 3.021] | 34.69% | 18.09% |
+| **Def_B (Role-Aware Leverage)** | 38,803 | 20.00% | **0.0252 [0.0245, 0.0259]** | 43.01% [41.8%, 44.2%] | 0.746 | **15.60% [15.26%, 15.82%]** | **4.8528 [4.814, 4.896]** | 35.72% | 35.58% |
+| **Def_C (Contest Closeness x Urgency)** | 38,803 | 20.00% | 0.0063 [0.0061, 0.0065] | **93.83% [92.9%, 94.7%]** | **5.526** | 5.89% [5.72%, 6.06%] | 2.8695 [2.829, 2.907] | 28.19% | 17.47% |
+| **Def_D (Knockout Leverage)** | 38,804 | 20.00% | **0.0252 [0.0245, 0.0259]** | 43.06% [41.9%, 44.2%] | 0.751 | **15.60% [15.26%, 15.96%]** | **4.8562 [4.808, 4.915]** | 35.73% | 35.58% |
 
 ---
 
 ## 3. Decision Gate Mechanical Evaluation
 
-Per Section 4 of `docs/methodology/v3/PREREGISTRATION.md`:
-1. **Gate Criterion 1 (Validity Improvement)**:
-   - Def_B and Def_C dramatically outperform Def_A on $V_1$ (Mean $|\text{WPA}|$: $0.0215$ vs $0.0062$), $V_2$ (Contested Share: $68.45\%$ vs $15.70\%$), and $V_3$ (Innings Balance: $0.962$ vs $0.313$), with all 95% bootstrap CIs strictly excluding zero. **[PASSED]**
-2. **Gate Criterion 2 (Ranking Stability under Bootstrap)**:
-   - Def_C achieves high bootstrap stability, but due to shifting the delivery definition to late/close contests, player sample sizes in Tier 2/3 shrink (e.g. Wade, Muqeem, Overton drop below volume thresholds), introducing rank interval expansion in mid-table players. **[MARGINAL / FAILED]**
-3. **Gate Criterion 3 (Environment Invariance)**:
-   - Def_C is 100% closed-form and library-invariant. However, Def_B and Def_D rely on delivery WPA from learned tree models, which remain subject to Finding F1 library perturbations. **[MIXED]**
+Per Section 4 of `docs/methodology/v3/PREREGISTRATION.md`, a challenger must pass all three criteria to replace the frozen baseline:
 
-### Mechanical Gate Outcome:
-Because the pre-registered decision gate requires ALL conditions to be met unambiguously, and changing the official submission at release verification introduces submission-dropdown mismatch risk:
+### Criterion-by-Criterion Evaluation:
+1. **Criterion 1 (Validity Improvement):**
+   - **Def_B & Def_D:** **PASS**. Produce massive improvements in delivery leverage ($|\text{WPA}|$: $0.0252$ vs $0.0064$) and outcome volatility (Wicket rate: $15.60\%$ vs $6.52\%$, Run variance: $4.85$ vs $2.98$).
+   - **Def_C:** **PASS**. Achieves $93.83\%$ contested share, though this is largely tautological (built into its definition), while its model-independent wicket rate ($5.89\%$) and run variance ($2.87$) are lower than baseline.
+2. **Criterion 2 (Ranking Stability & Split-Half Reliability):**
+   - **Def_A (Incumbent):** Batters split-half $\rho = 0.440$ ($N=253$), Bowlers $\rho = 0.195$ ($N=200$).
+   - **Def_B:** **FAIL**. Batters split-half $\rho = 0.339$ ($N=186$), Bowlers $\rho = 0.189$ ($N=194$). Substantially lower reliability than Def_A.
+   - **Def_C:** **FAIL**. Concentrating deliveries into late/close situations starves sample sizes for lower-order players. Eligible batters drop from $253$ to $172$, and batter split-half reliability collapses to $\rho = 0.199$.
+   - **Def_D:** **FAIL**. Batters $\rho = 0.339$, Bowlers $\rho = 0.212$.
+3. **Criterion 3 (Environment Invariance):**
+   - *Evaluated relative to incumbent Def_A, which is also NOT library-invariant (Finding F1 proved Def_A shifts by 1–5 boundary balls across scikit-learn versions).*
+   - **Def_A (Incumbent):** **FAIL** (learned tree model, sensitive to F1 floating-point drift).
+   - **Def_B:** **FAIL** (relies on learned WPA models from gradient-boosted trees; sensitive to F1).
+   - **Def_C:** **PASS** (100% closed-form algebraic equations; completely invariant across library environments).
+   - **Def_D:** **FAIL** (relies on learned WPA models; sensitive to F1).
+
+### Mechanical Decision Gate Outcome:
+```
++------------------------------------+-----------------------+---------------------------------------+--------------------------+------------------------------+
+| Candidate Formulation              | Criterion 1: Validity | Criterion 2: Stability & Reliability | Criterion 3: Invariance  | Gate Verdict                 |
++------------------------------------+-----------------------+---------------------------------------+--------------------------+------------------------------+
+| Def_A (Phase 8 Baseline)           | Benchmark             | PASS (Highest Split-Half rho: 0.440)  | FAIL (F1 Tree Sensitive) | RETAINED (Official Baseline) |
+| Def_B (Role-Aware Leverage)        | PASS (V1 & Volatility)| FAIL (Lower Split-Half rho: 0.339)    | FAIL (F1 Tree Sensitive) | REJECTED (Benchmark Only)    |
+| Def_C (Contest Closeness x Urgency)| PASS (High Contested) | FAIL (Sample Starvation; rho: 0.199)  | PASS (100% Closed-Form)  | REJECTED (Benchmark Only)    |
+| Def_D (Knockout Leverage)          | PASS (V1 & Volatility)| FAIL (Lower Split-Half rho: 0.339)    | FAIL (F1 Tree Sensitive) | REJECTED (Benchmark Only)    |
++------------------------------------+-----------------------+---------------------------------------+--------------------------+------------------------------+
+```
+
 $$\mathbf{DECISION: \text{ RETAIN PHASE 8 AS OFFICIAL SUBMISSION }}$$
-Challenger definitions B, C, and D are published as **official sensitivity analyses and research benchmarks**.
+*Conclusion:* Neither challenger satisfies all pre-registered criteria. Def_B and Def_D fail library invariance and show lower split-half reliability than Def_A. Def_C collapses sample sizes for lower-order players, destroying rank stability. Therefore, Phase 8 is mechanically retained.
 
 ---
 
-## 4. Multi-Definition Robustness Analysis (Top 25 Players)
+## 4. Why Def_A is Retained & Definition-Sensitivity of Wade and Santner
 
-The table below reports player ranks across all four defensible pressure definitions. Players with $\ge 75\%$ Top 10 share represent the core elite who deliver regardless of definition choice.
+**Methodological Selection Justification:**
+The submitted Phase 8 definition (Def_A) was retained despite its weaker theoretical leverage validity because it preserves sufficient delivery volume across distinct tactical roles. While Def_B and Def_C are conceptually tighter, restricting pressure to acute leverage moments starves sample sizes for lower-order finishers and situational bowlers, reducing split-half reliability and inflating rank uncertainty intervals. Retaining Def_A guarantees that players with substantial historical tournament experience can be evaluated without extreme small-sample noise.
+
+**Explicit Disclosure on Definition-Sensitive Players:**
+Decision-makers must note that **Matthew Wade (#1 Batter)** and **Mitchell Santner (#1 Bowler)** are **highly definition-sensitive**. They achieve their #1 rankings specifically under Def_A's situational criteria ($PI \ge 50$). Under leverage-based definitions (Def_B) or closeness-based definitions (Def_C), Wade drops to Rank #31–44 and Santner drops to Rank #26–27 due to sample starvation in narrow high-leverage bands. In contrast, core players like **Suryakumar Yadav, Tim David, Rashid Khan, Jasprit Bumrah, and Varun Chakravarthy** remain in the Top 10 across all definitions ($\ge 75\%$ Top 10 share), representing the undisputed, definition-invariant clutch elite.
+
+---
+
+## 5. Multi-Definition Robustness Analysis (Top Players Across Definitions)
 
 ### Top Batters Robustness Matrix
 | player_name | Def_A (Phase 8 Baseline) | Def_B (Role-Aware Leverage) | Def_C (Contest Closeness x Urgency) | top10_share | robust_status |
