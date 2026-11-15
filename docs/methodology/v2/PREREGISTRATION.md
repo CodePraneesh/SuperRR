@@ -198,3 +198,42 @@ Upon completion of the evaluation, the pipeline will generate in `output/phase11
 - **Zero API/UI Regression**: Phase 8 outputs remain default. v2 will only be integrated behind an explicit CLI/configuration flag (`--version v2`).
 
 *Pre-Registration Completed & Locked: 2026-11-15T18:35:00+05:30*
+
+
+---
+
+## 10. ERRATA (2026-11-15)
+
+### Erratum E1: Mathematical Unification of Point Estimates, Bootstrap Distributions, and Uncertainty Intervals
+An audit of the initial v2 implementation identified a formula divergence between `ml/phase11_v2/models.py` (which penalized match standard deviation and used REML prior variance) and `ml/phase11_v2/cluster_bootstrap.py` (which substituted a static `+30.0` constant and heuristic $\frac{N}{N+100}$ weights). This caused point scores to fall outside their 90% score CIs, point ranks to fall outside 90% rank CIs, and decoupled point ranks from $P(\text{Top 10})$.
+
+**Unified Specification**:
+1. **Single Evaluator Function**: Both the point estimate and the 2,000 match-cluster bootstrap replicates shall be computed using the **exact identical mathematical function** $G(C, A)$, where $C$ is the match incidence matrix ($1 \times M$ for full sample, $B \times M$ for bootstrap resamples) and $A$ is the pre-aggregated match-player delivery and value tensor.
+2. **Score Interval Unity**: For every player $i$, the point score $S_i = G(C_{\text{full}}, A)_i$ and bootstrap replicates $S_i^{(b)} = G(C_{\text{boot}}^{(b)}, A)_i$ originate from the identical functional mapping. The 90% score confidence interval is defined as $[q_{0.05}(S_i^{(\cdot)}), q_{0.95}(S_i^{(\cdot)})]$. By construction, $S_i \in [q_{0.05}, q_{0.95}]$ holds for all eligible players.
+3. **Rank Interval & $P(\text{Top 10})$ Unity**: In each bootstrap replicate $b$, players are ranked ordinally by $S_i^{(b)}$ using the deterministic tie-breaker. The 90% rank interval is $[q_{0.05}(R_i^{(\cdot)}), q_{0.95}(R_i^{(\cdot)})]$. The probability of top-10 inclusion is defined as:
+   $$P(\text{Top 10})_i = \frac{1}{B} \sum_{b=1}^B \mathbb{I}(R_i^{(b)} \le 10)$$
+   By mathematical theorem, $\sum_{i=1}^K P(\text{Top 10})_i \equiv 10.0000$ across all $K$ eligible players.
+
+### Erratum E2: Primary Ordering Metric & Statistical Ranking Rule
+Players are ordered strictly and monotonically by the **Unified Point Score** $S_i$. 
+- Point rank $R_i \in \{1, \dots, K\}$ is the ordinal rank of $S_i$.
+- Because point score $S_i$ is centered within the bootstrap distribution $\{S_i^{(b)}\}$, the point rank $R_i$ is centered within the bootstrap rank distribution $\{R_i^{(b)}\}$, guaranteeing that $R_i \in [q_{0.05}(R_i^{(\cdot)}), q_{0.95}(R_i^{(\cdot)})]$ across all eligible players.
+
+### Erratum E3: Deterministic Tie-Breaking Protocol
+To eliminate arbitrary index-dependent ordering in near-ties, ranking order is determined strictly by the lexicographical ordering of the following 5-tuple:
+$$\text{TieKey}_i = \left( -S_i, -P(\text{Top 10})_i, -N_{i,\text{balls}}, -M_{i,\text{matches}}, \text{player\_id}_i \right)$$
+Ties are broken first by primary score, second by $P(\text{Top 10})$, third by pressure balls faced/bowled, fourth by pressure matches played, and fifth by ascending integer `player_id`.
+
+### Erratum E4: Shrinkage of Consistency Component
+The audit revealed that `pos_match_ratio` was un-shrunk, allowing small-sample players (e.g. 5 positive matches in 6 games) to achieve higher consistency scores than high-volume players (e.g. 30 in 40).
+Under this erratum, positive match ratio is shrunk via a Beta-Binomial Empirical Bayes prior toward the cohort baseline ($\mu_{\text{pos}} = 0.50$):
+$$\text{pos\_ratio}_i^{\text{shrunk}} = \frac{M_{i,\text{pos}} + M_0 \times \mu_{\text{pos}}}{M_i + M_0}, \quad M_0 = 10.0$$
+where $M_0 = 10.0$ matches the match-saturation constant in $S_{\text{volume}}$. This prevents low-sample flukes from entering the top ranks without altering the pre-registered eligibility criteria ($N \ge 60, M \ge 5$).
+
+### Erratum E5: Clean Confidence Tier String Formatting
+Confidence tier labels are standardized to clean ASCII strings without LaTeX tokens or nested duplicate parentheses:
+- `Tier 1 (N >= 300)` for $N \ge 300$
+- `Tier 2 (150 <= N < 300)` for $150 \le N < 300$
+- `Tier 3 (60 <= N < 150)` for $60 \le N < 150$
+
+*Errata Committed & Locked: 2026-11-15T19:42:00+05:30*
