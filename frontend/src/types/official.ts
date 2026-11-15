@@ -35,6 +35,22 @@ export interface OfficialPlayerItem {
   tactical_classification: string
   is_official_top10: boolean
   contextual_splits?: Record<string, any>
+
+  // High-Volume PPR Upgrade Extensions
+  adjusted_cpri?: number
+  adjusted_rank?: number
+  ppr_score?: number
+  evidence_tier?: 'Elite Evidence' | 'Strong Evidence' | 'Moderate Evidence' | 'Limited Evidence' | 'Insufficient Evidence' | string
+  is_main_eligible?: boolean
+  eligibility_status?: 'Main Leaderboard' | 'Contender / Emerging' | 'Insufficient Evidence' | string
+  success_rate_pct?: number
+  role_success_metrics?: {
+    success_rate_pct?: number
+    dot_pct?: number
+    boundary_pct?: number
+    frequency_metric_pct?: number
+  }
+  adjusted_rank_ci?: string
 }
 
 export interface OfficialRoleRankingsResponse {
@@ -44,6 +60,10 @@ export interface OfficialRoleRankingsResponse {
   total_candidates: number
   official_top10: OfficialPlayerItem[]
   candidates: OfficialPlayerItem[]
+  main_leaderboard?: OfficialPlayerItem[]
+  contenders?: OfficialPlayerItem[]
+  insufficient_evidence?: OfficialPlayerItem[]
+  evidence_tier_counts?: Record<string, number>
   metadata: Record<string, any>
 }
 
@@ -52,5 +72,9 @@ export interface UnifiedOfficialOverviewResponse {
   title: string
   batters: OfficialPlayerItem[]
   bowlers: OfficialPlayerItem[]
+  main_leaderboard_batters?: OfficialPlayerItem[]
+  main_leaderboard_bowlers?: OfficialPlayerItem[]
+  contender_batters?: OfficialPlayerItem[]
+  contender_bowlers?: OfficialPlayerItem[]
   metadata: Record<string, any>
 }

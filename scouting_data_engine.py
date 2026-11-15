@@ -82,6 +82,9 @@ class ScoutingDataEngine:
                 "total_candidates": len(batters) + len(cand_batters),
                 "official_top10": batters,
                 "candidates": cand_batters,
+                "main_leaderboard": self.official_store.get("main_leaderboard_batters", []),
+                "contenders": self.official_store.get("contender_batters", []),
+                "evidence_tier_counts": self.official_store.get("metadata", {}).get("evidence_tier_counts_batters", {}),
                 "metadata": self.official_store.get("metadata", {})
             }
         elif role_norm == "Bowler":
@@ -92,14 +95,21 @@ class ScoutingDataEngine:
                 "total_candidates": len(bowlers) + len(cand_bowlers),
                 "official_top10": bowlers,
                 "candidates": cand_bowlers,
+                "main_leaderboard": self.official_store.get("main_leaderboard_bowlers", []),
+                "contenders": self.official_store.get("contender_bowlers", []),
+                "evidence_tier_counts": self.official_store.get("metadata", {}).get("evidence_tier_counts_bowlers", {}),
                 "metadata": self.official_store.get("metadata", {})
             }
         else:
             return {
-                "version": self.official_store.get("version", "CPRI-v1.0.0-PHASE8-OFFICIAL"),
+                "version": self.official_store.get("version", "CPRI-v1.1.0-HIGH-VOLUME-UPGRADE"),
                 "title": "SupeRR Intelligence — Official Competition Rankings",
                 "batters": batters,
                 "bowlers": bowlers,
+                "main_leaderboard_batters": self.official_store.get("main_leaderboard_batters", []),
+                "main_leaderboard_bowlers": self.official_store.get("main_leaderboard_bowlers", []),
+                "contender_batters": self.official_store.get("contender_batters", []),
+                "contender_bowlers": self.official_store.get("contender_bowlers", []),
                 "metadata": self.official_store.get("metadata", {})
             }
 

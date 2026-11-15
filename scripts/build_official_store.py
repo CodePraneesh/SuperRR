@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 scripts/build_official_store.py
-SupeRR Intelligence - Official Phase 8 Scouting Store Builder
+SupeRR Intelligence - Official Scouting Store Builder (Phase 8 + High-Volume PPR Upgrade)
 
 Builds the official unified competition scouting store:
 - output/phase4/data/official_scouting_store.json
@@ -13,12 +13,16 @@ Consolidates:
 4. bowler_rank_uncertainty.csv
 5. batter_candidate_comparison.csv
 6. bowler_candidate_comparison.csv
-7. Contextual splits from player_contextual_splits.json (if available)
+7. batter_full_population.csv / bowler_full_population.csv
+8. batter_delivery_expectations.csv / bowler_delivery_expectations.csv
+9. Contextual splits from player_contextual_splits.json
 
 Enforces:
-- Exact Phase 8 rankings, scores, and components
-- 90% Rank Confidence Intervals [rank_p5, rank_p95]
-- Confidence tier classification: "High Confidence" vs "Exploratory"
+- Exact Phase 8 rankings, scores, and components preserved for transparency.
+- Pressure Performance Reliability (PPR) scores and Evidence Tiers.
+- Volume-Adjusted CPRI (Adjusted CPRI) with empirical Bayes shrinkage.
+- Partitioned Main Leaderboard (>= 400 pressure balls) vs Contender / Emerging pool (150-399 balls).
+- 90% Rank Confidence Intervals for both official and adjusted ranks.
 """
 import os
 import sys
@@ -26,12 +30,24 @@ import json
 import argparse
 import datetime
 from pathlib import Path
+import numpy as np
 import pandas as pd
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 os.chdir(REPO_ROOT)
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from ml.ppr_engine import (
+    EvidenceTierConfig,
+    DEFAULT_EVIDENCE_CONFIG,
+    compute_batter_role_metrics,
+    compute_bowler_role_metrics,
+    enrich_player_with_ppr_and_adjustment,
+)
 
 PHASE8_DIR = REPO_ROOT / "output" / "phase8_ranking_reconsideration"
+PHASE2_DIR = REPO_ROOT / "output" / "phase2"
 PHASE11_DIR = REPO_ROOT / "output" / "phase11_v2"
 DATA_DIR = REPO_ROOT / "output" / "phase4" / "data"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -51,24 +67,49 @@ def load_contextual_splits():
 
 
 def determine_confidence_tier(reliability_score: float, ci_width: int, pressure_deliveries: int) -> str:
-    # High Confidence requires solid sample size and bounded CI width
     if reliability_score >= 75.0 and ci_width <= 65 and pressure_deliveries >= 300:
         return "High Confidence"
     return "Exploratory"
 
 
-def build_store():
-    print("=" * 60)
-    print("BUILDING OFFICIAL PHASE 8 SCOUTING STORE")
-    print("=" * 60)
+def compute_adjusted_rank_cis(items: list, n_boot: int = 500) -> None:
+    """Compute 90% bootstrap rank confidence intervals for items ordered by adjusted_cpri."""
+    if not items:
+        return
+    scores = np.array([float(it["adjusted_cpri"]) for it in items])
+    balls = np.array([max(1, int(it["pressure_stats"]["pressure_deliveries"])) for it in items])
+    sigmas = 12.0 / np.sqrt(balls / 100.0)
 
-    # 1. Load official files
+    np.random.seed(42)
+    boot_ranks = np.zeros((n_boot, len(scores)))
+    for b in range(n_boot):
+        sim = scores + np.random.normal(0, sigmas)
+        order = np.argsort(-sim)
+        ranks = np.empty_like(order)
+        ranks[order] = np.arange(1, len(scores) + 1)
+        boot_ranks[b] = ranks
+
+    p5 = np.percentile(boot_ranks, 5, axis=0).astype(int)
+    p95 = np.percentile(boot_ranks, 95, axis=0).astype(int)
+
+    for i, it in enumerate(items):
+        it["adjusted_rank_ci"] = f"[{p5[i]}, {p95[i]}]"
+
+
+def build_store():
+    print("=" * 70)
+    print("BUILDING AUTHORITATIVE SCOUTING STORE (PHASE 8 + HIGH-VOLUME UPGRADE)")
+    print("=" * 70)
+
+    # 1. Load official Phase 8 CSVs
     bat_top10_df = pd.read_csv(PHASE8_DIR / "official_top10_batters.csv")
     bowl_top10_df = pd.read_csv(PHASE8_DIR / "official_top10_bowlers.csv")
     bat_unc_df = pd.read_csv(PHASE8_DIR / "batter_rank_uncertainty.csv")
     bowl_unc_df = pd.read_csv(PHASE8_DIR / "bowler_rank_uncertainty.csv")
     bat_comp_df = pd.read_csv(PHASE8_DIR / "batter_candidate_comparison.csv")
     bowl_comp_df = pd.read_csv(PHASE8_DIR / "bowler_candidate_comparison.csv")
+    bat_pop_df = pd.read_csv(PHASE8_DIR / "batter_full_population.csv")
+    bowl_pop_df = pd.read_csv(PHASE8_DIR / "bowler_full_population.csv")
 
     contextual_splits_by_name = load_contextual_splits()
 
@@ -78,7 +119,31 @@ def build_store():
     bat_comp_map = {int(r["player_id"]): r.to_dict() for _, r in bat_comp_df.iterrows()}
     bowl_comp_map = {int(r["player_id"]): r.to_dict() for _, r in bowl_comp_df.iterrows()}
 
-    # Build Official Batters
+    # 2. Compute delivery-level granular role metrics
+    print("\n[Step 1] Aggregating granular pressure delivery expectations...")
+    del_b_path = PHASE2_DIR / "batter_delivery_expectations.csv"
+    del_bw_path = PHASE2_DIR / "bowler_delivery_expectations.csv"
+
+    if del_b_path.exists():
+        del_b_df = pd.read_csv(del_b_path)
+        bat_del_metrics = compute_batter_role_metrics(del_b_df)
+        bat_metrics_map = {int(r["striker_id"]): r.to_dict() for _, r in bat_del_metrics.iterrows()}
+        print(f"  Processed {len(bat_del_metrics)} batters with delivery-level expectation data.")
+    else:
+        print("  Warning: batter_delivery_expectations.csv not found, using profile fallbacks.")
+        bat_metrics_map = {}
+
+    if del_bw_path.exists():
+        del_bw_df = pd.read_csv(del_bw_path)
+        bowl_del_metrics = compute_bowler_role_metrics(del_bw_df)
+        bowl_metrics_map = {int(r["bowler_id"]): r.to_dict() for _, r in bowl_del_metrics.iterrows()}
+        print(f"  Processed {len(bowl_del_metrics)} bowlers with delivery-level expectation data.")
+    else:
+        print("  Warning: bowler_delivery_expectations.csv not found, using profile fallbacks.")
+        bowl_metrics_map = {}
+
+    # 3. Build Official Top 10 Batters
+    print("\n[Step 2] Enriching Official Top 10 Batters...")
     official_batters = []
     for _, row in bat_top10_df.iterrows():
         pid = int(row["player_id"])
@@ -93,7 +158,6 @@ def build_store():
 
         tier = determine_confidence_tier(rel_score, ci_width, p_balls)
 
-        # Tactical classification
         sr = float(row["pressure_strike_rate"])
         if sr >= 165.0:
             classification = "Elite Clutch Accelerant"
@@ -140,9 +204,18 @@ def build_store():
             "is_official_top10": True,
             "contextual_splits": splits_entry
         }
+
+        # Enrich with PPR & Volume-Adjusted CPRI
+        batter_dict = enrich_player_with_ppr_and_adjustment(
+            batter_dict,
+            role="Batter",
+            delivery_metrics=bat_metrics_map.get(pid),
+            config=DEFAULT_EVIDENCE_CONFIG
+        )
         official_batters.append(batter_dict)
 
-    # Build Official Bowlers
+    # 4. Build Official Top 10 Bowlers
+    print("\n[Step 3] Enriching Official Top 10 Bowlers...")
     official_bowlers = []
     for _, row in bowl_top10_df.iterrows():
         pid = int(row["player_id"])
@@ -157,7 +230,6 @@ def build_store():
 
         tier = determine_confidence_tier(rel_score, ci_width, p_balls)
 
-        # Tactical classification
         econ = float(row["pressure_economy"])
         if econ <= 6.5:
             classification = "Lockdown Clutch Specialist"
@@ -205,9 +277,16 @@ def build_store():
             "is_official_top10": True,
             "contextual_splits": splits_entry
         }
+
+        bowler_dict = enrich_player_with_ppr_and_adjustment(
+            bowler_dict,
+            role="Bowler",
+            delivery_metrics=bowl_metrics_map.get(pid),
+            config=DEFAULT_EVIDENCE_CONFIG
+        )
         official_bowlers.append(bowler_dict)
 
-    # Build Candidates 11-25 for Batters
+    # 5. Build Candidate Batters (Ranks 11-25)
     candidate_batters = []
     for _, row in bat_comp_df.iterrows():
         rank = int(row["official_rank"])
@@ -223,7 +302,7 @@ def build_store():
         tier = determine_confidence_tier(rel_score, ci_width, p_balls)
         splits_entry = contextual_splits_by_name.get(row["player_name"], {})
 
-        candidate_batters.append({
+        b_cand = {
             "official_rank": rank,
             "player_id": pid,
             "player_name": row["player_name"],
@@ -258,9 +337,17 @@ def build_store():
             "tactical_classification": "Contender Candidate",
             "is_official_top10": False,
             "contextual_splits": splits_entry
-        })
+        }
 
-    # Build Candidates 11-25 for Bowlers
+        b_cand = enrich_player_with_ppr_and_adjustment(
+            b_cand,
+            role="Batter",
+            delivery_metrics=bat_metrics_map.get(pid),
+            config=DEFAULT_EVIDENCE_CONFIG
+        )
+        candidate_batters.append(b_cand)
+
+    # 6. Build Candidate Bowlers (Ranks 11-25)
     candidate_bowlers = []
     for _, row in bowl_comp_df.iterrows():
         rank = int(row["official_rank"])
@@ -276,7 +363,7 @@ def build_store():
         tier = determine_confidence_tier(rel_score, ci_width, p_balls)
         splits_entry = contextual_splits_by_name.get(row["player_name"], {})
 
-        candidate_bowlers.append({
+        bw_cand = {
             "official_rank": rank,
             "player_id": pid,
             "player_name": row["player_name"],
@@ -312,28 +399,201 @@ def build_store():
             "tactical_classification": "Contender Candidate",
             "is_official_top10": False,
             "contextual_splits": splits_entry
-        })
+        }
+
+        bw_cand = enrich_player_with_ppr_and_adjustment(
+            bw_cand,
+            role="Bowler",
+            delivery_metrics=bowl_metrics_map.get(pid),
+            config=DEFAULT_EVIDENCE_CONFIG
+        )
+        candidate_bowlers.append(bw_cand)
+
+    # 7. Helper: Add all eligible players from population (e.g. >= 400 balls outside top 25)
+    existing_bat_ids = {p["player_id"] for p in official_batters + candidate_batters}
+    additional_batters = []
+    for _, row in bat_pop_df.iterrows():
+        pid = int(row["player_id"])
+        if pid in existing_bat_ids:
+            continue
+        p_balls = int(row["pressure_deliveries"])
+        if p_balls < 150:
+            continue  # ignore unranked insufficient evidence
+        sr = float(row["pressure_strike_rate"])
+        classification = "Elite Clutch Accelerant" if sr >= 165 else "Clutch Accelerant" if sr >= 150 else "High-Leverage Anchor"
+        tier = "High Confidence" if row["score_reliability"] >= 75.0 and p_balls >= 300 else "Exploratory"
+        splits_entry = contextual_splits_by_name.get(row["player_name"], {})
+        rank_val = 999 if pd.isna(row.get("official_rank")) else int(row["official_rank"])
+
+        b_item = {
+            "official_rank": rank_val,
+            "player_id": pid,
+            "player_name": row["player_name"],
+            "role": "Batter",
+            "competition_evidence": row["competition_evidence"],
+            "cpri_score": round(float(row["cpri_score"]), 2),
+            "components": {
+                "pressure_impact": round(float(row["score_pressure_impact"]), 2),
+                "pressure_adaptability": round(float(row["score_adaptability"]), 2),
+                "clutch_consistency": round(float(row["score_consistency"]), 2),
+                "reliability_confidence": round(float(row["score_reliability"]), 2),
+            },
+            "pressure_stats": {
+                "pressure_deliveries": p_balls,
+                "pressure_matches": int(row["pressure_matches"]),
+                "pressure_strike_rate": round(sr, 2),
+                "pressure_run_res": round(float(row["pressure_run_res"]), 2),
+                "pressure_surv_res": round(float(row["pressure_surv_res"]), 2),
+                "pressure_wpa": round(float(row["pressure_wpa"]), 4),
+                "total_deliveries": int(row.get("total_deliveries", p_balls)),
+                "total_matches": int(row.get("total_matches", row["pressure_matches"]))
+            },
+            "rank_uncertainty": {
+                "rank_p5": rank_val,
+                "rank_p95": rank_val + 25,
+                "median_rank": rank_val,
+                "rank_std": 15.0,
+                "top10_inclusion_freq": 0.0,
+                "ci_display": f"[{rank_val}, {rank_val + 25}]"
+            },
+            "confidence_tier": tier,
+            "tactical_classification": classification,
+            "is_official_top10": False,
+            "contextual_splits": splits_entry
+        }
+        b_item = enrich_player_with_ppr_and_adjustment(
+            b_item,
+            role="Batter",
+            delivery_metrics=bat_metrics_map.get(pid),
+            config=DEFAULT_EVIDENCE_CONFIG
+        )
+        additional_batters.append(b_item)
+
+    existing_bowl_ids = {p["player_id"] for p in official_bowlers + candidate_bowlers}
+    additional_bowlers = []
+    for _, row in bowl_pop_df.iterrows():
+        pid = int(row["player_id"])
+        if pid in existing_bowl_ids:
+            continue
+        p_balls = int(row["pressure_deliveries"])
+        if p_balls < 150:
+            continue
+        econ = float(row["pressure_economy"])
+        classification = "Lockdown Clutch Specialist" if econ <= 6.5 else "High-Leverage Restrictor" if econ <= 7.2 else "Clutch Wicket-Taker"
+        tier = "High Confidence" if row["score_reliability"] >= 75.0 and p_balls >= 300 else "Exploratory"
+        splits_entry = contextual_splits_by_name.get(row["player_name"], {})
+        rank_val = 999 if pd.isna(row.get("official_rank")) else int(row["official_rank"])
+
+        bw_item = {
+            "official_rank": rank_val,
+            "player_id": pid,
+            "player_name": row["player_name"],
+            "role": "Bowler",
+            "competition_evidence": row["competition_evidence"],
+            "cpri_score": round(float(row["cpri_score"]), 2),
+            "components": {
+                "pressure_impact": round(float(row["score_pressure_impact"]), 2),
+                "pressure_adaptability": round(float(row["score_adaptability"]), 2),
+                "clutch_consistency": round(float(row["score_consistency"]), 2),
+                "reliability_confidence": round(float(row["score_reliability"]), 2),
+            },
+            "pressure_stats": {
+                "pressure_deliveries": p_balls,
+                "pressure_matches": int(row["pressure_matches"]),
+                "pressure_economy": round(econ, 2),
+                "pressure_strike_rate": round(float(row["pressure_strike_rate"]), 2),
+                "pressure_runs_saved": round(float(row["pressure_runs_saved"]), 2),
+                "pressure_wkts_above_exp": round(float(row["pressure_wkts_above_exp"]), 2),
+                "pressure_wpa": round(float(row["pressure_wpa"]), 4),
+                "total_deliveries": int(row.get("total_deliveries", p_balls)),
+                "total_matches": int(row.get("total_matches", row["pressure_matches"]))
+            },
+            "rank_uncertainty": {
+                "rank_p5": rank_val,
+                "rank_p95": rank_val + 25,
+                "median_rank": rank_val,
+                "rank_std": 15.0,
+                "top10_inclusion_freq": 0.0,
+                "ci_display": f"[{rank_val}, {rank_val + 25}]"
+            },
+            "confidence_tier": tier,
+            "tactical_classification": classification,
+            "is_official_top10": False,
+            "contextual_splits": splits_entry
+        }
+        bw_item = enrich_player_with_ppr_and_adjustment(
+            bw_item,
+            role="Bowler",
+            delivery_metrics=bowl_metrics_map.get(pid),
+            config=DEFAULT_EVIDENCE_CONFIG
+        )
+        additional_bowlers.append(bw_item)
+
+    all_batters = official_batters + candidate_batters + additional_batters
+    all_bowlers = official_bowlers + candidate_bowlers + additional_bowlers
+
+    # 8. Partition into Main Leaderboard (>= 400 balls) and Contenders (150-399 balls)
+    print("\n[Step 4] Partitioning into Main Leaderboard and Contenders...")
+    main_batters = [p for p in all_batters if p["is_main_eligible"]]
+    main_batters.sort(key=lambda p: p["adjusted_cpri"], reverse=True)
+    for rank_idx, p in enumerate(main_batters, 1):
+        p["adjusted_rank"] = rank_idx
+    compute_adjusted_rank_cis(main_batters)
+
+    contender_batters = [p for p in all_batters if not p["is_main_eligible"] and p["pressure_stats"]["pressure_deliveries"] >= 150]
+    contender_batters.sort(key=lambda p: p["adjusted_cpri"], reverse=True)
+    for rank_idx, p in enumerate(contender_batters, 1):
+        p["adjusted_rank"] = rank_idx
+    compute_adjusted_rank_cis(contender_batters)
+
+    main_bowlers = [p for p in all_bowlers if p["is_main_eligible"]]
+    main_bowlers.sort(key=lambda p: p["adjusted_cpri"], reverse=True)
+    for rank_idx, p in enumerate(main_bowlers, 1):
+        p["adjusted_rank"] = rank_idx
+    compute_adjusted_rank_cis(main_bowlers)
+
+    contender_bowlers = [p for p in all_bowlers if not p["is_main_eligible"] and p["pressure_stats"]["pressure_deliveries"] >= 150]
+    contender_bowlers.sort(key=lambda p: p["adjusted_cpri"], reverse=True)
+    for rank_idx, p in enumerate(contender_bowlers, 1):
+        p["adjusted_rank"] = rank_idx
+    compute_adjusted_rank_cis(contender_bowlers)
 
     # Combined dictionaries for fast indexing
-    all_players = official_batters + official_bowlers + candidate_batters + candidate_bowlers
-    by_player_name = {p["player_name"]: p for p in all_players}
-    by_player_id = {str(p["player_id"]): p for p in all_players}
+    combined_pool = all_batters + all_bowlers
+    by_player_name = {p["player_name"]: p for p in combined_pool}
+    by_player_id = {str(p["player_id"]): p for p in combined_pool}
+
+    # Evidence tier breakdown
+    bat_tier_counts = pd.Series([p["evidence_tier"] for p in all_batters]).value_counts().to_dict()
+    bowl_tier_counts = pd.Series([p["evidence_tier"] for p in all_bowlers]).value_counts().to_dict()
 
     store_payload = {
-        "version": "CPRI-v1.0.0-PHASE8-OFFICIAL",
+        "version": "CPRI-v1.1.0-HIGH-VOLUME-UPGRADE",
         "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "metadata": {
-            "description": "Authoritative unified official Top 10 batters and bowlers for SupeRR Selector Season 2.",
-            "source": "Phase 8 Official Ranking Reconsideration",
+            "description": "Authoritative unified official Top 10 and High-Volume Pressure Performance Reliability rankings for SupeRR Selector Season 2.",
+            "source": "Phase 8 Official Reconsideration + Phase 12 High-Volume PPR Upgrade",
             "total_official_batters": len(official_batters),
             "total_official_bowlers": len(official_bowlers),
             "total_candidate_batters": len(candidate_batters),
             "total_candidate_bowlers": len(candidate_bowlers),
+            "total_main_eligible_batters": len(main_batters),
+            "total_main_eligible_bowlers": len(main_bowlers),
+            "total_contender_batters": len(contender_batters),
+            "total_contender_bowlers": len(contender_bowlers),
+            "evidence_tier_counts_batters": bat_tier_counts,
+            "evidence_tier_counts_bowlers": bowl_tier_counts,
         },
+        # Preserved exact Phase 8 official arrays for transparency
         "official_top10_batters": official_batters,
         "official_top10_bowlers": official_bowlers,
         "candidate_batters": candidate_batters,
         "candidate_bowlers": candidate_bowlers,
+        # High-Volume Upgraded Leaderboards
+        "main_leaderboard_batters": main_batters,
+        "main_leaderboard_bowlers": main_bowlers,
+        "contender_batters": contender_batters,
+        "contender_bowlers": contender_bowlers,
         "by_player_name": by_player_name,
         "by_player_id": by_player_id
     }
@@ -341,12 +601,14 @@ def build_store():
     with open(OUT_PATH, "w", encoding="utf-8") as f:
         json.dump(store_payload, f, indent=2)
 
-    print(f"Generated official store at: {OUT_PATH}")
-    print(f"  Official Batters: {len(official_batters)}")
-    print(f"  Official Bowlers: {len(official_bowlers)}")
-    print(f"  Candidate Batters: {len(candidate_batters)}")
-    print(f"  Candidate Bowlers: {len(candidate_bowlers)}")
-    print("=" * 60)
+    print(f"\nSuccessfully generated upgraded official store at: {OUT_PATH}")
+    print(f"  Official Batters (Phase 8): {len(official_batters)}")
+    print(f"  Official Bowlers (Phase 8): {len(official_bowlers)}")
+    print(f"  Main Leaderboard Batters (>= 400 balls): {len(main_batters)}")
+    print(f"  Main Leaderboard Bowlers (>= 400 balls): {len(main_bowlers)}")
+    print(f"  Contender Batters (150-399 balls): {len(contender_batters)}")
+    print(f"  Contender Bowlers (150-399 balls): {len(contender_bowlers)}")
+    print("=" * 70)
     return store_payload
 
 
