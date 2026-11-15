@@ -98,14 +98,15 @@ Once both services are deployed, perform these live checks against the productio
 | :---: | :--- | :--- | :--- |
 | **1** | Backend Health | Visit `https://<render-url>/api/v1/health` | HTTP `200` with `"status": "healthy"`, `"stores_loaded": true`. |
 | **2** | Swagger UI | Visit `https://<render-url>/docs` | Interactive OpenAPI documentation loads cleanly. |
-| **3** | Overview Page | Visit `https://<vercel-url>/` | Dashboard renders Top 3 podium, Top 10 bar chart, and #1 player radar. |
-| **4** | Format Switching | Click *IPL* then *T20I* on Overview | Cohorts switch smoothly without page refresh. |
-| **5** | Rankings Table | Visit `https://<vercel-url>/rankings/ipl` | Leaderboard renders with Rinku Singh #1 (CPRI 89.03). Multi-column sort works. |
-| **6** | Player Dossier | Visit `/players/IPL/Batter/Rinku%20Singh` | 4 CPRI components render, phase splits chart loads, net pressure delta (+18.94 SR) is shown. |
-| **7** | AI Scouting Report | Click **"Generate AI Scouting Report"** | Live report synthesizes in seconds and renders audited Markdown. |
-| **8** | Player Comparison | Visit `/compare`, select Rinku vs Suryakumar | Dual radar overlays, delta matrix shows +0.62 CPRI, AI comparison verdict renders. |
+| **3** | Overview Page | Visit `https://<vercel-url>/` | Headline view renders Official Phase 8 Unified Top 10 (Matthew Wade #1, Mitchell Santner #1) with 90% rank CIs. |
+| **4** | Format Switching | Click *Official Unified*, *IPL*, or *T20I* | Smoothly switches between official competition baseline and contextual league views. |
+| **5** | Rankings Table | Visit `https://<vercel-url>/rankings` | Authoritative leaderboard renders Wade #1 (85.36), David #2 (82.44), Suryakumar #3 (81.42), Rinku #5 (77.18), Santner #1 (79.84). |
+| **6** | Player Dossier | Visit `/players/IPL/Batter/Rinku%20Singh` | Displays Official Phase 8 Standing card with 90% bootstrap rank CI [1, 51] and single-league contextual breakdown. |
+| **7** | AI Scouting Report | Click **"Generate AI Scouting Report"** | Live report synthesizes in seconds and renders verified Markdown audited against immutable evidence. |
+| **8** | Player Comparison | Visit `/compare`, select Rinku vs Suryakumar | Dual radar overlays, delta matrix shows comparative clutch metrics, AI comparison verdict renders. |
 | **9** | Matchup Safety | Visit `/matchup`, select Dhoni vs Ashwin | Matchup card loads with **prominent exploratory sample warning (<18 balls)**. |
-| **10** | AI Terminal QA | Visit `/assistant`, ask a suggested question | Grounded analytical response appears with verification audit badge. |
+| **10** | Limitations & Uncertainty | Visit `/limitations` | Explores two-tier classification, wide CIs audit, and adaptability weight sensitivity tables. |
+| **11** | AI Terminal QA | Visit `/assistant`, ask a suggested question | Grounded analytical response appears with deterministic verification audit badge. |
 
 ---
 
@@ -116,32 +117,35 @@ Use this structured walkthrough for judges and evaluators:
 ### Minute 1: The Core Problem & Brand Promise
 - **Hook**: Standard cricket metrics (average, strike rate, economy) collapse when leverage spikes. Scoring 20 runs in over 2 is not the same as scoring 20 runs in over 19.
 - **Solution**: Introduce **SupeRR Intelligence** (*"Beyond Performance. Measuring Pressure."*).
-- **Hero**: Point out the live status indicator (*"Engine Online • CPRI v1.0.0 Certified"*).
+- **Hero**: Point out the live status indicator (*"Engine Online • CPRI v1.0.0 Certified"*), honoring Rajasthan Royals' data-forward legacy.
 
-### Minute 2: The Overview Dashboard & Rankings Curve
-- Show the **Top 3 Podium** and the **Top 10 CPRI Ranking Curve** bar chart.
-- Toggle between **IPL** and **T20I**, then between **Batters** and **Bowlers**. Emphasize strict format segregation.
-- Show the **#1 Player Component Radar**, breaking down the 4 weighted pillars:
-  - Pressure Impact (40%)
-  - Pressure Adaptability (25%)
-  - Clutch Consistency (20%)
-  - Reliability Confidence (15%)
+### Minute 2: Official Phase 8 Rankings & Bootstrap Rank Uncertainty
+- Show the headline **Official Competition Submission** (unified dual-format baseline):
+  - **Batters**: **Matthew Wade** (#1, CPRI 85.36, 90% CI [1, 22]), **Tim David** (#2, 82.44), **Suryakumar Yadav** (#3, 81.42), **Rinku Singh** (#5, 77.18).
+  - **Bowlers**: **Mitchell Santner** (#1, CPRI 79.84, 90% CI [2, 36]), **Sufiyan Muqeem** (#2, 78.78), **Rashid Khan** (#3, 77.90), **Jasprit Bumrah** (#8, 73.36).
+- Highlight the **Two-Tier System**:
+  - **High Confidence**: Proven high-volume performers with bounded rank spans ($\le 65$).
+  - **Exploratory**: Small-sample rate outliers (Wade [1, 22] on 191 balls, Muqeem [1, 74] on 151 balls, Overton [1, 71] on 168 balls).
+- Switch to contextual **IPL** and **T20I** views to show how individual tournament slices compare.
 
-### Minute 3: Deep Player Intelligence & AI Scouting
+### Minute 3: Deep Player Intelligence & AI Scouting Dossier
 - Navigate to **Rinku Singh**'s Player Dossier (`/players/IPL/Batter/Rinku%20Singh`).
+- Point out the **Official Phase 8 Standing Banner** showing his official rank (#5 Batter, 77.18 CPRI, [1, 51] 90% CI) above his IPL contextual performance.
 - Highlight the **Pressure Contrast Matrix**:
   - Strike rate jumps by **+18.94** under pressure ($PI \ge 50$), classifying him as a *Clutch Accelerant*.
 - Click **"Generate AI Scouting Report"**:
-  - Show how the Three-Tier AI engine produces an evidence-grounded report verified by the anti-hallucination auditor.
+  - Demonstrate how the Three-Tier AI engine produces an evidence-grounded report verified by the anti-hallucination auditor.
 
 ### Minute 4: Player Comparison & Matchup Safeguards
 - Open `/compare` and compare **Rinku Singh** vs **Suryakumar Yadav**:
-  - Show the dual radar overlay and the +0.62 net CPRI delta.
+  - Show the dual radar overlay and component delta matrix.
 - Open `/matchup` and inspect **Mahendra Singh Dhoni** vs **Ravichandran Ashwin**:
   - Highlight the **Exploratory Sample Warning**: The system refuses to fabricate confidence on small samples ($< 18$ balls), demonstrating statistical integrity.
+- Open `/limitations`:
+  - Show the **Phase 8 Adaptability Formula** ($0.60 \cdot \text{PI} + 0.40 \cdot \max(\Delta, -5.0)$), effective 55% weight breakdown, and weight sensitivity invariance tables.
 
 ### Minute 5: AI Terminal & Methodology Transparency
-- Open `/assistant` and ask: *"Why is Rinku Singh ranked highly under IPL pressure?"*
-  - Show the grounded statistical explanation citing exact components.
+- Open `/assistant` and ask: *"Who are the official Top 3 batters under pressure and what are their rank uncertainties?"*
+  - Show the grounded statistical explanation citing Wade #1 [1, 22], David #2 [1, 19], and Suryakumar #3 [2, 25].
 - Conclude on `/methodology`:
-  - Show the formal mathematical transparency, pre-ball $PI \ge 50$ threshold, LightGBM run/wicket baselines, and Bayesian shrinkage confidence classifications.
+  - Review the formal mathematical transparency, pre-ball $PI \ge 50$ threshold, LightGBM run/wicket baselines, and Bayesian shrinkage confidence classifications.
