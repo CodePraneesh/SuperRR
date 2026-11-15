@@ -50,6 +50,8 @@ class TestPhase9Validation(unittest.TestCase):
 
     def test_03_saved_models_exist(self):
         """Verify model artifacts are serialized in output/phase9_ml_evaluation/models/."""
+        from tests.conftest import require_data_file
+        require_data_file('output/phase9_ml_evaluation/models/baseline_batter_runs.joblib', 'python ml/phase9/run_phase9_evaluation.py')
         expected_models = [
             'baseline_batter_runs.joblib',
             'baseline_batter_dismissal.joblib',

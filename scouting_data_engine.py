@@ -116,7 +116,7 @@ class ScoutingDataEngine:
     def _load_json(self, filename: str) -> Dict[str, Any]:
         filepath = self.data_dir / filename
         if not filepath.exists():
-            raise FileNotFoundError(f"Scouting data store not found at {filepath}. Run build_scouting_store.py first.")
+            raise FileNotFoundError(f"Scouting data store not found at {filepath}. Run python scripts/build_official_store.py or python scripts/build_scouting_store.py first.")
         with open(filepath, "r", encoding="utf-8") as f:
             return json.load(f)
 

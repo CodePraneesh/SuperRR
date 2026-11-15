@@ -15,6 +15,9 @@ SUMMARY_FILE = BASE_DIR / 'output' / 'phase2' / 'player_wpa_summary.csv'
 class TestWPAAttribution(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        from tests.conftest import require_data_file
+        require_data_file('output/phase2/delivery_wpa.csv', 'python ml/phase2/wpa_engine.py')
+        require_data_file('output/phase2/player_wpa_summary.csv', 'python ml/phase2/wpa_attribution.py')
         print('\nLoading delivery WPA and player summary datasets...')
         cls.df = pd.read_csv(OUTPUT_FILE, low_memory=False)
         cls.summary = pd.read_csv(SUMMARY_FILE, low_memory=False)

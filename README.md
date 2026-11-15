@@ -4,7 +4,7 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/React-18-61DAFB.svg)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6.svg)](https://www.typescriptlang.org/)
-[![Tests](https://img.shields.io/badge/Tests-221%20Passing-success.svg)]()
+[![Tests](https://img.shields.io/badge/Tests-145%20passed%20%7C%2076%20skipped-success.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
 **SupeRR Intelligence** is an advanced, evidence-grounded cricket scouting and clutch performance platform built for **SupeRR Selector Season 2 (Round 1)**.
@@ -123,8 +123,8 @@ Edit `.env` and set `HF_TOKEN=your_token` if using Hugging Face inference. If om
 # Build the official Phase 8 scouting store
 python scripts/build_official_store.py
 
-# Run all 214 automated tests
-python run_all_tests_suite.py
+# Run automated test suite
+python -m pytest tests test_phase1_validation.py -q -rs
 ```
 
 ### 4. Start the Application
@@ -164,12 +164,16 @@ To re-run Phase 1 from raw source files:
 
 ## 6. Test Suite & Verification Metrics
 
-SupeRR Intelligence maintains an exhaustive test suite with **221 passing unit tests**:
-- **Phase 1 Data Validation:** 16 tests (`test_phase1_validation.py`)
-- **Phase 2–10 Engine & API Tests:** 205 tests (`tests/test_*.py`)
-- **Total Combined Tests:** **221 tests, 0 failures, 0 errors**
+SupeRR Intelligence maintains an exhaustive test suite of **221 collected unit tests**:
+- **Clean Clone Verification:** **145 passed on a clean clone; 76 additional tests run when the raw data pack is present (they are skipped otherwise, with reasons)**. (0 failures, 0 errors, exit code 0).
+  All official Phase 8 rankings, API endpoints, AI scouting verifier, and mathematical schemas run and pass immediately upon cloning without requiring external raw datasets.
+- **With Raw Data Present:** **221 passed with raw data** (16 Phase 1 validation tests + 205 Phase 2–10 engine & model tests, 0 skipped, 0 failures, 0 errors, exit code 0).
 
-Run the full test suite with:
+Run the automated test suite with:
+```bash
+python -m pytest tests test_phase1_validation.py -q -rs
+```
+Or run the local test runner:
 ```bash
 python run_all_tests_suite.py
 ```

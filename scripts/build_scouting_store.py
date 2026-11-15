@@ -23,7 +23,7 @@ import numpy as np
 import pandas as pd
 
 # Set working directory to project root
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 os.chdir(BASE_DIR)
 DATA_OUT_DIR = BASE_DIR / "output" / "phase4" / "data"
 DATA_OUT_DIR.mkdir(parents=True, exist_ok=True)

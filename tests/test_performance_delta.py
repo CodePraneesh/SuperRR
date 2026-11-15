@@ -15,6 +15,9 @@ BOWL_SUM_FILE = BASE_DIR / 'output' / 'phase2' / 'bowler_performance_summary.csv
 class TestPerformanceDelta(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        from tests.conftest import require_data_file
+        require_data_file('output/phase2/batter_performance_summary.csv', 'python ml/phase2/performance_delta.py')
+        require_data_file('output/phase2/bowler_performance_summary.csv', 'python ml/phase2/performance_delta.py')
         print('\nLoading player performance summary datasets...')
         cls.batters = pd.read_csv(BAT_SUM_FILE, low_memory=False)
         cls.bowlers = pd.read_csv(BOWL_SUM_FILE, low_memory=False)

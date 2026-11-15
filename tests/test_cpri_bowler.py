@@ -9,8 +9,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 class TestCPRIBowler(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        bw_path = BASE_DIR / 'output' / 'phase2' / 'bowler_delivery_expectations.csv'
-        w_path = BASE_DIR / 'output' / 'phase2' / 'delivery_wpa.csv'
+        from tests.conftest import require_data_file
+        bw_path = require_data_file('output/phase2/bowler_delivery_expectations.csv', 'python ml/phase2/expected_bowling.py')
+        w_path = require_data_file('output/phase2/delivery_wpa.csv', 'python ml/phase2/wpa_engine.py')
         cls.bw_df = pd.read_csv(bw_path, nrows=5000)
         cls.w_df = pd.read_csv(w_path, nrows=5000)
         cls.bowlers, cls.matches = compute_bowler_cpri(cls.bw_df, cls.w_df)

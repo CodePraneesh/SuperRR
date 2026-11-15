@@ -18,6 +18,9 @@ DIST_FILE = BASE_DIR / 'output' / 'phase2' / 'pressure_distribution.csv'
 class TestPressureEngine(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        from tests.conftest import require_data_file
+        require_data_file('output/phase2/pressure_scored_deliveries.csv', 'python ml/phase2/pressure_engine.py')
+        require_data_file('output/phase2/pressure_distribution.csv', 'python ml/phase2/pressure_engine.py')
         print('\nLoading Phase 2A pressure scored dataset...')
         cls.scored = pd.read_csv(OUTPUT_FILE, low_memory=False)
         cls.dist = pd.read_csv(DIST_FILE, low_memory=False)

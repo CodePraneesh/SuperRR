@@ -22,6 +22,9 @@ class TestPhase8Validation(unittest.TestCase):
 
     def test_01_source_row_counts_and_match_coverage(self):
         """Part K.1: Verify raw source dataset row counts and match coverage."""
+        from tests.conftest import require_data_file
+        require_data_file('output/processed/matches_enriched.csv', 'python supeRR_phase1_pipeline.py')
+        require_data_file('output/processed/deliveries_enriched.csv', 'python supeRR_phase1_pipeline.py')
         matches = pd.read_csv(PROCESSED_DIR / 'matches_enriched.csv', low_memory=False)
         deliveries = pd.read_csv(PROCESSED_DIR / 'deliveries_enriched.csv', low_memory=False)
         
@@ -36,6 +39,9 @@ class TestPhase8Validation(unittest.TestCase):
 
     def test_02_competition_scope_separation(self):
         """Part K.2: Verify competition format separation and Emerging Teams exclusion."""
+        from tests.conftest import require_data_file
+        require_data_file('output/processed/matches_enriched.csv', 'python supeRR_phase1_pipeline.py')
+        require_data_file('output/processed/deliveries_enriched.csv', 'python supeRR_phase1_pipeline.py')
         matches = pd.read_csv(PROCESSED_DIR / 'matches_enriched.csv', low_memory=False)
         deliveries = pd.read_csv(PROCESSED_DIR / 'deliveries_enriched.csv', low_memory=False)
         
@@ -115,6 +121,8 @@ class TestPhase8Validation(unittest.TestCase):
 
     def test_08_correct_extra_run_attribution(self):
         """Part K.8: Verify extras attribution rules on deliveries."""
+        from tests.conftest import require_data_file
+        require_data_file('output/processed/deliveries_enriched.csv', 'python supeRR_phase1_pipeline.py')
         delivs = pd.read_csv(PROCESSED_DIR / 'deliveries_enriched.csv', nrows=5000, low_memory=False)
         
         # Wides charged to bowler
@@ -129,6 +137,8 @@ class TestPhase8Validation(unittest.TestCase):
 
     def test_09_correct_wicket_credit_attribution(self):
         """Part K.9: Verify non-bowler wickets are not credited to bowlers."""
+        from tests.conftest import require_data_file
+        require_data_file('output/processed/deliveries_enriched.csv', 'python supeRR_phase1_pipeline.py')
         delivs = pd.read_csv(PROCESSED_DIR / 'deliveries_enriched.csv', nrows=20000, low_memory=False)
         
         run_outs = delivs[delivs['dismissal_type'] == 'RunOut']
@@ -141,6 +151,8 @@ class TestPhase8Validation(unittest.TestCase):
 
     def test_10_no_future_information_in_pressure_features(self):
         """Part K.10: Verify pre-delivery state variables contain zero lookahead."""
+        from tests.conftest import require_data_file
+        require_data_file('output/processed/deliveries_enriched.csv', 'python supeRR_phase1_pipeline.py')
         delivs = pd.read_csv(PROCESSED_DIR / 'deliveries_enriched.csv', nrows=1000, low_memory=False)
         ball_ones = delivs[(delivs['innings_ball_num'] == 1)]
         self.assertTrue((ball_ones['score_before'] == 0).all(), "Ball 1 score_before must be 0.")
@@ -149,6 +161,8 @@ class TestPhase8Validation(unittest.TestCase):
 
     def test_11_no_target_leakage(self):
         """Part K.11: Pre-delivery pressure index is independent of current ball outcome."""
+        from tests.conftest import require_data_file
+        require_data_file('output/processed/deliveries_enriched.csv', 'python supeRR_phase1_pipeline.py')
         delivs = pd.read_csv(PROCESSED_DIR / 'deliveries_enriched.csv', nrows=2000, low_memory=False)
         # Check that pre_delivery_pressure_index is present and non-null
         self.assertIn('pre_delivery_pressure_index', delivs.columns)

@@ -23,13 +23,19 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r requirements.txt pytest
+
+      - name: Verify Reproducibility Manifest Hashes
+        run: python scripts/verify_manifest.py
 
       - name: Build Official Scouting Store
         run: python scripts/build_official_store.py
 
       - name: Run Test Suite
-        run: python run_all_tests_suite.py
+        run: python -m pytest tests test_phase1_validation.py -q -rs
+
+      - name: Official Rankings API & Store Parity Check
+        run: python -m pytest tests/test_official_rankings_api.py -v
 
   frontend-build:
     name: Frontend Typecheck & Build

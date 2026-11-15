@@ -21,6 +21,7 @@
 # ------------------------------------------------------------------------------
 output/phase2/*.csv
 output/processed/deliveries_enriched.csv
+output/final_release_verification/
 *.zip
 *.tar.gz
 

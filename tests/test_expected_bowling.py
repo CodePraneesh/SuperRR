@@ -14,6 +14,8 @@ OUTPUT_FILE = BASE_DIR / 'output' / 'phase2' / 'bowler_delivery_expectations.csv
 class TestExpectedBowling(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        from tests.conftest import require_data_file
+        require_data_file('output/phase2/bowler_delivery_expectations.csv', 'python ml/phase2/expected_bowling.py')
         print('\nLoading bowler delivery expectations dataset...')
         cls.df = pd.read_csv(OUTPUT_FILE, low_memory=False)
         print('Loaded bowler expectations.')

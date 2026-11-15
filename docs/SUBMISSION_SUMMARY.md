@@ -59,5 +59,5 @@ The headline rankings represent the official dual-format frozen submission. Sing
 - **Frontend:** React 18, Vite 6, TypeScript, Tailwind CSS, Recharts dashboard with Rajasthan Royals visual identity (`#101F43` deep navy, `#EC008C` RR pink).
 - **AI Intelligence Layer:** Three-Tier architecture (Tier 1: Hugging Face Qwen-2.5-7B, Tier 3: Deterministic Fallback Engine) with automated `ScoutingResponseVerifier` enforcing ordinal parsing, sample disclosures, and zero-hallucination guardrails.
 - **Production Polish:** CORS origins restricted to verified domains; schema modernized with `json_schema_extra`; 38 MB `head_to_head_matrix.json` lazy-loaded on-demand keeping startup memory under 75 MB; sliding-window rate limiting on `/scouting/ask`.
-- **Test Suite Pass Rate:** **221 / 221 tests passing** (16 Phase 1 + 205 Phase 2–10 discovered tests, 0 failures, 0 errors).
+- **Test Suite Pass Rate:** **145 passed on a clean clone; 76 additional tests run when the raw data pack is present (they are skipped otherwise, with reasons)**. (221 passed with raw data, 0 failures, 0 errors across all 221 collected tests).
 - **CI Automation:** GitHub Actions CI workflow covering backend testing, store parity, and frontend compilation on every commit.

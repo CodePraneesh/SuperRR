@@ -23,9 +23,10 @@ from ml.phase3_1.cpri_bowler import compute_bowler_cpri_31
 class TestCPRI31(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        b_path = BASE_DIR / 'output' / 'phase2' / 'batter_delivery_expectations.csv'
-        bw_path = BASE_DIR / 'output' / 'phase2' / 'bowler_delivery_expectations.csv'
-        w_path = BASE_DIR / 'output' / 'phase2' / 'delivery_wpa.csv'
+        from tests.conftest import require_data_file
+        b_path = require_data_file('output/phase2/batter_delivery_expectations.csv', 'python ml/phase2/expected_batting.py')
+        bw_path = require_data_file('output/phase2/bowler_delivery_expectations.csv', 'python ml/phase2/expected_bowling.py')
+        w_path = require_data_file('output/phase2/delivery_wpa.csv', 'python ml/phase2/wpa_engine.py')
         
         # Load sample for quick unit testing
         cls.b_df = pd.read_csv(b_path, nrows=5000)
