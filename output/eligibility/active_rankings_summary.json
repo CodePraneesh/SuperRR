@@ -3,29 +3,13 @@
     "title": "SupeRR Intelligence Active Professional T20 Rankings",
     "audit_date": "2026-11-16",
     "qualifying_criteria": "pressure_deliveries >= 60 AND pressure_matches >= 5 AND eligibility_status == 'ACTIVE'",
-    "active_batters_count": 265,
-    "active_bowlers_count": 218,
-    "active_allrounders_count": 103
+    "active_batters_count": 256,
+    "active_bowlers_count": 212,
+    "active_allrounders_count": 99
   },
   "top10_active_batters": [
     {
       "active_rank": 1,
-      "player_id": 796,
-      "player_name": "Matthew Wade",
-      "competition_evidence": "Dual-Format",
-      "cpri_score": 85.36,
-      "evidence_tier": "Limited Evidence (150-249)",
-      "pressure_deliveries": 191,
-      "pressure_matches": 15,
-      "pressure_strike_rate": 165.97,
-      "sr_elevation": 25.3,
-      "score_pressure_impact": 89.98,
-      "score_adaptability": 94.81,
-      "score_consistency": 89.38,
-      "score_reliability": 51.96
-    },
-    {
-      "active_rank": 2,
       "player_id": 6396,
       "player_name": "Tim David",
       "competition_evidence": "Dual-Format",
@@ -41,7 +25,7 @@
       "score_reliability": 88.64
     },
     {
-      "active_rank": 3,
+      "active_rank": 2,
       "player_id": 1699,
       "player_name": "Suryakumar Yadav",
       "competition_evidence": "Dual-Format",
@@ -57,7 +41,7 @@
       "score_reliability": 96.02
     },
     {
-      "active_rank": 4,
+      "active_rank": 3,
       "player_id": 768,
       "player_name": "Reeza Hendricks",
       "competition_evidence": "T20I-Only",
@@ -73,7 +57,7 @@
       "score_reliability": 72.85
     },
     {
-      "active_rank": 5,
+      "active_rank": 4,
       "player_id": 4708,
       "player_name": "Rinku Singh",
       "competition_evidence": "Dual-Format",
@@ -89,7 +73,7 @@
       "score_reliability": 86.06
     },
     {
-      "active_rank": 6,
+      "active_rank": 5,
       "player_id": 5553,
       "player_name": "Phil Salt",
       "competition_evidence": "Dual-Format",
@@ -105,7 +89,7 @@
       "score_reliability": 65.64
     },
     {
-      "active_rank": 7,
+      "active_rank": 6,
       "player_id": 6726,
       "player_name": "Romario Shepherd",
       "competition_evidence": "Dual-Format",
@@ -121,7 +105,7 @@
       "score_reliability": 86.36
     },
     {
-      "active_rank": 8,
+      "active_rank": 7,
       "player_id": 7897,
       "player_name": "Namboori Tilak Varma",
       "competition_evidence": "Dual-Format",
@@ -137,7 +121,7 @@
       "score_reliability": 96.58
     },
     {
-      "active_rank": 9,
+      "active_rank": 8,
       "player_id": 152,
       "player_name": "Ravindra Jadeja",
       "competition_evidence": "Dual-Format",
@@ -153,7 +137,7 @@
       "score_reliability": 87.62
     },
     {
-      "active_rank": 10,
+      "active_rank": 9,
       "player_id": 2756,
       "player_name": "Shashank Singh",
       "competition_evidence": "IPL-Only",
@@ -167,6 +151,22 @@
       "score_adaptability": 72.78,
       "score_consistency": 68.17,
       "score_reliability": 74.35
+    },
+    {
+      "active_rank": 10,
+      "player_id": 8101,
+      "player_name": "Ashutosh Sharma",
+      "competition_evidence": "IPL-Only",
+      "cpri_score": 72.52,
+      "evidence_tier": "Moderate Evidence (250-399)",
+      "pressure_deliveries": 261,
+      "pressure_matches": 21,
+      "pressure_strike_rate": 165.52,
+      "sr_elevation": 24.85,
+      "score_pressure_impact": 74.69,
+      "score_adaptability": 71.66,
+      "score_consistency": 73.97,
+      "score_reliability": 66.25
     }
   ],
   "top10_active_bowlers": [
@@ -469,18 +469,18 @@
     },
     {
       "active_ar_rank": 10,
-      "player_id": 1318,
-      "player_name": "Andre Russell",
+      "player_id": 4823,
+      "player_name": "Washington Sundar",
       "competition_evidence": "Dual-Format",
-      "composite_ar_cpri": 62.93,
-      "batting_cpri": 61.38,
-      "bowling_cpri": 56.22,
+      "composite_ar_cpri": 61.95,
+      "batting_cpri": 54.87,
+      "bowling_cpri": 60.64,
       "evidence_tier": "Elite Evidence (600+)",
-      "total_pressure_balls": 653,
-      "batting_pressure_balls": 323,
-      "bowling_pressure_balls": 330,
-      "pressure_strike_rate": 153.25,
-      "pressure_economy": 10.13
+      "total_pressure_balls": 641,
+      "batting_pressure_balls": 299,
+      "bowling_pressure_balls": 342,
+      "pressure_strike_rate": 133.11,
+      "pressure_economy": 7.61
     }
   ]
 }

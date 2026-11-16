@@ -86,51 +86,47 @@ class TestPlayerEligibility(unittest.TestCase):
         for status in df["eligibility_status"]:
             self.assertIn(status, valid_statuses, f"Invalid status: {status}")
 
-    def test_04_task4_named_ipl_retirees_audited(self):
-        """Verify all 9 players requested in Task 4 are explicitly audited with accurate status distinctions."""
+    def test_04_user_retired_ipl_players_audited(self):
+        """Verify all 17 players requested in the retired list are audited and classified as RETIRED."""
         reg_df = pd.read_csv(DATA_DIR / "player_eligibility_registry.csv").set_index("player_name")
-        task4_names = [
-            "Robin Uthappa", "Kieron Pollard", "Dwayne Bravo", "Ambati Rayudu",
-            "Dinesh Karthik", "Shikhar Dhawan", "Wriddhiman Saha",
-            "Ravichandran Ashwin", "Andre Russell"
+        user_retired_17 = [
+            "Kieron Pollard", "Dwayne Bravo", "Aaron Finch", "David Warner", "Matthew Wade",
+            "Andre Russell", "Glenn Maxwell", "Faf du Plessis", "Moeen Ali", "Robin Uthappa",
+            "Ambati Rayudu", "Dinesh Karthik", "Shikhar Dhawan", "Wriddhiman Saha",
+            "Ravichandran Ashwin", "Piyush Chawla", "Mohit Sharma"
         ]
-        for name in task4_names:
-            self.assertIn(name, reg_df.index, f"Task 4 player '{name}' missing from eligibility registry!")
-
-        # Confirmed IPL retirees
-        for name in ["Robin Uthappa", "Kieron Pollard", "Dwayne Bravo", "Ambati Rayudu", "Dinesh Karthik", "Shikhar Dhawan", "Wriddhiman Saha"]:
+        for name in user_retired_17:
+            self.assertIn(name, reg_df.index, f"Retired player '{name}' missing from eligibility registry!")
+            status = reg_df.loc[name, "eligibility_status"]
+            self.assertEqual(status, "RETIRED", f"Player '{name}' should have eligibility_status == 'RETIRED', found: {status}")
             ipl_stat = str(reg_df.loc[name, "IPL_status"])
             self.assertIn("RETIRED", ipl_stat, f"Player '{name}' should have RETIRED in IPL_status, found: {ipl_stat}")
 
-        # Ashwin and Russell must NOT be classified as retired
-        ashwin_status = reg_df.loc["Ravichandran Ashwin", "eligibility_status"]
-        russell_status = reg_df.loc["Andre Russell", "eligibility_status"]
-        self.assertEqual(ashwin_status, "ACTIVE", "Ravichandran Ashwin should be ACTIVE!")
-        self.assertEqual(russell_status, "ACTIVE", "Andre Russell should be ACTIVE!")
-        self.assertIn("ACTIVE", str(reg_df.loc["Ravichandran Ashwin", "IPL_status"]))
-        self.assertIn("ACTIVE", str(reg_df.loc["Andre Russell", "IPL_status"]))
-
     def test_05_released_or_unsold_not_marked_retired(self):
-        """Task 5 Invariant: Players like Matthew Wade, Reeza Hendricks, Tim David are NOT marked retired merely for being unsold."""
+        """Task 5 Invariant: Truly active players like Reeza Hendricks, Tim David, Phil Salt are NOT marked retired."""
         reg_df = pd.read_csv(DATA_DIR / "player_eligibility_registry.csv").set_index("player_name")
-        # Matthew Wade: retired from internationals, but active in BBL/franchise T20
-        self.assertEqual(reg_df.loc["Matthew Wade", "eligibility_status"], "ACTIVE")
-        self.assertIn("RETIRED", str(reg_df.loc["Matthew Wade", "international_status"]))
-        self.assertIn("ACTIVE", str(reg_df.loc["Matthew Wade", "franchise_T20_status"]))
-
-        # Reeza Hendricks: unsold/replacement, but active in internationals & SA20
-        self.assertEqual(reg_df.loc["Reeza Hendricks", "eligibility_status"], "ACTIVE")
+        active_check = ["Tim David", "Suryakumar Yadav", "Reeza Hendricks", "Rinku Singh", "Phil Salt", "Romario Shepherd"]
+        for name in active_check:
+            self.assertEqual(reg_df.loc[name, "eligibility_status"], "ACTIVE", f"Active player '{name}' wrongly marked non-active")
 
     def test_06_active_leaderboard_preserves_historical_scores(self):
-        """Verify active leaderboard filters Dinesh Karthik from batters and replaces with Shashank Singh."""
+        """Verify active leaderboard excludes Matthew Wade and Dinesh Karthik; Tim David leads."""
         act_bat = pd.read_csv(OUT_ELIG_DIR / "active_top10_batters.csv")
         self.assertEqual(len(act_bat), 10, "Active batters top 10 must have exactly 10 players")
+        self.assertNotIn("Matthew Wade", act_bat["player_name"].tolist(), "Matthew Wade must not be in active leaderboard")
         self.assertNotIn("Dinesh Karthik", act_bat["player_name"].tolist(), "Dinesh Karthik must not be in active leaderboard")
-        self.assertIn("Shashank Singh", act_bat["player_name"].tolist(), "Shashank Singh should enter active batters top 10")
 
-        # Check Matthew Wade CPRI is still 85.36 (score preserved)
-        wade_row = act_bat[act_bat["player_name"] == "Matthew Wade"].iloc[0]
-        self.assertEqual(wade_row["cpri_score"], 85.36)
+        # Tim David is #1 Active Batter with CPRI 82.44
+        self.assertEqual(act_bat.iloc[0]["player_name"], "Tim David")
+        self.assertEqual(act_bat.iloc[0]["cpri_score"], 82.44)
+
+        # Suryakumar Yadav is #2 Active Batter with CPRI 81.42
+        self.assertEqual(act_bat.iloc[1]["player_name"], "Suryakumar Yadav")
+        self.assertEqual(act_bat.iloc[1]["cpri_score"], 81.42)
+
+        # Ashutosh Sharma enters active top 10 at #10
+        self.assertIn("Ashutosh Sharma", act_bat["player_name"].tolist())
+        self.assertIn("Shashank Singh", act_bat["player_name"].tolist())
 
         # Active bowlers top 10 is 100% active
         act_bowl = pd.read_csv(OUT_ELIG_DIR / "active_top10_bowlers.csv")
