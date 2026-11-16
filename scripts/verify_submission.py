@@ -353,8 +353,59 @@ def verify_submission():
     else:
         warnings.append("Population CSVs not found — skipping volume-band verification.")
 
+    # Cross-check Supplementary Active View (Phase 12)
+    print("\n[7/8] Cross-checking Supplementary Active View (Phase 12) against reports...")
+    act_dir = REPO_ROOT / "output" / "phase12_active"
+    if act_dir.exists():
+        act_bat_path = act_dir / "active_top10_batters.csv"
+        act_bowl_path = act_dir / "active_top10_bowlers.csv"
+        act_sens_path = act_dir / "active_sensitivity_table.csv"
+
+        if not act_bat_path.exists() or not act_bowl_path.exists() or not act_sens_path.exists():
+            errors.append("Active view files missing in output/phase12_active/")
+        else:
+            act_bat = pd.read_csv(act_bat_path)
+            act_bowl = pd.read_csv(act_bowl_path)
+            act_sens = pd.read_csv(act_sens_path)
+
+            # Check cutoffs: all players must have last_played >= 2025-11-01
+            cutoff = "2025-11-01"
+            for _, r in act_bat.iterrows():
+                if r["last_played"] < cutoff:
+                    errors.append(f"Active batter {r['player_name']} last_played {r['last_played']} < cutoff {cutoff}")
+            for _, r in act_bowl.iterrows():
+                if r["last_played"] < cutoff:
+                    errors.append(f"Active bowler {r['player_name']} last_played {r['last_played']} < cutoff {cutoff}")
+
+            # Verify dropped/entered expectations under 12-month window
+            act_bat_names = set(act_bat["player_name"].tolist())
+            if "Matthew Wade" in act_bat_names or "Dinesh Karthik" in act_bat_names:
+                errors.append("Matthew Wade or Dinesh Karthik incorrectly present in active Top 10 batters")
+            if "Shashank Singh" not in act_bat_names or "Ashutosh Sharma" not in act_bat_names:
+                errors.append("Shashank Singh or Ashutosh Sharma missing from active Top 10 batters")
+
+            # Check key active players appear in reports
+            for p_name in ["Shashank Singh", "Ashutosh Sharma"]:
+                if 'md_text' in locals() and p_name not in md_text:
+                    errors.append(f"Active player '{p_name}' missing from METHODOLOGY_REPORT.md")
+                if 'full_pdf_text' in locals() and p_name not in full_pdf_text:
+                    errors.append(f"Active player '{p_name}' missing from PDF report")
+
+            # Check sensitivity table windows appear in reports
+            for _, srow in act_sens.iterrows():
+                w_lbl = str(srow["window_label"])
+                c_date = str(srow["cutoff_date"])
+                if 'md_text' in locals() and c_date not in md_text:
+                    errors.append(f"Sensitivity cutoff date '{c_date}' missing from METHODOLOGY_REPORT.md")
+                if 'full_pdf_text' in locals() and c_date not in full_pdf_text:
+                    errors.append(f"Sensitivity cutoff date '{c_date}' missing from PDF report")
+
+            print("  Active view (12m) and sensitivity tables: VERIFIED.")
+    else:
+        errors.append("output/phase12_active directory not found")
+
     # 8. Final Evaluation
-    print("\n[7/7] Submission Verification Evaluation:")
+    print("\n[8/8] Submission Verification Evaluation:")
     print("-" * 80)
     for w in warnings:
         print(f"  WARNING: {w}")

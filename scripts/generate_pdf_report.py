@@ -996,7 +996,79 @@ def build_pdf():
             ('BOTTOMPADDING', (0, 0), (-1, -1), 2.5),
         ]))
         story.append(t400)
-        story.append(Spacer(1, 6))
+        story.append(Spacer(1, 4))
+
+    # =========================================================================
+    # SECTION 3.7: ELIGIBILITY: RECENT ACTIVITY IN THE DATA
+    # =========================================================================
+    story.append(Paragraph("3.7 Eligibility: Recent Activity in the Data (Post-hoc)", h2_style))
+    story.append(Paragraph(
+        "<i>Post-hoc eligibility rule, not pre-registered. The official Unstop submission remains the frozen Phase 8 lists.</i>",
+        body_style
+    ))
+    story.append(Paragraph(
+        "<b>Rule Definition:</b> A player is defined as recently active in the dataset if they have ≥ 1 ball in the supplied "
+        "ball-by-ball dataset in the evaluated role (batting or bowling) on or after <b>2025-11-01</b> (12 months prior to latest "
+        "match date <b>2026-11-01</b>). Evaluates in-scope IPL and Senior Men's T20I matches, applied uniformly by code with zero player-name logic. "
+        "<br/><b>Scope Caveat:</b> The data covers only IPL and T20Is. A player absent from this dataset may still play other leagues; "
+        "the label is strictly <i>'not recently active in the supplied data'</i>, never <i>'retired'</i>.",
+        body_style
+    ))
+    story.append(Spacer(1, 3))
+
+    # Before / After summary for 12 months
+    act_dir_pdf = REPO_ROOT / "output" / "phase12_active"
+    act_sens_pdf = pd.read_csv(act_dir_pdf / "active_sensitivity_table.csv")
+    act_top_bat_pdf = pd.read_csv(act_dir_pdf / "active_top10_batters.csv")
+    act_top_bowl_pdf = pd.read_csv(act_dir_pdf / "active_top10_bowlers.csv")
+
+    story.append(Paragraph("<b>Primary 12-Month Window Impact on Official Top 10:</b>", body_style))
+    story.append(Paragraph(
+        "• <b>Batters:</b> 2 players drop out: Matthew Wade (#1, last played 2024-04-10) and Dinesh Karthik (#9, last played 2024-05-22). "
+        "2 players enter: Shashank Singh (#9 active, CPRI 72.83) and Ashutosh Sharma (#10 active, CPRI 72.52). Tim David (#1, 82.44) and Suryakumar Yadav (#2, 81.42) lead. "
+        "<br/>• <b>Bowlers:</b> 0 players drop out; all 10 official bowlers remain active in the dataset (100% concordance). Mitchell Santner (#1, 79.84) leads.",
+        body_style
+    ))
+    story.append(Spacer(1, 3))
+
+    story.append(Paragraph("<b>Sensitivity Across Recency Windows (6 vs 12 vs 18 Months):</b>", body_style))
+    sens_table_data = [[
+        Paragraph("Window", table_header),
+        Paragraph("Cutoff Date", table_header),
+        Paragraph("Active Batters", table_header),
+        Paragraph("Batters Dropped / Entered", table_header),
+        Paragraph("Active Bowlers", table_header),
+        Paragraph("Bowlers Dropped / Entered", table_header),
+    ]]
+    for _, srow in act_sens_pdf.iterrows():
+        b_drop = srow["batters_dropped_from_top10"] if pd.notna(srow["batters_dropped_from_top10"]) and srow["batters_dropped_from_top10"] else "None"
+        b_ent = srow["batters_entered_top10"] if pd.notna(srow["batters_entered_top10"]) and srow["batters_entered_top10"] else "None"
+        b_summary = f"Out: {b_drop}<br/>In: {b_ent}" if b_drop != "None" else "None (Unchanged)"
+        
+        bowl_drop = srow["bowlers_dropped_from_top10"] if pd.notna(srow["bowlers_dropped_from_top10"]) and srow["bowlers_dropped_from_top10"] else "None"
+        bowl_ent = srow["bowlers_entered_top10"] if pd.notna(srow["bowlers_entered_top10"]) and srow["bowlers_entered_top10"] else "None"
+        bowl_summary = f"Out: {bowl_drop}<br/>In: {bowl_ent}" if bowl_drop != "None" else "None (Unchanged)"
+
+        w_name = f"<b>{srow['window_label']}</b> (Primary)" if srow["window_months"] == 12 else str(srow["window_label"])
+
+        sens_table_data.append([
+            Paragraph(w_name, table_cell_bold),
+            Paragraph(str(srow["cutoff_date"]), table_cell),
+            Paragraph(str(int(srow["batters_qualifying_count"])), table_cell),
+            Paragraph(b_summary, table_cell),
+            Paragraph(str(int(srow["bowlers_qualifying_count"])), table_cell),
+            Paragraph(bowl_summary, table_cell),
+        ])
+    t_sens = Table(sens_table_data, colWidths=[75, 65, 55, 125, 55, 125])
+    t_sens.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), SECONDARY),
+        ('GRID', (0, 0), (-1, -1), 0.5, BORDER_COLOR),
+        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, LIGHT_BG]),
+        ('TOPPADDING', (0, 0), (-1, -1), 2),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 2),
+    ]))
+    story.append(t_sens)
+    story.append(Spacer(1, 4))
 
     story.append(PageBreak())
     # =========================================================================

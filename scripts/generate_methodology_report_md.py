@@ -303,6 +303,50 @@ n_bat_in = int((bat_official_local["pressure_deliveries"] >= 400).sum())
 n_bowl_in = int((bowl_official_local["pressure_deliveries"] >= 400).sum())
 md.append(f"**{n_bat_in}/10 official batters** and **{n_bowl_in}/10 official bowlers** pass the ≥ 400-ball filter. The 400-ball leaderboard differs at the top (Matthew Wade #1 and Sufiyan Muqeem #2 are in the Contender section under this stricter threshold) but retains 6 and 7 of the official Top 10 respectively, confirming that the Phase 8 ranking is not dominated by low-volume outliers and that the high-volume specialists feature prominently under any reasonable exposure threshold.\n")
 
+# Section 3.5 Eligibility: Recent Activity in the Data
+md.append("### 3.5 Eligibility: Recent Activity in the Data\n")
+md.append("> **Post-hoc eligibility rule, not pre-registered. The official Unstop submission remains the frozen Phase 8 lists.**\n")
+md.append("**Definition**: A player is defined as *recently active in the dataset* if they have at least one delivery in the supplied ball-by-ball dataset in the evaluated role (batting or bowling) in a match dated on or after **2025-11-01** (12 months prior to the latest match date in the dataset, **2026-11-01**). This rule is applied uniformly by code with zero player-name logic.\n")
+md.append("**Data Scope Caveat**: The dataset scope is strictly IPL and senior men's T20I matches. A player absent from this dataset may still play other global leagues; the label is strictly *'not recently active in the supplied data'*, never *'retired'*.\n")
+
+act_dir = REPO_ROOT / "output" / "phase12_active"
+act_bat_df = pd.read_csv(act_dir / "active_top10_batters.csv")
+act_bowl_df = pd.read_csv(act_dir / "active_top10_bowlers.csv")
+sens_df = pd.read_csv(act_dir / "active_sensitivity_table.csv")
+
+md.append("#### Active-Only Top 10 Batters (12-Month Window)\n")
+md.append("| Active Rank | Player Name | Raw CPRI | Pressure Balls | Last Played | 90% Rank CI* | Official Phase 8 Rank | Status |")
+md.append("| :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: |")
+for _, r in act_bat_df.iterrows():
+    stat = "Official Top 10" if r["in_official_top10"] else "**New Entrant**"
+    p8_rk = f"#{int(r['official_rank'])}" if pd.notna(r["official_rank"]) else "—"
+    md.append(f"| {int(r['rank'])} | {r['player_name']} | **{r['cpri_score']:.2f}** | {int(r['pressure_deliveries'])} | {r['last_played']} | {r['rank_ci_90']} | {p8_rk} | {stat} |")
+md.append("")
+md.append("\\* *Rank uncertainty intervals are from full-population bootstrap, not recomputed for the active view.*\n")
+
+md.append("#### Active-Only Top 10 Bowlers (12-Month Window)\n")
+md.append("| Active Rank | Player Name | Raw CPRI | Pressure Balls | Last Played | 90% Rank CI* | Official Phase 8 Rank | Status |")
+md.append("| :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: |")
+for _, r in act_bowl_df.iterrows():
+    stat = "Official Top 10" if r["in_official_top10"] else "**New Entrant**"
+    p8_rk = f"#{int(r['official_rank'])}" if pd.notna(r["official_rank"]) else "—"
+    md.append(f"| {int(r['rank'])} | {r['player_name']} | **{r['cpri_score']:.2f}** | {int(r['pressure_deliveries'])} | {r['last_played']} | {r['rank_ci_90']} | {p8_rk} | {stat} |")
+md.append("")
+md.append("\\* *Rank uncertainty intervals are from full-population bootstrap, not recomputed for the active view.*\n")
+
+md.append("#### Sensitivity Across Recency Windows (6 vs 12 vs 18 Months)\n")
+md.append("| Window | Cutoff Date | Qualifying Batters | Batters Dropped | Batters Entered | Qualifying Bowlers | Bowlers Dropped / Entered |")
+md.append("| :---: | :---: | :---: | :--- | :--- | :---: | :--- |")
+for _, r in sens_df.iterrows():
+    b_drop = r["batters_dropped_from_top10"] if pd.notna(r["batters_dropped_from_top10"]) and r["batters_dropped_from_top10"] else "None"
+    b_ent = r["batters_entered_top10"] if pd.notna(r["batters_entered_top10"]) and r["batters_entered_top10"] else "None"
+    bowl_drop = r["bowlers_dropped_from_top10"] if pd.notna(r["bowlers_dropped_from_top10"]) and r["bowlers_dropped_from_top10"] else "None"
+    bowl_ent = r["bowlers_entered_top10"] if pd.notna(r["bowlers_entered_top10"]) and r["bowlers_entered_top10"] else "None"
+    bowl_note = f"Dropped: {bowl_drop}; Entered: {bowl_ent}" if bowl_drop != "None" else "None (Top 10 Unchanged)"
+    win_lbl = f"**{r['window_label']}**" if r["window_months"] == 12 else r["window_label"]
+    md.append(f"| {win_lbl} | {r['cutoff_date']} | {int(r['batters_qualifying_count'])} | {b_drop} | {b_ent} | {int(r['bowlers_qualifying_count'])} | {bowl_note} |")
+md.append("")
+
 # Section 4: Evidence
 md.append("## 4. Evidence for the Official Top 10\n")
 md.append("### 4.1 Official Top 10 Batters Evidence Table\n")

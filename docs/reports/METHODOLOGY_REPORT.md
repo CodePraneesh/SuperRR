@@ -235,6 +235,56 @@ As a post-hoc robustness check, we apply a stricter minimum exposure filter (≥
 
 **6/10 official batters** and **7/10 official bowlers** pass the ≥ 400-ball filter. The 400-ball leaderboard differs at the top (Matthew Wade #1 and Sufiyan Muqeem #2 are in the Contender section under this stricter threshold) but retains 6 and 7 of the official Top 10 respectively, confirming that the Phase 8 ranking is not dominated by low-volume outliers and that the high-volume specialists feature prominently under any reasonable exposure threshold.
 
+### 3.5 Eligibility: Recent Activity in the Data
+
+> **Post-hoc eligibility rule, not pre-registered. The official Unstop submission remains the frozen Phase 8 lists.**
+
+**Definition**: A player is defined as *recently active in the dataset* if they have at least one delivery in the supplied ball-by-ball dataset in the evaluated role (batting or bowling) in a match dated on or after **2025-11-01** (12 months prior to the latest match date in the dataset, **2026-11-01**). This rule is applied uniformly by code with zero player-name logic.
+
+**Data Scope Caveat**: The dataset scope is strictly IPL and senior men's T20I matches. A player absent from this dataset may still play other global leagues; the label is strictly *'not recently active in the supplied data'*, never *'retired'*.
+
+#### Active-Only Top 10 Batters (12-Month Window)
+
+| Active Rank | Player Name | Raw CPRI | Pressure Balls | Last Played | 90% Rank CI* | Official Phase 8 Rank | Status |
+| :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| 1 | Tim David | **82.44** | 476 | 2026-06-21 | [1, 19] | #2 | Official Top 10 |
+| 2 | Suryakumar Yadav | **81.42** | 749 | 2026-05-24 | [2, 25] | #3 | Official Top 10 |
+| 3 | Reeza Hendricks | **77.45** | 378 | 2025-12-19 | [2, 49] | #4 | Official Top 10 |
+| 4 | Rinku Singh | **77.18** | 457 | 2026-07-26 | [1, 51] | #5 | Official Top 10 |
+| 5 | Phil Salt | **76.96** | 261 | 2026-07-11 | [2, 70] | #6 | Official Top 10 |
+| 6 | Romario Shepherd | **75.33** | 428 | 2026-10-09 | [2, 48] | #7 | Official Top 10 |
+| 7 | Namboori Tilak Varma | **74.81** | 777 | 2026-11-01 | [4, 44] | #8 | Official Top 10 |
+| 8 | Ravindra Jadeja | **73.70** | 467 | 2026-05-29 | [7, 63] | #10 | Official Top 10 |
+| 9 | Shashank Singh | **72.83** | 327 | 2026-05-17 | [2, 76] | #11 | **New Entrant** |
+| 10 | Ashutosh Sharma | **72.52** | 261 | 2026-05-24 | [2, 81] | #12 | **New Entrant** |
+
+\* *Rank uncertainty intervals are from full-population bootstrap, not recomputed for the active view.*
+
+#### Active-Only Top 10 Bowlers (12-Month Window)
+
+| Active Rank | Player Name | Raw CPRI | Pressure Balls | Last Played | 90% Rank CI* | Official Phase 8 Rank | Status |
+| :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| 1 | Mitchell Santner | **79.84** | 653 | 2026-11-01 | [2, 36] | #1 | Official Top 10 |
+| 2 | Sufiyan Muqeem | **78.78** | 151 | 2026-10-13 | [1, 74] | #2 | Official Top 10 |
+| 3 | Rashid Khan | **77.90** | 970 | 2026-11-01 | [2, 33] | #3 | Official Top 10 |
+| 4 | Jamie Overton | **76.92** | 168 | 2026-09-19 | [1, 71] | #4 | Official Top 10 |
+| 5 | Matheesha Pathirana | **75.77** | 557 | 2026-05-16 | [4, 49] | #5 | Official Top 10 |
+| 6 | Sunil Narine | **75.63** | 511 | 2026-05-24 | [4, 47] | #6 | Official Top 10 |
+| 7 | Mohammad Nawaz | **75.51** | 301 | 2026-02-01 | [1, 38] | #7 | Official Top 10 |
+| 8 | Jasprit Bumrah | **73.36** | 606 | 2026-09-17 | [3, 67] | #8 | Official Top 10 |
+| 9 | Varun Chakravarthy | **73.02** | 892 | 2026-11-01 | [5, 46] | #9 | Official Top 10 |
+| 10 | Yuzvendra Chahal | **73.01** | 859 | 2026-05-23 | [3, 48] | #10 | Official Top 10 |
+
+\* *Rank uncertainty intervals are from full-population bootstrap, not recomputed for the active view.*
+
+#### Sensitivity Across Recency Windows (6 vs 12 vs 18 Months)
+
+| Window | Cutoff Date | Qualifying Batters | Batters Dropped | Batters Entered | Qualifying Bowlers | Bowlers Dropped / Entered |
+| :---: | :---: | :---: | :--- | :--- | :---: | :--- |
+| 6 Months | 2026-05-01 | 119 | Matthew Wade; Reeza Hendricks; Dinesh Karthik | Shashank Singh; Ashutosh Sharma; Ayush Badoni | 114 | Dropped: Mohammad Nawaz; Entered: Abrar Ahmed |
+| **12 Months (Primary)** | 2025-11-01 | 142 | Matthew Wade; Dinesh Karthik | Shashank Singh; Ashutosh Sharma | 133 | None (Top 10 Unchanged) |
+| 18 Months | 2025-05-01 | 151 | Matthew Wade; Dinesh Karthik | Shashank Singh; Ashutosh Sharma | 148 | None (Top 10 Unchanged) |
+
 ## 4. Evidence for the Official Top 10
 
 ### 4.1 Official Top 10 Batters Evidence Table
