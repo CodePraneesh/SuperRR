@@ -46,7 +46,7 @@ Furthermore, the rule *"at least 50 pressure deliveries across at least 10 disti
 We searched the entire repository across tracked files, untracked artifacts, and full git history (`git log -S`) for eligibility logic and tier generation.
 
 ### Exact Thresholds Used in Code
-The authoritative classification logic resides in [`scripts/execute_phase8_analysis.py`](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/scripts/execute_phase8_analysis.py#L267-L290):
+The authoritative classification logic resides in [`scripts/execute_phase8_analysis.py`](scripts/execute_phase8_analysis.py#L267-L290):
 
 #### Batters (Lines 267–290)
 ```python
@@ -180,7 +180,7 @@ The 15 in-scope matches where Matthew Wade faced deliveries with pre-ball pressu
 | 14 | `29817` | 2024-02-13 | West Indies in Australia T20I Series 2024 | 2 | 7 | 7 |
 | 15 | `31242` | 2024-04-10 | IPL 2024 | 2 | 7 | 4 |
 
-These match counts, delivery totals, and run totals match [`output/phase8_ranking_reconsideration/batter_full_population.csv`](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/phase8_ranking_reconsideration/batter_full_population.csv) exactly.
+These match counts, delivery totals, and run totals match [`output/phase8_ranking_reconsideration/batter_full_population.csv`](output/phase8_ranking_reconsideration/batter_full_population.csv) exactly.
 
 ---
 

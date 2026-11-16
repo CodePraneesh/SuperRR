@@ -1,13 +1,13 @@
 {
   "files": {
     "pressure_scored_deliveries": {
-      "path": "C:\\Users\\Praneesh\\OneDrive\\Desktop\\RR\\SupeRR_Intelligence_Phase1\\SupeRR_Phase1\\output\\phase2\\pressure_scored_deliveries.csv",
+      "path": "output/phase2/pressure_scored_deliveries.csv",
       "sha256": "fd499a1285f41e7c190cbe0375f97368664f69edc17d6e3beed36677034e5952",
       "total_rows": 200999,
       "modeling_rows": 192235
     },
     "matches_enriched": {
-      "path": "C:\\Users\\Praneesh\\OneDrive\\Desktop\\RR\\SupeRR_Intelligence_Phase1\\SupeRR_Phase1\\output\\processed\\matches_enriched.csv",
+      "path": "output/processed/matches_enriched.csv",
       "sha256": "b14234814fb52bbcea65b788646a7a4a082cd7f3a84696456599b539ee938356",
       "total_matches": 883,
       "active_matches": 813,
