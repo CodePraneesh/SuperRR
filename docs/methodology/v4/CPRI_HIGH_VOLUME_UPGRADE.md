@@ -1,7 +1,7 @@
-# SupeRR Intelligence — CPRI High-Volume Pressure Performance Ranking Upgrade
+﻿# SupeRR Intelligence — CPRI High-Volume Pressure Performance Ranking Upgrade
 
 **Document Version**: v4.0.0  
-**Status**: Pre-Registered & Implemented  
+**Status**: Exploratory, post-hoc — committed together with the code it analyses; not pre-registered  
 **Date**: November 15, 2026  
 **Author**: SupeRR Intelligence Analytics & Release Engineering Team  
 
@@ -21,7 +21,7 @@ The **High-Volume Pressure Performance Ranking Upgrade** addresses this by:
 1. **Preserving Raw CPRI**: Original frozen Phase 8 scores and rankings remain completely unmodified for transparency and competition compliance.
 2. **Classifying Evidence Tiers**: Establishing statistically grounded, configurable sample-size tiers based on pressure deliveries.
 3. **Introducing Pressure Performance Reliability (PPR)**: A new metric capturing role-specific delivery success, cross-match consistency, and Bayesian exposure credibility.
-4. **Volume-Adjusted CPRI (Adjusted CPRI)**: Proportionately regressing small samples toward the population mean without double-counting sample size, ensuring high-volume proven clutch match-winners are recognized while preventing volume from compensating for poor play.
+4. **Volume-Adjusted CPRI (Adjusted CPRI)**: Proportionately regressing small samples toward the population mean (note: sample size enters three times — see Section 7 Limitations), ensuring high-volume proven clutch match-winners are recognized while preventing volume from compensating for poor play.
 5. **Main Leaderboard Eligibility**: Requiring at least 400 pressure balls ($\ge$ Strong Evidence) for the headline Main Leaderboard, while partitioning emerging talents into a separate, transparent Contenders section.
 
 ---
@@ -102,7 +102,7 @@ $$\text{PPR} = 50.0 + (\text{CQI} - 50.0) \times \lambda(N)$$
 
 ## 5. Volume-Adjusted CPRI Formulation
 
-To avoid double-counting sample size (since Reliability Confidence already contains non-linear delivery saturation), Adjusted CPRI separates raw skill from exposure:
+Adjusted CPRI separates raw skill from exposure. **Important accuracy note**: sample size is NOT avoided from double-counting — it enters three times: (1) skill shrinkage κ(N) = N/(N+150) in Step 2 below; (2) PPR credibility λ(N) = N/(N+250) in Section 4; and (3) the Reliability Confidence (RC) term already incorporates non-linear ball saturation. Additionally, PPR reuses the PI/PA/CC components from the original CPRI formula, introducing further correlation.
 
 1. **Unweighted Raw Skill**:
    $$\text{Skill}_{\text{raw}} = \frac{0.40 \times PI + 0.25 \times PA + 0.20 \times CC}{0.85}$$
@@ -160,3 +160,23 @@ Confirming that volume alone does NOT artificially inflate ranking:
 - **Rohit Sharma** (447 balls): Run residual = +3.07, Impact = 44.33 $\implies$ Adjusted CPRI = 54.90, PPR = 48.46.
 
 None of these high-exposure players rise to the top ranks because their underlying clutch efficiency is substandard.
+
+
+
+---
+
+## 7. Limitations
+
+**This document describes an exploratory, post-hoc analysis. It was committed in the same commit as the code it describes (49d059) and was motivated by observations about named players. It is NOT pre-registered.**
+
+The following constants and design choices in this upgrade are hand-chosen and lack held-out empirical validation:
+
+- **400-ball main leaderboard cutoff**: Chosen based on domain intuition, not cross-validated against an external outcome measure.
+- **Bayesian priors**: The skill shrinkage prior of N₀ = 150 (κ = N/(N+150)) and the PPR credibility prior of N₀ = 250 (λ = N/(N+250)) are set by convention; no grid search or leave-one-out validation was performed.
+- **PPR component weights**: The weights 0.60 (Skill_shrunk), 0.20 (RC), 0.20 (PPR) in the Adjusted CPRI formula, and the 0.35/0.25/0.20/0.20 CQI sub-weights, are hand-chosen. Alternative weightings were not formally evaluated.
+- **Role-specific success norms**: The batter success-rate norm (μ = 30%, σ = 6%) and bowler norm (μ = 60%, σ = 8%) are set by convention, not empirically derived from the population distribution.
+- **No held-out validation was run**: The upgrade was not tested on a held-out set of matches or a future season. The in-sample diagnostic tables (Section 6) cannot substitute for out-of-sample validation.
+- **Phase 8 outperformed shrinkage-based methods on split-half reliability**: In the v2 evaluation (pre-registered in docs/methodology/v2/PREREGISTRATION.md), the Phase 8 baseline achieved higher split-half reliability (batter ρ = 0.440, bowler ρ = 0.195) compared to Empirical Bayes shrinkage variants. The adjusted CPRI has not been shown to improve on this.
+- **Triple sample-size use**: As noted in Section 5, sample size N enters the Adjusted CPRI three times (κ, λ, and RC), and PPR reuses PI/PA/CC components. This compounding is not corrected for and may cause the adjusted scores to overweight high-volume players more than any single Bayesian shrinkage approach would.
+
+**The official Unstop submission remains the frozen Phase 8 (Def_A) ranking. The Adjusted CPRI / PPR view is strictly an exploratory post-hoc analysis.**

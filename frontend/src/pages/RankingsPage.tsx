@@ -217,14 +217,15 @@ export const RankingsPage: React.FC = () => {
         <div>
           <div className="text-xs uppercase tracking-widest text-[#EC008C] font-bold mb-1 flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5 text-[#EC008C]" />
-            <span>High-Volume Pressure Performance Ranking (CPRI Upgrade)</span>
+            <span>Clutch Performance Rankings (CPRI)</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-extrabold text-[#101F43] tracking-tight">
             {isOfficial ? `Clutch Leaderboard • ${role}s` : `${mode.toUpperCase()} ${role} Rankings`}
           </h1>
           <p className="text-xs text-slate-500 mt-1 max-w-2xl leading-relaxed">
-            Prioritizing players with high pressure-ball exposure and proven successful clutch performance.
-            Main Leaderboard requires at least 400 pressure balls (Elite + Strong Evidence). Raw Phase 8 scores preserved for transparency.
+            <strong className="text-[#101F43]">Official Submission:</strong> The Frozen Phase 8 Top 10 tab shows the official Unstop submission lists.
+            The "Adjusted CPRI" view is an <span className="font-semibold text-amber-700">Exploratory, post-hoc</span> analysis — not the official ranking.
+            Raw Phase 8 CPRI scores are always shown alongside any adjusted scores for transparency.
           </p>
         </div>
 
@@ -527,19 +528,21 @@ export const RankingsPage: React.FC = () => {
                     onClick={() => handleSort('adj_cpri')}
                   >
                     <div className="flex items-center justify-end gap-1">
-                      <span className="text-[#EC008C] font-extrabold">Adjusted CPRI</span>
-                      <ArrowUpDown className="w-3 h-3 text-[#EC008C]" />
+                      <span className="text-amber-300 font-extrabold">Adj. CPRI</span>
+                      <span className="text-[9px] bg-amber-500 text-white px-1 py-0.5 rounded font-bold">Exploratory</span>
+                      <ArrowUpDown className="w-3 h-3 text-amber-300" />
                     </div>
                   </th>
 
-                  {/* Raw CPRI Header */}
+                  {/* Raw CPRI Header (Official Phase 8 Score) */}
                   <th
                     className="py-3 px-3 text-right cursor-pointer hover:bg-white/10 transition-colors"
                     onClick={() => handleSort('raw_cpri')}
                   >
                     <div className="flex items-center justify-end gap-1">
-                      <span className="text-slate-300">Raw CPRI</span>
-                      <ArrowUpDown className="w-3 h-3 text-slate-400" />
+                      <span className="text-[#EC008C] font-extrabold">Raw CPRI</span>
+                      <span className="text-[9px] bg-[#EC008C] text-white px-1 py-0.5 rounded font-bold">Official</span>
+                      <ArrowUpDown className="w-3 h-3 text-[#EC008C]" />
                     </div>
                   </th>
 
