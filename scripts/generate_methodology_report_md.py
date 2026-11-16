@@ -196,7 +196,7 @@ md.append("$$\\text{Reliability} = 100 \\cdot \\tanh\\left(\\frac{N_{\\text{ball
 # Section 3
 md.append("## 3. Fair Comparisons: Sample Sizes, Eligibility, Context & Formats\n")
 md.append("### 3.1 Eligibility Thresholds & Confidence Tiers\n")
-md.append("To be considered for ranking, a player must satisfy pre-registered minimum thresholds:")
+md.append("To be considered for ranking, a player must satisfy exploratory minimum thresholds:")
 md.append("$$\\text{Eligibility Criteria}: N_{\\text{pressure balls}} \\ge 60 \\quad \\text{AND} \\quad M_{\\text{pressure matches}} \\ge 5$$\n")
 md.append("Across the dataset (match dates 2022-01-22 to 2026-11-01), **256 batters** and **212 bowlers** meet this threshold (468 eligible players total). All ranked players are assigned to standardized **Confidence Tiers**:")
 md.append("- **Tier 1 (Heavy Volume, $N \\ge 300$ balls)**: High statistical certainty; narrow rank confidence intervals.")

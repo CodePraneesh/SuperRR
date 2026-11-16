@@ -3,7 +3,7 @@ backend/app/api/routes/official.py
 Authoritative official Phase 8 competition rankings, bootstrap uncertainty,
 and High-Volume Pressure Performance Reliability (PPR) endpoints.
 """
-from typing import Optional, List
+from typing import Optional, List, Dict, Any
 from fastapi import APIRouter, Depends, Path, Query, HTTPException
 from backend.app.schemas.official import (
     OfficialRoleRankingsResponse,
@@ -17,7 +17,7 @@ router = APIRouter(prefix="/official", tags=["Official Rankings"])
 
 
 def filter_players_list(
-    players: List[Dict_or_Item],
+    players: List[Dict[str, Any]],
     min_balls: Optional[int] = None,
     evidence_tier: Optional[str] = None,
     format_evidence: Optional[str] = None
@@ -38,9 +38,6 @@ def filter_players_list(
             continue
         out.append(p)
     return out
-
-
-Dict_or_Item = Any = object
 
 
 @router.get(

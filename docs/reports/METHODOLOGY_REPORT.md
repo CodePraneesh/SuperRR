@@ -121,7 +121,7 @@ $$\text{Reliability} = 100 \cdot \tanh\left(\frac{N_{\text{balls}}}{300.0}\right
 
 ### 3.1 Eligibility Thresholds & Confidence Tiers
 
-To be considered for ranking, a player must satisfy pre-registered minimum thresholds:
+To be considered for ranking, a player must satisfy exploratory minimum thresholds:
 $$\text{Eligibility Criteria}: N_{\text{pressure balls}} \ge 60 \quad \text{AND} \quad M_{\text{pressure matches}} \ge 5$$
 
 Across the dataset (match dates 2022-01-22 to 2026-11-01), **256 batters** and **212 bowlers** meet this threshold (468 eligible players total). All ranked players are assigned to standardized **Confidence Tiers**:

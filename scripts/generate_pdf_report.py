@@ -329,7 +329,7 @@ def build_pdf():
     <b>Deliverables:</b> Two Official Ordered Top 10 Lists (Unstop Dropdowns) & Comprehensive Technical Report<br/>
     <b>Dataset Scope:</b> 883 Matches, 194,014 In-Scope Deliveries (IPL + Senior Men's T20I, Excl. Emerging Teams)<br/>
     <b>Authoritative Engine:</b> Cricket Pressure-Performance Reliability Index (CPRI v1.0 / Phase 8 Frozen Baseline)<br/>
-    <b>Integrity Protocol:</b> Pre-Registered Evaluation, Pinned Environments (requirements.lock), Fixed Seed 42<br/>
+    <b>Integrity Protocol:</b> Exploratory Evaluation with Pre-Registered Decision Gate, Pinned Environments (requirements.lock), Fixed Seed 42<br/>
     <b>Release Verification:</b> 236/236 Automated Tests Passing | 17/17 Manifest Deliverables Cryptographically Verified
     """
     story.append(Paragraph(meta_text, meta_style))
@@ -765,9 +765,9 @@ def build_pdf():
         body_style
     ))
 
-    story.append(Paragraph("3.1 Pre-Registered Eligibility & Confidence Tiers", h2_style))
+    story.append(Paragraph("3.1 Exploratory Eligibility & Confidence Tiers", h2_style))
     story.append(Paragraph(
-        "To qualify for ranking, players must meet explicit pre-registered volume thresholds: "
+        "To qualify for ranking, players must meet explicit exploratory volume thresholds: "
         "<b>N_balls ≥ 60 AND M_matches ≥ 5</b>. This filters out one-off cameos while admitting all genuine rotation players. "
         "Across the dataset, <b>256 batters</b> and <b>212 bowlers</b> qualify. To ensure honesty regarding statistical confidence, "
         "every player is categorized into a transparent confidence tier:",
