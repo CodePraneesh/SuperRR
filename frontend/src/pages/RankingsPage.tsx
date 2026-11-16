@@ -35,6 +35,25 @@ type SortField = 'rank' | 'adj_cpri' | 'raw_cpri' | 'ppr' | 'success_rate' | 'ba
 type SortOrder = 'asc' | 'desc'
 type ViewTab = 'main' | 'contenders' | 'active' | 'all' | 'official_phase8'
 
+// Horizontal Bar representation of 90% Rank Confidence Interval
+const RankIntervalBar: React.FC<{ p5?: number; p95?: number; maxRank?: number }> = ({ p5 = 1, p95 = 50, maxRank = 75 }) => {
+  const leftPct = Math.max(0, Math.min(100, ((p5 - 1) / maxRank) * 100))
+  const widthPct = Math.max(6, Math.min(100 - leftPct, ((p95 - p5) / maxRank) * 100))
+  return (
+    <div className="flex flex-col gap-1 w-28" title={`90% Rank Confidence Interval: [${p5}, ${p95}] across 500 bootstrap iterations`}>
+      <div className="flex justify-between items-center text-[10px] font-mono text-slate-700 font-bold">
+        <span>[{p5}, {p95}]</span>
+      </div>
+      <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden relative">
+        <div
+          className="h-full bg-gradient-to-r from-[#EC008C] to-indigo-600 rounded-full absolute"
+          style={{ left: `${leftPct}%`, width: `${widthPct}%` }}
+        />
+      </div>
+    </div>
+  )
+}
+
 export const RankingsPage: React.FC = () => {
   const { scopeParam } = useParams<{ scopeParam?: string }>()
   const navigate = useNavigate()
@@ -51,7 +70,7 @@ export const RankingsPage: React.FC = () => {
   const isActiveMode = mode === 'active'
 
   const [role, setRole] = useState<ActiveRole>('Batter')
-  const [activeTab, setActiveTab] = useState<ViewTab>(isActiveMode ? 'active' : 'main')
+  const [activeTab, setActiveTab] = useState<ViewTab>(isActiveMode ? 'active' : 'official_phase8')
   
   // Data stores
   const [officialTop10, setOfficialTop10] = useState<OfficialPlayerItem[]>([])
@@ -161,9 +180,11 @@ export const RankingsPage: React.FC = () => {
         const matchesName = (p.player_name || '').toLowerCase().includes(search.toLowerCase())
         if (!matchesName) return false
 
-        // Min balls filter
-        const balls = p.pressure_stats?.pressure_deliveries || p.pressure_deliveries || p.total_pressure_balls || 0
-        if (minBallsFilter > 0 && balls < minBallsFilter) return false
+        // Min balls filter (filters supplementary tables only; official Phase 8 table never changes)
+        if (activeTab !== 'official_phase8') {
+          const balls = p.pressure_stats?.pressure_deliveries || p.pressure_deliveries || p.total_pressure_balls || 0
+          if (minBallsFilter > 0 && balls < minBallsFilter) return false
+        }
 
         // Evidence Tier filter
         if (evidenceTierFilter !== 'ALL') {
@@ -270,7 +291,7 @@ export const RankingsPage: React.FC = () => {
             <button
               onClick={() => {
                 navigate('/rankings/official')
-                setActiveTab('main')
+                setActiveTab('official_phase8')
               }}
               className={`px-3 py-1.5 rounded transition-colors flex items-center gap-1.5 ${
                 isOfficial && activeTab !== 'active'
@@ -459,100 +480,20 @@ export const RankingsPage: React.FC = () => {
         </div>
       )}
 
-      {/* Section Tabs (Main Leaderboard vs Contenders vs Active vs All vs Official Phase 8) */}
+      {/* Section Tabs (Official Phase 8 is default, followed by Supplementary Views) */}
       {(isOfficial || isActiveMode) && (
-        <div className="flex flex-wrap items-center gap-2 border-b border-[#E5E7EB] pb-3">
+        <div className="flex flex-wrap items-center gap-2 border-b border-[#E5E7EB] pb-3" role="tablist" aria-label="Ranking view categories">
+          {/* 1. Official Phase 8 Top 10 (Default & Official Submission) */}
           <button
-            onClick={() => {
-              setActiveTab('main')
-              setSortField('adj_cpri')
-              setSortOrder('desc')
-            }}
-            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2 ${
-              activeTab === 'main'
-                ? 'bg-[#101F43] text-white shadow-xs'
-                : 'bg-white border border-[#E5E7EB] text-slate-700 hover:bg-[#F5F7FA]'
-            }`}
-          >
-            <Crown className={`w-3.5 h-3.5 ${activeTab === 'main' ? 'text-[#EC008C]' : 'text-slate-400'}`} />
-            <span>Main Leaderboard (≥ 400 Balls)</span>
-            <span className={`px-1.5 py-0.5 rounded-full text-[10px] ${
-              activeTab === 'main' ? 'bg-[#EC008C] text-white' : 'bg-slate-100 text-slate-600'
-            }`}>
-              {mainLeaderboard.length}
-            </span>
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab('contenders')
-              setSortField('adj_cpri')
-              setSortOrder('desc')
-            }}
-            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2 ${
-              activeTab === 'contenders'
-                ? 'bg-[#101F43] text-white shadow-xs'
-                : 'bg-white border border-[#E5E7EB] text-slate-700 hover:bg-[#F5F7FA]'
-            }`}
-          >
-            <Target className={`w-3.5 h-3.5 ${activeTab === 'contenders' ? 'text-[#EC008C]' : 'text-slate-400'}`} />
-            <span>Contenders & Emerging (150–399 Balls)</span>
-            <span className={`px-1.5 py-0.5 rounded-full text-[10px] ${
-              activeTab === 'contenders' ? 'bg-[#EC008C] text-white' : 'bg-slate-100 text-slate-600'
-            }`}>
-              {contenders.length}
-            </span>
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab('active')
-              setSortField('rank')
-              setSortOrder('asc')
-            }}
-            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2 ${
-              activeTab === 'active'
-                ? 'bg-emerald-800 text-white shadow-xs'
-                : 'bg-white border border-[#E5E7EB] text-slate-700 hover:bg-[#F5F7FA]'
-            }`}
-          >
-            <UserCheck className={`w-3.5 h-3.5 ${activeTab === 'active' ? 'text-emerald-300' : 'text-slate-400'}`} />
-            <span>Recently Active (12m Data)</span>
-            <span className={`px-1.5 py-0.5 rounded-full text-[10px] ${
-              activeTab === 'active' ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-600'
-            }`}>
-              {activePlayers.length || 'SUPP'}
-            </span>
-          </button>
-
-          <button
-            onClick={() => {
-              setActiveTab('all')
-              setSortField('adj_cpri')
-              setSortOrder('desc')
-            }}
-            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2 ${
-              activeTab === 'all'
-                ? 'bg-[#101F43] text-white shadow-xs'
-                : 'bg-white border border-[#E5E7EB] text-slate-700 hover:bg-[#F5F7FA]'
-            }`}
-          >
-            <Layers className={`w-3.5 h-3.5 ${activeTab === 'all' ? 'text-[#EC008C]' : 'text-slate-400'}`} />
-            <span>All Evaluated Players</span>
-            <span className={`px-1.5 py-0.5 rounded-full text-[10px] ${
-              activeTab === 'all' ? 'bg-[#EC008C] text-white' : 'bg-slate-100 text-slate-600'
-            }`}>
-              {mainLeaderboard.length + contenders.length}
-            </span>
-          </button>
-
-          <button
+            role="tab"
+            aria-selected={activeTab === 'official_phase8'}
+            aria-label="View Frozen Phase 8 Official Top 10 rankings"
             onClick={() => {
               setActiveTab('official_phase8')
               setSortField('rank')
               setSortOrder('asc')
             }}
-            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2 ${
+            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#EC008C] ${
               activeTab === 'official_phase8'
                 ? 'bg-[#101F43] text-white shadow-xs'
                 : 'bg-white border border-[#E5E7EB] text-slate-700 hover:bg-[#F5F7FA]'
@@ -560,10 +501,114 @@ export const RankingsPage: React.FC = () => {
           >
             <ShieldCheck className={`w-3.5 h-3.5 ${activeTab === 'official_phase8' ? 'text-[#EC008C]' : 'text-slate-400'}`} />
             <span>Frozen Phase 8 Top 10</span>
-            <span className={`px-1.5 py-0.5 rounded-full text-[10px] ${
-              activeTab === 'official_phase8' ? 'bg-[#EC008C] text-white' : 'bg-slate-100 text-slate-600'
+            <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-bold ${
+              activeTab === 'official_phase8' ? 'bg-[#EC008C] text-white' : 'bg-pink-100 text-[#EC008C]'
             }`}>
-              10
+              OFFICIAL
+            </span>
+          </button>
+
+          {/* 2. Main Leaderboard (Supplementary) */}
+          <button
+            role="tab"
+            aria-selected={activeTab === 'main'}
+            aria-label="View Main Leaderboard 400 plus balls (Supplementary)"
+            onClick={() => {
+              setActiveTab('main')
+              setSortField('adj_cpri')
+              setSortOrder('desc')
+            }}
+            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#EC008C] ${
+              activeTab === 'main'
+                ? 'bg-[#101F43] text-white shadow-xs'
+                : 'bg-white border border-[#E5E7EB] text-slate-700 hover:bg-[#F5F7FA]'
+            }`}
+          >
+            <Crown className={`w-3.5 h-3.5 ${activeTab === 'main' ? 'text-[#EC008C]' : 'text-slate-400'}`} />
+            <span>Main Leaderboard (≥ 400 Balls)</span>
+            <span className="text-[9px] bg-amber-500 text-white px-1.5 py-0.2 rounded-full font-bold">SUPP</span>
+            <span className={`px-1.5 py-0.5 rounded-full text-[10px] ${
+              activeTab === 'main' ? 'bg-[#EC008C] text-white' : 'bg-slate-100 text-slate-600'
+            }`}>
+              {mainLeaderboard.length}
+            </span>
+          </button>
+
+          {/* 3. Contenders (Supplementary) */}
+          <button
+            role="tab"
+            aria-selected={activeTab === 'contenders'}
+            aria-label="View Contenders and Emerging 150 to 399 balls (Supplementary)"
+            onClick={() => {
+              setActiveTab('contenders')
+              setSortField('adj_cpri')
+              setSortOrder('desc')
+            }}
+            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#EC008C] ${
+              activeTab === 'contenders'
+                ? 'bg-[#101F43] text-white shadow-xs'
+                : 'bg-white border border-[#E5E7EB] text-slate-700 hover:bg-[#F5F7FA]'
+            }`}
+          >
+            <Target className={`w-3.5 h-3.5 ${activeTab === 'contenders' ? 'text-[#EC008C]' : 'text-slate-400'}`} />
+            <span>Contenders & Emerging (150–399 Balls)</span>
+            <span className="text-[9px] bg-amber-500 text-white px-1.5 py-0.2 rounded-full font-bold">SUPP</span>
+            <span className={`px-1.5 py-0.5 rounded-full text-[10px] ${
+              activeTab === 'contenders' ? 'bg-[#EC008C] text-white' : 'bg-slate-100 text-slate-600'
+            }`}>
+              {contenders.length}
+            </span>
+          </button>
+
+          {/* 4. Active (Supplementary) */}
+          <button
+            role="tab"
+            aria-selected={activeTab === 'active'}
+            aria-label="View Recently Active 12m (Supplementary)"
+            onClick={() => {
+              setActiveTab('active')
+              setSortField('rank')
+              setSortOrder('asc')
+            }}
+            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#EC008C] ${
+              activeTab === 'active'
+                ? 'bg-emerald-800 text-white shadow-xs'
+                : 'bg-white border border-[#E5E7EB] text-slate-700 hover:bg-[#F5F7FA]'
+            }`}
+          >
+            <UserCheck className={`w-3.5 h-3.5 ${activeTab === 'active' ? 'text-emerald-300' : 'text-slate-400'}`} />
+            <span>Recently Active (12m Data)</span>
+            <span className="text-[9px] bg-emerald-500 text-white px-1.5 py-0.2 rounded-full font-bold">SUPP</span>
+            <span className={`px-1.5 py-0.5 rounded-full text-[10px] ${
+              activeTab === 'active' ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-600'
+            }`}>
+              {activePlayers.length || 'SUPP'}
+            </span>
+          </button>
+
+          {/* 5. All Evaluated Players (Supplementary) */}
+          <button
+            role="tab"
+            aria-selected={activeTab === 'all'}
+            aria-label="View All Evaluated Players (Supplementary)"
+            onClick={() => {
+              setActiveTab('all')
+              setSortField('adj_cpri')
+              setSortOrder('desc')
+            }}
+            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#EC008C] ${
+              activeTab === 'all'
+                ? 'bg-[#101F43] text-white shadow-xs'
+                : 'bg-white border border-[#E5E7EB] text-slate-700 hover:bg-[#F5F7FA]'
+            }`}
+          >
+            <Layers className={`w-3.5 h-3.5 ${activeTab === 'all' ? 'text-[#EC008C]' : 'text-slate-400'}`} />
+            <span>All Evaluated Players</span>
+            <span className="text-[9px] bg-amber-500 text-white px-1.5 py-0.2 rounded-full font-bold">SUPP</span>
+            <span className={`px-1.5 py-0.5 rounded-full text-[10px] ${
+              activeTab === 'all' ? 'bg-[#EC008C] text-white' : 'bg-slate-100 text-slate-600'
+            }`}>
+              {mainLeaderboard.length + contenders.length}
             </span>
           </button>
         </div>
@@ -577,35 +622,60 @@ export const RankingsPage: React.FC = () => {
             <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
+              aria-label="Search players by name"
               placeholder="Search by player name..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-9 pr-4 py-1.5 bg-[#F5F7FA] border border-[#E5E7EB] rounded-md text-xs text-[#101F43] focus:outline-none focus:border-[#EC008C]"
+              className="w-full pl-9 pr-4 py-1.5 bg-[#F5F7FA] border border-[#E5E7EB] rounded-md text-xs text-[#101F43] focus:outline-none focus:ring-2 focus:ring-[#EC008C]"
             />
           </div>
 
-          {/* Min Pressure Balls Filter */}
+          {/* Min Pressure Balls Filter (Control: All / 150 / 250 / 400 - filters supplementary tables only) */}
           <div className="flex items-center gap-1.5">
-            <span className="text-[11px] font-semibold text-slate-500">Min Balls:</span>
+            <span className="text-[11px] font-semibold text-slate-600">Min Balls:</span>
             <select
               value={minBallsFilter}
               onChange={(e) => setMinBallsFilter(Number(e.target.value))}
-              className="text-xs bg-[#F5F7FA] border border-[#E5E7EB] rounded-md px-2.5 py-1.5 font-medium text-slate-700 focus:outline-none focus:border-[#EC008C]"
+              disabled={activeTab === 'official_phase8'}
+              aria-label="Minimum pressure balls control (filters supplementary tables only)"
+              title={activeTab === 'official_phase8' ? 'The official Phase 8 Top 10 table is frozen and never filtered. This control applies to supplementary tables only.' : 'Filter supplementary tables by minimum pressure deliveries'}
+              className="text-xs bg-[#F5F7FA] border border-[#E5E7EB] rounded-md px-2.5 py-1.5 font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#EC008C] disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <option value={0}>All Qualifying (150+)</option>
-              <option value={250}>250+ Balls (Moderate+)</option>
-              <option value={400}>400+ Balls (Main Only)</option>
-              <option value={600}>600+ Balls (Elite Only)</option>
+              <option value={0}>All</option>
+              <option value={150}>150</option>
+              <option value={250}>250</option>
+              <option value={400}>400</option>
             </select>
+            {activeTab === 'official_phase8' && (
+              <span className="text-[10px] text-slate-400 italic">(Supp only)</span>
+            )}
           </div>
 
           {/* Evidence Tier Filter */}
           <div className="flex items-center gap-1.5">
-            <span className="text-[11px] font-semibold text-slate-500">Evidence Tier:</span>
+            <span className="text-[11px] font-semibold text-slate-600">Evidence Tier:</span>
             <select
               value={evidenceTierFilter}
               onChange={(e) => setEvidenceTierFilter(e.target.value)}
-              className="text-xs bg-[#F5F7FA] border border-[#E5E7EB] rounded-md px-2.5 py-1.5 font-medium text-slate-700 focus:outline-none focus:border-[#EC008C]"
+              aria-label="Filter by evidence tier"
+              className="text-xs bg-[#F5F7FA] border border-[#E5E7EB] rounded-md px-2.5 py-1.5 font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#EC008C]"
+            >
+              <option value="ALL">All Tiers</option>
+              <option value="Elite Evidence">Elite Evidence (600+)</option>
+              <option value="Strong Evidence">Strong Evidence (400–599)</option>
+              <option value="Moderate Evidence">Moderate Evidence (250–399)</option>
+              <option value="Limited Evidence">Limited Evidence (150–249)</option>
+            </select>
+          </div>
+
+          {/* Format Filter */}
+          <div className="flex items-center gap-1.5">
+            <span className="text-[11px] font-semibold text-slate-600">Format:</span>
+            <select
+              value={formatFilter}
+              onChange={(e) => setFormatFilter(e.target.value)}
+              aria-label="Filter by match format"
+              className="text-xs bg-[#F5F7FA] border border-[#E5E7EB] rounded-md px-2.5 py-1.5 font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#EC008C]"
             >
               <option value="ALL">All Tiers</option>
               <option value="Elite Evidence">Elite Evidence (600+)</option>
@@ -760,130 +830,54 @@ export const RankingsPage: React.FC = () => {
                   )}
                 </tbody>
               </table>
-            ) : (
-            <table className="w-full text-left border-collapse text-xs">
-              <thead>
-                <tr className="bg-[#101F43] text-white border-b border-[#E5E7EB]">
-                  {/* Rank Header */}
-                  <th
-                    className="py-3 px-3 cursor-pointer hover:bg-white/10 transition-colors w-14"
-                    onClick={() => handleSort('rank')}
-                  >
-                    <div className="flex items-center gap-1">
-                      <span>Rank</span>
-                      <ArrowUpDown className="w-3 h-3 text-slate-400" />
-                    </div>
-                  </th>
+            ) : activeTab === 'official_phase8' ? (
+              /* Authoritative Official Phase 8 Top 10 Table */
+              <div>
+                <div className="px-4 py-3 bg-[#101F43] text-white flex flex-wrap items-center justify-between gap-2 border-b border-[#182752]">
+                  <div className="flex items-center gap-2">
+                    <Crown className="w-4 h-4 text-[#EC008C]" />
+                    <span className="font-bold text-xs uppercase tracking-wide">
+                      Authoritative Phase 8 Official Top 10 Submission
+                    </span>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#EC008C] text-white">
+                      OFFICIAL SUBMISSION
+                    </span>
+                  </div>
+                  <span className="text-[11px] text-slate-300">
+                    Frozen Phase 8 baseline • 90% bootstrap rank confidence intervals
+                  </span>
+                </div>
+                <table className="w-full text-left border-collapse text-xs" aria-label="Official Top 10 Rankings Table">
+                  <thead>
+                    <tr className="bg-[#101F43] text-white border-b border-[#E5E7EB]">
+                      <th className="py-3 px-3 w-14">Rank</th>
+                      <th className="py-3 px-3 w-32">90% Rank CI</th>
+                      <th className="py-3 px-3 min-w-[160px]">Player</th>
+                      <th className="py-3 px-3 w-28">Format Evidence</th>
+                      <th className="py-3 px-3 w-36">Evidence Tier</th>
+                      <th className="py-3 px-3 text-right">
+                        <span className="text-[#EC008C] font-extrabold">Official CPRI</span>
+                      </th>
+                      <th className="py-3 px-3 text-right">Pressure Balls & Matches</th>
+                      <th className="py-3 px-3 text-center w-28">Last Played</th>
+                      <th className="py-3 px-3 text-right w-20">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[#E5E7EB]">
+                    {filteredAndSortedPlayers.map((p: any) => {
+                      const displayRank = p.official_rank
+                      const isTop3 = displayRank <= 3
+                      const pScope = p.competition_evidence === 'T20I-Only' ? 'T20I' : 'IPL'
+                      const pBalls = p.pressure_stats?.pressure_deliveries || p.pressure_deliveries || 0
+                      const pMatches = p.pressure_stats?.pressure_matches || p.total_matches || 0
+                      const isExploratory = pBalls < 250
+                      const tierName = p.evidence_tier || 'Limited Evidence'
+                      const p5 = p.rank_uncertainty?.rank_p5 ?? 1
+                      const p95 = p.rank_uncertainty?.rank_p95 ?? 10
 
-                  {/* 90% Rank CI Header */}
-                  {isOfficial && (
-                    <th className="py-3 px-3 w-20">
-                      <span>90% CI</span>
-                    </th>
-                  )}
-
-                  {/* Player Header */}
-                  <th className="py-3 px-3 min-w-[160px]">Player</th>
-
-                  {/* Format Evidence Header */}
-                  {isOfficial && <th className="py-3 px-3 w-28">Format Evidence</th>}
-
-                  {/* Evidence Tier Header */}
-                  {isOfficial && <th className="py-3 px-3 w-32">Evidence Tier</th>}
-
-                  {/* Adjusted CPRI Header */}
-                  <th
-                    className="py-3 px-3 text-right cursor-pointer hover:bg-white/10 transition-colors"
-                    onClick={() => handleSort('adj_cpri')}
-                  >
-                    <div className="flex items-center justify-end gap-1">
-                      <span className="text-amber-300 font-extrabold">Adj. CPRI</span>
-                      <span className="text-[9px] bg-amber-500 text-white px-1 py-0.5 rounded font-bold">Exploratory</span>
-                      <ArrowUpDown className="w-3 h-3 text-amber-300" />
-                    </div>
-                  </th>
-
-                  {/* Raw CPRI Header (Official Phase 8 Score) */}
-                  <th
-                    className="py-3 px-3 text-right cursor-pointer hover:bg-white/10 transition-colors"
-                    onClick={() => handleSort('raw_cpri')}
-                  >
-                    <div className="flex items-center justify-end gap-1">
-                      <span className="text-[#EC008C] font-extrabold">Raw CPRI</span>
-                      <span className="text-[9px] bg-[#EC008C] text-white px-1 py-0.5 rounded font-bold">Official</span>
-                      <ArrowUpDown className="w-3 h-3 text-[#EC008C]" />
-                    </div>
-                  </th>
-
-                  {/* PPR Score Header */}
-                  {isOfficial && (
-                    <th
-                      className="py-3 px-3 text-right cursor-pointer hover:bg-white/10 transition-colors"
-                      onClick={() => handleSort('ppr')}
-                    >
-                      <div className="flex items-center justify-end gap-1">
-                        <span>PPR</span>
-                        <ArrowUpDown className="w-3 h-3 text-slate-400" />
-                      </div>
-                    </th>
-                  )}
-
-                  {/* Clutch Success % Header */}
-                  {isOfficial && (
-                    <th
-                      className="py-3 px-3 text-right cursor-pointer hover:bg-white/10 transition-colors"
-                      onClick={() => handleSort('success_rate')}
-                    >
-                      <div className="flex items-center justify-end gap-1">
-                        <span>Success %</span>
-                        <ArrowUpDown className="w-3 h-3 text-slate-400" />
-                      </div>
-                    </th>
-                  )}
-
-                  {/* Pressure Deliveries Header */}
-                  <th
-                    className="py-3 px-3 text-right cursor-pointer hover:bg-white/10 transition-colors"
-                    onClick={() => handleSort('balls')}
-                  >
-                    <div className="flex items-center justify-end gap-1">
-                      <span>Pressure Balls</span>
-                      <ArrowUpDown className="w-3 h-3 text-slate-400" />
-                    </div>
-                  </th>
-
-                  {/* Action Header */}
-                  <th className="py-3 px-3 text-right w-20">Action</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#E5E7EB]">
-                {filteredAndSortedPlayers.length === 0 ? (
-                  <tr>
-                    <td colSpan={11} className="py-12 text-center text-slate-400">
-                      No players match the selected filters.
-                    </td>
-                  </tr>
-                ) : (
-                  filteredAndSortedPlayers.map((p: any, idx: number) => {
-                    const displayRank = activeTab === 'official_phase8'
-                      ? p.official_rank
-                      : (activeTab === 'main' ? p.adjusted_rank : (p.adjusted_rank || p.official_rank)) || idx + 1
-                    const isTop3 = displayRank <= 3
-                    const pScope = isOfficial ? (p.competition_evidence === 'T20I-Only' ? 'T20I' : 'IPL') : mode.toUpperCase()
-                    const pBalls = p.pressure_stats?.pressure_deliveries || p.pressure_deliveries || 0
-                    const tierName = p.evidence_tier || 'Limited Evidence'
-                    const ciDisplay = activeTab === 'official_phase8'
-                      ? (p.rank_uncertainty?.ci_display || '—')
-                      : (p.adjusted_rank_ci || p.rank_uncertainty?.ci_display || '—')
-
-                    return (
-                      <tr
-                        key={p.player_id || p.player_name}
-                        className="hover:bg-[#F5F7FA] transition-colors"
-                      >
-                        {/* Rank */}
-                        <td className="py-3 px-3 font-mono font-bold">
-                          <div className="flex items-center gap-1.5">
+                      return (
+                        <tr key={p.player_id || p.player_name} className="hover:bg-[#F5F7FA] transition-colors">
+                          <td className="py-3 px-3 font-mono font-bold">
                             <span
                               className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${
                                 displayRank === 1
@@ -895,96 +889,256 @@ export const RankingsPage: React.FC = () => {
                             >
                               {displayRank}
                             </span>
-                          </div>
-                        </td>
-
-                        {/* 90% Rank CI */}
-                        {isOfficial && (
-                          <td className="py-3 px-3 font-mono text-slate-600 font-semibold text-[11px]">
-                            {ciDisplay}
                           </td>
-                        )}
-
-                        {/* Player Name & Tactical Tag */}
-                        <td className="py-3 px-3">
-                          <div className="flex items-center gap-1.5 flex-wrap">
+                          <td className="py-3 px-3">
+                            <RankIntervalBar p5={p5} p95={p95} />
+                          </td>
+                          <td className="py-3 px-3">
                             <Link
                               to={`/players/${pScope}/${role}/${encodeURIComponent(p.player_name)}`}
-                              className="font-bold text-[#101F43] hover:text-[#EC008C] transition-colors block text-xs"
+                              className="font-bold text-[#101F43] hover:text-[#EC008C] transition-colors block text-xs focus:outline-none focus:ring-2 focus:ring-[#EC008C]"
                             >
                               {p.player_name}
                             </Link>
-                          </div>
-                          {p.tactical_classification && (
-                            <span className="text-[10px] text-slate-400 font-medium">
-                              {p.tactical_classification}
-                            </span>
-                          )}
-                        </td>
-
-                        {/* Format Evidence */}
-                        {isOfficial && (
+                            {p.tactical_classification && (
+                              <span className="text-[10px] text-slate-400 font-medium">
+                                {p.tactical_classification}
+                              </span>
+                            )}
+                          </td>
                           <td className="py-3 px-3">
                             <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700 whitespace-nowrap">
                               {p.competition_evidence || 'Dual-Format'}
                             </span>
                           </td>
-                        )}
-
-                        {/* Evidence Tier */}
-                        {isOfficial && (
                           <td className="py-3 px-3">
-                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded whitespace-nowrap ${getEvidenceTierBadge(p.evidence_tier)}`}>
-                              {tierName}
-                            </span>
+                            {isExploratory ? (
+                              <span
+                                className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300 cursor-help"
+                                title="Exploratory Evidence: Fewer than 250 pressure deliveries in dataset (<250 balls). Sample size has wider bootstrap confidence intervals."
+                              >
+                                <AlertTriangle className="w-3 h-3 text-amber-600 shrink-0" />
+                                <span>Exploratory ({tierName})</span>
+                              </span>
+                            ) : (
+                              <span
+                                className={`text-[10px] font-bold px-2 py-0.5 rounded whitespace-nowrap ${getEvidenceTierBadge(p.evidence_tier)}`}
+                                title="Statistically robust sample size (≥250 pressure deliveries)."
+                              >
+                                {tierName}
+                              </span>
+                            )}
                           </td>
-                        )}
-
-                        {/* Adjusted CPRI Score (Highlighted) */}
-                        <td className="py-3 px-3 text-right font-black text-sm text-[#EC008C] font-mono">
-                          {formatScore(p.adjusted_cpri ?? p.cpri_score)}
-                        </td>
-
-                        {/* Raw CPRI Score (Reference) */}
-                        <td className="py-3 px-3 text-right font-mono text-slate-600 text-xs">
-                          {formatScore(p.cpri_score)}
-                        </td>
-
-                        {/* PPR Score */}
-                        {isOfficial && (
-                          <td className="py-3 px-3 text-right font-mono font-semibold text-slate-800 text-xs">
-                            {formatScore(p.ppr_score ?? 50.0)}
+                          <td className="py-3 px-3 text-right font-black text-sm text-[#EC008C] font-mono">
+                            {formatScore(p.cpri_score)}
                           </td>
-                        )}
-
-                        {/* Clutch Success % */}
-                        {isOfficial && (
-                          <td className="py-3 px-3 text-right font-mono text-slate-700 text-xs">
-                            {p.success_rate_pct != null ? `${Number(p.success_rate_pct).toFixed(1)}%` : '—'}
+                          <td className="py-3 px-3 text-right font-mono text-slate-800 font-semibold text-xs whitespace-nowrap">
+                            <div>{pBalls} balls</div>
+                            <div className="text-[10px] text-slate-500 font-normal">{pMatches} matches</div>
                           </td>
-                        )}
-
-                        {/* Pressure Deliveries */}
-                        <td className="py-3 px-3 text-right font-mono text-slate-700 font-semibold text-xs">
-                          {pBalls}
-                        </td>
-
-                        {/* Action Link */}
-                        <td className="py-3 px-3 text-right">
-                          <Link
-                            to={`/players/${pScope}/${role}/${encodeURIComponent(p.player_name)}`}
-                            className="text-[11px] font-bold text-[#EC008C] hover:text-[#101F43] inline-flex items-center gap-1"
-                          >
-                            <span>Dossier</span>
-                            <ArrowRight className="w-3 h-3" />
-                          </Link>
+                          <td className="py-3 px-3 text-center font-mono text-xs text-slate-700 font-medium">
+                            {p.last_played || '—'}
+                          </td>
+                          <td className="py-3 px-3 text-right">
+                            <Link
+                              to={`/players/${pScope}/${role}/${encodeURIComponent(p.player_name)}`}
+                              className="text-[11px] font-bold text-[#EC008C] hover:text-[#101F43] inline-flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-[#EC008C]"
+                            >
+                              <span>Dossier</span>
+                              <ArrowRight className="w-3 h-3" />
+                            </Link>
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              /* Supplementary Tables (Main Leaderboard / Contenders / All Evaluated) */
+              <div>
+                <div className="px-4 py-3 bg-amber-50 border-b border-amber-200 flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-amber-200 text-amber-900 border border-amber-300">
+                      SUPPLEMENTARY
+                    </span>
+                    <span className="text-xs font-bold text-amber-950">
+                      Supplementary — not the official submission
+                    </span>
+                  </div>
+                  <span className="text-[11px] text-amber-800">
+                    Filtered by min balls ({minBallsFilter > 0 ? `${minBallsFilter}+` : 'All'}). CPRI scores and ranks unchanged; display re-numbered.
+                  </span>
+                </div>
+                <table className="w-full text-left border-collapse text-xs" aria-label="Supplementary Clutch Rankings Table">
+                  <thead>
+                    <tr className="bg-[#101F43] text-white border-b border-[#E5E7EB]">
+                      <th
+                        className="py-3 px-3 cursor-pointer hover:bg-white/10 transition-colors w-14"
+                        onClick={() => handleSort('rank')}
+                      >
+                        <div className="flex items-center gap-1">
+                          <span>Rank</span>
+                          <ArrowUpDown className="w-3 h-3 text-slate-400" />
+                        </div>
+                      </th>
+                      <th className="py-3 px-3 min-w-[160px]">Player</th>
+                      <th className="py-3 px-3 w-28">Format Evidence</th>
+                      <th className="py-3 px-3 w-32">Evidence Tier</th>
+                      <th
+                        className="py-3 px-3 text-right cursor-pointer hover:bg-white/10 transition-colors"
+                        onClick={() => handleSort('adj_cpri')}
+                      >
+                        <div className="flex items-center justify-end gap-1">
+                          <span className="text-amber-300 font-extrabold">Adj. CPRI</span>
+                          <span className="text-[9px] bg-amber-500 text-white px-1 py-0.5 rounded font-bold">Exploratory</span>
+                          <ArrowUpDown className="w-3 h-3 text-amber-300" />
+                        </div>
+                      </th>
+                      <th
+                        className="py-3 px-3 text-right cursor-pointer hover:bg-white/10 transition-colors"
+                        onClick={() => handleSort('raw_cpri')}
+                      >
+                        <div className="flex items-center justify-end gap-1">
+                          <span className="text-[#EC008C] font-extrabold">Raw CPRI</span>
+                          <span className="text-[9px] bg-[#EC008C] text-white px-1 py-0.5 rounded font-bold">Ref</span>
+                          <ArrowUpDown className="w-3 h-3 text-[#EC008C]" />
+                        </div>
+                      </th>
+                      <th
+                        className="py-3 px-3 text-right cursor-pointer hover:bg-white/10 transition-colors"
+                        onClick={() => handleSort('ppr')}
+                      >
+                        <div className="flex items-center justify-end gap-1">
+                          <span>PPR</span>
+                          <ArrowUpDown className="w-3 h-3 text-slate-400" />
+                        </div>
+                      </th>
+                      <th
+                        className="py-3 px-3 text-right cursor-pointer hover:bg-white/10 transition-colors"
+                        onClick={() => handleSort('success_rate')}
+                      >
+                        <div className="flex items-center justify-end gap-1">
+                          <span>Success %</span>
+                          <ArrowUpDown className="w-3 h-3 text-slate-400" />
+                        </div>
+                      </th>
+                      <th
+                        className="py-3 px-3 text-right cursor-pointer hover:bg-white/10 transition-colors"
+                        onClick={() => handleSort('balls')}
+                      >
+                        <div className="flex items-center justify-end gap-1">
+                          <span>Pressure Balls & Matches</span>
+                          <ArrowUpDown className="w-3 h-3 text-slate-400" />
+                        </div>
+                      </th>
+                      <th className="py-3 px-3 text-right w-20">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[#E5E7EB]">
+                    {filteredAndSortedPlayers.length === 0 ? (
+                      <tr>
+                        <td colSpan={10} className="py-12 text-center text-slate-400">
+                          No players match the selected filters.
                         </td>
                       </tr>
-                    )
-                  })
-                )}
-              </tbody>
-            </table>
+                    ) : (
+                      filteredAndSortedPlayers.map((p: any, idx: number) => {
+                        const displayRank = idx + 1
+                        const isTop3 = displayRank <= 3
+                        const pScope = isOfficial ? (p.competition_evidence === 'T20I-Only' ? 'T20I' : 'IPL') : mode.toUpperCase()
+                        const pBalls = p.pressure_stats?.pressure_deliveries || p.pressure_deliveries || 0
+                        const pMatches = p.pressure_stats?.pressure_matches || p.total_matches || 0
+                        const tierName = p.evidence_tier || 'Limited Evidence'
+                        const isExploratory = pBalls < 250
+
+                        return (
+                          <tr key={p.player_id || p.player_name} className="hover:bg-[#F5F7FA] transition-colors">
+                            <td className="py-3 px-3 font-mono font-bold">
+                              <div className="flex items-center gap-1.5">
+                                <span
+                                  className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${
+                                    displayRank === 1
+                                      ? 'bg-amber-600 text-white font-extrabold shadow-xs'
+                                      : isTop3
+                                      ? 'bg-[#101F43] text-white font-bold'
+                                      : 'bg-[#F5F7FA] text-[#101F43] border border-[#E5E7EB]'
+                                  }`}
+                                >
+                                  {displayRank}
+                                </span>
+                                {p.official_rank && (
+                                  <span className="text-[9px] text-slate-400 font-mono" title={`Official Phase 8 Rank #${p.official_rank}`}>
+                                    (Off #{p.official_rank})
+                                  </span>
+                                )}
+                              </div>
+                            </td>
+                            <td className="py-3 px-3">
+                              <Link
+                                to={`/players/${pScope}/${role}/${encodeURIComponent(p.player_name)}`}
+                                className="font-bold text-[#101F43] hover:text-[#EC008C] transition-colors block text-xs focus:outline-none focus:ring-2 focus:ring-[#EC008C]"
+                              >
+                                {p.player_name}
+                              </Link>
+                              {p.tactical_classification && (
+                                <span className="text-[10px] text-slate-400 font-medium">
+                                  {p.tactical_classification}
+                                </span>
+                              )}
+                            </td>
+                            <td className="py-3 px-3">
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700 whitespace-nowrap">
+                                {p.competition_evidence || 'Dual-Format'}
+                              </span>
+                            </td>
+                            <td className="py-3 px-3">
+                              {isExploratory ? (
+                                <span
+                                  className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300 cursor-help"
+                                  title="Exploratory Evidence: Fewer than 250 pressure deliveries in dataset. Wider bootstrap confidence interval."
+                                >
+                                  <AlertTriangle className="w-3 h-3 text-amber-600 shrink-0" />
+                                  <span>Exploratory ({tierName})</span>
+                                </span>
+                              ) : (
+                                <span className={`text-[10px] font-bold px-2 py-0.5 rounded whitespace-nowrap ${getEvidenceTierBadge(p.evidence_tier)}`}>
+                                  {tierName}
+                                </span>
+                              )}
+                            </td>
+                            <td className="py-3 px-3 text-right font-black text-sm text-amber-700 font-mono">
+                              {formatScore(p.adjusted_cpri ?? p.cpri_score)}
+                            </td>
+                            <td className="py-3 px-3 text-right font-mono text-slate-600 text-xs">
+                              {formatScore(p.cpri_score)}
+                            </td>
+                            <td className="py-3 px-3 text-right font-mono font-semibold text-slate-800 text-xs">
+                              {formatScore(p.ppr_score ?? 50.0)}
+                            </td>
+                            <td className="py-3 px-3 text-right font-mono text-slate-700 text-xs">
+                              {p.success_rate_pct != null ? `${Number(p.success_rate_pct).toFixed(1)}%` : '—'}
+                            </td>
+                            <td className="py-3 px-3 text-right font-mono text-slate-800 font-semibold text-xs whitespace-nowrap">
+                              <div>{pBalls} balls</div>
+                              <div className="text-[10px] text-slate-500 font-normal">{pMatches} matches</div>
+                            </td>
+                            <td className="py-3 px-3 text-right">
+                              <Link
+                                to={`/players/${pScope}/${role}/${encodeURIComponent(p.player_name)}`}
+                                className="text-[11px] font-bold text-[#EC008C] hover:text-[#101F43] inline-flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-[#EC008C]"
+                              >
+                                <span>Dossier</span>
+                                <ArrowRight className="w-3 h-3" />
+                              </Link>
+                            </td>
+                          </tr>
+                        )
+                      })
+                    )}
+                  </tbody>
+                </table>
+              </div>
             )}
           </div>
         </div>
