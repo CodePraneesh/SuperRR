@@ -11,19 +11,19 @@ export const MarkdownView: React.FC<MarkdownViewProps> = ({ content, className =
 
   const baseText = dark ? 'text-slate-200' : 'text-[#475569]'
   const h1Class = dark
-    ? 'text-xl md:text-2xl font-black tracking-tight text-pink-300 pt-2 pb-1.5 border-b border-[#182752] flex items-center gap-2.5'
+    ? 'text-xl md:text-2xl font-black tracking-tight text-pink-300 pt-2 pb-1.5 border-b border-[#1e2f5f] flex items-center gap-2.5'
     : 'text-xl md:text-2xl font-black tracking-tight text-[#0F172A] pt-2 pb-1.5 border-b border-slate-200 flex items-center gap-2.5'
   const h2Class = dark
-    ? 'text-base md:text-lg font-bold text-blue-300 pt-3 pb-1 border-b border-[#182752]/70 flex items-center gap-2'
+    ? 'text-base md:text-lg font-bold text-blue-300 pt-3 pb-1 border-b border-[#1e2f5f] flex items-center gap-2'
     : 'text-base md:text-lg font-bold text-[#0F172A] pt-3 pb-1 border-b border-slate-200 flex items-center gap-2'
   const h3Class = dark
     ? 'text-sm font-bold text-amber-300 pt-2 flex items-center gap-1.5'
     : 'text-sm font-bold text-amber-800 pt-2 flex items-center gap-1.5'
   const bulletText = dark ? 'text-slate-200' : 'text-[#475569]'
   const blockquoteClass = dark
-    ? 'border-l-3 border-pink-500 bg-pink-950/20 pl-3.5 py-2 rounded-r text-pink-200/90 italic my-1.5'
+    ? 'border-l-3 border-pink-500 bg-pink-950/30 pl-3.5 py-2 rounded-r text-pink-200 italic my-1.5'
     : 'border-l-3 border-[#EC008C] bg-pink-50/70 pl-3.5 py-2 rounded-r text-[#334155] italic my-1.5'
-  const pClass = dark ? 'text-slate-300' : 'text-[#475569]'
+  const pClass = dark ? 'text-slate-200' : 'text-[#475569]'
 
   return (
     <div className={`space-y-3 ${baseText} leading-relaxed text-sm ${className}`}>
