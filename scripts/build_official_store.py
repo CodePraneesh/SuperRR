@@ -653,12 +653,57 @@ def build_store_v2():
     return store_payload
 
 
+def build_store_active():
+    print("=" * 60)
+    print("BUILDING SUPERR INTELLIGENCE ACTIVE-ONLY SCOUTING STORE")
+    print("=" * 60)
+    out_active_path = DATA_DIR / "official_scouting_store_active.json"
+
+    phase12_dir = REPO_ROOT / "output" / "phase12_active"
+    b_act_csv = phase12_dir / "active_top10_batters.csv"
+    bw_act_csv = phase12_dir / "active_top10_bowlers.csv"
+
+    if not b_act_csv.exists() or not bw_act_csv.exists():
+        raise FileNotFoundError(f"Active CSVs not found in {phase12_dir}. Run `python scripts/build_active_view.py` first.")
+
+    b_df = pd.read_csv(b_act_csv)
+    bw_df = pd.read_csv(bw_act_csv)
+
+    active_batters = b_df.to_dict(orient="records")
+    active_bowlers = bw_df.to_dict(orient="records")
+
+    store_payload = {
+        "version": "CPRI-v1.0.0-ACTIVE-12M",
+        "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        "metadata": {
+            "description": "Supplementary active-only Top 10 batters and bowlers (last 12 months in data) for SupeRR Selector Season 2.",
+            "source": "Phase 12 Active View (12-month recency window)",
+            "total_official_batters": len(active_batters),
+            "total_official_bowlers": len(active_bowlers),
+            "eligibility_rule": ">= 1 ball in supplied data in ranked role on or after 2025-11-01",
+        },
+        "official_top10_batters": active_batters,
+        "official_top10_bowlers": active_bowlers,
+    }
+
+    with open(out_active_path, "w", encoding="utf-8") as f:
+        json.dump(store_payload, f, indent=2)
+
+    print(f"Generated active official store at: {out_active_path}")
+    print(f"  Active Batters (12m): {len(active_batters)}")
+    print(f"  Active Bowlers (12m): {len(active_bowlers)}")
+    print("=" * 60)
+    return store_payload
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Build SupeRR Intelligence Scouting Store")
-    parser.add_argument("--version", choices=["phase8", "v2"], default="phase8", help="Version to build (default: phase8)")
+    parser.add_argument("--version", choices=["phase8", "v2", "active"], default="phase8", help="Version to build (default: phase8)")
     args = parser.parse_args()
 
     if args.version == "v2":
         build_store_v2()
+    elif args.version == "active":
+        build_store_active()
     else:
         build_store()
