@@ -23,7 +23,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const navItems = [
     { name: 'Overview', to: '/', icon: LayoutDashboard },
     { name: 'Active Players', to: '/rankings/active', icon: UserCheck, badge: 'ACTIVE' },
-    { name: 'Official Rankings', to: '/rankings', icon: Trophy, badge: 'OFFICIAL' },
+    { name: 'Official Rankings (Phase 8)', to: '/rankings/official', icon: Trophy, badge: 'OFFICIAL' },
     { name: 'IPL Rankings', to: '/rankings/ipl', icon: Trophy },
     { name: 'T20I Rankings', to: '/rankings/t20i', icon: Globe },
     { name: 'Player Intelligence', to: '/players/IPL/Batter/Rinku%20Singh', icon: UserCheck },

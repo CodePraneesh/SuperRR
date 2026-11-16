@@ -264,7 +264,22 @@ export const RankingsPage: React.FC = () => {
           <div className="inline-flex rounded-md p-1 bg-[#F5F7FA] border border-[#E5E7EB] text-xs font-semibold">
             <button
               onClick={() => {
-                navigate('/rankings')
+                navigate('/rankings/active')
+                setActiveTab('active')
+              }}
+              className={`px-3 py-1.5 rounded transition-colors flex items-center gap-1.5 ${
+                isActiveMode || activeTab === 'active'
+                  ? 'bg-emerald-800 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-[#101F43]'
+              }`}
+            >
+              <UserCheck className="w-3.5 h-3.5 text-emerald-300" />
+              <span>Active Players</span>
+              <span className="text-[9px] bg-emerald-500 text-white px-1.5 py-0.2 rounded-full font-bold">ACTIVE</span>
+            </button>
+            <button
+              onClick={() => {
+                navigate('/rankings/official')
                 setActiveTab('main')
               }}
               className={`px-3 py-1.5 rounded transition-colors flex items-center gap-1.5 ${
@@ -274,22 +289,7 @@ export const RankingsPage: React.FC = () => {
               }`}
             >
               <Crown className="w-3.5 h-3.5 text-[#EC008C]" />
-              <span>Official Unified</span>
-            </button>
-            <button
-              onClick={() => {
-                navigate('/rankings/active')
-                setActiveTab('active')
-              }}
-              className={`px-3 py-1.5 rounded transition-colors flex items-center gap-1.5 ${
-                isActiveMode || activeTab === 'active'
-                  ? 'bg-[#101F43] text-white shadow-xs'
-                  : 'text-slate-600 hover:text-[#101F43]'
-              }`}
-            >
-              <UserCheck className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Active Players</span>
-              <span className="text-[9px] bg-emerald-500 text-white px-1.5 py-0.2 rounded-full font-bold">ACTIVE</span>
+              <span>Official Unified (Phase 8)</span>
             </button>
             <button
               onClick={() => navigate('/rankings/ipl')}

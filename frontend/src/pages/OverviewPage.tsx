@@ -27,10 +27,10 @@ import { CPRIComponentRadar } from '../components/charts/CPRIComponentRadar'
 import { formatScore } from '../utils/formatters'
 import { getErrorMessage } from '../api/client'
 
-type ViewMode = 'official' | 'active' | 'ipl' | 't20i'
+type ViewMode = 'active' | 'official' | 'ipl' | 't20i'
 
 export const OverviewPage: React.FC = () => {
-  const [viewMode, setViewMode] = useState<ViewMode>('official')
+  const [viewMode, setViewMode] = useState<ViewMode>('active')
   const [role, setRole] = useState<Role>('Batter')
   
   // Official unified state
@@ -138,6 +138,18 @@ export const OverviewPage: React.FC = () => {
               <span className="text-xs font-bold uppercase tracking-wider text-slate-500 mr-1">Ranking View:</span>
               <div className="inline-flex rounded-md p-1 bg-[#F5F7FA] border border-[#E5E7EB] text-xs font-semibold">
                 <button
+                  onClick={() => setViewMode('active')}
+                  className={`px-3 py-1.5 rounded transition-colors flex items-center gap-1.5 ${
+                    viewMode === 'active'
+                      ? 'bg-emerald-800 text-white shadow-xs'
+                      : 'text-slate-600 hover:text-[#101F43]'
+                  }`}
+                >
+                  <UserCheck className="w-3.5 h-3.5 text-emerald-300" />
+                  <span>Active Players</span>
+                  <span className="text-[9px] bg-emerald-500 text-white px-1.5 py-0.2 rounded-full font-bold">ACTIVE</span>
+                </button>
+                <button
                   onClick={() => setViewMode('official')}
                   className={`px-3 py-1.5 rounded transition-colors flex items-center gap-1.5 ${
                     viewMode === 'official'
@@ -146,19 +158,7 @@ export const OverviewPage: React.FC = () => {
                   }`}
                 >
                   <Crown className="w-3.5 h-3.5 text-[#EC008C]" />
-                  <span>Official Unified (Headline)</span>
-                </button>
-                <button
-                  onClick={() => setViewMode('active')}
-                  className={`px-3 py-1.5 rounded transition-colors flex items-center gap-1.5 ${
-                    viewMode === 'active'
-                      ? 'bg-[#101F43] text-white shadow-xs'
-                      : 'text-slate-600 hover:text-[#101F43]'
-                  }`}
-                >
-                  <UserCheck className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Active Players</span>
-                  <span className="text-[9px] bg-emerald-500 text-white px-1.5 py-0.2 rounded-full font-bold">ACTIVE</span>
+                  <span>Official Unified (Historical)</span>
                 </button>
                 <button
                   onClick={() => setViewMode('ipl')}
@@ -307,14 +307,22 @@ export const OverviewPage: React.FC = () => {
             <div className="flex items-center justify-between mb-3">
               <div>
                 <div className="text-xs font-bold uppercase tracking-wider text-[#EC008C] mb-0.5">
-                  {isOfficial ? 'Official Competition Podium' : `${viewMode.toUpperCase()} Contextual Leaders`}
+                  {isActive 
+                    ? 'Active Professional T20 Podium (No Retirees)' 
+                    : isOfficial 
+                    ? 'Official Competition Podium (Historical Phase 8)' 
+                    : `${viewMode.toUpperCase()} Contextual Leaders`}
                 </div>
                 <h2 className="text-lg font-bold text-[#101F43]">
-                  {isOfficial ? `Official Top 3 ${role}s` : `${viewMode.toUpperCase()} ${role} Leaders`}
+                  {isActive 
+                    ? `Active Top 3 ${role}s` 
+                    : isOfficial 
+                    ? `Official Top 3 ${role}s` 
+                    : `${viewMode.toUpperCase()} ${role} Leaders`}
                 </h2>
               </div>
               <Link
-                to={isOfficial ? '/rankings' : `/rankings/${viewMode}`}
+                to={isActive ? '/rankings/active' : isOfficial ? '/rankings' : `/rankings/${viewMode}`}
                 className="text-xs font-bold text-[#EC008C] hover:text-[#101F43] flex items-center gap-1 transition-colors"
               >
                 <span>View Full Leaderboard</span>
@@ -418,10 +426,10 @@ export const OverviewPage: React.FC = () => {
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <div className="text-xs font-bold uppercase tracking-wider text-[#EC008C] mb-0.5">
-                    Official CPRI Distribution
+                    {isActive ? 'Active CPRI Distribution' : isOfficial ? 'Official CPRI Distribution' : `${viewMode.toUpperCase()} CPRI Distribution`}
                   </div>
                   <h3 className="text-base font-bold text-[#101F43]">
-                    {isOfficial ? `Official Top 10 ${role}s` : `${viewMode.toUpperCase()} ${role} Rankings`}
+                    {isActive ? `Active Top 10 ${role}s (Retirees Excluded)` : isOfficial ? `Official Top 10 ${role}s` : `${viewMode.toUpperCase()} ${role} Rankings`}
                   </h3>
                 </div>
                 <div className="text-xs font-mono text-slate-500">Scale: 60 - 100 CPRI</div>
