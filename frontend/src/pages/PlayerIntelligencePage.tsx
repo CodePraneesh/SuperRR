@@ -150,32 +150,68 @@ export const PlayerIntelligencePage: React.FC = () => {
                 <span className="text-xs text-slate-300 font-mono">
                   {officialData.competition_evidence} Evidence
                 </span>
+                {officialData.last_played && (
+                  <span className="text-xs text-emerald-300 font-mono bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-600/40">
+                    Last Played: {officialData.last_played}
+                  </span>
+                )}
               </div>
               <h2 className="text-xl font-bold flex items-center gap-2">
                 <span>{officialData.player_name}</span>
                 <span className="text-slate-300 font-normal text-sm">
-                  — Official #{officialData.official_rank} {officialData.role}
+                  — {officialData.is_official_top10 ? `Official #${officialData.official_rank} ${officialData.role}` : 'not in Top 10'}
                 </span>
               </h2>
-              <p className="text-xs text-slate-300 mt-1">
-                90% Bootstrap Rank CI: <span className="font-mono font-bold text-amber-300">[{officialData.rank_uncertainty.rank_p5}, {officialData.rank_uncertainty.rank_p95}]</span> • Top-10 Inclusion: <span className="font-mono text-emerald-300">{(officialData.rank_uncertainty.top10_inclusion_freq * 100).toFixed(0)}%</span> • {officialData.pressure_stats?.pressure_deliveries || 0} Pressure Deliveries
-              </p>
-            </div>
-            <div className="text-right bg-[#070b18]/80 px-4 py-2.5 rounded-xl border border-pink-500/20 min-w-[130px]">
-              <div className="text-[10px] font-mono uppercase text-slate-400 font-bold">Official CPRI</div>
-              <div className="text-3xl font-black font-mono text-[#EC008C]">
-                {formatScore(officialData.cpri_score)}
+              <div className="text-xs text-slate-300 mt-1 flex flex-wrap items-center gap-3">
+                <span>
+                  90% Bootstrap Rank CI: <span className="font-mono font-bold text-amber-300">[{officialData.rank_uncertainty.rank_p5}, {officialData.rank_uncertainty.rank_p95}]</span>
+                </span>
+                <span>•</span>
+                <span>
+                  Top-10 Inclusion: <span className="font-mono text-emerald-300">{(officialData.rank_uncertainty.top10_inclusion_freq * 100).toFixed(0)}%</span>
+                </span>
+                <span>•</span>
+                <span className="font-mono text-white">
+                  {officialData.pressure_stats?.pressure_deliveries || 0} Pressure Balls ({officialData.pressure_stats?.pressure_matches || 0} Matches)
+                </span>
               </div>
-              <div className="text-[10px] font-mono text-amber-300">Phase 8 Baseline</div>
+            </div>
+            <div className="flex items-center gap-4">
+              {/* Rank Interval Bar Visual */}
+              <div className="hidden sm:flex flex-col gap-1 w-32 bg-[#070b18]/80 p-2.5 rounded-xl border border-pink-500/20">
+                <span className="text-[10px] uppercase font-mono text-slate-400">90% Rank Interval</span>
+                <span className="text-xs font-mono font-bold text-amber-300">[{officialData.rank_uncertainty.rank_p5}, {officialData.rank_uncertainty.rank_p95}]</span>
+                <div className="w-full h-1.5 bg-slate-700 rounded-full overflow-hidden relative mt-1">
+                  <div
+                    className="h-full bg-gradient-to-r from-[#EC008C] to-indigo-400 rounded-full absolute"
+                    style={{
+                      left: `${Math.max(0, Math.min(100, ((officialData.rank_uncertainty.rank_p5 - 1) / 75) * 100))}%`,
+                      width: `${Math.max(6, Math.min(100, ((officialData.rank_uncertainty.rank_p95 - officialData.rank_uncertainty.rank_p5) / 75) * 100))}%`
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="text-right bg-[#070b18]/80 px-4 py-2.5 rounded-xl border border-pink-500/20 min-w-[130px]">
+                <div className="text-[10px] font-mono uppercase text-slate-400 font-bold">Official CPRI</div>
+                <div className="text-3xl font-black font-mono text-[#EC008C]">
+                  {formatScore(officialData.cpri_score)}
+                </div>
+                <div className="text-[10px] font-mono text-amber-300">Phase 8 Baseline</div>
+              </div>
             </div>
           </div>
         </div>
       ) : (
-        <div className="bg-[#101F43]/5 border border-slate-200 rounded-xl p-4 text-slate-600 flex items-center gap-3">
-          <Info className="w-5 h-5 text-slate-400 flex-shrink-0" />
-          <div className="text-xs">
-            <span className="font-semibold text-slate-800">Contextual League Profile ({scope}):</span> This dossier represents single-tournament {scope} play. Player is not ranked in the official Top 25 unified submission.
+        <div className="bg-[#101F43]/5 border border-slate-200 rounded-xl p-4 text-slate-600 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <Info className="w-5 h-5 text-slate-400 flex-shrink-0" />
+            <div className="text-xs">
+              <span className="font-semibold text-slate-800">Contextual League Profile ({scope}):</span> This dossier represents single-tournament {scope} play. Player official rank: <span className="font-bold text-amber-800">not in Top 10</span>.
+            </div>
           </div>
+          <span className="text-[10px] font-mono font-bold bg-slate-200 text-slate-700 px-2.5 py-1 rounded">
+            not in Top 10
+          </span>
         </div>
       )}
 
@@ -188,30 +224,39 @@ export const PlayerIntelligencePage: React.FC = () => {
                 {profile.competition_scope} {profile.role}
               </span>
               <Badge variant={profile.is_official_top10 ? 'official' : 'provisional'} size="md">
-                {profile.ranking_tier}
+                {officialData?.is_official_top10 ? `Official #${officialData.official_rank}` : 'not in Top 10'}
               </Badge>
               <Badge variant="high" size="md">
                 {profile.confidence_tier}
               </Badge>
+              {(officialData?.last_played || (profile as any).last_played) && (
+                <span className="text-xs font-mono text-emerald-300 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-600/40">
+                  Last Played: {officialData?.last_played || (profile as any).last_played}
+                </span>
+              )}
             </div>
 
             <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-2 flex items-center gap-2">
               <span>{profile.player_name}</span>
-              {profile.official_rank === 1 && (
+              {officialData?.official_rank === 1 && (
                 <Crown className="w-7 h-7 text-amber-400 inline" />
               )}
             </h1>
 
             <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-slate-400">
-              {profile.official_rank && (
-                <div className="flex items-center gap-1.5 text-amber-300 font-bold bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/30">
-                  <Trophy className="w-3.5 h-3.5 text-amber-400" />
-                  Official Rank #{profile.official_rank} in {profile.cohort}
-                </div>
-              )}
-              <div className="text-slate-300">{profile.exposure.pressure_deliveries} Pressure Deliveries</div>
+              <div className="flex items-center gap-1.5 text-amber-300 font-bold bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/30">
+                <Trophy className="w-3.5 h-3.5 text-amber-400" />
+                {officialData?.is_official_top10
+                  ? `Official Rank #${officialData.official_rank} in ${profile.cohort}`
+                  : 'Official Rank: not in Top 10'}
+              </div>
+              <div className="text-slate-300">
+                {officialData?.pressure_stats?.pressure_deliveries ?? profile.exposure.pressure_deliveries} Pressure Balls
+              </div>
               <span className="text-slate-600">•</span>
-              <div className="text-slate-300">{profile.exposure.pressure_matches} Leverage Matches</div>
+              <div className="text-slate-300">
+                {officialData?.pressure_stats?.pressure_matches ?? profile.exposure.pressure_matches} Pressure Matches
+              </div>
               <span className="text-slate-600">•</span>
               <div className="text-pink-400 font-semibold">{formatScore(profile.exposure.pos_pressure_match_ratio * 100, 1)}% Positive Match Ratio</div>
             </div>
@@ -224,7 +269,7 @@ export const PlayerIntelligencePage: React.FC = () => {
                 Official CPRI Score
               </div>
               <div className="text-4xl md:text-5xl font-black font-mono text-white">
-                <span className="text-pink-400">{formatScore(profile.cpri_score)}</span>
+                <span className="text-pink-400">{formatScore(officialData?.cpri_score ?? profile.cpri_score)}</span>
               </div>
               <div className="text-[10px] font-mono text-amber-300 mt-1 flex items-center gap-1">
                 <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
@@ -235,8 +280,9 @@ export const PlayerIntelligencePage: React.FC = () => {
             {/* Quick action to compare */}
             <button
               onClick={() => navigate('/compare')}
-              className="p-3 rounded-xl bg-[#0c132c] hover:bg-pink-600/20 border border-[#182752] hover:border-pink-500/50 text-slate-300 hover:text-pink-300 transition-colors"
+              className="p-3 rounded-xl bg-[#0c132c] hover:bg-pink-600/20 border border-[#182752] hover:border-pink-500/50 text-slate-300 hover:text-pink-300 transition-colors focus:outline-none focus:ring-2 focus:ring-[#EC008C]"
               title="Compare with another player"
+              aria-label="Compare with another player"
             >
               <GitCompare className="w-5 h-5" />
             </button>
@@ -248,29 +294,29 @@ export const PlayerIntelligencePage: React.FC = () => {
       <div>
         <h2 className="text-sm font-bold text-slate-300 uppercase tracking-wider font-mono mb-3 flex items-center gap-2">
           <Activity className="w-4 h-4 text-pink-400" />
-          The Four Weighted CPRI Component Pillars
+          The Four Constituent CPRI Component Scores
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <StatMetric
-            label="Pressure Impact"
+            label="score_pressure_impact"
             value={formatScore(comps.pressure_impact, 2)}
             weight="40% Weight"
             subValue={`Percentile: ${formatScore(profile.peer_benchmarks?.cohort_percentiles.pressure_impact_percentile, 1)}%`}
           />
           <StatMetric
-            label="Adaptability"
+            label="score_adaptability"
             value={formatScore(comps.pressure_adaptability, 2)}
             weight="25% Weight"
             subValue={`Percentile: ${formatScore(profile.peer_benchmarks?.cohort_percentiles.adaptability_percentile, 1)}%`}
           />
           <StatMetric
-            label="Consistency"
+            label="score_consistency"
             value={formatScore(comps.clutch_consistency, 2)}
             weight="20% Weight"
             subValue={`Percentile: ${formatScore(profile.peer_benchmarks?.cohort_percentiles.consistency_percentile, 1)}%`}
           />
           <StatMetric
-            label="Reliability"
+            label="score_reliability"
             value={formatScore(comps.reliability_confidence, 2)}
             weight="15% Weight"
             subValue={`Percentile: ${formatScore(profile.peer_benchmarks?.cohort_percentiles.reliability_percentile, 1)}%`}

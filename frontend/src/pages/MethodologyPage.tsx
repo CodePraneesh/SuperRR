@@ -10,6 +10,9 @@ import {
   Award,
   AlertTriangle,
   Crown,
+  FileText,
+  Download,
+  ExternalLink,
 } from 'lucide-react'
 import { Card } from '../components/common/Card'
 import { Badge } from '../components/common/Badge'
@@ -81,6 +84,132 @@ export const MethodologyPage: React.FC = () => {
           <div className="text-right text-xs font-mono text-slate-400">
             <div>Verification: <span className="text-white font-bold">100% Pass Rate</span></div>
             <div className="text-amber-400 font-bold">Zero Statistical Leakage</div>
+          </div>
+        </div>
+      </Card>
+
+      {/* Official 16-Page Submission Methodology Report & Required Report Sections */}
+      <Card variant="default" className="p-6 border-[#EC008C]/40 bg-[#0c132c]/90 shadow-xl">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-[#182752]">
+          <div className="flex items-start gap-3.5">
+            <div className="w-11 h-11 rounded-xl bg-[#EC008C]/20 border border-[#EC008C]/40 flex items-center justify-center text-[#EC008C] shrink-0 mt-0.5">
+              <FileText className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 className="text-lg font-bold text-white">
+                  Official Methodology Report PDF (16 Pages)
+                </h2>
+                <span className="text-[10px] font-mono font-bold bg-[#EC008C] text-white px-2 py-0.5 rounded">
+                  AUTHORITATIVE
+                </span>
+              </div>
+              <p className="text-xs text-slate-300 mt-1 max-w-2xl leading-relaxed">
+                Complete competition submission report documenting the mathematical formalization of CPRI, data pipelines, empirical validation, 90% bootstrap rank confidence intervals, and the official Top 10 lists.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <a
+              href="/docs/SupeRR_Intelligence_Methodology_Report.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Methodology Report PDF in new browser tab"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#182752] hover:bg-[#20336a] text-white text-xs font-bold transition-all border border-[#2b448a] focus:outline-none focus:ring-2 focus:ring-[#EC008C]"
+            >
+              <ExternalLink className="w-3.5 h-3.5 text-pink-400" />
+              <span>View PDF</span>
+            </a>
+            <a
+              href="/api/v1/official/report-pdf"
+              download="SupeRR_Intelligence_Methodology_Report.pdf"
+              aria-label="Download Official Methodology Report PDF"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#EC008C] hover:bg-[#d6007f] text-white text-xs font-bold transition-all shadow-md shadow-[#EC008C]/20 focus:outline-none focus:ring-2 focus:ring-[#EC008C]"
+            >
+              <Download className="w-3.5 h-3.5 text-white" />
+              <span>Download PDF</span>
+            </a>
+          </div>
+        </div>
+
+        {/* Five Required Report Sections */}
+        <div className="mt-5 space-y-3">
+          <div className="text-xs uppercase font-mono tracking-wider text-pink-400 font-bold flex items-center gap-1.5">
+            <BookOpen className="w-3.5 h-3.5 text-pink-400" />
+            <span>The Five Required Report Sections</span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-3 pt-1">
+            {/* Section 1 */}
+            <div className="p-3.5 rounded-xl bg-[#070b18] border border-[#182752] flex flex-col justify-between">
+              <div>
+                <div className="text-[10px] font-mono text-pink-400 font-bold mb-1">SECTION 1</div>
+                <h4 className="text-xs font-bold text-white mb-1.5">Pressure Definition</h4>
+                <p className="text-[11px] text-slate-300 leading-relaxed">
+                  Meaning, indicators, and separation of high vs low pressure. Pre-ball leverage (PI ≥ 50.0) with zero lookahead bias.
+                </p>
+              </div>
+              <div className="mt-2 pt-2 border-t border-[#182752] text-[10px] font-mono text-slate-400">
+                PDF Pages 1–3
+              </div>
+            </div>
+
+            {/* Section 2 */}
+            <div className="p-3.5 rounded-xl bg-[#070b18] border border-[#182752] flex flex-col justify-between">
+              <div>
+                <div className="text-[10px] font-mono text-blue-400 font-bold mb-1">SECTION 2</div>
+                <h4 className="text-xs font-bold text-white mb-1.5">Performance Measurement</h4>
+                <p className="text-[11px] text-slate-300 leading-relaxed">
+                  Metrics, baselines, and rating logic. LightGBM expected residuals and ball-by-ball WPA delta attribution.
+                </p>
+              </div>
+              <div className="mt-2 pt-2 border-t border-[#182752] text-[10px] font-mono text-slate-400">
+                PDF Pages 4–6
+              </div>
+            </div>
+
+            {/* Section 3 */}
+            <div className="p-3.5 rounded-xl bg-[#070b18] border border-[#182752] flex flex-col justify-between">
+              <div>
+                <div className="text-[10px] font-mono text-emerald-400 font-bold mb-1">SECTION 3</div>
+                <h4 className="text-xs font-bold text-white mb-1.5">Fair Comparisons</h4>
+                <p className="text-[11px] text-slate-300 leading-relaxed">
+                  Sample sizes, eligibility thresholds, context normalization, empirical Bayes shrinkage, and format evidence tiers.
+                </p>
+              </div>
+              <div className="mt-2 pt-2 border-t border-[#182752] text-[10px] font-mono text-slate-400">
+                PDF Pages 7–9
+              </div>
+            </div>
+
+            {/* Section 4 */}
+            <div className="p-3.5 rounded-xl bg-[#070b18] border border-[#182752] flex flex-col justify-between">
+              <div>
+                <div className="text-[10px] font-mono text-amber-400 font-bold mb-1">SECTION 4</div>
+                <h4 className="text-xs font-bold text-white mb-1.5">Evidence for Official Top 10</h4>
+                <p className="text-[11px] text-slate-300 leading-relaxed">
+                  Deep-dive dossiers for official Top 10 Batters and Bowlers. Tactical profiling, phase splits, and empirical evidence.
+                </p>
+              </div>
+              <div className="mt-2 pt-2 border-t border-[#182752] text-[10px] font-mono text-slate-400">
+                PDF Pages 10–13
+              </div>
+            </div>
+
+            {/* Section 5 */}
+            <div className="p-3.5 rounded-xl bg-[#070b18] border border-[#182752] flex flex-col justify-between">
+              <div>
+                <div className="text-[10px] font-mono text-purple-400 font-bold mb-1">SECTION 5</div>
+                <h4 className="text-xs font-bold text-white mb-1.5">Reliability & Limitations</h4>
+                <p className="text-[11px] text-slate-300 leading-relaxed">
+                  500-iteration bootstrap rank CIs, sample cutoff sensitivity (8/10/12 matches), data windows, and model boundaries.
+                </p>
+              </div>
+              <div className="mt-2 pt-2 border-t border-[#182752] text-[10px] font-mono text-slate-400">
+                PDF Pages 14–16
+              </div>
+            </div>
           </div>
         </div>
       </Card>

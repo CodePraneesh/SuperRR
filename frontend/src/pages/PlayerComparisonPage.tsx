@@ -10,8 +10,10 @@ import {
 } from 'lucide-react'
 import { getCohortPlayers } from '../api/playerApi'
 import { comparePlayers } from '../api/comparisonApi'
+import { getOfficialPlayer } from '../api/officialApi'
 import type { PlayerSummaryItem } from '../types/player'
 import type { PlayerComparisonResponse } from '../types/scouting'
+import type { OfficialPlayerItem } from '../types/official'
 import type { Scope, Role } from '../types/common'
 import { Card } from '../components/common/Card'
 import { Badge } from '../components/common/Badge'
@@ -34,6 +36,8 @@ export const PlayerComparisonPage: React.FC = () => {
 
   // Comparison results
   const [comparison, setComparison] = useState<PlayerComparisonResponse | null>(null)
+  const [officialA, setOfficialA] = useState<OfficialPlayerItem | null>(null)
+  const [officialB, setOfficialB] = useState<OfficialPlayerItem | null>(null)
   const [loadingComparison, setLoadingComparison] = useState(false)
   const [comparisonError, setComparisonError] = useState<string | null>(null)
 
@@ -82,13 +86,19 @@ export const PlayerComparisonPage: React.FC = () => {
     setLoadingComparison(true)
     setComparisonError(null)
     try {
-      const res = await comparePlayers({
-        scope,
-        role,
-        player_a: playerA,
-        player_b: playerB,
-      })
+      const [res, offA, offB] = await Promise.all([
+        comparePlayers({
+          scope,
+          role,
+          player_a: playerA,
+          player_b: playerB,
+        }),
+        getOfficialPlayer(playerA).catch(() => null),
+        getOfficialPlayer(playerB).catch(() => null),
+      ])
       setComparison(res)
+      setOfficialA(offA)
+      setOfficialB(offB)
     } catch (err) {
       setComparisonError(getErrorMessage(err))
     } finally {
@@ -129,7 +139,8 @@ export const PlayerComparisonPage: React.FC = () => {
             <div className="grid grid-cols-2 gap-1 p-1 rounded-lg bg-[#070b18] border border-[#182752] text-xs font-semibold">
               <button
                 onClick={() => setScope('IPL')}
-                className={`py-1.5 rounded-md transition-all ${
+                aria-label="Select IPL scope"
+                className={`py-1.5 rounded-md transition-all focus:outline-none focus:ring-2 focus:ring-[#EC008C] ${
                   scope === 'IPL'
                     ? 'bg-gradient-to-r from-blue-700 to-indigo-700 text-white shadow-sm'
                     : 'text-slate-400 hover:text-white'
@@ -139,7 +150,8 @@ export const PlayerComparisonPage: React.FC = () => {
               </button>
               <button
                 onClick={() => setScope('T20I')}
-                className={`py-1.5 rounded-md transition-all ${
+                aria-label="Select T20I scope"
+                className={`py-1.5 rounded-md transition-all focus:outline-none focus:ring-2 focus:ring-[#EC008C] ${
                   scope === 'T20I'
                     ? 'bg-gradient-to-r from-blue-700 to-indigo-700 text-white shadow-sm'
                     : 'text-slate-400 hover:text-white'
@@ -158,7 +170,8 @@ export const PlayerComparisonPage: React.FC = () => {
             <div className="grid grid-cols-2 gap-1 p-1 rounded-lg bg-[#070b18] border border-[#182752] text-xs font-semibold">
               <button
                 onClick={() => setRole('Batter')}
-                className={`py-1.5 rounded-md transition-all ${
+                aria-label="Select Batter role"
+                className={`py-1.5 rounded-md transition-all focus:outline-none focus:ring-2 focus:ring-[#EC008C] ${
                   role === 'Batter'
                     ? 'bg-gradient-to-r from-pink-600 to-rose-600 text-white shadow-sm'
                     : 'text-slate-400 hover:text-white'
@@ -168,7 +181,8 @@ export const PlayerComparisonPage: React.FC = () => {
               </button>
               <button
                 onClick={() => setRole('Bowler')}
-                className={`py-1.5 rounded-md transition-all ${
+                aria-label="Select Bowler role"
+                className={`py-1.5 rounded-md transition-all focus:outline-none focus:ring-2 focus:ring-[#EC008C] ${
                   role === 'Bowler'
                     ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-sm'
                     : 'text-slate-400 hover:text-white'
@@ -188,7 +202,8 @@ export const PlayerComparisonPage: React.FC = () => {
               value={playerA}
               onChange={(e) => setPlayerA(e.target.value)}
               disabled={loadingPlayers}
-              className="w-full px-3 py-2 rounded-lg bg-[#070b18] border border-pink-500/40 text-xs text-white focus:outline-none focus:border-pink-400 font-medium"
+              aria-label="Select Player A for comparison"
+              className="w-full px-3 py-2 rounded-lg bg-[#070b18] border border-pink-500/40 text-xs text-white focus:outline-none focus:ring-2 focus:ring-[#EC008C] font-medium"
             >
               {availablePlayers.map((p) => (
                 <option key={p.player_name} value={p.player_name}>
@@ -207,7 +222,8 @@ export const PlayerComparisonPage: React.FC = () => {
               value={playerB}
               onChange={(e) => setPlayerB(e.target.value)}
               disabled={loadingPlayers}
-              className="w-full px-3 py-2 rounded-lg bg-[#070b18] border border-blue-500/40 text-xs text-white focus:outline-none focus:border-blue-400 font-medium"
+              aria-label="Select Player B for comparison"
+              className="w-full px-3 py-2 rounded-lg bg-[#070b18] border border-blue-500/40 text-xs text-white focus:outline-none focus:ring-2 focus:ring-[#EC008C] font-medium"
             >
               {availablePlayers.map((p) => (
                 <option key={p.player_name} value={p.player_name}>
@@ -223,7 +239,8 @@ export const PlayerComparisonPage: React.FC = () => {
           <button
             onClick={handleRunComparison}
             disabled={loadingComparison || loadingPlayers || !playerA || !playerB}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-pink-600 via-rose-600 to-blue-600 hover:from-pink-500 hover:to-blue-500 text-xs font-bold text-white shadow-lg shadow-pink-600/20 transition-all disabled:opacity-50"
+            aria-label="Run side-by-side player comparison"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-pink-600 via-rose-600 to-blue-600 hover:from-pink-500 hover:to-blue-500 text-xs font-bold text-white shadow-lg shadow-pink-600/20 transition-all disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-[#EC008C]"
           >
             <GitCompare className="w-4 h-4" />
             {loadingComparison ? 'Computing Comparative Matrix...' : 'Compare Players'}
@@ -362,6 +379,159 @@ export const PlayerComparisonPage: React.FC = () => {
               </div>
             </Card>
           </div>
+
+          {/* Detailed Side-by-Side Component Matrix Table */}
+          <Card variant="default" className="border-[#182752] p-5">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h3 className="text-sm font-bold text-white flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-[#EC008C]" />
+                  Direct Component & Standing Comparison Matrix
+                </h3>
+                <p className="text-xs text-slate-400">
+                  Comprehensive audit across all official CPRI components, ranks, sample sizes, and last match dates.
+                </p>
+              </div>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs border-collapse" aria-label="Two-Player Component Comparison Table">
+                <thead>
+                  <tr className="bg-[#0c132c] text-white border-b border-[#182752]">
+                    <th className="py-2.5 px-3">Component / Metric</th>
+                    <th className="py-2.5 px-3 text-pink-400 font-bold">{comparison.player_a}</th>
+                    <th className="py-2.5 px-3 text-center text-slate-400">Variance (Δ)</th>
+                    <th className="py-2.5 px-3 text-blue-400 font-bold">{comparison.player_b}</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#182752] text-slate-300 font-mono">
+                  {/* CPRI */}
+                  <tr className="hover:bg-white/5 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-white">Composite CPRI Score</td>
+                    <td className="py-2.5 px-3 font-bold text-pink-400 text-sm">{formatScore(itemA?.cpri_score)}</td>
+                    <td className="py-2.5 px-3 text-center font-bold text-amber-300">{formatDelta(deltas?.cpri_delta, 2)}</td>
+                    <td className="py-2.5 px-3 font-bold text-blue-400 text-sm">{formatScore(itemB?.cpri_score)}</td>
+                  </tr>
+
+                  {/* Official Rank */}
+                  <tr className="hover:bg-white/5 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-white">Official Competition Rank</td>
+                    <td className="py-2.5 px-3">
+                      {officialA?.is_official_top10 ? (
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-pink-500/20 text-pink-300 border border-pink-500/40">
+                          #{officialA.official_rank} Official Top 10
+                        </span>
+                      ) : (
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
+                          not in Top 10
+                        </span>
+                      )}
+                    </td>
+                    <td className="py-2.5 px-3 text-center text-slate-400 text-[11px]">—</td>
+                    <td className="py-2.5 px-3">
+                      {officialB?.is_official_top10 ? (
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/40">
+                          #{officialB.official_rank} Official Top 10
+                        </span>
+                      ) : (
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
+                          not in Top 10
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+
+                  {/* 90% Rank Interval */}
+                  <tr className="hover:bg-white/5 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-white">90% Bootstrap Rank CI</td>
+                    <td className="py-2.5 px-3 text-amber-300">
+                      {officialA?.rank_uncertainty ? `[${officialA.rank_uncertainty.rank_p5}, ${officialA.rank_uncertainty.rank_p95}]` : '—'}
+                    </td>
+                    <td className="py-2.5 px-3 text-center text-slate-400 text-[11px]">—</td>
+                    <td className="py-2.5 px-3 text-amber-300">
+                      {officialB?.rank_uncertainty ? `[${officialB.rank_uncertainty.rank_p5}, ${officialB.rank_uncertainty.rank_p95}]` : '—'}
+                    </td>
+                  </tr>
+
+                  {/* score_pressure_impact */}
+                  <tr className="hover:bg-white/5 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-white">
+                      score_pressure_impact <span className="text-slate-400 font-normal">(40%)</span>
+                    </td>
+                    <td className="py-2.5 px-3 font-semibold text-white">{formatScore(itemA?.components.pressure_impact, 2)}</td>
+                    <td className="py-2.5 px-3 text-center font-bold text-slate-200">{formatDelta(deltas?.pressure_impact_delta, 2)}</td>
+                    <td className="py-2.5 px-3 font-semibold text-white">{formatScore(itemB?.components.pressure_impact, 2)}</td>
+                  </tr>
+
+                  {/* score_adaptability */}
+                  <tr className="hover:bg-white/5 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-white">
+                      score_adaptability <span className="text-slate-400 font-normal">(25%)</span>
+                    </td>
+                    <td className="py-2.5 px-3 font-semibold text-white">{formatScore(itemA?.components.pressure_adaptability, 2)}</td>
+                    <td className="py-2.5 px-3 text-center font-bold text-slate-200">{formatDelta(deltas?.adaptability_delta, 2)}</td>
+                    <td className="py-2.5 px-3 font-semibold text-white">{formatScore(itemB?.components.pressure_adaptability, 2)}</td>
+                  </tr>
+
+                  {/* score_consistency */}
+                  <tr className="hover:bg-white/5 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-white">
+                      score_consistency <span className="text-slate-400 font-normal">(20%)</span>
+                    </td>
+                    <td className="py-2.5 px-3 font-semibold text-white">{formatScore(itemA?.components.clutch_consistency, 2)}</td>
+                    <td className="py-2.5 px-3 text-center font-bold text-slate-200">{formatDelta(deltas?.consistency_delta, 2)}</td>
+                    <td className="py-2.5 px-3 font-semibold text-white">{formatScore(itemB?.components.clutch_consistency, 2)}</td>
+                  </tr>
+
+                  {/* score_reliability */}
+                  <tr className="hover:bg-white/5 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-white">
+                      score_reliability <span className="text-slate-400 font-normal">(15%)</span>
+                    </td>
+                    <td className="py-2.5 px-3 font-semibold text-white">{formatScore(itemA?.components.reliability_confidence, 2)}</td>
+                    <td className="py-2.5 px-3 text-center font-bold text-slate-200">{formatDelta(deltas?.reliability_delta, 2)}</td>
+                    <td className="py-2.5 px-3 font-semibold text-white">{formatScore(itemB?.components.reliability_confidence, 2)}</td>
+                  </tr>
+
+                  {/* Pressure Balls */}
+                  <tr className="hover:bg-white/5 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-white">Pressure Deliveries</td>
+                    <td className="py-2.5 px-3 font-semibold text-white">
+                      {officialA?.pressure_stats?.pressure_deliveries ?? itemA?.pressure_deliveries ?? 0}
+                    </td>
+                    <td className="py-2.5 px-3 text-center text-slate-400 text-[11px]">—</td>
+                    <td className="py-2.5 px-3 font-semibold text-white">
+                      {officialB?.pressure_stats?.pressure_deliveries ?? itemB?.pressure_deliveries ?? 0}
+                    </td>
+                  </tr>
+
+                  {/* Pressure Matches */}
+                  <tr className="hover:bg-white/5 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-white">Pressure Matches</td>
+                    <td className="py-2.5 px-3 font-semibold text-white">
+                      {officialA?.pressure_stats?.pressure_matches ?? '—'}
+                    </td>
+                    <td className="py-2.5 px-3 text-center text-slate-400 text-[11px]">—</td>
+                    <td className="py-2.5 px-3 font-semibold text-white">
+                      {officialB?.pressure_stats?.pressure_matches ?? '—'}
+                    </td>
+                  </tr>
+
+                  {/* Last Played Date */}
+                  <tr className="hover:bg-white/5 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-white">Last Played in Data</td>
+                    <td className="py-2.5 px-3 text-emerald-300 font-semibold">
+                      {officialA?.last_played || '—'}
+                    </td>
+                    <td className="py-2.5 px-3 text-center text-slate-400 text-[11px]">—</td>
+                    <td className="py-2.5 px-3 text-emerald-300 font-semibold">
+                      {officialB?.last_played || '—'}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </Card>
 
           {/* Dual Overlay Radar Visualization */}
           {itemA && itemB && (
