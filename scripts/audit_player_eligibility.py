@@ -137,13 +137,13 @@ CURATED_ELIGIBILITY = {
     },
     152: {
         "player_name": "Ravindra Jadeja",
-        "role": "Batter",
-        "IPL_status": "ACTIVE (Chennai Super Kings, Retained for ₹18 Cr)",
-        "international_status": "RETIRED from T20Is (June 29, 2024); ACTIVE in Tests & ODIs",
-        "franchise_T20_status": "ACTIVE (IPL / CSK)",
-        "last_verified_match_date": "2026-05-29 (in dataset) / 2024-11-03 (Test vs NZ)",
-        "eligibility_status": "ACTIVE",
-        "evidence_source": "CSK official retention list Oct 31, 2024; BCCI active Test player"
+        "role": "All-Rounder",
+        "IPL_status": "ACTIVE in IPL (Chennai Super Kings, Retained for ₹18 Cr)",
+        "international_status": "RETIRED from T20Is (Retired June 2024 following India's T20 World Cup victory)",
+        "franchise_T20_status": "ACTIVE in IPL",
+        "last_verified_match_date": "2024-06-29 (T20 World Cup Final vs SA)",
+        "eligibility_status": "RETIRED",
+        "evidence_source": "BCCI official announcement June 30, 2024; User-provided international retirement registry"
     },
 
     # Official Top 10 Bowlers
@@ -313,11 +313,11 @@ CURATED_ELIGIBILITY = {
         "player_name": "Glenn Maxwell",
         "role": "All-Rounder",
         "IPL_status": "RETIRED (Opted out of the IPL 2026 mini-auction in December 2025, bringing 13-season IPL stint to a close)",
-        "international_status": "ACTIVE (Australia T20I / BBL)",
-        "franchise_T20_status": "RETIRED from IPL (Focus on domestic/BBL)",
+        "international_status": "RETIRED (Retired from all international cricket in November 2026 after playing 130 T20Is)",
+        "franchise_T20_status": "RETIRED from IPL & International Cricket (Focus on domestic/BBL)",
         "last_verified_match_date": "2024-05-18 (IPL 2024 RCB)",
         "eligibility_status": "RETIRED",
-        "evidence_source": "IPL 2026 mini-auction registry; official player statement"
+        "evidence_source": "User-provided verified T20I retirement registry; IPL 2026 mini-auction registry"
     },
     88: {
         "player_name": "Faf du Plessis",
@@ -400,6 +400,158 @@ CURATED_ELIGIBILITY = {
         "evidence_source": "User-provided verified IPL retirement registry; BCCI official records"
     },
 
+    # Notable T20 International Retirees (2022–2026 User-Supplied Registry)
+    478: {
+        "player_name": "Eoin Morgan",
+        "role": "Batter",
+        "IPL_status": "RETIRED (Last played KKR 2021; commentary)",
+        "international_status": "RETIRED from all international cricket in June 2022 after captaining England to 72 T20I appearances",
+        "franchise_T20_status": "RETIRED from all cricket (Media / Commentary)",
+        "last_verified_match_date": "2022-06-28",
+        "eligibility_status": "RETIRED",
+        "evidence_source": "ECB official retirement announcement June 2022; User-provided international retirement registry"
+    },
+    505: {
+        "player_name": "Mushfiqur Rahim",
+        "role": "Wicketkeeper-Batter",
+        "IPL_status": "Uncapped",
+        "international_status": "RETIRED from T20Is in September 2022 to focus on Test and ODI cricket",
+        "franchise_T20_status": "BPL / Domestic T20",
+        "last_verified_match_date": "2022-09-04",
+        "eligibility_status": "RETIRED",
+        "evidence_source": "BCB official announcement Sept 2022; User-provided international retirement registry"
+    },
+    99001: {
+        "player_name": "Tamim Iqbal",
+        "role": "Batter",
+        "IPL_status": "Uncapped",
+        "international_status": "RETIRED from T20Is in July 2022 (before retiring from all international cricket in 2025)",
+        "franchise_T20_status": "BPL",
+        "last_verified_match_date": "2022-07-16",
+        "eligibility_status": "RETIRED",
+        "evidence_source": "BCB official announcement July 2022; User-provided international retirement registry"
+    },
+    1183: {
+        "player_name": "Alex Hales",
+        "role": "Batter",
+        "IPL_status": "RETIRED from IPL / Withdrawn (Last contracted KKR 2022)",
+        "international_status": "RETIRED from international cricket in August 2023 after helping England win the 2022 T20 World Cup",
+        "franchise_T20_status": "Freelance franchise (BBL, PSL, ILT20)",
+        "last_verified_match_date": "2023-08-04",
+        "eligibility_status": "RETIRED",
+        "evidence_source": "ECB announcement August 2023; User-provided international retirement registry"
+    },
+    126: {
+        "player_name": "Rohit Sharma",
+        "role": "Batter",
+        "IPL_status": "ACTIVE in IPL (Mumbai Indians, Retained for ₹16.30 Cr)",
+        "international_status": "RETIRED from T20Is in June 2024 after captaining India to the T20 World Cup title",
+        "franchise_T20_status": "ACTIVE in IPL / Tests & ODIs",
+        "last_verified_match_date": "2024-06-29 (T20 World Cup Final vs SA)",
+        "eligibility_status": "RETIRED",
+        "evidence_source": "BCCI official announcement June 29, 2024; User-provided international retirement registry"
+    },
+    2320: {
+        "player_name": "Trent Boult",
+        "role": "Bowler",
+        "IPL_status": "ACTIVE in IPL (Rajasthan Royals / Auction Pool 2025)",
+        "international_status": "RETIRED (Concluded his T20I and international career after the June 2024 T20 World Cup)",
+        "franchise_T20_status": "Global franchise (MI Emirates, RR)",
+        "last_verified_match_date": "2024-06-17 (T20 World Cup vs PNG)",
+        "eligibility_status": "RETIRED",
+        "evidence_source": "New Zealand Cricket announcement June 2024; User-provided international retirement registry"
+    },
+    499: {
+        "player_name": "Shakib Al Hasan",
+        "role": "All-Rounder",
+        "IPL_status": "Unsold / Inactive (Last played KKR 2021)",
+        "international_status": "RETIRED (Announced his retirement from T20Is in September 2024)",
+        "franchise_T20_status": "Global franchise / BPL",
+        "last_verified_match_date": "2024-09-26",
+        "eligibility_status": "RETIRED",
+        "evidence_source": "BCB official press release Sept 2024; User-provided international retirement registry"
+    },
+    507: {
+        "player_name": "Mahmudullah",
+        "role": "All-Rounder",
+        "IPL_status": "Uncapped",
+        "international_status": "RETIRED from T20Is in October 2024 during the tour of India",
+        "franchise_T20_status": "BPL / Domestic",
+        "last_verified_match_date": "2024-10-12",
+        "eligibility_status": "RETIRED",
+        "evidence_source": "BCB official announcement Oct 2024; User-provided international retirement registry"
+    },
+    274: {
+        "player_name": "Martin Guptill",
+        "role": "Batter",
+        "IPL_status": "RETIRED (Last played SRH 2019)",
+        "international_status": "RETIRED from all international cricket in January 2025 as New Zealand's all-time leading T20I run-scorer",
+        "franchise_T20_status": "RETIRED from international cricket",
+        "last_verified_match_date": "2025-01-15",
+        "eligibility_status": "RETIRED",
+        "evidence_source": "NZC official retirement announcement Jan 2025; User-provided international retirement registry"
+    },
+    4260: {
+        "player_name": "Heinrich Klaasen",
+        "role": "Wicketkeeper-Batter",
+        "IPL_status": "ACTIVE in IPL (Sunrisers Hyderabad, Retained for ₹23 Cr; Top Retention)",
+        "international_status": "RETIRED from all international cricket in June 2025",
+        "franchise_T20_status": "ACTIVE in franchise (IPL, SA20, MLC)",
+        "last_verified_match_date": "2025-06-15",
+        "eligibility_status": "RETIRED",
+        "evidence_source": "CSA official release June 2025; User-provided international retirement registry"
+    },
+    829: {
+        "player_name": "Mitchell Starc",
+        "role": "Bowler",
+        "IPL_status": "ACTIVE in IPL (Kolkata Knight Riders / Auction Pool 2025)",
+        "international_status": "RETIRED exclusively from T20Is in September 2025 to prolong his Test and ODI career",
+        "franchise_T20_status": "ACTIVE in IPL & Tests",
+        "last_verified_match_date": "2025-09-10",
+        "eligibility_status": "RETIRED",
+        "evidence_source": "Cricket Australia official announcement Sept 2025; User-provided international retirement registry"
+    },
+    2892: {
+        "player_name": "Asif Ali",
+        "role": "Batter",
+        "IPL_status": "Ineligible (Pakistan)",
+        "international_status": "RETIRED from all international cricket in September 2025",
+        "franchise_T20_status": "PSL / Global franchise",
+        "last_verified_match_date": "2025-09-20",
+        "eligibility_status": "RETIRED",
+        "evidence_source": "PCB official release Sept 2025; User-provided international retirement registry"
+    },
+    1568: {
+        "player_name": "Kane Williamson",
+        "role": "Batter",
+        "IPL_status": "ACTIVE in IPL (Gujarat Titans / Auction Pool 2025)",
+        "international_status": "RETIRED from T20Is in November 2025 before retiring from all international formats in June 2026",
+        "franchise_T20_status": "Franchise cricket / Tests",
+        "last_verified_match_date": "2025-11-15",
+        "eligibility_status": "RETIRED",
+        "evidence_source": "New Zealand Cricket release Nov 2025; User-provided international retirement registry"
+    },
+    286: {
+        "player_name": "Kane Richardson",
+        "role": "Bowler",
+        "IPL_status": "RETIRED (Last played RCB 2021)",
+        "international_status": "RETIRED from all cricket in January 2026",
+        "franchise_T20_status": "RETIRED from all cricket",
+        "last_verified_match_date": "2026-01-10",
+        "eligibility_status": "RETIRED",
+        "evidence_source": "Cricket Australia official announcement Jan 2026; User-provided international retirement registry"
+    },
+    2930: {
+        "player_name": "Rassie van der Dussen",
+        "role": "Batter",
+        "IPL_status": "Available (Last played RR 2022)",
+        "international_status": "RETIRED from international cricket in April 2026",
+        "franchise_T20_status": "SA20 (MI Cape Town) / Global franchise",
+        "last_verified_match_date": "2026-04-15",
+        "eligibility_status": "RETIRED",
+        "evidence_source": "CSA official release April 2026; User-provided international retirement registry"
+    },
+
     # Notable Candidate Pool Players
     8: {
         "player_name": "Mahendra Singh Dhoni",
@@ -454,12 +606,12 @@ CURATED_ELIGIBILITY = {
     3125: {
         "player_name": "Nicholas Pooran",
         "role": "Batter",
-        "IPL_status": "ACTIVE (Lucknow Super Giants, Retained for ₹21 Cr; Top Retention)",
-        "international_status": "ACTIVE (West Indies T20I)",
+        "IPL_status": "ACTIVE in IPL (Lucknow Super Giants, Retained for ₹21 Cr; Top Retention)",
+        "international_status": "RETIRED from all international cricket in June 2025 as the West Indies' highest T20I run-scorer",
         "franchise_T20_status": "ACTIVE (Trinbago Knight Riders, MI NY, MI Emirates)",
-        "last_verified_match_date": "2024-11-14 (T20I vs ENG) / 2024-05-17 (IPL 2024)",
-        "eligibility_status": "ACTIVE",
-        "evidence_source": "LSG official retention list Oct 31, 2024; CWI records"
+        "last_verified_match_date": "2025-06-20 (International retirement)",
+        "eligibility_status": "RETIRED",
+        "evidence_source": "CWI official release June 2025; User-provided international retirement registry"
     },
     1077: {
         "player_name": "David Miller",
@@ -474,12 +626,12 @@ CURATED_ELIGIBILITY = {
     47: {
         "player_name": "Virat Kohli",
         "role": "Batter",
-        "IPL_status": "ACTIVE (Royal Challengers Bengaluru, Retained for ₹21 Cr)",
-        "international_status": "RETIRED from T20Is (June 29, 2024); ACTIVE in Tests & ODIs",
-        "franchise_T20_status": "ACTIVE (IPL / RCB)",
-        "last_verified_match_date": "2024-05-22 (IPL 2024 in dataset) / 2024-11-03 (Test vs NZ)",
-        "eligibility_status": "ACTIVE",
-        "evidence_source": "RCB official retention list Oct 31, 2024; BCCI active contract"
+        "IPL_status": "ACTIVE in IPL (Royal Challengers Bengaluru, Retained for ₹21 Cr)",
+        "international_status": "RETIRED from T20Is in June 2024 immediately after winning the T20 World Cup final",
+        "franchise_T20_status": "ACTIVE in IPL",
+        "last_verified_match_date": "2024-06-29 (T20 World Cup Final vs SA)",
+        "eligibility_status": "RETIRED",
+        "evidence_source": "BCCI official announcement June 29, 2024; User-provided international retirement registry"
     },
     4373: {
         "player_name": "Mustafizur Rahman",
@@ -718,8 +870,40 @@ def generate_coverage_report(registry_df, active_bat_top10, active_bowl_top10, r
             row = sub.iloc[0]
             md.append(f"| — | **{row['player_name']}** | {row['role']} | {row['IPL_status']} | {row['international_status']} | {row['franchise_T20_status']} | **{row['eligibility_status']}** | {row['evidence_source']} |")
 
-    md.append("\n### Summary of IPL Retirement Transitions:")
+    md.append("\n### 2.2 Notable T20 International Retirements (2022–2026 User-Supplied Registry)")
+    md.append("| Year | Player | Country | Retirement Scope & Details | Status |")
+    md.append("| :---: | :--- | :--- | :--- | :---: |")
+    intl_23 = [
+        ("2022", "Eoin Morgan", "England", "Retired from all international cricket in June 2022 after captaining England to 72 T20I appearances."),
+        ("2022", "Mushfiqur Rahim", "Bangladesh", "Retired from T20Is in September 2022 to focus on Test and ODI cricket."),
+        ("2022", "Tamim Iqbal", "Bangladesh", "Retired from T20Is in July 2022 (before retiring from all international cricket in 2025)."),
+        ("2023", "Aaron Finch", "Australia", "Retired from T20Is and all international cricket in February 2023 after leading Australia to the 2021 T20 World Cup title."),
+        ("2023", "Alex Hales", "England", "Retired from international cricket in August 2023 after helping England win the 2022 T20 World Cup."),
+        ("2024", "Virat Kohli", "India", "Retired from T20Is in June 2024 immediately after winning the T20 World Cup final."),
+        ("2024", "Rohit Sharma", "India", "Retired from T20Is in June 2024 after captaining India to the T20 World Cup title."),
+        ("2024", "Ravindra Jadeja", "India", "Retired from T20Is in June 2024 following India's T20 World Cup victory."),
+        ("2024", "David Warner", "Australia", "Retired from T20Is and all international cricket in June 2024 following Australia's exit from the T20 World Cup."),
+        ("2024", "Trent Boult", "New Zealand", "Concluded his T20I and international career after the June 2024 T20 World Cup."),
+        ("2024", "Shakib Al Hasan", "Bangladesh", "Announced his retirement from T20Is in September 2024."),
+        ("2024", "Mahmudullah", "Bangladesh", "Retired from T20Is in October 2024 during the tour of India."),
+        ("2024", "Moeen Ali", "England", "Retired from all international cricket in September 2024."),
+        ("2024", "Matthew Wade", "Australia", "Retired from all international cricket in October 2024 after winning the 2021 T20 World Cup."),
+        ("2025", "Martin Guptill", "New Zealand", "Retired from all international cricket in January 2025 as New Zealand's all-time leading T20I run-scorer."),
+        ("2025", "Heinrich Klaasen", "South Africa", "Retired from all international cricket in June 2025."),
+        ("2025", "Nicholas Pooran", "West Indies", "Retired from all international cricket in June 2025 as the West Indies' highest T20I run-scorer."),
+        ("2025", "Mitchell Starc", "Australia", "Retired exclusively from T20Is in September 2025 to prolong his Test and ODI career."),
+        ("2025", "Asif Ali", "Pakistan", "Retired from all international cricket in September 2025."),
+        ("2025", "Kane Williamson", "New Zealand", "Retired from T20Is in November 2025 before retiring from all international formats in June 2026."),
+        ("2026", "Kane Richardson", "Australia", "Retired from all cricket in January 2026."),
+        ("2026", "Rassie van der Dussen", "South Africa", "Retired from international cricket in April 2026."),
+        ("2026", "Glenn Maxwell", "Australia", "Retired from all international cricket in November 2026 after playing 130 T20Is.")
+    ]
+    for yr, p_name, country, details in intl_23:
+        md.append(f"| {yr} | **{p_name}** | {country} | {details} | `RETIRED` |")
+
+    md.append("\n### Summary of Retirement Transitions:")
     md.append("- **Coaching Transitions**: Several stars moved into franchise coaching/mentoring: Kieron Pollard (MI batting coach), Dwayne Bravo (CSK/KKR mentor), Dinesh Karthik (RCB mentor), Matthew Wade (GT assistant coach 2025), and Andre Russell (KKR power-hitting coach 2026).")
+    md.append("- **International T20 Exits**: Modern icons stepped away from T20Is following World Cup cycles: Virat Kohli, Rohit Sharma, and Ravindra Jadeja (post-2024 T20 World Cup triumph), David Warner, Trent Boult, Nicholas Pooran, and Heinrich Klaasen.")
     md.append("- **Opt-Outs & Other Leagues**: Glenn Maxwell, Faf du Plessis (PSL), and Moeen Ali stepped away from IPL auctions to pursue other franchise options or conclude long IPL tenures.")
     md.append("- **Indian Veterans**: Robin Uthappa, Ambati Rayudu, Shikhar Dhawan, Wriddhiman Saha, Ravichandran Ashwin, Piyush Chawla, and Mohit Sharma concluded their storied IPL playing careers.\n")
 
@@ -731,10 +915,10 @@ def generate_coverage_report(registry_df, active_bat_top10, active_bowl_top10, r
         name = r["player_name"]
         reg = registry_df[registry_df["player_name"] == name]
         status = reg.iloc[0]["eligibility_status"] if len(reg) > 0 else "ACTIVE"
-        note = "Retained in Active Top 10" if status == "ACTIVE" else "REMOVED from Active Leaderboard (Retired from IPL)"
+        note = "Retained in Active Top 10" if status == "ACTIVE" else f"REMOVED from Active Leaderboard ({status})"
         md.append(f"| #{int(r['official_rank'])} | **{name}** | {int(r['pressure_deliveries'])} | {r['cpri_score']:.2f} | {status} | {note} |")
 
-    md.append("\n*Result for Batters*: **Matthew Wade (#1)** and **Dinesh Karthik (#9)** are removed from active consideration. **Tim David** advances to #1, **Suryakumar Yadav** to #2, **Shashank Singh** to #9, and **Ashutosh Sharma** enters at #10.\n")
+    md.append("\n*Result for Batters*: **Matthew Wade (#1)**, **Dinesh Karthik (#9)**, and **Ravindra Jadeja (#10 Phase 8 / #8 Active)** are removed from active consideration. **Tim David** advances to #1, **Suryakumar Yadav** to #2, **Shashank Singh** to #8, **Ashutosh Sharma** to #9, and **Mahendra Singh Dhoni** enters at #10.\n")
 
     md.append("### 3.2 Official Bowlers Audit:")
     md.append("| Rank | Bowler Name | Pressure Balls | CPRI Score | Playing Status | Impact on Active Leaderboard |")

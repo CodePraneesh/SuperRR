@@ -87,7 +87,7 @@ class TestPlayerEligibility(unittest.TestCase):
             self.assertIn(status, valid_statuses, f"Invalid status: {status}")
 
     def test_04_user_retired_ipl_players_audited(self):
-        """Verify all 17 players requested in the retired list are audited and classified as RETIRED."""
+        """Verify all 17 players requested in the IPL retired list are audited and classified as RETIRED."""
         reg_df = pd.read_csv(DATA_DIR / "player_eligibility_registry.csv").set_index("player_name")
         user_retired_17 = [
             "Kieron Pollard", "Dwayne Bravo", "Aaron Finch", "David Warner", "Matthew Wade",
@@ -102,6 +102,23 @@ class TestPlayerEligibility(unittest.TestCase):
             ipl_stat = str(reg_df.loc[name, "IPL_status"])
             self.assertIn("RETIRED", ipl_stat, f"Player '{name}' should have RETIRED in IPL_status, found: {ipl_stat}")
 
+    def test_04b_international_retirees_audited(self):
+        """Verify all 23 international retirees (2022-2026) are audited and classified as RETIRED."""
+        reg_df = pd.read_csv(DATA_DIR / "player_eligibility_registry.csv").set_index("player_name")
+        international_retired_23 = [
+            "Eoin Morgan", "Mushfiqur Rahim", "Tamim Iqbal", "Aaron Finch", "Alex Hales",
+            "Virat Kohli", "Rohit Sharma", "Ravindra Jadeja", "David Warner", "Trent Boult",
+            "Shakib Al Hasan", "Mahmudullah", "Moeen Ali", "Matthew Wade", "Martin Guptill",
+            "Heinrich Klaasen", "Nicholas Pooran", "Mitchell Starc", "Asif Ali", "Kane Williamson",
+            "Kane Richardson", "Rassie van der Dussen", "Glenn Maxwell"
+        ]
+        for name in international_retired_23:
+            self.assertIn(name, reg_df.index, f"International retiree '{name}' missing from eligibility registry!")
+            status = reg_df.loc[name, "eligibility_status"]
+            self.assertEqual(status, "RETIRED", f"Player '{name}' should have eligibility_status == 'RETIRED', found: {status}")
+            intl_stat = str(reg_df.loc[name, "international_status"])
+            self.assertIn("RETIRED", intl_stat, f"Player '{name}' should have RETIRED in international_status, found: {intl_stat}")
+
     def test_05_released_or_unsold_not_marked_retired(self):
         """Task 5 Invariant: Truly active players like Reeza Hendricks, Tim David, Phil Salt are NOT marked retired."""
         reg_df = pd.read_csv(DATA_DIR / "player_eligibility_registry.csv").set_index("player_name")
@@ -110,11 +127,14 @@ class TestPlayerEligibility(unittest.TestCase):
             self.assertEqual(reg_df.loc[name, "eligibility_status"], "ACTIVE", f"Active player '{name}' wrongly marked non-active")
 
     def test_06_active_leaderboard_preserves_historical_scores(self):
-        """Verify active leaderboard excludes Matthew Wade and Dinesh Karthik; Tim David leads."""
+        """Verify active leaderboard excludes Matthew Wade, Dinesh Karthik, Ravindra Jadeja; Tim David leads."""
         act_bat = pd.read_csv(OUT_ELIG_DIR / "active_top10_batters.csv")
         self.assertEqual(len(act_bat), 10, "Active batters top 10 must have exactly 10 players")
         self.assertNotIn("Matthew Wade", act_bat["player_name"].tolist(), "Matthew Wade must not be in active leaderboard")
         self.assertNotIn("Dinesh Karthik", act_bat["player_name"].tolist(), "Dinesh Karthik must not be in active leaderboard")
+        self.assertNotIn("Ravindra Jadeja", act_bat["player_name"].tolist(), "Ravindra Jadeja must not be in active leaderboard")
+        self.assertNotIn("Virat Kohli", act_bat["player_name"].tolist(), "Virat Kohli must not be in active leaderboard")
+        self.assertNotIn("Rohit Sharma", act_bat["player_name"].tolist(), "Rohit Sharma must not be in active leaderboard")
 
         # Tim David is #1 Active Batter with CPRI 82.44
         self.assertEqual(act_bat.iloc[0]["player_name"], "Tim David")
@@ -124,9 +144,9 @@ class TestPlayerEligibility(unittest.TestCase):
         self.assertEqual(act_bat.iloc[1]["player_name"], "Suryakumar Yadav")
         self.assertEqual(act_bat.iloc[1]["cpri_score"], 81.42)
 
-        # Ashutosh Sharma enters active top 10 at #10
-        self.assertIn("Ashutosh Sharma", act_bat["player_name"].tolist())
-        self.assertIn("Shashank Singh", act_bat["player_name"].tolist())
+        # MS Dhoni enters active top 10 at #10
+        self.assertEqual(act_bat.iloc[9]["player_name"], "Mahendra Singh Dhoni")
+        self.assertEqual(act_bat.iloc[9]["cpri_score"], 69.85)
 
         # Active bowlers top 10 is 100% active
         act_bowl = pd.read_csv(OUT_ELIG_DIR / "active_top10_bowlers.csv")

@@ -14,7 +14,7 @@ import {
 } from 'lucide-react'
 import { getCohortPlayers } from '../api/playerApi'
 import { getOfficialRoleRankings } from '../api/officialApi'
-import { getActiveRankings } from '../api/activeApi'
+import { getActiveRankings, getRetiredPlayers } from '../api/activeApi'
 import type { PlayerSummaryItem } from '../types/player'
 import type { OfficialPlayerItem } from '../types/official'
 import type { Role } from '../types/common'
@@ -39,10 +39,18 @@ export const OverviewPage: React.FC = () => {
   const [activePlayers, setActivePlayers] = useState<OfficialPlayerItem[]>([])
   // Contextual league state
   const [cohortPlayers, setCohortPlayers] = useState<PlayerSummaryItem[]>([])
+  // Retired players list
+  const [retiredNames, setRetiredNames] = useState<string[]>([])
   
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    getRetiredPlayers().then(res => {
+      setRetiredNames(res.retired_names || [])
+    }).catch(() => {})
+  }, [])
 
   const loadData = async () => {
     setLoading(true)
@@ -221,12 +229,45 @@ export const OverviewPage: React.FC = () => {
 
       {/* Active Players Audit Banner */}
       {isActive && (
-        <div className="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-lg shadow-xs flex items-start gap-3">
-          <UserCheck className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-          <div className="text-xs text-emerald-900 leading-relaxed">
-            <span className="font-bold">Active Professional T20 Players: </span>
-            Showing only verified active cricketers. <strong>17 confirmed IPL retirees</strong> (including Matthew Wade, Dinesh Karthik, David Warner, Andre Russell, Glenn Maxwell, Ravichandran Ashwin) have been excluded from active rankings. Historical performance data and Phase 8 baseline CPRI scores remain strictly preserved.
+        <div className="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-lg shadow-xs flex items-start justify-between gap-3">
+          <div className="flex items-start gap-3">
+            <UserCheck className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+            <div className="text-xs text-emerald-900 leading-relaxed">
+              <span className="font-bold">Active Professional T20 Players: </span>
+              Showing only verified active cricketers. <strong>35 confirmed retirees</strong> (17 IPL retirees + 23 International T20 retirees from 2022–2026, including Matthew Wade, Dinesh Karthik, Ravindra Jadeja, Virat Kohli, Rohit Sharma, David Warner, Andre Russell, Glenn Maxwell, Heinrich Klaasen, Nicholas Pooran, Trent Boult) have been excluded from active rankings. Historical performance data and Phase 8 baseline CPRI scores remain strictly preserved.
+            </div>
           </div>
+          <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 shrink-0 hidden md:inline-block">
+            35 Confirmed Retirees Filtered
+          </span>
+        </div>
+      )}
+
+      {/* Official Historical Baseline Banner */}
+      {isOfficial && (
+        <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div className="flex items-start gap-3">
+            <Crown className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+            <div className="text-xs text-blue-950 leading-relaxed">
+              <span className="font-bold">Official Historical Competition Baseline (Phase 8 Submission): </span>
+              This view reflects the frozen Phase 8 submission rankings across all qualifying cricketers (including historical performers like Matthew Wade). 
+              For scouting and auction decisions, switch to the{' '}
+              <button
+                onClick={() => setViewMode('active')}
+                className="font-bold underline text-emerald-800 hover:text-emerald-950 cursor-pointer"
+              >
+                Active Players Leaderboard
+              </button>{' '}
+              which excludes 35 confirmed IPL &amp; International retirees.
+            </div>
+          </div>
+          <button
+            onClick={() => setViewMode('active')}
+            className="px-3.5 py-1.5 rounded bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shrink-0 flex items-center gap-1.5 transition-colors shadow-xs cursor-pointer"
+          >
+            <UserCheck className="w-3.5 h-3.5" />
+            <span>Switch to Active Players</span>
+          </button>
         </div>
       )}
 
@@ -337,6 +378,7 @@ export const OverviewPage: React.FC = () => {
                 const isFirst = rankNum === 1
                 const confTier = p.confidence_tier || 'High Confidence'
                 const isExploratory = confTier === 'Exploratory'
+                const isPlayerRetired = retiredNames.includes(p.player_name)
 
                 return (
                   <div
@@ -367,7 +409,12 @@ export const OverviewPage: React.FC = () => {
                         )}
                       </div>
                       
-                      <div className="flex items-center gap-1.5">
+                      <div className="flex items-center gap-1.5 flex-wrap justify-end">
+                        {isPlayerRetired && (
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-rose-600 text-white shadow-xs">
+                            RETIRED
+                          </span>
+                        )}
                         {p.competition_evidence && (
                           <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
                             isFirst ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-700'
@@ -385,7 +432,16 @@ export const OverviewPage: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="font-extrabold text-lg tracking-tight mb-1">{p.player_name}</div>
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <div className="font-extrabold text-lg tracking-tight">{p.player_name}</div>
+                      {isPlayerRetired && (
+                        <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded ${
+                          isFirst ? 'text-rose-200 bg-rose-950/80 border border-rose-700' : 'text-rose-700 bg-rose-50 border border-rose-200'
+                        }`}>
+                          Retired from T20
+                        </span>
+                      )}
+                    </div>
                     
                     <div className="flex items-baseline gap-2 mb-4">
                       <div className="text-2xl font-black text-[#EC008C]">{formatScore(p.cpri_score)}</div>
@@ -437,6 +493,7 @@ export const OverviewPage: React.FC = () => {
 
               <TopRankingsBarChart
                 players={displayPlayers}
+                retiredNames={retiredNames}
                 height={340}
                 onSelectPlayer={(selected) => {
                   const pScope = isOfficial ? (selected.competition_evidence === 'T20I-Only' ? 'T20I' : 'IPL') : viewMode.toUpperCase()

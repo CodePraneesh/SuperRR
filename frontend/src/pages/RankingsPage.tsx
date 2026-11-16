@@ -20,7 +20,7 @@ import {
 } from 'lucide-react'
 import { getCohortPlayers } from '../api/playerApi'
 import { getOfficialRoleRankings } from '../api/officialApi'
-import { getActiveRankings, ActivePlayerItem } from '../api/activeApi'
+import { getActiveRankings, getRetiredPlayers, ActivePlayerItem } from '../api/activeApi'
 import type { PlayerSummaryItem } from '../types/player'
 import type { OfficialPlayerItem } from '../types/official'
 import type { ActiveRole } from '../types/common'
@@ -62,9 +62,16 @@ export const RankingsPage: React.FC = () => {
   const [cohortPlayers, setCohortPlayers] = useState<PlayerSummaryItem[]>([])
   const [activePlayers, setActivePlayers] = useState<ActivePlayerItem[]>([])
   const [activeMetadata, setActiveMetadata] = useState<any>(null)
+  const [retiredNames, setRetiredNames] = useState<string[]>([])
   
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    getRetiredPlayers().then(res => {
+      setRetiredNames(res.retired_names || [])
+    }).catch(() => {})
+  }, [])
 
   // Filtering & Sorting
   const [search, setSearch] = useState('')
@@ -362,13 +369,13 @@ export const RankingsPage: React.FC = () => {
               <div className="text-xs text-emerald-950 leading-relaxed">
                 <strong className="font-bold text-emerald-900">Active T20 Player Registry (2022–2026 Retiree Audit): </strong>
                 This leaderboard reflects only currently active professional T20 cricketers. 
-                <span className="font-semibold text-emerald-800"> 17 confirmed IPL retirees</span> (Matthew Wade, Dinesh Karthik, David Warner, Andre Russell, Glenn Maxwell, Faf du Plessis, Moeen Ali, Aaron Finch, Kieron Pollard, Dwayne Bravo, Ravichandran Ashwin, Piyush Chawla, Mohit Sharma, Robin Uthappa, Ambati Rayudu, Shikhar Dhawan, Wriddhiman Saha) have been excluded. 
+                <span className="font-semibold text-emerald-800"> 35 confirmed retirees</span> (17 IPL retirees + 23 International T20 retirees from 2022–2026, including Matthew Wade, Dinesh Karthik, Ravindra Jadeja, Virat Kohli, Rohit Sharma, David Warner, Andre Russell, Glenn Maxwell, Heinrich Klaasen, Nicholas Pooran, Trent Boult, Shakib Al Hasan, Mitchell Starc, Kane Williamson) have been excluded. 
                 All historical ball-by-ball deliveries, expected performance baselines, and Phase 8 official submission rankings remain permanently preserved.
               </div>
             </div>
             <div className="flex items-center gap-2 shrink-0">
               <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">
-                17 Confirmed Retirees Filtered
+                35 Confirmed Retirees Filtered
               </span>
               <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-blue-100 text-blue-800 border border-blue-200">
                 Phase 8 Baseline Preserved
@@ -472,7 +479,7 @@ export const RankingsPage: React.FC = () => {
             }`}
           >
             <UserCheck className={`w-3.5 h-3.5 ${activeTab === 'active' ? 'text-emerald-300' : 'text-slate-400'}`} />
-            <span>Active Players (17 Retirees Filtered)</span>
+            <span>Active Players (35 Retirees Filtered)</span>
             <span className={`px-1.5 py-0.5 rounded-full text-[10px] ${
               activeTab === 'active' ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-600'
             }`}>
@@ -894,12 +901,19 @@ export const RankingsPage: React.FC = () => {
 
                         {/* Player Name & Tactical Tag */}
                         <td className="py-3 px-3">
-                          <Link
-                            to={`/players/${pScope}/${role}/${encodeURIComponent(p.player_name)}`}
-                            className="font-bold text-[#101F43] hover:text-[#EC008C] transition-colors block text-xs"
-                          >
-                            {p.player_name}
-                          </Link>
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <Link
+                              to={`/players/${pScope}/${role}/${encodeURIComponent(p.player_name)}`}
+                              className="font-bold text-[#101F43] hover:text-[#EC008C] transition-colors block text-xs"
+                            >
+                              {p.player_name}
+                            </Link>
+                            {retiredNames.includes(p.player_name) && (
+                              <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-rose-100 text-rose-700 border border-rose-300">
+                                RETIRED
+                              </span>
+                            )}
+                          </div>
                           {p.tactical_classification && (
                             <span className="text-[10px] text-slate-400 font-medium">
                               {p.tactical_classification}

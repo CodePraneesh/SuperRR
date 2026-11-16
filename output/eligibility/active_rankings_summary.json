@@ -3,9 +3,9 @@
     "title": "SupeRR Intelligence Active Professional T20 Rankings",
     "audit_date": "2026-11-16",
     "qualifying_criteria": "pressure_deliveries >= 60 AND pressure_matches >= 5 AND eligibility_status == 'ACTIVE'",
-    "active_batters_count": 256,
-    "active_bowlers_count": 212,
-    "active_allrounders_count": 99
+    "active_batters_count": 247,
+    "active_bowlers_count": 207,
+    "active_allrounders_count": 96
   },
   "top10_active_batters": [
     {
@@ -122,22 +122,6 @@
     },
     {
       "active_rank": 8,
-      "player_id": 152,
-      "player_name": "Ravindra Jadeja",
-      "competition_evidence": "Dual-Format",
-      "cpri_score": 73.7,
-      "evidence_tier": "Strong Evidence (400-599)",
-      "pressure_deliveries": 467,
-      "pressure_matches": 34,
-      "pressure_strike_rate": 137.47,
-      "sr_elevation": -3.2,
-      "score_pressure_impact": 69.39,
-      "score_adaptability": 73.59,
-      "score_consistency": 72.03,
-      "score_reliability": 87.62
-    },
-    {
-      "active_rank": 9,
       "player_id": 2756,
       "player_name": "Shashank Singh",
       "competition_evidence": "IPL-Only",
@@ -153,7 +137,7 @@
       "score_reliability": 74.35
     },
     {
-      "active_rank": 10,
+      "active_rank": 9,
       "player_id": 8101,
       "player_name": "Ashutosh Sharma",
       "competition_evidence": "IPL-Only",
@@ -167,6 +151,22 @@
       "score_adaptability": 71.66,
       "score_consistency": 73.97,
       "score_reliability": 66.25
+    },
+    {
+      "active_rank": 10,
+      "player_id": 8,
+      "player_name": "Mahendra Singh Dhoni",
+      "competition_evidence": "IPL-Only",
+      "cpri_score": 69.85,
+      "evidence_tier": "Moderate Evidence (250-399)",
+      "pressure_deliveries": 360,
+      "pressure_matches": 28,
+      "pressure_strike_rate": 141.11,
+      "sr_elevation": 0.44,
+      "score_pressure_impact": 71.7,
+      "score_adaptability": 69.28,
+      "score_consistency": 59.76,
+      "score_reliability": 79.32
     }
   ],
   "top10_active_bowlers": [
@@ -349,21 +349,6 @@
     },
     {
       "active_ar_rank": 2,
-      "player_id": 152,
-      "player_name": "Ravindra Jadeja",
-      "competition_evidence": "Dual-Format",
-      "composite_ar_cpri": 70.38,
-      "batting_cpri": 73.7,
-      "bowling_cpri": 57.67,
-      "evidence_tier": "Elite Evidence (600+)",
-      "total_pressure_balls": 1046,
-      "batting_pressure_balls": 467,
-      "bowling_pressure_balls": 579,
-      "pressure_strike_rate": 137.47,
-      "pressure_economy": 7.89
-    },
-    {
-      "active_ar_rank": 3,
       "player_id": 4101,
       "player_name": "Mitchell Santner",
       "competition_evidence": "Dual-Format",
@@ -378,7 +363,7 @@
       "pressure_economy": 6.51
     },
     {
-      "active_ar_rank": 4,
+      "active_ar_rank": 3,
       "player_id": 2490,
       "player_name": "Mohammad Nawaz",
       "competition_evidence": "T20I-Only",
@@ -393,7 +378,7 @@
       "pressure_economy": 6.04
     },
     {
-      "active_ar_rank": 5,
+      "active_ar_rank": 4,
       "player_id": 2639,
       "player_name": "Marcus Stoinis",
       "competition_evidence": "Dual-Format",
@@ -408,7 +393,7 @@
       "pressure_economy": 9.05
     },
     {
-      "active_ar_rank": 6,
+      "active_ar_rank": 5,
       "player_id": 6726,
       "player_name": "Romario Shepherd",
       "competition_evidence": "Dual-Format",
@@ -423,7 +408,7 @@
       "pressure_economy": 9.84
     },
     {
-      "active_ar_rank": 7,
+      "active_ar_rank": 6,
       "player_id": 1107,
       "player_name": "Mohammad Nabi",
       "competition_evidence": "Dual-Format",
@@ -438,7 +423,7 @@
       "pressure_economy": 7.11
     },
     {
-      "active_ar_rank": 8,
+      "active_ar_rank": 7,
       "player_id": 2417,
       "player_name": "Akeal Hosein",
       "competition_evidence": "Dual-Format",
@@ -453,7 +438,7 @@
       "pressure_economy": 7.72
     },
     {
-      "active_ar_rank": 9,
+      "active_ar_rank": 8,
       "player_id": 2382,
       "player_name": "Jamie Overton",
       "competition_evidence": "Dual-Format",
@@ -468,7 +453,7 @@
       "pressure_economy": 6.25
     },
     {
-      "active_ar_rank": 10,
+      "active_ar_rank": 9,
       "player_id": 4823,
       "player_name": "Washington Sundar",
       "competition_evidence": "Dual-Format",
@@ -481,6 +466,21 @@
       "bowling_pressure_balls": 342,
       "pressure_strike_rate": 133.11,
       "pressure_economy": 7.61
+    },
+    {
+      "active_ar_rank": 10,
+      "player_id": 2984,
+      "player_name": "Sikandar Raza",
+      "competition_evidence": "Dual-Format",
+      "composite_ar_cpri": 61.4,
+      "batting_cpri": 65.9,
+      "bowling_cpri": 48.8,
+      "evidence_tier": "Elite Evidence (600+)",
+      "total_pressure_balls": 617,
+      "batting_pressure_balls": 410,
+      "bowling_pressure_balls": 207,
+      "pressure_strike_rate": 147.56,
+      "pressure_economy": 6.64
     }
   ]
 }

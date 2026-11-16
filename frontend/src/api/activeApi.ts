@@ -56,11 +56,22 @@ export interface ActiveRankingsResponse {
   active_allrounders?: ActivePlayerItem[]
 }
 
+export interface RetiredResponse {
+  total_retired: number
+  retired_players: any[]
+  retired_names: string[]
+}
+
 export async function getActiveRankings(
   params?: ActiveQueryParams
 ): Promise<ActiveRankingsResponse> {
   const { data } = await apiClient.get<ActiveRankingsResponse>('/active/rankings', {
     params
   })
+  return data
+}
+
+export async function getRetiredPlayers(): Promise<RetiredResponse> {
+  const { data } = await apiClient.get<RetiredResponse>('/active/retired')
   return data
 }

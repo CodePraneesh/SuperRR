@@ -26,7 +26,7 @@ The 17 players officially retired or stepped away from the Indian Premier League
 | — | **David Warner** | Batter | RETIRED (Concluded IPL playing career after going unsold in IPL 2025 mega auction, transitioning to commentary/other T20 leagues) | RETIRED (June 2024 post T20 World Cup) | RETIRED from IPL (Transitioning into commentary & franchise leagues) | **RETIRED** | IPL 2025 mega auction records; official retirement confirmation |
 | — | **Matthew Wade** | Batter | RETIRED (Announced international retirement Oct 2024; joined Gujarat Titans as assistant coach for IPL 2025) | RETIRED (Announced Oct 29, 2024) | RETIRED from IPL (Assistant Coach Gujarat Titans 2025) | **RETIRED** | Cricket Australia official announcement Oct 29, 2024; Gujarat Titans coaching appointment |
 | — | **Andre Russell** | All-Rounder | RETIRED (Retired from the IPL ahead of the 2026 mini-auction after 12 seasons with KKR, joining as power-hitting coach) | RETIRED from IPL contention | RETIRED from IPL (KKR Power-Hitting Coach) | **RETIRED** | KKR official announcement; User-provided verified IPL retirement registry |
-| — | **Glenn Maxwell** | All-Rounder | RETIRED (Opted out of the IPL 2026 mini-auction in December 2025, bringing 13-season IPL stint to a close) | ACTIVE (Australia T20I / BBL) | RETIRED from IPL (Focus on domestic/BBL) | **RETIRED** | IPL 2026 mini-auction registry; official player statement |
+| — | **Glenn Maxwell** | All-Rounder | RETIRED (Opted out of the IPL 2026 mini-auction in December 2025, bringing 13-season IPL stint to a close) | RETIRED (Retired from all international cricket in November 2026 after playing 130 T20Is) | RETIRED from IPL & International Cricket (Focus on domestic/BBL) | **RETIRED** | User-provided verified T20I retirement registry; IPL 2026 mini-auction registry |
 | — | **Faf du Plessis** | Batter | RETIRED (Stepped away from the IPL ahead of the 2026 season, choosing to play in the Pakistan Super League instead) | RETIRED from South Africa | RETIRED from IPL (Active in PSL / SA20) | **RETIRED** | Official IPL 2026 release; PSL 2026 draft registration |
 | — | **Moeen Ali** | All-Rounder | RETIRED (Opted out of the IPL 2026 auction to focus on other global franchise leagues) | RETIRED (September 2024) | RETIRED from IPL (Active in CPL / BPL) | **RETIRED** | Daily Mail / ECB retirement release Sept 2024; IPL 2026 auction list |
 | — | **Robin Uthappa** | Batter | RETIRED (Retired from all forms of Indian cricket and the IPL in September 2022) | RETIRED (All forms of Indian cricket) | RETIRED from professional leagues (Plays Legends/LLC) | **RETIRED** | Official BCCI & social media retirement release Sept 14, 2022 |
@@ -38,8 +38,36 @@ The 17 players officially retired or stepped away from the Indian Premier League
 | — | **Piyush Chawla** | Bowler | RETIRED (Stepped away from IPL cricket in 2025 as one of the tournament's all-time leading wicket-takers) | RETIRED | RETIRED from IPL (Domestic / Commentary) | **RETIRED** | IPL 2025 records; Mumbai Indians squad announcements |
 | — | **Mohit Sharma** | Bowler | RETIRED (Announced his retirement from all forms of cricket ahead of the IPL 2026 auction) | RETIRED | RETIRED from all cricket | **RETIRED** | User-provided verified IPL retirement registry; BCCI official records |
 
-### Summary of IPL Retirement Transitions:
+### 2.2 Notable T20 International Retirements (2022–2026 User-Supplied Registry)
+| Year | Player | Country | Retirement Scope & Details | Status |
+| :---: | :--- | :--- | :--- | :---: |
+| 2022 | **Eoin Morgan** | England | Retired from all international cricket in June 2022 after captaining England to 72 T20I appearances. | `RETIRED` |
+| 2022 | **Mushfiqur Rahim** | Bangladesh | Retired from T20Is in September 2022 to focus on Test and ODI cricket. | `RETIRED` |
+| 2022 | **Tamim Iqbal** | Bangladesh | Retired from T20Is in July 2022 (before retiring from all international cricket in 2025). | `RETIRED` |
+| 2023 | **Aaron Finch** | Australia | Retired from T20Is and all international cricket in February 2023 after leading Australia to the 2021 T20 World Cup title. | `RETIRED` |
+| 2023 | **Alex Hales** | England | Retired from international cricket in August 2023 after helping England win the 2022 T20 World Cup. | `RETIRED` |
+| 2024 | **Virat Kohli** | India | Retired from T20Is in June 2024 immediately after winning the T20 World Cup final. | `RETIRED` |
+| 2024 | **Rohit Sharma** | India | Retired from T20Is in June 2024 after captaining India to the T20 World Cup title. | `RETIRED` |
+| 2024 | **Ravindra Jadeja** | India | Retired from T20Is in June 2024 following India's T20 World Cup victory. | `RETIRED` |
+| 2024 | **David Warner** | Australia | Retired from T20Is and all international cricket in June 2024 following Australia's exit from the T20 World Cup. | `RETIRED` |
+| 2024 | **Trent Boult** | New Zealand | Concluded his T20I and international career after the June 2024 T20 World Cup. | `RETIRED` |
+| 2024 | **Shakib Al Hasan** | Bangladesh | Announced his retirement from T20Is in September 2024. | `RETIRED` |
+| 2024 | **Mahmudullah** | Bangladesh | Retired from T20Is in October 2024 during the tour of India. | `RETIRED` |
+| 2024 | **Moeen Ali** | England | Retired from all international cricket in September 2024. | `RETIRED` |
+| 2024 | **Matthew Wade** | Australia | Retired from all international cricket in October 2024 after winning the 2021 T20 World Cup. | `RETIRED` |
+| 2025 | **Martin Guptill** | New Zealand | Retired from all international cricket in January 2025 as New Zealand's all-time leading T20I run-scorer. | `RETIRED` |
+| 2025 | **Heinrich Klaasen** | South Africa | Retired from all international cricket in June 2025. | `RETIRED` |
+| 2025 | **Nicholas Pooran** | West Indies | Retired from all international cricket in June 2025 as the West Indies' highest T20I run-scorer. | `RETIRED` |
+| 2025 | **Mitchell Starc** | Australia | Retired exclusively from T20Is in September 2025 to prolong his Test and ODI career. | `RETIRED` |
+| 2025 | **Asif Ali** | Pakistan | Retired from all international cricket in September 2025. | `RETIRED` |
+| 2025 | **Kane Williamson** | New Zealand | Retired from T20Is in November 2025 before retiring from all international formats in June 2026. | `RETIRED` |
+| 2026 | **Kane Richardson** | Australia | Retired from all cricket in January 2026. | `RETIRED` |
+| 2026 | **Rassie van der Dussen** | South Africa | Retired from international cricket in April 2026. | `RETIRED` |
+| 2026 | **Glenn Maxwell** | Australia | Retired from all international cricket in November 2026 after playing 130 T20Is. | `RETIRED` |
+
+### Summary of Retirement Transitions:
 - **Coaching Transitions**: Several stars moved into franchise coaching/mentoring: Kieron Pollard (MI batting coach), Dwayne Bravo (CSK/KKR mentor), Dinesh Karthik (RCB mentor), Matthew Wade (GT assistant coach 2025), and Andre Russell (KKR power-hitting coach 2026).
+- **International T20 Exits**: Modern icons stepped away from T20Is following World Cup cycles: Virat Kohli, Rohit Sharma, and Ravindra Jadeja (post-2024 T20 World Cup triumph), David Warner, Trent Boult, Nicholas Pooran, and Heinrich Klaasen.
 - **Opt-Outs & Other Leagues**: Glenn Maxwell, Faf du Plessis (PSL), and Moeen Ali stepped away from IPL auctions to pursue other franchise options or conclude long IPL tenures.
 - **Indian Veterans**: Robin Uthappa, Ambati Rayudu, Shikhar Dhawan, Wriddhiman Saha, Ravichandran Ashwin, Piyush Chawla, and Mohit Sharma concluded their storied IPL playing careers.
 
@@ -48,7 +76,7 @@ The 17 players officially retired or stepped away from the Indian Premier League
 ### 3.1 Official Batters Audit:
 | Rank | Player Name | Pressure Balls | CPRI Score | Playing Status | Impact on Active Leaderboard |
 | :---: | :--- | :---: | :---: | :--- | :--- |
-| #1 | **Matthew Wade** | 191 | 85.36 | RETIRED | REMOVED from Active Leaderboard (Retired from IPL) |
+| #1 | **Matthew Wade** | 191 | 85.36 | RETIRED | REMOVED from Active Leaderboard (RETIRED) |
 | #2 | **Tim David** | 476 | 82.44 | ACTIVE | Retained in Active Top 10 |
 | #3 | **Suryakumar Yadav** | 749 | 81.42 | ACTIVE | Retained in Active Top 10 |
 | #4 | **Reeza Hendricks** | 378 | 77.45 | ACTIVE | Retained in Active Top 10 |
@@ -56,10 +84,10 @@ The 17 players officially retired or stepped away from the Indian Premier League
 | #6 | **Phil Salt** | 261 | 76.96 | ACTIVE | Retained in Active Top 10 |
 | #7 | **Romario Shepherd** | 428 | 75.33 | ACTIVE | Retained in Active Top 10 |
 | #8 | **Namboori Tilak Varma** | 777 | 74.81 | ACTIVE | Retained in Active Top 10 |
-| #9 | **Dinesh Karthik** | 277 | 74.54 | RETIRED | REMOVED from Active Leaderboard (Retired from IPL) |
-| #10 | **Ravindra Jadeja** | 467 | 73.70 | ACTIVE | Retained in Active Top 10 |
+| #9 | **Dinesh Karthik** | 277 | 74.54 | RETIRED | REMOVED from Active Leaderboard (RETIRED) |
+| #10 | **Ravindra Jadeja** | 467 | 73.70 | RETIRED | REMOVED from Active Leaderboard (RETIRED) |
 
-*Result for Batters*: **Matthew Wade (#1)** and **Dinesh Karthik (#9)** are removed from active consideration. **Tim David** advances to #1, **Suryakumar Yadav** to #2, **Shashank Singh** to #9, and **Ashutosh Sharma** enters at #10.
+*Result for Batters*: **Matthew Wade (#1)**, **Dinesh Karthik (#9)**, and **Ravindra Jadeja (#10 Phase 8 / #8 Active)** are removed from active consideration. **Tim David** advances to #1, **Suryakumar Yadav** to #2, **Shashank Singh** to #8, **Ashutosh Sharma** to #9, and **Mahendra Singh Dhoni** enters at #10.
 
 ### 3.2 Official Bowlers Audit:
 | Rank | Bowler Name | Pressure Balls | CPRI Score | Playing Status | Impact on Active Leaderboard |
@@ -92,9 +120,9 @@ The 17 players officially retired or stepped away from the Indian Premier League
 | **#5** | Phil Salt | Dual-Format | **76.96** | 261 | 20 | Active Professional T20 |
 | **#6** | Romario Shepherd | Dual-Format | **75.33** | 428 | 38 | Active Professional T20 |
 | **#7** | Namboori Tilak Varma | Dual-Format | **74.81** | 777 | 43 | Active Professional T20 |
-| **#8** | Ravindra Jadeja | Dual-Format | **73.70** | 467 | 34 | Active Professional T20 |
-| **#9** | Shashank Singh | IPL-Only | **72.83** | 327 | 23 | Active Professional T20 |
-| **#10** | Ashutosh Sharma | IPL-Only | **72.52** | 261 | 21 | Active Professional T20 |
+| **#8** | Shashank Singh | IPL-Only | **72.83** | 327 | 23 | Active Professional T20 |
+| **#9** | Ashutosh Sharma | IPL-Only | **72.52** | 261 | 21 | Active Professional T20 |
+| **#10** | Mahendra Singh Dhoni | IPL-Only | **69.85** | 360 | 28 | Active Professional T20 |
 
 ### 4.2 Active Top 10 Bowlers Leaderboard
 
@@ -121,8 +149,8 @@ Players in our dataset with high pressure-ball volume ($\ge 400$ balls) who are 
 | **Ayush Badoni** | Batter | 416 | **69.60** | IPL-Only | High pressure sample (>=400 balls) with verified active contract |
 | **Tristan Stubbs** | Batter | 579 | **69.55** | Dual-Format | High pressure sample (>=400 balls) with verified active contract |
 | **Dasun Shanaka** | Batter | 402 | **68.70** | Dual-Format | High pressure sample (>=400 balls) with verified active contract |
-| **Nicholas Pooran** | Batter | 673 | **68.43** | Dual-Format | High pressure sample (>=400 balls) with verified active contract |
 | **David Miller** | Batter | 664 | **67.60** | Dual-Format | High pressure sample (>=400 balls) with verified active contract |
+| **Sai Sudharsan** | Batter | 460 | **67.17** | IPL-Only | High pressure sample (>=400 balls) with verified active contract |
 | **Mustafizur Rahman** | Bowler | 527 | **72.12** | Dual-Format | High pressure sample (>=400 balls) with verified active contract |
 | **Wanindu Hasaranga** | Bowler | 639 | **71.86** | Dual-Format | High pressure sample (>=400 balls) with verified active contract |
 | **Kuldeep Yadav** | Bowler | 627 | **71.29** | Dual-Format | High pressure sample (>=400 balls) with verified active contract |

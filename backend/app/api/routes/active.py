@@ -75,3 +75,24 @@ def get_active_rankings(
         result["active_allrounders"] = f_ar.to_dict(orient="records")
 
     return result
+
+
+@router.get("/retired")
+def get_retired_players(
+    limit: Optional[int] = Query(100, description="Max players to return")
+) -> Dict[str, Any]:
+    """
+    Returns list of confirmed retired cricketers (IPL and/or T20 International)
+    identified in the 2022-2026 player eligibility audit.
+    """
+    retired_csv = ELIG_DIR / "retired_players.csv"
+    if not retired_csv.exists():
+        raise HTTPException(status_code=404, detail="Retired players dataset not found")
+
+    df = pd.read_csv(retired_csv)
+    records = df.head(limit).to_dict(orient="records")
+    return {
+        "total_retired": len(df),
+        "retired_players": records,
+        "retired_names": df["player_name"].tolist()
+    }
