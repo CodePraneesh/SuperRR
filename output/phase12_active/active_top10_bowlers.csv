@@ -1,0 +1,11 @@
+rank,player_id,player_name,cpri_score,pressure_deliveries,last_played,evidence_tier,official_rank,in_official_top10,rank_p5,rank_p95,rank_ci_90,rank_uncertainty_source
+1,4101,Mitchell Santner,79.84,653,2026-11-01,Elite Evidence,1,True,2,36,"[2, 36]","from full-population bootstrap, not recomputed for the active view"
+2,34485,Sufiyan Muqeem,78.78,151,2026-10-13,Limited Evidence,2,True,1,74,"[1, 74]","from full-population bootstrap, not recomputed for the active view"
+3,4722,Rashid Khan,77.9,970,2026-11-01,Elite Evidence,3,True,2,33,"[2, 33]","from full-population bootstrap, not recomputed for the active view"
+4,2382,Jamie Overton,76.92,168,2026-09-19,Limited Evidence,4,True,1,71,"[1, 71]","from full-population bootstrap, not recomputed for the active view"
+5,8661,Matheesha Pathirana,75.77,557,2026-05-16,Strong Evidence,5,True,4,49,"[4, 49]","from full-population bootstrap, not recomputed for the active view"
+6,781,Sunil Narine,75.63,511,2026-05-24,Strong Evidence,6,True,4,47,"[4, 47]","from full-population bootstrap, not recomputed for the active view"
+7,2490,Mohammad Nawaz,75.51,301,2026-02-01,Moderate Evidence,7,True,1,38,"[1, 38]","from full-population bootstrap, not recomputed for the active view"
+8,2933,Jasprit Bumrah,73.36,606,2026-09-17,Elite Evidence,8,True,3,67,"[3, 67]","from full-population bootstrap, not recomputed for the active view"
+9,6256,Varun Chakravarthy,73.02,892,2026-11-01,Elite Evidence,9,True,5,46,"[5, 46]","from full-population bootstrap, not recomputed for the active view"
+10,1612,Yuzvendra Chahal,73.01,859,2026-05-23,Elite Evidence,10,True,3,48,"[3, 48]","from full-population bootstrap, not recomputed for the active view"

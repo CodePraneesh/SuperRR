@@ -1,0 +1,11 @@
+rank,player_id,player_name,cpri_score,pressure_deliveries,last_played,evidence_tier,official_rank,in_official_top10,rank_p5,rank_p95,rank_ci_90,rank_uncertainty_source
+1,6396,Tim David,82.44,476,2026-06-21,Strong Evidence,2,True,1,19,"[1, 19]","from full-population bootstrap, not recomputed for the active view"
+2,1699,Suryakumar Yadav,81.42,749,2026-05-24,Elite Evidence,3,True,2,25,"[2, 25]","from full-population bootstrap, not recomputed for the active view"
+3,768,Reeza Hendricks,77.45,378,2025-12-19,Moderate Evidence,4,True,2,49,"[2, 49]","from full-population bootstrap, not recomputed for the active view"
+4,4708,Rinku Singh,77.18,457,2026-07-26,Strong Evidence,5,True,1,51,"[1, 51]","from full-population bootstrap, not recomputed for the active view"
+5,5553,Phil Salt,76.96,261,2026-07-11,Moderate Evidence,6,True,2,70,"[2, 70]","from full-population bootstrap, not recomputed for the active view"
+6,6726,Romario Shepherd,75.33,428,2026-10-09,Strong Evidence,7,True,2,48,"[2, 48]","from full-population bootstrap, not recomputed for the active view"
+7,7897,Namboori Tilak Varma,74.81,777,2026-11-01,Elite Evidence,8,True,4,44,"[4, 44]","from full-population bootstrap, not recomputed for the active view"
+8,152,Ravindra Jadeja,73.7,467,2026-05-29,Strong Evidence,10,True,7,63,"[7, 63]","from full-population bootstrap, not recomputed for the active view"
+9,2756,Shashank Singh,72.83,327,2026-05-17,Moderate Evidence,11,False,2,76,"[2, 76]","from full-population bootstrap, not recomputed for the active view"
+10,8101,Ashutosh Sharma,72.52,261,2026-05-24,Moderate Evidence,12,False,2,81,"[2, 81]","from full-population bootstrap, not recomputed for the active view"
