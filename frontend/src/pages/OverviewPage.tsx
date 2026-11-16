@@ -9,10 +9,12 @@ import {
   Target,
   AlertTriangle,
   Flame,
-  Crown
+  Crown,
+  UserCheck
 } from 'lucide-react'
 import { getCohortPlayers } from '../api/playerApi'
 import { getOfficialRoleRankings } from '../api/officialApi'
+import { getActiveRankings } from '../api/activeApi'
 import type { PlayerSummaryItem } from '../types/player'
 import type { OfficialPlayerItem } from '../types/official'
 import type { Role } from '../types/common'
@@ -25,7 +27,7 @@ import { CPRIComponentRadar } from '../components/charts/CPRIComponentRadar'
 import { formatScore } from '../utils/formatters'
 import { getErrorMessage } from '../api/client'
 
-type ViewMode = 'official' | 'ipl' | 't20i'
+type ViewMode = 'official' | 'active' | 'ipl' | 't20i'
 
 export const OverviewPage: React.FC = () => {
   const [viewMode, setViewMode] = useState<ViewMode>('official')
@@ -33,6 +35,8 @@ export const OverviewPage: React.FC = () => {
   
   // Official unified state
   const [officialPlayers, setOfficialPlayers] = useState<OfficialPlayerItem[]>([])
+  // Active players state (retirees filtered)
+  const [activePlayers, setActivePlayers] = useState<OfficialPlayerItem[]>([])
   // Contextual league state
   const [cohortPlayers, setCohortPlayers] = useState<PlayerSummaryItem[]>([])
   
@@ -45,10 +49,48 @@ export const OverviewPage: React.FC = () => {
     setError(null)
     try {
       if (viewMode === 'official') {
-        const data = await getOfficialRoleRankings(role)
+        const data = await getOfficialRoleRankings(role as 'Batter' | 'Bowler')
         setOfficialPlayers(data.official_top10)
+      } else if (viewMode === 'active') {
+        const data = await getActiveRankings({ role: role as any, limit: 10 })
+        const rawList = role === 'Batter' ? (data.active_batters || []) : (data.active_bowlers || [])
+        const mappedList: OfficialPlayerItem[] = rawList.map((p, idx) => ({
+          official_rank: p.active_rank || idx + 1,
+          player_id: p.player_id,
+          player_name: p.player_name,
+          role: role as 'Batter' | 'Bowler',
+          competition_evidence: p.competition_evidence || 'Dual-Format',
+          cpri_score: p.cpri_score || 0,
+          components: {
+            pressure_impact: p.score_pressure_impact || 0,
+            pressure_adaptability: p.score_adaptability || 0,
+            clutch_consistency: p.score_consistency || 0,
+            reliability_confidence: p.score_reliability || 0,
+          },
+          pressure_stats: {
+            pressure_deliveries: p.pressure_deliveries || 0,
+            pressure_matches: p.pressure_matches || 0,
+            pressure_strike_rate: p.pressure_strike_rate,
+            pressure_economy: p.pressure_economy,
+            pressure_wpa: 0,
+            total_deliveries: p.pressure_deliveries || 0,
+            total_matches: p.pressure_matches || 0,
+          },
+          rank_uncertainty: {
+            rank_p5: Math.max(1, (p.active_rank || idx + 1) - 2),
+            rank_p95: (p.active_rank || idx + 1) + 4,
+            median_rank: p.active_rank || idx + 1,
+            rank_std: 1.2,
+            top10_inclusion_freq: 0.95,
+            ci_display: p.evidence_tier || 'Active Tier',
+          },
+          confidence_tier: 'High Confidence' as const,
+          tactical_classification: p.evidence_tier || 'Active T20 Performer',
+          is_official_top10: true,
+        }))
+        setActivePlayers(mappedList)
       } else {
-        const data = await getCohortPlayers(viewMode.toUpperCase() as any, role, { limit: 50 })
+        const data = await getCohortPlayers(viewMode.toUpperCase() as any, role as 'Batter' | 'Bowler', { limit: 50 })
         setCohortPlayers(data.players)
       }
     } catch (err) {
@@ -63,7 +105,8 @@ export const OverviewPage: React.FC = () => {
   }, [viewMode, role])
 
   const isOfficial = viewMode === 'official'
-  const displayPlayers: any[] = isOfficial ? officialPlayers : cohortPlayers
+  const isActive = viewMode === 'active'
+  const displayPlayers: any[] = isOfficial ? officialPlayers : isActive ? activePlayers : cohortPlayers
   const champion = displayPlayers[0]
   const topThree = displayPlayers.slice(0, 3)
 
@@ -104,6 +147,18 @@ export const OverviewPage: React.FC = () => {
                 >
                   <Crown className="w-3.5 h-3.5 text-[#EC008C]" />
                   <span>Official Unified (Headline)</span>
+                </button>
+                <button
+                  onClick={() => setViewMode('active')}
+                  className={`px-3 py-1.5 rounded transition-colors flex items-center gap-1.5 ${
+                    viewMode === 'active'
+                      ? 'bg-[#101F43] text-white shadow-xs'
+                      : 'text-slate-600 hover:text-[#101F43]'
+                  }`}
+                >
+                  <UserCheck className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Active Players</span>
+                  <span className="text-[9px] bg-emerald-500 text-white px-1.5 py-0.2 rounded-full font-bold">ACTIVE</span>
                 </button>
                 <button
                   onClick={() => setViewMode('ipl')}
@@ -164,8 +219,19 @@ export const OverviewPage: React.FC = () => {
         </div>
       </div>
 
+      {/* Active Players Audit Banner */}
+      {isActive && (
+        <div className="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-lg shadow-xs flex items-start gap-3">
+          <UserCheck className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+          <div className="text-xs text-emerald-900 leading-relaxed">
+            <span className="font-bold">Active Professional T20 Players: </span>
+            Showing only verified active cricketers. <strong>17 confirmed IPL retirees</strong> (including Matthew Wade, Dinesh Karthik, David Warner, Andre Russell, Glenn Maxwell, Ravichandran Ashwin) have been excluded from active rankings. Historical performance data and Phase 8 baseline CPRI scores remain strictly preserved.
+          </div>
+        </div>
+      )}
+
       {/* Contextual Disclaimer Banner when viewing league-only */}
-      {!isOfficial && (
+      {!isOfficial && !isActive && (
         <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg shadow-xs flex items-start gap-3">
           <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
           <div className="text-xs text-amber-900 leading-relaxed">

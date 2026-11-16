@@ -1,5 +1,6 @@
 export type Scope = 'IPL' | 'T20I'
 export type Role = 'Batter' | 'Bowler'
+export type ActiveRole = 'Batter' | 'Bowler' | 'All-Rounder'
 
 export interface HealthResponse {
   status: string
