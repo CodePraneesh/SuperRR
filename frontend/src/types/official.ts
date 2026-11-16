@@ -51,6 +51,7 @@ export interface OfficialPlayerItem {
     frequency_metric_pct?: number
   }
   adjusted_rank_ci?: string
+  last_played?: string
 }
 
 export interface OfficialRoleRankingsResponse {

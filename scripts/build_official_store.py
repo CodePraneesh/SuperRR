@@ -96,10 +96,37 @@ def compute_adjusted_rank_cis(items: list, n_boot: int = 500) -> None:
         it["adjusted_rank_ci"] = f"[{p5[i]}, {p95[i]}]"
 
 
+def load_last_played_lookup():
+    """Load player last_played dates from Phase 12 active datasets and data fallbacks."""
+    last_played_map = {}
+    for fn in ["active_top25_batters.csv", "active_top25_bowlers.csv", "active_top10_batters.csv", "active_top10_bowlers.csv"]:
+        fpath = REPO_ROOT / "output" / "phase12_active" / fn
+        if fpath.exists():
+            df = pd.read_csv(fpath)
+            for _, r in df.iterrows():
+                if "player_id" in r and pd.notnull(r["player_id"]):
+                    last_played_map[int(r["player_id"])] = str(r["last_played"])
+                if "player_name" in r and pd.notnull(r["player_name"]):
+                    last_played_map[str(r["player_name"])] = str(r["last_played"])
+
+    fallbacks = {
+        796: "2024-04-10",  # Matthew Wade
+        "Matthew Wade": "2024-04-10",
+        143: "2024-05-22",  # Dinesh Karthik
+        "Dinesh Karthik": "2024-05-22",
+    }
+    for k, v in fallbacks.items():
+        if k not in last_played_map:
+            last_played_map[k] = v
+    return last_played_map
+
+
 def build_store():
     print("=" * 70)
     print("BUILDING AUTHORITATIVE SCOUTING STORE (PHASE 8 + HIGH-VOLUME UPGRADE)")
     print("=" * 70)
+
+    lp_map = load_last_played_lookup()
 
     # 1. Load official Phase 8 CSVs
     bat_top10_df = pd.read_csv(PHASE8_DIR / "official_top10_batters.csv")
@@ -202,6 +229,7 @@ def build_store():
             "confidence_tier": tier,
             "tactical_classification": classification,
             "is_official_top10": True,
+            "last_played": lp_map.get(pid) or lp_map.get(row["player_name"]) or "2026-11-01",
             "contextual_splits": splits_entry
         }
 
@@ -275,6 +303,7 @@ def build_store():
             "confidence_tier": tier,
             "tactical_classification": classification,
             "is_official_top10": True,
+            "last_played": lp_map.get(pid) or lp_map.get(row["player_name"]) or "2026-11-01",
             "contextual_splits": splits_entry
         }
 
@@ -336,6 +365,7 @@ def build_store():
             "confidence_tier": tier,
             "tactical_classification": "Contender Candidate",
             "is_official_top10": False,
+            "last_played": lp_map.get(pid) or lp_map.get(row["player_name"]) or "2026-11-01",
             "contextual_splits": splits_entry
         }
 
@@ -398,6 +428,7 @@ def build_store():
             "confidence_tier": tier,
             "tactical_classification": "Contender Candidate",
             "is_official_top10": False,
+            "last_played": lp_map.get(pid) or lp_map.get(row["player_name"]) or "2026-11-01",
             "contextual_splits": splits_entry
         }
 

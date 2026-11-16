@@ -4,7 +4,9 @@ Authoritative official Phase 8 competition rankings, bootstrap uncertainty,
 and High-Volume Pressure Performance Reliability (PPR) endpoints.
 """
 from typing import Optional, List, Dict, Any
+from pathlib import Path as FilePath
 from fastapi import APIRouter, Depends, Path, Query, HTTPException
+from fastapi.responses import FileResponse
 from backend.app.schemas.official import (
     OfficialRoleRankingsResponse,
     UnifiedOfficialOverviewResponse,
@@ -100,6 +102,21 @@ def get_official_bowlers(
         res["contenders"] = filter_players_list(res.get("contenders", []), min_balls, evidence_tier, format_evidence)
         res["official_top10"] = filter_players_list(res.get("official_top10", []), min_balls, evidence_tier, format_evidence)
     return res
+
+
+@router.get("/report-pdf", summary="Download or view the official SupeRR Intelligence Methodology Report PDF")
+def get_methodology_report_pdf():
+    """
+    Returns the official 16-page Methodology Report PDF.
+    """
+    pdf_path = FilePath("docs/reports/SupeRR_Intelligence_Methodology_Report.pdf")
+    if not pdf_path.exists():
+        raise HTTPException(status_code=404, detail="Methodology report PDF not found.")
+    return FileResponse(
+        str(pdf_path),
+        media_type="application/pdf",
+        filename="SupeRR_Intelligence_Methodology_Report.pdf"
+    )
 
 
 @router.get(

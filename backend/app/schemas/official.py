@@ -42,6 +42,7 @@ class OfficialPlayerItem(BaseModel):
     success_rate_pct: Optional[float] = Field(None, description="Percentage of pressure balls with successful clutch execution")
     role_success_metrics: Optional[Dict[str, Any]] = Field(default_factory=dict, description="Granular role metrics (dots, boundaries, outs/wickets)")
     adjusted_rank_ci: Optional[str] = Field(None, description="90% bootstrap confidence interval for adjusted rank, e.g. '[1, 5]'")
+    last_played: Optional[str] = Field(None, description="Most recent match date in dataset [YYYY-MM-DD]")
 
 
 class OfficialRoleRankingsResponse(BaseModel):
