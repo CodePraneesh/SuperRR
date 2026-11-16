@@ -2,8 +2,8 @@
 
 **Project**: SupeRR Intelligence (SupeRR Selector Season 2, Round 1)  
 **Document Status**: Official v2 Research & Evaluation Report  
-**Pre-Registration Reference**: [`docs/methodology/v2/PREREGISTRATION.md`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/docs/methodology/v2/PREREGISTRATION.md)  
-**Audit Findings Reference**: [`docs/methodology/v2/AUDIT_FINDINGS.md`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/docs/methodology/v2/AUDIT_FINDINGS.md)  
+**Pre-Registration Reference**: [`docs/methodology/v2/PREREGISTRATION.md`](docs/methodology/v2/PREREGISTRATION.md)  
+**Audit Findings Reference**: [`docs/methodology/v2/AUDIT_FINDINGS.md`](docs/methodology/v2/AUDIT_FINDINGS.md)  
 **Pipeline Location**: `ml/phase11_v2/`  
 **Output Deliverables**: `output/phase11_v2/`  
 
@@ -52,7 +52,7 @@ Pressure is evaluated strictly prior to each delivery:
 
 ## 3. Candidate Methods Formulations
 
-All candidate methods were declared in advance in [`PREREGISTRATION.md`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/docs/methodology/v2/PREREGISTRATION.md):
+All candidate methods were declared in advance in [`PREREGISTRATION.md`](docs/methodology/v2/PREREGISTRATION.md):
 
 ### Method A: Phase 8 Baseline Reproduction (Reference Anchor)
 The frozen CPRI v1.0 formula with 40/25/20/15 component weights, sigmoid normalization, and sample saturation reliability.

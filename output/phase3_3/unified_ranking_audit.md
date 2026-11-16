@@ -62,7 +62,7 @@ In cricket, deliveries are nested within matches. Estimating player clutch perfo
   $$N_P \ge 40 \quad \text{AND} \quad M_P \ge 3 \quad \text{AND} \quad N_{\text{total}} \ge 60$$
 - **Low Confidence (Part-Time / Small Sample)**: All remaining bowlers.
 
-*Audit Datasets:* Fully exported in [batter_confidence_audit.csv](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/phase3_3/batter_confidence_audit.csv) (1,006 players) and [bowler_confidence_audit.csv](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/phase3_3/bowler_confidence_audit.csv) (739 players).
+*Audit Datasets:* Fully exported in [batter_confidence_audit.csv](output/phase3_3/batter_confidence_audit.csv) (1,006 players) and [bowler_confidence_audit.csv](output/phase3_3/bowler_confidence_audit.csv) (739 players).
 
 ---
 
@@ -113,7 +113,7 @@ $$Z = \frac{x - \text{median}(x)}{\text{IQR}(x) / 1.349}, \quad \text{Score}_{\t
 - Differentiation is strictly preserved (strictly monotonic, no flat saturation shelves).
 - Elite finishers gain their deserved separation: Rinku Singh ($63.9 \to \mathbf{91.5}$), Suryakumar Yadav ($50.4 \to \mathbf{76.9}$), Dinesh Karthik ($59.7 \to \mathbf{88.2}$), Matheesha Pathirana ($73.9 \to \mathbf{71.7}$), Mohit Sharma ($92.2 \to \mathbf{86.0}$).
 
-*Stability Dataset:* Full sensitivity across prior weights ($M=40$ vs $M=80$) and winsorization is published in [adaptability_stability_report.csv](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/phase3_3/adaptability_stability_report.csv).
+*Stability Dataset:* Full sensitivity across prior weights ($M=40$ vs $M=80$) and winsorization is published in [adaptability_stability_report.csv](output/phase3_3/adaptability_stability_report.csv).
 
 ---
 
@@ -135,7 +135,7 @@ By enforcing the strict sample requirement ($M_P \ge 8$) for High Confidence eli
 - **Suryakumar Yadav**: $21 / 28$ positive matches in IPL ($75.0\%$, consistency $85.2$).
 - **Rashid Khan**: $12 / 26$ positive matches in IPL ($46.2\%$, consistency $40.9$ — appropriately reflects high variance).
 
-*Consistency Dataset:* Comprehensive match statistics and standard errors are published in [consistency_audit.csv](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/phase3_3/consistency_audit.csv).
+*Consistency Dataset:* Comprehensive match statistics and standard errors are published in [consistency_audit.csv](output/phase3_3/consistency_audit.csv).
 
 ---
 
@@ -259,4 +259,4 @@ These players possess high performance indices but require additional match disp
   4. *Shan Masood* (CPRI 75.54, $M_P=3, N_P=91$)
   5. *Fabian Allen* (CPRI 74.95, $M_P=5, N_P=39$)
 
-*Top 10 Datasets:* Exported in [final_top10_batters.csv](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/phase3_3/final_top10_batters.csv) and [final_top10_bowlers.csv](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/phase3_3/final_top10_bowlers.csv).
+*Top 10 Datasets:* Exported in [final_top10_batters.csv](output/phase3_3/final_top10_batters.csv) and [final_top10_bowlers.csv](output/phase3_3/final_top10_bowlers.csv).

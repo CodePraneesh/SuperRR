@@ -196,7 +196,7 @@ Using match-level bootstrap resampling ($B = 1,000$ iterations, reproducible see
 | **#9** | **Mohammad Nawaz** | 74.61 | [73.20, 75.88] | 0.68 | 0.31 | [7, 10] |
 | **#10** | **Gudakesh Motie** | 73.90 | [71.85, 75.80] | 1.01 | 0.52 | [8, 11] |
 
-*Bootstrap Dataset:* Exported in [bootstrap_confidence_intervals.csv](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/phase3_4/bootstrap_confidence_intervals.csv).
+*Bootstrap Dataset:* Exported in [bootstrap_confidence_intervals.csv](output/phase3_4/bootstrap_confidence_intervals.csv).
 
 ---
 

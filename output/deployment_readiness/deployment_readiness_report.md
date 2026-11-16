@@ -37,13 +37,13 @@ Following the successful completion of **Stage 1: Full Application Testing** (96
 
 ### 2.1 Startup & Lifespan Configuration
 - **Entry Point:** `backend.app.main:app`
-- **Lifespan Mechanism:** Defined in [backend/app/main.py](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/backend/app/main.py#L20-L34) using `@asynccontextmanager`.
+- **Lifespan Mechanism:** Defined in [backend/app/main.py](backend/app/main.py#L20-L34) using `@asynccontextmanager`.
 - **Initialization Actions:** Instantiates `ScoutingService`, which eagerly loads all three Phase 4 JSON databases into memory. This eliminates per-request disk I/O, yielding sub-15ms endpoint latencies.
 - **Port Binding:** Reads `PORT` dynamically from `os.getenv("PORT", os.getenv("API_PORT", "8000"))`, satisfying Render, Heroku, and Railway container environments.
 
 ### 2.2 Health-Check Endpoint Verification
 - **Endpoint:** `GET /api/v1/health`
-- **Controller:** [backend/app/api/routes/health.py](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/backend/app/api/routes/health.py#L13-L18)
+- **Controller:** [backend/app/api/routes/health.py](backend/app/api/routes/health.py#L13-L18)
 - **Response Payload:**
   ```json
   {
@@ -74,14 +74,14 @@ DATA_DIR = BASE_DIR / "output" / "phase4" / "data"
 - **Build Command:** `npm run build` (`tsc -b && vite build`)
 - **Compile Time:** 15.98 seconds
 - **TypeScript Errors:** 0
-- **Bundle Optimization:** [frontend/vite.config.ts](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/frontend/vite.config.ts#L23-L34) implements manual Rollup vendor chunking:
+- **Bundle Optimization:** [frontend/vite.config.ts](frontend/vite.config.ts#L23-L34) implements manual Rollup vendor chunking:
   - `vendor-react` (React, ReactDOM, React Router DOM)
   - `vendor-charts` (Recharts)
   - `vendor-icons` (Lucide React)
 - **Asset Size:** All chunks remain below Vite’s 600 kB threshold.
 
 ### 3.2 Dynamic API Base URL Resolution
-The frontend API client in [frontend/src/api/client.ts](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/frontend/src/api/client.ts#L4-L6) resolves the backend URL dynamically:
+The frontend API client in [frontend/src/api/client.ts](frontend/src/api/client.ts#L4-L6) resolves the backend URL dynamically:
 ```typescript
 const API_BASE_URL =
   (import.meta as any).env?.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api/v1'
@@ -92,7 +92,7 @@ const API_BASE_URL =
 
 ### 3.3 SPA Routing & Page Refresh Defense
 Single-page applications often suffer from `404 Not Found` when users refresh deep links (e.g., `/rankings/ipl` or `/players/IPL/Batter/Rinku%20Singh`).
-- [frontend/vercel.json](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/frontend/vercel.json#L5-L10) configures edge rewrites:
+- [frontend/vercel.json](frontend/vercel.json#L5-L10) configures edge rewrites:
   ```json
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
@@ -114,7 +114,7 @@ A static analysis was conducted across all source code, configuration files, env
 - **Git Ignore Security:** `.gitignore` excludes `.env`, `*.env`, `.env.local`, and `.env.*.local`.
 
 ### 4.2 Error Handling & Debug Mode
-- **Production Setting:** `DEBUG=False` by default in [backend/app/core/config.py](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/backend/app/core/config.py#L28).
+- **Production Setting:** `DEBUG=False` by default in [backend/app/core/config.py](backend/app/core/config.py#L28).
 - **Exception Sanitization:** Custom exception handlers (`superr_exception_handler` and `validation_exception_handler`) catch application exceptions and return clean JSON error payloads (`{"detail": "...", "error_type": "..."}`). Raw internal Python stack traces are suppressed.
 
 ---

@@ -142,8 +142,8 @@ Initialize the Git repository directly inside:
 In accordance with user instructions, **no Git commands that alter state (`git init`, `git add`, `git commit`, `git push`) have been executed**.
 
 Review the companion documents:
-- [large_file_audit.csv](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/repository_inspection/large_file_audit.csv)
-- [recommended_gitignore.md](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/repository_inspection/recommended_gitignore.md)
-- [github_preparation_checklist.md](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/repository_inspection/github_preparation_checklist.md)
+- [large_file_audit.csv](output/repository_inspection/large_file_audit.csv)
+- [recommended_gitignore.md](output/repository_inspection/recommended_gitignore.md)
+- [github_preparation_checklist.md](output/repository_inspection/github_preparation_checklist.md)
 
 *Awaiting your explicit approval to run the prepared initialization commands.*

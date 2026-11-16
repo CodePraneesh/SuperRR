@@ -15,9 +15,9 @@ Phase 4.5 concludes the AI Scouting Intelligence Engine (Phase 4). The complete 
 All seven core scouting features operate with full statistical grounding, zero mathematical drift against Phase 3.5 frozen baselines, and complete resilience to network or API interruptions via the Deterministic Python Fallback.
 
 Automated verification achieved **100% pass rates**:
-- **Phase 4.5 Dedicated Integration Suite**: 7 / 7 passed ([`tests/test_phase4_5_integration.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/tests/test_phase4_5_integration.py))
+- **Phase 4.5 Dedicated Integration Suite**: 7 / 7 passed ([`tests/test_phase4_5_integration.py`](tests/test_phase4_5_integration.py))
 - **Phase 4 Combined AI Suites**: 32 / 32 passed
-- **Master Platform Regression Test Suite**: **160 / 160 passed** ([`run_all_tests_suite.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/run_all_tests_suite.py))
+- **Master Platform Regression Test Suite**: **160 / 160 passed** ([`run_all_tests_suite.py`](run_all_tests_suite.py))
 
 ---
 
@@ -82,13 +82,13 @@ The full operational pipeline was audited across all 7 core scouting services:
 ## 5. Production Configuration Audit
 
 1. **Credential Hygiene**:
-   - [`.env.example`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/.env.example) created with `HF_TOKEN=your_token_here`.
-   - [`.gitignore`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/.gitignore) protects `.env`, local caches, model binaries, and Python bytecode from Git leakage.
+   - [`.env.example`](.env.example) created with `HF_TOKEN=your_token_here`.
+   - [`.gitignore`](.gitignore) protects `.env`, local caches, model binaries, and Python bytecode from Git leakage.
    - Zero hardcoded tokens exist in the codebase.
 2. **Minimal Dependencies**:
-   - [`requirements.txt`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/requirements.txt) locked with necessary production libraries: `pandas`, `numpy`, `scipy`, `huggingface-hub`, `scikit-learn`, `lightgbm`.
+   - [`requirements.txt`](requirements.txt) locked with necessary production libraries: `pandas`, `numpy`, `scipy`, `huggingface-hub`, `scikit-learn`, `lightgbm`.
 3. **CLI Runner**:
-   - [`scouting_cli.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/scouting_cli.py) provides a one-command interface for command-line queries and automated self-testing (`python scouting_cli.py --test`).
+   - [`scouting_cli.py`](scouting_cli.py) provides a one-command interface for command-line queries and automated self-testing (`python scouting_cli.py --test`).
 
 ---
 

@@ -67,7 +67,7 @@
 ---
 
 ### [WARNING] W-01: Unpinned Dependency Lower Bounds in `requirements.txt`
-- **Affected File:** [requirements.txt](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/requirements.txt)
+- **Affected File:** [requirements.txt](requirements.txt)
 - **Observed State:**  
   Dependencies specify `>=` lower bounds (e.g., `fastapi>=0.110.0`, `pandas>=2.0.0`, `scikit-learn>=1.2.0`).
 - **Potential Risk:**  
@@ -84,7 +84,7 @@
 ---
 
 ### [WARNING] W-02: Permissive Default CORS Origins
-- **Affected File:** [render.yaml](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/render.yaml#L18-L19)
+- **Affected File:** [render.yaml](render.yaml#L18-L19)
 - **Observed State:**  
   The default `CORS_ORIGINS` setting includes `*` alongside localhost URLs.
 - **Potential Risk:**  
@@ -123,7 +123,7 @@
 ## 4. PASSED AUDIT CRITERIA (Verified Complete & Secure)
 
 - **[PASS] P-01: Runtime OS Agnosticism:**  
-  All runtime services ([backend/app/core/config.py](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/backend/app/core/config.py), `scouting_data_engine.py`) utilize `pathlib.Path(__file__).resolve()`. No Windows-specific path separators exist in production code.
+  All runtime services ([backend/app/core/config.py](backend/app/core/config.py), `scouting_data_engine.py`) utilize `pathlib.Path(__file__).resolve()`. No Windows-specific path separators exist in production code.
 - **[PASS] P-02: Zero Secret Leakage:**  
   Static scanning confirmed zero hardcoded API keys, tokens, or private credentials across the repository.
 - **[PASS] P-03: Hugging Face Token Isolation:**  

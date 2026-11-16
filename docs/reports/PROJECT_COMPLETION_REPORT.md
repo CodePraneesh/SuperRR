@@ -69,8 +69,8 @@ The script `scripts/verify_submission.py` was executed against `data/competition
 Per the competition prompt, a complete 12–15 page publication-quality PDF report and its Markdown companion have been generated and verified.
 
 ### Report Deliverables
-- **Formal PDF Report:** [SupeRR_Intelligence_Methodology_Report.pdf](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/docs/reports/SupeRR_Intelligence_Methodology_Report.pdf) (**Exactly 14 Pages**)
-- **Markdown Companion:** [METHODOLOGY_REPORT.md](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/docs/reports/METHODOLOGY_REPORT.md)
+- **Formal PDF Report:** [SupeRR_Intelligence_Methodology_Report.pdf](docs/reports/SupeRR_Intelligence_Methodology_Report.pdf) (**Exactly 14 Pages**)
+- **Markdown Companion:** [METHODOLOGY_REPORT.md](docs/reports/METHODOLOGY_REPORT.md)
 - **PDF Generator Script:** `scripts/generate_pdf_report.py` (ReportLab engine with dynamic `NumberedCanvas` header/footer).
 
 ### Page-by-Page PDF Structure

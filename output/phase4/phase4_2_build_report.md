@@ -13,7 +13,7 @@
 
 Phase 4.2 has successfully built and validated the three structured scouting data stores required to power real-time AI scouting and tactical analytics. This implementation bridges frozen upstream statistical modeling (Phases 1 through 3.5) with downstream AI context assembly without duplicating large raw delivery datasets.
 
-All three JSON stores and the supporting Data Dictionary have been generated and validated under [`output/phase4/data/`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/phase4/data/). The automated validation suite ([`tests/test_phase4_2_stores.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/tests/test_phase4_2_stores.py)) ran with **9 / 9 passing tests**, and the master test suite ([`run_all_tests_suite.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/run_all_tests_suite.py)) expanded from 128 to **137 / 137 passing tests** with zero failures, errors, or regressions.
+All three JSON stores and the supporting Data Dictionary have been generated and validated under [`output/phase4/data/`](output/phase4/data/). The automated validation suite ([`tests/test_phase4_2_stores.py`](tests/test_phase4_2_stores.py)) ran with **9 / 9 passing tests**, and the master test suite ([`run_all_tests_suite.py`](run_all_tests_suite.py)) expanded from 128 to **137 / 137 passing tests** with zero failures, errors, or regressions.
 
 ---
 
@@ -21,12 +21,12 @@ All three JSON stores and the supporting Data Dictionary have been generated and
 
 | Deliverable | Path | Scope & Focus | Records | File Size |
 |:---|:---|:---|:---:|:---:|
-| **Store 1: Profiles** | [`player_scouting_profiles.json`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/phase4/data/player_scouting_profiles.json) | Complete scouting profiles, CPRI scores, component breakdowns, confidence tiers, and bootstrap uncertainty. | 60 Players | 0.66 MB |
-| **Store 2: Splits** | [`player_contextual_splits.json`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/phase4/data/player_contextual_splits.json) | Powerplay, Middle, Death, Pace/Spin (Batters), vs RHB/LHB (Bowlers), and Pressure Contrast splits. | 60 Players | 0.71 MB |
-| **Store 3: H2H** | [`head_to_head_matrix.json`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/phase4/data/head_to_head_matrix.json) | Complete batter vs bowler matchup records in IPL & T20I with explicit 4-tier sample limitations. | 25,985 Matchups | 38.21 MB |
-| **Data Dictionary** | [`data_dictionary.md`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/phase4/data/data_dictionary.md) | Exhaustive field definitions, formulas, null policies, and sample limitation legends. | 4 Sections | 0.01 MB |
-| **Builder Script** | [`build_scouting_store.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/build_scouting_store.py) | Automated distillation pipeline extracting features from upstream deliveries into structured JSON. | Standalone | 0.03 MB |
-| **Test Suite** | [`test_phase4_2_stores.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/tests/test_phase4_2_stores.py) | Unit test suite verifying schema, coverage, mathematical consistency, and raw reconciliation. | 9 Tests | 0.01 MB |
+| **Store 1: Profiles** | [`player_scouting_profiles.json`](output/phase4/data/player_scouting_profiles.json) | Complete scouting profiles, CPRI scores, component breakdowns, confidence tiers, and bootstrap uncertainty. | 60 Players | 0.66 MB |
+| **Store 2: Splits** | [`player_contextual_splits.json`](output/phase4/data/player_contextual_splits.json) | Powerplay, Middle, Death, Pace/Spin (Batters), vs RHB/LHB (Bowlers), and Pressure Contrast splits. | 60 Players | 0.71 MB |
+| **Store 3: H2H** | [`head_to_head_matrix.json`](output/phase4/data/head_to_head_matrix.json) | Complete batter vs bowler matchup records in IPL & T20I with explicit 4-tier sample limitations. | 25,985 Matchups | 38.21 MB |
+| **Data Dictionary** | [`data_dictionary.md`](output/phase4/data/data_dictionary.md) | Exhaustive field definitions, formulas, null policies, and sample limitation legends. | 4 Sections | 0.01 MB |
+| **Builder Script** | [`build_scouting_store.py`](build_scouting_store.py) | Automated distillation pipeline extracting features from upstream deliveries into structured JSON. | Standalone | 0.03 MB |
+| **Test Suite** | [`test_phase4_2_stores.py`](tests/test_phase4_2_stores.py) | Unit test suite verifying schema, coverage, mathematical consistency, and raw reconciliation. | 9 Tests | 0.01 MB |
 
 ---
 
@@ -332,7 +332,7 @@ In strict accordance with the project guidelines, no missing metrics were fabric
 
 ## 7. Validation Test Results
 
-The dedicated test suite [`tests/test_phase4_2_stores.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/tests/test_phase4_2_stores.py) executed 9 tests covering all structural, numerical, and integrity requirements:
+The dedicated test suite [`tests/test_phase4_2_stores.py`](tests/test_phase4_2_stores.py) executed 9 tests covering all structural, numerical, and integrity requirements:
 
 ```text
 Ran 9 tests in 5.756s
@@ -367,4 +367,4 @@ Total Combined Tests: 137
 
 Phase 4.2 data stores are complete, verified, and sealed. The immediate next task is:
 - **Phase 4.3: Scouting Data Engine & Grounded Prompt Assembler**:
-  Implement [`scouting_data_engine.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/scouting_data_engine.py) to provide fast in-memory query methods and strict JSON-grounded prompt templates for the 7 core scouting features.
+  Implement [`scouting_data_engine.py`](scouting_data_engine.py) to provide fast in-memory query methods and strict JSON-grounded prompt templates for the 7 core scouting features.

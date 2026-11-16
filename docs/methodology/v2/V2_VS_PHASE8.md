@@ -3,7 +3,7 @@
 **Project**: SupeRR Intelligence (SupeRR Selector Season 2, Round 1)  
 **Document Status**: Official Methodological Comparison & Release Recommendation  
 **Source Outputs**: `output/phase11_v2/` and `output/phase8_ranking_reconsideration/`  
-**Evaluation Reference**: [`docs/methodology/v2/V2_METHODOLOGY.md`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/docs/methodology/v2/V2_METHODOLOGY.md)  
+**Evaluation Reference**: [`docs/methodology/v2/V2_METHODOLOGY.md`](docs/methodology/v2/V2_METHODOLOGY.md)  
 
 ---
 

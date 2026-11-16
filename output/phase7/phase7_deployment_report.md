@@ -37,7 +37,7 @@ The platform integrates:
 
 ## 3. Production Configuration Deliverables
 
-### 3.1 Backend Configuration ([`render.yaml`](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/render.yaml) & [`Procfile`](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/Procfile))
+### 3.1 Backend Configuration ([`render.yaml`](render.yaml) & [`Procfile`](Procfile))
 - **Service Name**: `superr-intelligence-api`
 - **Runtime**: `Python 3.11.9`
 - **Build Command**: `pip install -r requirements.txt`
@@ -49,7 +49,7 @@ The platform integrates:
   - `HF_TOKEN`: *(Optional)* User Hugging Face token for Tier 1 inference.
   - `CORS_ORIGINS`: Configured for deployed Vercel origins.
 
-### 3.2 Frontend Configuration ([`frontend/vercel.json`](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/frontend/vercel.json))
+### 3.2 Frontend Configuration ([`frontend/vercel.json`](frontend/vercel.json))
 - **Build Command**: `npm run build`
 - **Output Directory**: `dist`
 - **SPA Rewrites**: All incoming paths routed to `/index.html`.
@@ -87,7 +87,7 @@ Executed against the running backend server:
 
 ## 5. Competition Demo Walkthrough & Script
 
-A 5-minute competition presentation sequence has been formulated in [`DEPLOYMENT.md`](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/DEPLOYMENT.md#5-competition-demo-walkthrough-5-minute-script):
+A 5-minute competition presentation sequence has been formulated in [`DEPLOYMENT.md`](DEPLOYMENT.md#5-competition-demo-walkthrough-5-minute-script):
 1. **Minute 1: The Problem & The Brand**: Introduce how conventional statistics fail under pressure and present **SupeRR Intelligence**.
 2. **Minute 2: Overview & 4 CPRI Pillars**: Walk through the Top 3 podium, Top 10 ranking curve, and the 4 component weights (40% PI, 25% PA, 20% CC, 15% RC).
 3. **Minute 3: Deep Player Dossier & AI Scouting**: Showcase Rinku Singh's dossier (+18.94 strike rate delta under pressure) and trigger live evidence-grounded AI report generation.
@@ -98,4 +98,4 @@ A 5-minute competition presentation sequence has been formulated in [`DEPLOYMENT
 
 ## 6. Deployment Readiness Confirmation
 
-All deployment artifacts, configuration files, test suites, and documentation are prepared and validated. The repository is ready for the user to push to GitHub and connect to Render and Vercel following the steps in [`DEPLOYMENT.md`](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/DEPLOYMENT.md).
+All deployment artifacts, configuration files, test suites, and documentation are prepared and validated. The repository is ready for the user to push to GitHub and connect to Render and Vercel following the steps in [`DEPLOYMENT.md`](DEPLOYMENT.md).

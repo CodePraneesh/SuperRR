@@ -12,14 +12,14 @@
 
 ## 1. Executive Summary
 
-Phase 4.4 implements the production AI generation service ([`scouting_ai_service.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/scouting_ai_service.py)) for the SupeRR Intelligence platform. The system operates on a resilient **Three-Tier Generation Architecture** backed by an automated evidence verifier ([`scouting_response_verifier.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/scouting_response_verifier.py)) that audits all model responses against verified statistical facts before returning them to users.
+Phase 4.4 implements the production AI generation service ([`scouting_ai_service.py`](scouting_ai_service.py)) for the SupeRR Intelligence platform. The system operates on a resilient **Three-Tier Generation Architecture** backed by an automated evidence verifier ([`scouting_response_verifier.py`](scouting_response_verifier.py)) that audits all model responses against verified statistical facts before returning them to users.
 
 Key engineering milestones delivered:
-1. **Hugging Face Serverless Client** ([`hf_inference_client.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/hf_inference_client.py)) integrating `Qwen/Qwen2.5-7B-Instruct` using `huggingface_hub.InferenceClient`.
+1. **Hugging Face Serverless Client** ([`hf_inference_client.py`](hf_inference_client.py)) integrating `Qwen/Qwen2.5-7B-Instruct` using `huggingface_hub.InferenceClient`.
 2. **Deterministic Offline Fallback** guaranteeing 100% operational uptime without internet access or GPU acceleration.
 3. **Evidence Verification Guardrail** that detects and rejects altered CPRI scores, inaccurate ranks, format mismatches, and ungrounded small-sample tactical assertions.
-4. **Credential Security**: Dedicated [`.env.example`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/.env.example) and [`.gitignore`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/.gitignore) ensuring API keys are never leaked to version control.
-5. **Testing & Regression Suite**: Dedicated test suite ([`tests/test_phase4_4_ai_service.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/tests/test_phase4_4_ai_service.py)) passed **7 / 7 tests** with mocked API responses, expanding the platform's master test suite to **153 / 153 passing tests**.
+4. **Credential Security**: Dedicated [`.env.example`](.env.example) and [`.gitignore`](.gitignore) ensuring API keys are never leaked to version control.
+5. **Testing & Regression Suite**: Dedicated test suite ([`tests/test_phase4_4_ai_service.py`](tests/test_phase4_4_ai_service.py)) passed **7 / 7 tests** with mocked API responses, expanding the platform's master test suite to **153 / 153 passing tests**.
 
 ---
 
@@ -237,7 +237,7 @@ Matheesha Pathirana is classified as a `High-Leverage Constrictor`, maintaining 
 ## 5. Verification Test Suite Results
 
 ### 5.1 Dedicated AI Service Test Suite
-[`tests/test_phase4_4_ai_service.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/tests/test_phase4_4_ai_service.py) executed 7 comprehensive tests:
+[`tests/test_phase4_4_ai_service.py`](tests/test_phase4_4_ai_service.py) executed 7 comprehensive tests:
 ```text
 Ran 7 tests in 1.139s
 OK
@@ -252,7 +252,7 @@ All unit tests verified:
 7. `test_07_all_seven_scouting_features_execute`: Confirms execution of all 7 generation functions.
 
 ### 5.2 Master Regression Test Suite
-[`run_all_tests_suite.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/run_all_tests_suite.py) executed:
+[`run_all_tests_suite.py`](run_all_tests_suite.py) executed:
 ```text
 ============================================================
 OVERALL RESULT: ALL PASSED

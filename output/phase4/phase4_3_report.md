@@ -11,11 +11,11 @@
 
 ## 1. Executive Summary
 
-Phase 4.3 implements the core query engine ([`scouting_data_engine.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/scouting_data_engine.py)) and the grounded prompt assembler ([`scouting_prompt_assembler.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/scouting_prompt_assembler.py)). This layer connects the frozen Phase 4.2 scouting stores to downstream AI model inference while enforcing strict anti-hallucination constraints and complete statistical immutability.
+Phase 4.3 implements the core query engine ([`scouting_data_engine.py`](scouting_data_engine.py)) and the grounded prompt assembler ([`scouting_prompt_assembler.py`](scouting_prompt_assembler.py)). This layer connects the frozen Phase 4.2 scouting stores to downstream AI model inference while enforcing strict anti-hallucination constraints and complete statistical immutability.
 
 All data mapping discrepancies identified between preliminary illustrative mocks and the authoritative Phase 3.5 freeze were formally reconciled, documented, and protected by dedicated regression unit tests.
 
-The automated verification suite ([`tests/test_phase4_3_engine.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/tests/test_phase4_3_engine.py)) executed with **9 / 9 passing tests**, and the master test suite ([`run_all_tests_suite.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/run_all_tests_suite.py)) expanded to **146 / 146 passing tests** with zero failures or regressions.
+The automated verification suite ([`tests/test_phase4_3_engine.py`](tests/test_phase4_3_engine.py)) executed with **9 / 9 passing tests**, and the master test suite ([`run_all_tests_suite.py`](run_all_tests_suite.py)) expanded to **146 / 146 passing tests** with zero failures or regressions.
 
 ---
 
@@ -53,13 +53,13 @@ To prevent any future confusion between match-level state and striker-faced metr
    - *Delivery-Derived Striker Metric*: Strict subset of pressure deliveries where `batter_faced_ball == 1`.
    - Wides (24 balls) are excluded from balls faced per standard cricket scoring rules ($SR = Runs / BallsFaced \times 100$).
 
-Both values are retained, explicitly labeled, and protected by regression tests in [`tests/test_phase4_3_engine.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/tests/test_phase4_3_engine.py).
+Both values are retained, explicitly labeled, and protected by regression tests in [`tests/test_phase4_3_engine.py`](tests/test_phase4_3_engine.py).
 
 ---
 
 ## 3. Task 2: Scouting Data Engine Architecture (`scouting_data_engine.py`)
 
-The [`ScoutingDataEngine`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/scouting_data_engine.py) provides sub-millisecond in-memory lookups across all 3 scouting stores:
+The [`ScoutingDataEngine`](scouting_data_engine.py) provides sub-millisecond in-memory lookups across all 3 scouting stores:
 
 ### Supported Query Methods
 1. **`get_player_profile(player_name, player_id, competition_scope, role)`**:
@@ -88,7 +88,7 @@ The [`ScoutingDataEngine`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_
 
 ## 4. Task 3: Grounded Prompt Assembler (`scouting_prompt_assembler.py`)
 
-The [`ScoutingPromptAssembler`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/scouting_prompt_assembler.py) formats structured evidence blocks for language model prompting with mandatory guardrails:
+The [`ScoutingPromptAssembler`](scouting_prompt_assembler.py) formats structured evidence blocks for language model prompting with mandatory guardrails:
 
 ```
 [System Guardrail Directive]
@@ -156,7 +156,7 @@ h2h = engine.get_head_to_head("Rinku Singh", "Mohit Sharma", competition_scope="
 ## 6. Verification Test Results
 
 ### 6.1 Dedicated Phase 4.3 Test Suite
-[`tests/test_phase4_3_engine.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/tests/test_phase4_3_engine.py) ran 9 targeted unit tests:
+[`tests/test_phase4_3_engine.py`](tests/test_phase4_3_engine.py) ran 9 targeted unit tests:
 ```text
 Ran 9 tests in 0.535s
 OK
@@ -173,7 +173,7 @@ All test specifications verified:
 9. `test_09_grounded_prompt_assembler`: Confirms prompt formatting across all 7 core features.
 
 ### 6.2 Master Test Suite Regression Run
-[`run_all_tests_suite.py`](file:///C:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/run_all_tests_suite.py) executed the entire test suite:
+[`run_all_tests_suite.py`](run_all_tests_suite.py) executed the entire test suite:
 ```text
 ============================================================
 OVERALL RESULT: ALL PASSED

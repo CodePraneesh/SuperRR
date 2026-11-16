@@ -49,7 +49,7 @@ Render hosts the FastAPI service with dynamic port assignment, free SSL, and con
 1. Log into your [Render Dashboard](https://dashboard.render.com).
 2. Click **New +** → **Blueprint**.
 3. Connect your GitHub repository.
-4. Render will automatically detect and parse [`render.yaml`](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/render.yaml):
+4. Render will automatically detect and parse [`render.yaml`](render.yaml):
    - **Service Name:** `superr-intelligence-api`
    - **Runtime:** `Python`
    - **Build Command:** `pip install -r requirements.txt`
@@ -103,7 +103,7 @@ Vercel provides edge CDN delivery for Vite/React applications with automatic ass
    - **Value:** `https://<your-render-url>.onrender.com/api/v1` *(Ensure it ends with `/api/v1`)*
 6. Click **Deploy**.
 7. Vercel will install dependencies, compile TypeScript, run Vite Rollup bundling, and deploy the application.
-8. Because [`vercel.json`](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/frontend/vercel.json) configures single-page application (SPA) rewrites, navigating directly to deep links like `/rankings/ipl` or `/players/IPL/Batter/Rinku%20Singh` works with zero 404 errors.
+8. Because [`vercel.json`](frontend/vercel.json) configures single-page application (SPA) rewrites, navigating directly to deep links like `/rankings/ipl` or `/players/IPL/Batter/Rinku%20Singh` works with zero 404 errors.
 
 ---
 

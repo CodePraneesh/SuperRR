@@ -168,11 +168,11 @@ All legacy and multi-phase automated regression suites were executed to ensure z
 
 All Stage 1 testing deliverables have been generated and archived in the project repository:
 
-1. [application_test_report.md](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/final_application_testing/application_test_report.md) — *This comprehensive QA audit report.*
-2. [api_test_results.csv](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/final_application_testing/api_test_results.csv) — *Granular records of all 42 backend API test executions.*
-3. [frontend_test_results.csv](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/final_application_testing/frontend_test_results.csv) — *Granular records of all 16 frontend page and UI audit executions.*
-4. [ranking_consistency_report.md](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/final_application_testing/ranking_consistency_report.md) — *Data reconciliation, zero-contamination, and anti-tampering report.*
-5. [bugs_found.md](file:///c:/Users/Praneesh/OneDrive/Desktop/RR/SupeRR_Intelligence_Phase1/SupeRR_Phase1/output/final_application_testing/bugs_found.md) — *Detailed defect log documenting 0 blocking bugs and 2 technical observations.*
+1. [application_test_report.md](output/final_application_testing/application_test_report.md) — *This comprehensive QA audit report.*
+2. [api_test_results.csv](output/final_application_testing/api_test_results.csv) — *Granular records of all 42 backend API test executions.*
+3. [frontend_test_results.csv](output/final_application_testing/frontend_test_results.csv) — *Granular records of all 16 frontend page and UI audit executions.*
+4. [ranking_consistency_report.md](output/final_application_testing/ranking_consistency_report.md) — *Data reconciliation, zero-contamination, and anti-tampering report.*
+5. [bugs_found.md](output/final_application_testing/bugs_found.md) — *Detailed defect log documenting 0 blocking bugs and 2 technical observations.*
 
 ---
 

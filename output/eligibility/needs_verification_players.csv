@@ -1,4 +1,0 @@
-player_id,player_name,role,IPL_status,international_status,franchise_T20_status,last_verified_match_date,eligibility_status,evidence_source,pressure_deliveries,cpri_score,competition_evidence
-22471,Matthew Humphreys,Bowler,Uncapped,Intermittent / Emerging (Ireland squad),Northern Knights (Inter-Provincial T20),2024-04-10 (Ireland Inter-Provincial),NEEDS_VERIFICATION,Cricket Ireland domestic match records; limited top-flight appearances,10.0,,T20I-Only
-25048,Umran Malik,Bowler,"Available / Uncontracted (SRH 2024, Auction Pool 2025)",Inactive / Injured (Last played India July 2023),Jammu & Kashmir Domestic (Injured during 2024-25 season),2024-03-27 (IPL 2024 SRH vs MI),NEEDS_VERIFICATION,BCCI injury reports 2024; IPL 2024 appearance logs,18.0,,Dual-Format
-33792,Salman Mirza,Bowler,Ineligible (Pakistan),Uncapped,Lahore Qalandars (PSL reserve / limited appearances),2024-03-06 (PSL 2024),NEEDS_VERIFICATION,PCB PSL 2024 logs; uncontracted in senior international tier,,,
