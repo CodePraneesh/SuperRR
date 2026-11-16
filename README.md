@@ -99,14 +99,24 @@ flowchart TD
 - Node.js 18+ & npm
 - Windows, Linux, or macOS
 
-### 1. Installation
+### 1. Installation & Environment Setup
 ```bash
 # Clone the repository
 git clone https://github.com/CodePraneesh/SuperRR.git
 cd SuperRR
 
-# Install Python backend dependencies
-pip install -r requirements.txt
+# Create and activate virtual environment
+python -m venv .venv
+# Windows:
+.\.venv\Scripts\activate
+# Linux / macOS:
+source .venv/bin/activate
+
+# Pinned-version setup (Recommended for exact numerical reproduction):
+pip install -r requirements.lock
+
+# Alternatively, standard unpinned installation:
+# pip install -r requirements.txt
 
 # Install frontend dependencies
 cd frontend && npm install && cd ..
@@ -118,13 +128,22 @@ cp .env.example .env
 ```
 Edit `.env` and set `HF_TOKEN=your_token` if using Hugging Face inference. If omitted, the system operates completely offline using **Tier 3 (Deterministic Python Fallback)**.
 
-### 3. Build Stores & Run Tests
+### 3. Build Stores, Verify Manifest & Run Tests
 ```bash
-# Build the official Phase 8 scouting store
+# 1. Build the official Phase 8 scouting store
 python scripts/build_official_store.py
 
-# Run automated test suite
+# 2. Verify deliverable cryptographic hashes (Must return 17/17 MATCH)
+python scripts/verify_manifest.py
+
+# 3. Verify submission integrity, concordance, and ranking invariants
+python scripts/verify_submission.py
+
+# 4. Run automated test suite
 python -m pytest tests test_phase1_validation.py -q -rs
+
+# 5. Build frontend production bundle
+cd frontend && npm run build && cd ..
 ```
 
 ### 4. Start the Application
