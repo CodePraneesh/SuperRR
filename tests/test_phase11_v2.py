@@ -33,6 +33,8 @@ class TestPhase11V2(unittest.TestCase):
 
     def test_02_match_disjoint_train_eval_splits(self):
         """Verify match assignments in temporal splits are strictly disjoint (0 overlap)."""
+        from tests.conftest import require_data_file
+        require_data_file("output/phase2/batter_delivery_expectations.csv")
         from ml.phase11_v2.data_loader import load_v2_datasets
         matches_in, _, _ = load_v2_datasets(50.0)
         
@@ -47,6 +49,8 @@ class TestPhase11V2(unittest.TestCase):
 
     def test_03_reproducibility_with_fixed_seed(self):
         """Verify candidate method and cluster bootstrap are 100% deterministic with seed=42."""
+        from tests.conftest import require_data_file
+        require_data_file("output/phase2/batter_delivery_expectations.csv")
         from ml.phase11_v2.data_loader import load_v2_datasets, get_eligible_players
         from ml.phase11_v2.models import run_method_d
         from ml.phase11_v2.cluster_bootstrap import run_cluster_bootstrap

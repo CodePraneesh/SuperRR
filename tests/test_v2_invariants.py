@@ -127,6 +127,8 @@ class TestV2Invariants(unittest.TestCase):
 
     def test_T7_match_disjoint_train_test_splits(self):
         """T7: Out-of-sample evaluation uses match-disjoint train/test splits with no lookahead leakage."""
+        from tests.conftest import require_data_file
+        require_data_file("output/phase2/batter_delivery_expectations.csv")
         from ml.phase11_v2.data_loader import load_v2_datasets
         matches_in, _, _ = load_v2_datasets(50.0)
         n_matches = len(matches_in)
