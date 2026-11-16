@@ -1,7 +1,7 @@
 """
 backend/app/api/routes/active.py
-API endpoints for currently active professional T20 player rankings and analysis.
-Filters confirmed retirees while preserving historical performance data.
+API endpoints for supplementary 'recently active in data' (last 12 months) rankings.
+Governed strictly by docs/methodology/v5/ELIGIBILITY_RULE.md.
 """
 from typing import Optional, List, Dict, Any
 from pathlib import Path
@@ -9,43 +9,41 @@ import json
 import pandas as pd
 from fastapi import APIRouter, Query, HTTPException
 
-router = APIRouter(prefix="/active", tags=["Active Player Rankings"])
+router = APIRouter(prefix="/active", tags=["Supplementary Active Rankings"])
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent.parent
-ELIG_DIR = REPO_ROOT / "output" / "eligibility"
+ACTIVE_DIR = REPO_ROOT / "output" / "phase12_active"
 
 
 @router.get("/rankings")
 def get_active_rankings(
-    role: Optional[str] = Query("All", description="Player role filter: 'Batter', 'Bowler', 'All-Rounder', or 'All'"),
+    role: Optional[str] = Query("All", description="Player role filter: 'Batter', 'Bowler', or 'All'"),
     min_balls: Optional[int] = Query(0, description="Minimum pressure deliveries filter"),
     evidence_tier: Optional[str] = Query(None, description="Evidence tier: Elite, Strong, Moderate, Limited"),
     limit: Optional[int] = Query(50, description="Number of players to return")
 ) -> Dict[str, Any]:
     """
-    Returns verified active professional T20 players ranked by clutch performance (CPRI).
-    Confirmed retirees (e.g. Dinesh Karthik) are excluded.
+    Returns players recently active in the match dataset (last 12 months),
+    ranked strictly by RAW CPRI under the post-hoc eligibility window.
     """
-    summary_path = ELIG_DIR / "active_rankings_summary.json"
+    summary_path = ACTIVE_DIR / "active_summary.json"
     if not summary_path.exists():
         raise HTTPException(status_code=503, detail="Active rankings summary not generated yet.")
 
     with open(summary_path, "r", encoding="utf-8") as f:
         summary_data = json.load(f)
 
-    # Load full rankings if limit > 10
-    bat_csv = ELIG_DIR / "active_batters_rankings.csv"
-    bowl_csv = ELIG_DIR / "active_bowlers_rankings.csv"
-    ar_csv = ELIG_DIR / "active_allrounders_rankings.csv"
+    # Load top 25 rankings if limit > 10, else top 10
+    bat_csv = ACTIVE_DIR / ("active_top25_batters.csv" if limit > 10 else "active_top10_batters.csv")
+    bowl_csv = ACTIVE_DIR / ("active_top25_bowlers.csv" if limit > 10 else "active_top10_bowlers.csv")
 
-    batters = pd.read_csv(bat_csv) if bat_csv.exists() else pd.DataFrame(summary_data["top10_active_batters"])
-    bowlers = pd.read_csv(bowl_csv) if bowl_csv.exists() else pd.DataFrame(summary_data["top10_active_bowlers"])
-    allrounders = pd.read_csv(ar_csv) if ar_csv.exists() else pd.DataFrame(summary_data["top10_active_allrounders"])
+    batters = pd.read_csv(bat_csv) if bat_csv.exists() else pd.DataFrame(summary_data["active_top10_batters"])
+    bowlers = pd.read_csv(bowl_csv) if bowl_csv.exists() else pd.DataFrame(summary_data["active_top10_bowlers"])
 
-    def _filter_df(df: pd.DataFrame, balls_col: str) -> pd.DataFrame:
+    def _filter_df(df: pd.DataFrame) -> pd.DataFrame:
         res = df.copy()
         if min_balls and min_balls > 0:
-            res = res[res[balls_col] >= min_balls]
+            res = res[res["pressure_deliveries"] >= min_balls]
         if evidence_tier:
             res = res[res["evidence_tier"].str.contains(evidence_tier, case=False, na=False)]
         return res.head(limit)
@@ -63,36 +61,26 @@ def get_active_rankings(
     role_clean = role.lower() if role else "all"
 
     if role_clean in ("all", "batter", "batters"):
-        f_bat = _filter_df(batters, "pressure_deliveries")
+        f_bat = _filter_df(batters)
         result["active_batters"] = f_bat.to_dict(orient="records")
 
     if role_clean in ("all", "bowler", "bowlers"):
-        f_bowl = _filter_df(bowlers, "pressure_deliveries")
+        f_bowl = _filter_df(bowlers)
         result["active_bowlers"] = f_bowl.to_dict(orient="records")
-
-    if role_clean in ("all", "all-rounder", "allrounder", "all-rounders"):
-        f_ar = _filter_df(allrounders, "total_pressure_balls")
-        result["active_allrounders"] = f_ar.to_dict(orient="records")
 
     return result
 
 
-@router.get("/retired")
-def get_retired_players(
-    limit: Optional[int] = Query(100, description="Max players to return")
-) -> Dict[str, Any]:
+@router.get("/sensitivity")
+def get_active_sensitivity() -> Dict[str, Any]:
     """
-    Returns list of confirmed retired cricketers (IPL and/or T20 International)
-    identified in the 2022-2026 player eligibility audit.
+    Returns the sensitivity table across 6, 12, and 18-month activity windows.
     """
-    retired_csv = ELIG_DIR / "retired_players.csv"
-    if not retired_csv.exists():
-        raise HTTPException(status_code=404, detail="Retired players dataset not found")
+    sens_csv = ACTIVE_DIR / "active_sensitivity_table.csv"
+    if not sens_csv.exists():
+        raise HTTPException(status_code=503, detail="Sensitivity analysis table not generated yet.")
 
-    df = pd.read_csv(retired_csv)
-    records = df.head(limit).to_dict(orient="records")
+    df = pd.read_csv(sens_csv)
     return {
-        "total_retired": len(df),
-        "retired_players": records,
-        "retired_names": df["player_name"].tolist()
+        "windows": df.to_dict(orient="records")
     }

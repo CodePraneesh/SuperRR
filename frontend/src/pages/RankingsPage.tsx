@@ -20,7 +20,7 @@ import {
 } from 'lucide-react'
 import { getCohortPlayers } from '../api/playerApi'
 import { getOfficialRoleRankings } from '../api/officialApi'
-import { getActiveRankings, getRetiredPlayers, ActivePlayerItem } from '../api/activeApi'
+import { getActiveRankings, getActiveSensitivity, ActivePlayerItem, SensitivityWindowItem } from '../api/activeApi'
 import type { PlayerSummaryItem } from '../types/player'
 import type { OfficialPlayerItem } from '../types/official'
 import type { ActiveRole } from '../types/common'
@@ -62,15 +62,15 @@ export const RankingsPage: React.FC = () => {
   const [cohortPlayers, setCohortPlayers] = useState<PlayerSummaryItem[]>([])
   const [activePlayers, setActivePlayers] = useState<ActivePlayerItem[]>([])
   const [activeMetadata, setActiveMetadata] = useState<any>(null)
-  const [retiredNames, setRetiredNames] = useState<string[]>([])
+  const [sensitivityWindows, setSensitivityWindows] = useState<SensitivityWindowItem[]>([])
   
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    getRetiredPlayers().then(res => {
-      setRetiredNames(res.retired_names || [])
-    }).catch(() => {})
+    getActiveSensitivity()
+      .then(res => setSensitivityWindows(res.windows || []))
+      .catch(() => {})
   }, [])
 
   // Filtering & Sorting
@@ -89,9 +89,7 @@ export const RankingsPage: React.FC = () => {
         const actData = await getActiveRankings({ role: role as any, limit: 100 })
         const list = role === 'Batter'
           ? (actData.active_batters || [])
-          : role === 'Bowler'
-          ? (actData.active_bowlers || [])
-          : (actData.active_allrounders || [])
+          : (actData.active_bowlers || [])
         setActivePlayers(list)
         setActiveMetadata(actData.metadata)
       }
@@ -271,21 +269,6 @@ export const RankingsPage: React.FC = () => {
           <div className="inline-flex rounded-md p-1 bg-[#F5F7FA] border border-[#E5E7EB] text-xs font-semibold">
             <button
               onClick={() => {
-                navigate('/rankings/active')
-                setActiveTab('active')
-              }}
-              className={`px-3 py-1.5 rounded transition-colors flex items-center gap-1.5 ${
-                isActiveMode || activeTab === 'active'
-                  ? 'bg-emerald-800 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-[#101F43]'
-              }`}
-            >
-              <UserCheck className="w-3.5 h-3.5 text-emerald-300" />
-              <span>Active Players</span>
-              <span className="text-[9px] bg-emerald-500 text-white px-1.5 py-0.2 rounded-full font-bold">ACTIVE</span>
-            </button>
-            <button
-              onClick={() => {
                 navigate('/rankings/official')
                 setActiveTab('main')
               }}
@@ -297,6 +280,21 @@ export const RankingsPage: React.FC = () => {
             >
               <Crown className="w-3.5 h-3.5 text-[#EC008C]" />
               <span>Official Unified (Phase 8)</span>
+            </button>
+            <button
+              onClick={() => {
+                navigate('/rankings/active')
+                setActiveTab('active')
+              }}
+              className={`px-3 py-1.5 rounded transition-colors flex items-center gap-1.5 ${
+                isActiveMode || activeTab === 'active'
+                  ? 'bg-emerald-800 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-[#101F43]'
+              }`}
+            >
+              <UserCheck className="w-3.5 h-3.5 text-emerald-300" />
+              <span>Recently Active (12m)</span>
+              <span className="text-[9px] bg-emerald-500 text-white px-1.5 py-0.2 rounded-full font-bold">SUPP</span>
             </button>
             <button
               onClick={() => navigate('/rankings/ipl')}
@@ -342,46 +340,86 @@ export const RankingsPage: React.FC = () => {
             >
               Bowlers
             </button>
-            {(isActiveMode || activeTab === 'active') && (
-              <button
-                onClick={() => setRole('All-Rounder')}
-                className={`px-3.5 py-1.5 rounded transition-colors ${
-                  role === 'All-Rounder'
-                    ? 'bg-[#101F43] text-white shadow-xs'
-                    : 'text-slate-600 hover:text-[#101F43]'
-                }`}
-              >
-                All-Rounders
-              </button>
-            )}
           </div>
         </div>
       </div>
 
-      {/* Active Players Audit Banner when in active view */}
+      {/* Supplementary Eligibility Banner when in active view */}
       {(isActiveMode || activeTab === 'active') && (
-        <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4 shadow-xs">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-5 shadow-xs space-y-3">
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-3">
             <div className="flex items-start gap-3">
               <div className="w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center shrink-0 mt-0.5">
                 <UserCheck className="w-4 h-4 text-emerald-200" />
               </div>
               <div className="text-xs text-emerald-950 leading-relaxed">
-                <strong className="font-bold text-emerald-900">Active T20 Player Registry (2022–2026 Retiree Audit): </strong>
-                This leaderboard reflects only currently active professional T20 cricketers. 
-                <span className="font-semibold text-emerald-800"> 35 confirmed retirees</span> (17 IPL retirees + 23 International T20 retirees from 2022–2026, including Matthew Wade, Dinesh Karthik, Ravindra Jadeja, Virat Kohli, Rohit Sharma, David Warner, Andre Russell, Glenn Maxwell, Heinrich Klaasen, Nicholas Pooran, Trent Boult, Shakib Al Hasan, Mitchell Starc, Kane Williamson) have been excluded. 
-                All historical ball-by-ball deliveries, expected performance baselines, and Phase 8 official submission rankings remain permanently preserved.
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="font-bold text-emerald-900 text-sm">
+                    Supplementary Eligibility View: Recently Active in Data (Last 12 Months)
+                  </span>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-200 text-emerald-900 border border-emerald-300">
+                    POST-HOC RULE
+                  </span>
+                </div>
+                <p className="text-emerald-900/90">
+                  <strong>Eligibility Definition:</strong> Player has at least one ball in the supplied ball-by-ball dataset in the evaluated role (batting or bowling) in a match dated on or after <strong>2025-11-01</strong> (12 months prior to latest match <strong>2026-11-01</strong>). 
+                  Evaluates in-scope IPL and Senior Men's T20Is. Applied uniformly with no player-name logic.
+                </p>
+                <p className="text-emerald-800 text-[11px] mt-1 italic">
+                  Note: A player absent from this dataset may still play other leagues; the label is strictly "not recently active in the supplied data". The official competition submission remains the Frozen Phase 8 Rankings.
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-2 shrink-0">
               <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">
-                35 Confirmed Retirees Filtered
+                12-Month Data Window
               </span>
               <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-blue-100 text-blue-800 border border-blue-200">
                 Phase 8 Baseline Preserved
               </span>
             </div>
           </div>
+
+          {/* Sensitivity Windows Table */}
+          {sensitivityWindows.length > 0 && (
+            <div className="mt-3 pt-3 border-t border-emerald-200/70">
+              <div className="text-[11px] font-bold text-emerald-950 uppercase tracking-wider mb-2">
+                Sensitivity Windows (6 vs 12 vs 18 Months)
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-[11px] border-collapse bg-white/80 rounded border border-emerald-200">
+                  <thead>
+                    <tr className="bg-emerald-100/80 text-emerald-950 font-bold border-b border-emerald-200">
+                      <th className="py-1.5 px-3">Window</th>
+                      <th className="py-1.5 px-3">Cutoff Date</th>
+                      <th className="py-1.5 px-3">Active Batters</th>
+                      <th className="py-1.5 px-3">Batters Dropped from Top 10</th>
+                      <th className="py-1.5 px-3">Batters Entered Top 10</th>
+                      <th className="py-1.5 px-3">Active Bowlers</th>
+                      <th className="py-1.5 px-3">Bowlers Dropped / Entered</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-emerald-100 text-emerald-900">
+                    {sensitivityWindows.map((w) => (
+                      <tr key={w.window_label} className={w.window_months === 12 ? 'bg-emerald-100/50 font-semibold' : ''}>
+                        <td className="py-1.5 px-3 font-medium">
+                          {w.window_label} {w.window_months === 12 && '(Primary)'}
+                        </td>
+                        <td className="py-1.5 px-3 font-mono text-[10px]">{w.cutoff_date}</td>
+                        <td className="py-1.5 px-3 font-mono">{w.batters_qualifying_count}</td>
+                        <td className="py-1.5 px-3 text-rose-700">{w.batters_dropped_from_top10 || 'None'}</td>
+                        <td className="py-1.5 px-3 text-emerald-800">{w.batters_entered_top10 || 'None'}</td>
+                        <td className="py-1.5 px-3 font-mono">{w.bowlers_qualifying_count}</td>
+                        <td className="py-1.5 px-3 text-slate-600">
+                          {w.bowlers_dropped_from_top10 ? `Dropped: ${w.bowlers_dropped_from_top10}; Entered: ${w.bowlers_entered_top10}` : 'None (Top 10 Unchanged)'}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </div>
       )}
 
@@ -479,11 +517,11 @@ export const RankingsPage: React.FC = () => {
             }`}
           >
             <UserCheck className={`w-3.5 h-3.5 ${activeTab === 'active' ? 'text-emerald-300' : 'text-slate-400'}`} />
-            <span>Active Players (35 Retirees Filtered)</span>
+            <span>Recently Active (12m Data)</span>
             <span className={`px-1.5 py-0.5 rounded-full text-[10px] ${
               activeTab === 'active' ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-600'
             }`}>
-              {activePlayers.length || 'Active'}
+              {activePlayers.length || 'SUPP'}
             </span>
           </button>
 
@@ -616,12 +654,14 @@ export const RankingsPage: React.FC = () => {
                         <ArrowUpDown className="w-3 h-3 text-emerald-200" />
                       </div>
                     </th>
+                    <th className="py-3 px-3 w-20">
+                      <span>90% CI</span>
+                    </th>
                     <th className="py-3 px-3 min-w-[160px]">Player</th>
-                    <th className="py-3 px-3 w-28">Format Evidence</th>
                     <th className="py-3 px-3 w-36">Evidence Tier</th>
                     <th className="py-3 px-3 text-right cursor-pointer hover:bg-white/10 transition-colors" onClick={() => handleSort('raw_cpri')}>
                       <div className="flex items-center justify-end gap-1">
-                        <span className="text-amber-300 font-extrabold">{role === 'All-Rounder' ? 'Composite CPRI' : 'CPRI Score'}</span>
+                        <span className="text-amber-300 font-extrabold">Raw CPRI</span>
                         <ArrowUpDown className="w-3 h-3 text-amber-300" />
                       </div>
                     </th>
@@ -631,23 +671,9 @@ export const RankingsPage: React.FC = () => {
                         <ArrowUpDown className="w-3 h-3 text-emerald-200" />
                       </div>
                     </th>
-                    {role === 'All-Rounder' ? (
-                      <>
-                        <th className="py-3 px-3 text-right">Bat / Bowl CPRI</th>
-                        <th className="py-3 px-3 text-right">Bat / Bowl Balls</th>
-                      </>
-                    ) : role === 'Batter' ? (
-                      <>
-                        <th className="py-3 px-3 text-right">Pressure SR</th>
-                        <th className="py-3 px-3 text-right">SR Elevation</th>
-                      </>
-                    ) : (
-                      <>
-                        <th className="py-3 px-3 text-right">Pressure Econ</th>
-                        <th className="py-3 px-3 text-right">Dot %</th>
-                      </>
-                    )}
-                    <th className="py-3 px-3 text-center w-24">Status</th>
+                    <th className="py-3 px-3 text-center w-28">Last Played in Data</th>
+                    <th className="py-3 px-3 text-center w-28">Phase 8 Rank</th>
+                    <th className="py-3 px-3 text-center w-28">Status</th>
                     <th className="py-3 px-3 text-right w-20">Action</th>
                   </tr>
                 </thead>
@@ -660,12 +686,12 @@ export const RankingsPage: React.FC = () => {
                     </tr>
                   ) : (
                     filteredAndSortedPlayers.map((p: any, idx: number) => {
-                      const displayRank = p.active_rank || p.active_ar_rank || idx + 1
+                      const displayRank = p.rank || idx + 1
                       const isTop3 = displayRank <= 3
-                      const pScope = p.competition_evidence === 'T20I-Only' ? 'T20I' : 'IPL'
-                      const pBalls = p.pressure_deliveries || p.total_pressure_balls || 0
-                      const pScore = p.composite_ar_cpri || p.cpri_score || 0
-                      const tierName = p.evidence_tier || 'Active Tier'
+                      const pBalls = p.pressure_deliveries || 0
+                      const pScore = p.cpri_score || 0
+                      const tierName = p.evidence_tier || 'Moderate Evidence'
+                      const ciDisplay = p.rank_ci_90 || '—'
 
                       return (
                         <tr key={p.player_id || p.player_name} className="hover:bg-emerald-50/40 transition-colors">
@@ -680,18 +706,16 @@ export const RankingsPage: React.FC = () => {
                               {displayRank}
                             </span>
                           </td>
+                          <td className="py-3 px-3 font-mono text-slate-600 font-semibold text-[11px]">
+                            {ciDisplay}
+                          </td>
                           <td className="py-3 px-3">
                             <Link
-                              to={`/players/${pScope}/${role === 'All-Rounder' ? 'Batter' : role}/${encodeURIComponent(p.player_name)}`}
+                              to={`/players/IPL/${role}/${encodeURIComponent(p.player_name)}`}
                               className="font-bold text-[#101F43] hover:text-[#EC008C] transition-colors block text-xs"
                             >
                               {p.player_name}
                             </Link>
-                          </td>
-                          <td className="py-3 px-3">
-                            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700 whitespace-nowrap">
-                              {p.competition_evidence || 'Dual-Format'}
-                            </span>
                           </td>
                           <td className="py-3 px-3">
                             <span className={`text-[10px] font-bold px-2 py-0.5 rounded whitespace-nowrap ${getEvidenceTierBadge(p.evidence_tier)}`}>
@@ -704,44 +728,26 @@ export const RankingsPage: React.FC = () => {
                           <td className="py-3 px-3 text-right font-mono text-slate-700 font-semibold text-xs">
                             {pBalls}
                           </td>
-                          {role === 'All-Rounder' ? (
-                            <>
-                              <td className="py-3 px-3 text-right font-mono text-xs text-slate-700">
-                                <span className="text-blue-700 font-bold">{formatScore(p.batting_cpri)}</span> / <span className="text-emerald-700 font-bold">{formatScore(p.bowling_cpri)}</span>
-                              </td>
-                              <td className="py-3 px-3 text-right font-mono text-xs text-slate-600">
-                                {p.batting_pressure_balls} / {p.bowling_pressure_balls}
-                              </td>
-                            </>
-                          ) : role === 'Batter' ? (
-                            <>
-                              <td className="py-3 px-3 text-right font-mono text-xs text-slate-700 font-bold">
-                                {p.pressure_strike_rate != null ? Number(p.pressure_strike_rate).toFixed(1) : '—'}
-                              </td>
-                              <td className="py-3 px-3 text-right font-mono text-xs">
-                                <span className={p.sr_elevation >= 0 ? 'text-emerald-600 font-bold' : 'text-rose-600 font-bold'}>
-                                  {p.sr_elevation >= 0 ? `+${Number(p.sr_elevation).toFixed(1)}` : Number(p.sr_elevation).toFixed(1)}
-                                </span>
-                              </td>
-                            </>
-                          ) : (
-                            <>
-                              <td className="py-3 px-3 text-right font-mono text-xs text-slate-700 font-bold">
-                                {p.pressure_economy != null ? Number(p.pressure_economy).toFixed(2) : '—'}
-                              </td>
-                              <td className="py-3 px-3 text-right font-mono text-xs text-slate-700 font-semibold">
-                                {p.dot_pct != null ? `${Number(p.dot_pct).toFixed(1)}%` : '—'}
-                              </td>
-                            </>
-                          )}
+                          <td className="py-3 px-3 text-center font-mono text-xs text-emerald-800 font-semibold">
+                            {p.last_played || '—'}
+                          </td>
+                          <td className="py-3 px-3 text-center font-mono text-xs text-slate-700 font-bold">
+                            {p.official_rank ? `#${p.official_rank}` : '—'}
+                          </td>
                           <td className="py-3 px-3 text-center">
-                            <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">
-                              ACTIVE
-                            </span>
+                            {p.in_official_top10 ? (
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 border border-blue-200">
+                                Official Top 10
+                              </span>
+                            ) : (
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">
+                                New Entrant
+                              </span>
+                            )}
                           </td>
                           <td className="py-3 px-3 text-right">
                             <Link
-                              to={`/players/${pScope}/${role === 'All-Rounder' ? 'Batter' : role}/${encodeURIComponent(p.player_name)}`}
+                              to={`/players/IPL/${role}/${encodeURIComponent(p.player_name)}`}
                               className="text-[11px] font-bold text-[#EC008C] hover:text-[#101F43] inline-flex items-center gap-1"
                             >
                               <span>Dossier</span>
@@ -908,11 +914,6 @@ export const RankingsPage: React.FC = () => {
                             >
                               {p.player_name}
                             </Link>
-                            {retiredNames.includes(p.player_name) && (
-                              <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-rose-100 text-rose-700 border border-rose-300">
-                                RETIRED
-                              </span>
-                            )}
                           </div>
                           {p.tactical_classification && (
                             <span className="text-[10px] text-slate-400 font-medium">

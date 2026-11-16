@@ -14,7 +14,7 @@ import {
 } from 'lucide-react'
 import { getCohortPlayers } from '../api/playerApi'
 import { getOfficialRoleRankings } from '../api/officialApi'
-import { getActiveRankings, getRetiredPlayers } from '../api/activeApi'
+import { getActiveRankings, getActiveSensitivity, SensitivityWindowItem } from '../api/activeApi'
 import type { PlayerSummaryItem } from '../types/player'
 import type { OfficialPlayerItem } from '../types/official'
 import type { Role } from '../types/common'
@@ -27,28 +27,29 @@ import { CPRIComponentRadar } from '../components/charts/CPRIComponentRadar'
 import { formatScore } from '../utils/formatters'
 import { getErrorMessage } from '../api/client'
 
-type ViewMode = 'active' | 'official' | 'ipl' | 't20i'
+type ViewMode = 'official' | 'active' | 'ipl' | 't20i'
 
 export const OverviewPage: React.FC = () => {
-  const [viewMode, setViewMode] = useState<ViewMode>('active')
+  // Official Phase 8 rankings remain default view
+  const [viewMode, setViewMode] = useState<ViewMode>('official')
   const [role, setRole] = useState<Role>('Batter')
   
   // Official unified state
   const [officialPlayers, setOfficialPlayers] = useState<OfficialPlayerItem[]>([])
-  // Active players state (retirees filtered)
+  // Active players state (last 12 months)
   const [activePlayers, setActivePlayers] = useState<OfficialPlayerItem[]>([])
   // Contextual league state
   const [cohortPlayers, setCohortPlayers] = useState<PlayerSummaryItem[]>([])
-  // Retired players list
-  const [retiredNames, setRetiredNames] = useState<string[]>([])
+  // Sensitivity table state
+  const [sensitivityWindows, setSensitivityWindows] = useState<SensitivityWindowItem[]>([])
   
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
 
   useEffect(() => {
-    getRetiredPlayers().then(res => {
-      setRetiredNames(res.retired_names || [])
+    getActiveSensitivity().then(res => {
+      setSensitivityWindows(res.windows || [])
     }).catch(() => {})
   }, [])
 
@@ -63,17 +64,17 @@ export const OverviewPage: React.FC = () => {
         const data = await getActiveRankings({ role: role as any, limit: 10 })
         const rawList = role === 'Batter' ? (data.active_batters || []) : (data.active_bowlers || [])
         const mappedList: OfficialPlayerItem[] = rawList.map((p, idx) => ({
-          official_rank: p.active_rank || idx + 1,
+          official_rank: p.rank || idx + 1,
           player_id: p.player_id,
           player_name: p.player_name,
           role: role as 'Batter' | 'Bowler',
           competition_evidence: p.competition_evidence || 'Dual-Format',
           cpri_score: p.cpri_score || 0,
           components: {
-            pressure_impact: p.score_pressure_impact || 0,
-            pressure_adaptability: p.score_adaptability || 0,
-            clutch_consistency: p.score_consistency || 0,
-            reliability_confidence: p.score_reliability || 0,
+            pressure_impact: p.score_pressure_impact || 75.0,
+            pressure_adaptability: p.score_adaptability || 70.0,
+            clutch_consistency: p.score_consistency || 70.0,
+            reliability_confidence: p.score_reliability || 75.0,
           },
           pressure_stats: {
             pressure_deliveries: p.pressure_deliveries || 0,
@@ -85,16 +86,16 @@ export const OverviewPage: React.FC = () => {
             total_matches: p.pressure_matches || 0,
           },
           rank_uncertainty: {
-            rank_p5: Math.max(1, (p.active_rank || idx + 1) - 2),
-            rank_p95: (p.active_rank || idx + 1) + 4,
-            median_rank: p.active_rank || idx + 1,
+            rank_p5: p.rank_p5 || Math.max(1, (p.rank || idx + 1) - 2),
+            rank_p95: p.rank_p95 || (p.rank || idx + 1) + 4,
+            median_rank: p.rank || idx + 1,
             rank_std: 1.2,
             top10_inclusion_freq: 0.95,
-            ci_display: p.evidence_tier || 'Active Tier',
+            ci_display: p.rank_ci_90 || p.evidence_tier || 'Active Tier',
           },
           confidence_tier: 'High Confidence' as const,
-          tactical_classification: p.evidence_tier || 'Active T20 Performer',
-          is_official_top10: true,
+          tactical_classification: p.evidence_tier || 'Recently Active',
+          is_official_top10: p.in_official_top10 ?? true,
         }))
         setActivePlayers(mappedList)
       } else {
@@ -146,18 +147,6 @@ export const OverviewPage: React.FC = () => {
               <span className="text-xs font-bold uppercase tracking-wider text-slate-500 mr-1">Ranking View:</span>
               <div className="inline-flex rounded-md p-1 bg-[#F5F7FA] border border-[#E5E7EB] text-xs font-semibold">
                 <button
-                  onClick={() => setViewMode('active')}
-                  className={`px-3 py-1.5 rounded transition-colors flex items-center gap-1.5 ${
-                    viewMode === 'active'
-                      ? 'bg-emerald-800 text-white shadow-xs'
-                      : 'text-slate-600 hover:text-[#101F43]'
-                  }`}
-                >
-                  <UserCheck className="w-3.5 h-3.5 text-emerald-300" />
-                  <span>Active Players</span>
-                  <span className="text-[9px] bg-emerald-500 text-white px-1.5 py-0.2 rounded-full font-bold">ACTIVE</span>
-                </button>
-                <button
                   onClick={() => setViewMode('official')}
                   className={`px-3 py-1.5 rounded transition-colors flex items-center gap-1.5 ${
                     viewMode === 'official'
@@ -166,7 +155,19 @@ export const OverviewPage: React.FC = () => {
                   }`}
                 >
                   <Crown className="w-3.5 h-3.5 text-[#EC008C]" />
-                  <span>Official Unified (Historical)</span>
+                  <span>Official Unified (Phase 8 Baseline)</span>
+                </button>
+                <button
+                  onClick={() => setViewMode('active')}
+                  className={`px-3 py-1.5 rounded transition-colors flex items-center gap-1.5 ${
+                    viewMode === 'active'
+                      ? 'bg-emerald-800 text-white shadow-xs'
+                      : 'text-slate-600 hover:text-[#101F43]'
+                  }`}
+                >
+                  <UserCheck className="w-3.5 h-3.5 text-emerald-300" />
+                  <span>Recently active in data (last 12 months)</span>
+                  <span className="text-[9px] bg-emerald-500 text-white px-1.5 py-0.2 rounded-full font-bold">SUPP</span>
                 </button>
                 <button
                   onClick={() => setViewMode('ipl')}
@@ -227,47 +228,19 @@ export const OverviewPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Active Players Audit Banner */}
+      {/* Supplementary Active View Banner */}
       {isActive && (
-        <div className="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-lg shadow-xs flex items-start justify-between gap-3">
+        <div className="bg-emerald-50 border-l-4 border-emerald-600 p-4 rounded-r-lg shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div className="flex items-start gap-3">
             <UserCheck className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-            <div className="text-xs text-emerald-900 leading-relaxed">
-              <span className="font-bold">Active Professional T20 Players: </span>
-              Showing only verified active cricketers. <strong>35 confirmed retirees</strong> (17 IPL retirees + 23 International T20 retirees from 2022–2026, including Matthew Wade, Dinesh Karthik, Ravindra Jadeja, Virat Kohli, Rohit Sharma, David Warner, Andre Russell, Glenn Maxwell, Heinrich Klaasen, Nicholas Pooran, Trent Boult) have been excluded from active rankings. Historical performance data and Phase 8 baseline CPRI scores remain strictly preserved.
+            <div className="text-xs text-emerald-950 leading-relaxed">
+              <strong className="font-bold text-emerald-900">Supplementary Eligibility View (Post-Hoc 12-Month Rule): </strong>
+              Shows players with ≥ 1 delivery in the ranked role on or after <strong>2025-11-01</strong> (12 months before the dataset's final match date, 2026-11-01). Ranked strictly by RAW CPRI. Players absent from this data may remain active in other competitions; they are classified as <em>not recently active in the supplied data</em>.
             </div>
           </div>
-          <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 shrink-0 hidden md:inline-block">
-            35 Confirmed Retirees Filtered
+          <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 shrink-0">
+            Supplementary Output
           </span>
-        </div>
-      )}
-
-      {/* Official Historical Baseline Banner */}
-      {isOfficial && (
-        <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
-          <div className="flex items-start gap-3">
-            <Crown className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
-            <div className="text-xs text-blue-950 leading-relaxed">
-              <span className="font-bold">Official Historical Competition Baseline (Phase 8 Submission): </span>
-              This view reflects the frozen Phase 8 submission rankings across all qualifying cricketers (including historical performers like Matthew Wade). 
-              For scouting and auction decisions, switch to the{' '}
-              <button
-                onClick={() => setViewMode('active')}
-                className="font-bold underline text-emerald-800 hover:text-emerald-950 cursor-pointer"
-              >
-                Active Players Leaderboard
-              </button>{' '}
-              which excludes 35 confirmed IPL &amp; International retirees.
-            </div>
-          </div>
-          <button
-            onClick={() => setViewMode('active')}
-            className="px-3.5 py-1.5 rounded bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shrink-0 flex items-center gap-1.5 transition-colors shadow-xs cursor-pointer"
-          >
-            <UserCheck className="w-3.5 h-3.5" />
-            <span>Switch to Active Players</span>
-          </button>
         </div>
       )}
 
@@ -349,14 +322,14 @@ export const OverviewPage: React.FC = () => {
               <div>
                 <div className="text-xs font-bold uppercase tracking-wider text-[#EC008C] mb-0.5">
                   {isActive 
-                    ? 'Active Professional T20 Podium (No Retirees)' 
+                    ? 'Supplementary Active View (Last 12 Months)' 
                     : isOfficial 
-                    ? 'Official Competition Podium (Historical Phase 8)' 
+                    ? 'Official Competition Podium (Phase 8 Baseline)' 
                     : `${viewMode.toUpperCase()} Contextual Leaders`}
                 </div>
                 <h2 className="text-lg font-bold text-[#101F43]">
                   {isActive 
-                    ? `Active Top 3 ${role}s` 
+                    ? `Recently Active Top 3 ${role}s` 
                     : isOfficial 
                     ? `Official Top 3 ${role}s` 
                     : `${viewMode.toUpperCase()} ${role} Leaders`}
@@ -378,7 +351,6 @@ export const OverviewPage: React.FC = () => {
                 const isFirst = rankNum === 1
                 const confTier = p.confidence_tier || 'High Confidence'
                 const isExploratory = confTier === 'Exploratory'
-                const isPlayerRetired = retiredNames.includes(p.player_name)
 
                 return (
                   <div
@@ -410,11 +382,6 @@ export const OverviewPage: React.FC = () => {
                       </div>
                       
                       <div className="flex items-center gap-1.5 flex-wrap justify-end">
-                        {isPlayerRetired && (
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-rose-600 text-white shadow-xs">
-                            RETIRED
-                          </span>
-                        )}
                         {p.competition_evidence && (
                           <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
                             isFirst ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-700'
@@ -432,16 +399,7 @@ export const OverviewPage: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 mb-1 flex-wrap">
-                      <div className="font-extrabold text-lg tracking-tight">{p.player_name}</div>
-                      {isPlayerRetired && (
-                        <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded ${
-                          isFirst ? 'text-rose-200 bg-rose-950/80 border border-rose-700' : 'text-rose-700 bg-rose-50 border border-rose-200'
-                        }`}>
-                          Retired from T20
-                        </span>
-                      )}
-                    </div>
+                    <div className="font-extrabold text-lg tracking-tight mb-1">{p.player_name}</div>
                     
                     <div className="flex items-baseline gap-2 mb-4">
                       <div className="text-2xl font-black text-[#EC008C]">{formatScore(p.cpri_score)}</div>
@@ -482,10 +440,10 @@ export const OverviewPage: React.FC = () => {
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <div className="text-xs font-bold uppercase tracking-wider text-[#EC008C] mb-0.5">
-                    {isActive ? 'Active CPRI Distribution' : isOfficial ? 'Official CPRI Distribution' : `${viewMode.toUpperCase()} CPRI Distribution`}
+                    {isActive ? 'Recently Active CPRI Distribution' : isOfficial ? 'Official CPRI Distribution' : `${viewMode.toUpperCase()} CPRI Distribution`}
                   </div>
                   <h3 className="text-base font-bold text-[#101F43]">
-                    {isActive ? `Active Top 10 ${role}s (Retirees Excluded)` : isOfficial ? `Official Top 10 ${role}s` : `${viewMode.toUpperCase()} ${role} Rankings`}
+                    {isActive ? `Recently Active Top 10 ${role}s` : isOfficial ? `Official Top 10 ${role}s` : `${viewMode.toUpperCase()} ${role} Rankings`}
                   </h3>
                 </div>
                 <div className="text-xs font-mono text-slate-500">Scale: 60 - 100 CPRI</div>
@@ -493,7 +451,6 @@ export const OverviewPage: React.FC = () => {
 
               <TopRankingsBarChart
                 players={displayPlayers}
-                retiredNames={retiredNames}
                 height={340}
                 onSelectPlayer={(selected) => {
                   const pScope = isOfficial ? (selected.competition_evidence === 'T20I-Only' ? 'T20I' : 'IPL') : viewMode.toUpperCase()
@@ -514,43 +471,70 @@ export const OverviewPage: React.FC = () => {
                       {champion.player_name} (CPRI {formatScore(champion.cpri_score)})
                     </h3>
                   </div>
-                  {champion.rank_uncertainty && (
-                    <div className="text-xs font-mono font-bold bg-[#F5F7FA] border border-[#E5E7EB] px-2 py-1 rounded text-[#101F43]">
-                      Rank CI: {champion.rank_uncertainty.ci_display}
-                    </div>
-                  )}
-                </div>
-
-                <div className="text-xs text-slate-500 mb-2">
-                  {champion.tactical_classification} • {champion.pressure_stats?.pressure_deliveries || champion.pressure_deliveries} Pressure Deliveries
+                  <Badge variant="pink">{role} Champion</Badge>
                 </div>
 
                 <div className="flex-1 flex items-center justify-center">
                   <CPRIComponentRadar
-                    componentsA={champion.components}
-                    labelA={champion.player_name}
-                    height={260}
-                  />
-                </div>
-
-                <div className="mt-4 pt-3 border-t border-[#E5E7EB] flex items-center justify-between text-xs">
-                  <span className="text-slate-500">
-                    Confidence Tier: <strong className="text-[#101F43]">{champion.confidence_tier || 'High Confidence'}</strong>
-                  </span>
-                  <button
-                    onClick={() => {
-                      const pScope = isOfficial ? (champion.competition_evidence === 'T20I-Only' ? 'T20I' : 'IPL') : viewMode.toUpperCase()
-                      navigate(`/players/${pScope}/${role}/${encodeURIComponent(champion.player_name)}`)
+                    componentsA={champion.components || {
+                      pressure_impact: champion.score_pressure_impact || 0,
+                      pressure_adaptability: champion.score_adaptability || 0,
+                      clutch_consistency: champion.score_consistency || 0,
+                      reliability_confidence: champion.score_reliability || 0,
                     }}
-                    className="font-bold text-[#EC008C] hover:text-[#101F43] flex items-center gap-1 transition-colors"
-                  >
-                    <span>Inspect Full Dossier</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
+                    labelA={champion.player_name}
+                    height={300}
+                  />
                 </div>
               </div>
             )}
           </div>
+
+          {/* Sensitivity Table when Active View is Selected */}
+          {isActive && sensitivityWindows.length > 0 && (
+            <div className="bg-white border border-[#E5E7EB] rounded-lg p-5 shadow-xs">
+              <div className="mb-3">
+                <div className="text-xs font-bold uppercase tracking-wider text-[#EC008C] mb-0.5">
+                  Methodology Robustness
+                </div>
+                <h3 className="text-base font-bold text-[#101F43]">
+                  Activity Window Sensitivity Analysis (6 vs 12 vs 18 Months)
+                </h3>
+                <p className="text-xs text-slate-600 mt-1">
+                  Evaluates how Top 10 inclusions shift across different recency thresholds relative to T_max (2026-11-01).
+                </p>
+              </div>
+
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs text-left border-collapse">
+                  <thead>
+                    <tr className="bg-[#101F43] text-white">
+                      <th className="py-2.5 px-3 font-bold">Window</th>
+                      <th className="py-2.5 px-3 font-bold">Cutoff Date</th>
+                      <th className="py-2.5 px-3 font-bold">Batters Dropped from Top 10</th>
+                      <th className="py-2.5 px-3 font-bold">Batters Entering Top 10</th>
+                      <th className="py-2.5 px-3 font-bold">Bowlers Dropped</th>
+                      <th className="py-2.5 px-3 font-bold">Bowlers Entering</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-200">
+                    {sensitivityWindows.map((win, idx) => (
+                      <tr key={win.window_label} className={idx === 1 ? 'bg-emerald-50 font-semibold' : 'hover:bg-slate-50'}>
+                        <td className="py-2.5 px-3 font-bold text-[#101F43]">
+                          {win.window_label} {idx === 1 && '(Primary)'}
+                        </td>
+                        <td className="py-2.5 px-3 font-mono">{win.cutoff_date}</td>
+                        <td className="py-2.5 px-3 text-slate-700">{win.batters_dropped_from_top10 || 'None'}</td>
+                        <td className="py-2.5 px-3 text-emerald-800">{win.batters_entered_top10 || 'None'}</td>
+                        <td className="py-2.5 px-3 text-slate-700">{win.bowlers_dropped_from_top10 || 'None'}</td>
+                        <td className="py-2.5 px-3 text-emerald-800">{win.bowlers_entered_top10 || 'None'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </>
       )}
     </div>

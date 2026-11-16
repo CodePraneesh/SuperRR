@@ -1,49 +1,53 @@
 import { apiClient } from './client'
 
 export interface ActiveQueryParams {
-  role?: 'Batter' | 'Bowler' | 'All-Rounder' | 'All'
+  role?: 'Batter' | 'Bowler' | 'All'
   min_balls?: number
   evidence_tier?: string
   limit?: number
 }
 
 export interface ActivePlayerItem {
-  active_rank?: number
-  active_ar_rank?: number
+  rank: number
   player_id: number
   player_name: string
-  role?: string
-  competition_evidence: string
-  cpri_score?: number
-  composite_ar_cpri?: number
-  batting_cpri?: number
-  bowling_cpri?: number
+  cpri_score: number
+  pressure_deliveries: number
+  last_played: string
   evidence_tier: string
-  pressure_deliveries?: number
-  total_pressure_balls?: number
-  batting_pressure_balls?: number
-  bowling_pressure_balls?: number
-  pressure_matches?: number
-  pressure_strike_rate?: number
-  pressure_economy?: number
-  sr_elevation?: number
-  dot_pct?: number
-  boundary_pct?: number
-  score_pressure_impact?: number
-  score_adaptability?: number
-  score_consistency?: number
-  score_reliability?: number
+  official_rank: number | null
+  in_official_top10: boolean
+  rank_p5?: number | null
+  rank_p95?: number | null
+  rank_ci_90?: string
+  rank_uncertainty_source?: string
   [key: string]: any
+}
+
+export interface SensitivityWindowItem {
+  window_label: string
+  window_months: number
+  cutoff_date: string
+  batters_qualifying_count: number
+  batters_dropped_from_top10: string
+  batters_entered_top10: string
+  bowlers_qualifying_count: number
+  bowlers_dropped_from_top10: string
+  bowlers_entered_top10: string
 }
 
 export interface ActiveRankingsResponse {
   metadata: {
     title: string
-    audit_date: string
-    qualifying_criteria: string
-    active_batters_count: number
-    active_bowlers_count: number
-    active_allrounders_count: number
+    rule_reference: string
+    rule_type: string
+    last_match_date: string
+    primary_window_months: number
+    primary_cutoff_date: string
+    competitions_scope: string
+    qualifying_active_batters_count: number
+    qualifying_active_bowlers_count: number
+    bootstrap_rank_uncertainty_note: string
   }
   filters_applied: {
     role: string
@@ -53,13 +57,10 @@ export interface ActiveRankingsResponse {
   }
   active_batters?: ActivePlayerItem[]
   active_bowlers?: ActivePlayerItem[]
-  active_allrounders?: ActivePlayerItem[]
 }
 
-export interface RetiredResponse {
-  total_retired: number
-  retired_players: any[]
-  retired_names: string[]
+export interface ActiveSensitivityResponse {
+  windows: SensitivityWindowItem[]
 }
 
 export async function getActiveRankings(
@@ -71,7 +72,7 @@ export async function getActiveRankings(
   return data
 }
 
-export async function getRetiredPlayers(): Promise<RetiredResponse> {
-  const { data } = await apiClient.get<RetiredResponse>('/active/retired')
+export async function getActiveSensitivity(): Promise<ActiveSensitivityResponse> {
+  const { data } = await apiClient.get<ActiveSensitivityResponse>('/active/sensitivity')
   return data
 }

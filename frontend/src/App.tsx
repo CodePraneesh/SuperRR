@@ -18,7 +18,7 @@ export const App: React.FC = () => {
         <Route path="/" element={<OverviewPage />} />
 
         {/* Page 2: Rankings */}
-        <Route path="/rankings" element={<Navigate to="/rankings/active" replace />} />
+        <Route path="/rankings" element={<Navigate to="/rankings/official" replace />} />
         <Route path="/rankings/:scopeParam" element={<RankingsPage />} />
 
         {/* Page 3: Player Intelligence */}
