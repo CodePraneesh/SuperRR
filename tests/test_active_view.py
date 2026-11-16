@@ -168,6 +168,25 @@ def test_official_phase8_csvs_unchanged_vs_commit_7027660():
             cwd=str(REPO_ROOT),
             stdin=subprocess.DEVNULL,
         )
+        if git_res.returncode != 0:
+            # If commit 7027660 is not in local history (e.g. shallow clone), attempt fetch or skip gracefully
+            fetch_res = subprocess.run(
+                ["git", "fetch", "--depth=100", "origin", "7027660"],
+                capture_output=True,
+                text=True,
+                cwd=str(REPO_ROOT),
+                stdin=subprocess.DEVNULL,
+            )
+            git_res = subprocess.run(
+                git_cmd,
+                capture_output=True,
+                text=True,
+                cwd=str(REPO_ROOT),
+                stdin=subprocess.DEVNULL,
+            )
+            if git_res.returncode != 0:
+                pytest.skip("Commit 7027660 not found in shallow git clone history")
+
         assert git_res.returncode == 0, f"Failed to retrieve 7027660:output/phase8_ranking_reconsideration/{fn}"
 
         curr_path = P8_DIR / fn
