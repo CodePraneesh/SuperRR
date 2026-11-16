@@ -647,7 +647,7 @@ export const RankingsPage: React.FC = () => {
               <option value={400}>400</option>
             </select>
             {activeTab === 'official_phase8' && (
-              <span className="text-[10px] text-slate-400 italic">(Supp only)</span>
+              <span className="text-[10px] text-[#64748B] italic">(Supp only)</span>
             )}
           </div>
 
@@ -750,7 +750,7 @@ export const RankingsPage: React.FC = () => {
                 <tbody className="divide-y divide-[#E5E7EB]">
                   {filteredAndSortedPlayers.length === 0 ? (
                     <tr>
-                      <td colSpan={10} className="py-12 text-center text-slate-400">
+                      <td colSpan={10} className="py-12 text-center text-[#64748B]">
                         No active players match the selected filters.
                       </td>
                     </tr>
@@ -901,7 +901,7 @@ export const RankingsPage: React.FC = () => {
                               {p.player_name}
                             </Link>
                             {p.tactical_classification && (
-                              <span className="text-[10px] text-slate-400 font-medium">
+                              <span className="text-[10px] text-[#64748B] font-medium">
                                 {p.tactical_classification}
                               </span>
                             )}
@@ -1038,7 +1038,7 @@ export const RankingsPage: React.FC = () => {
                   <tbody className="divide-y divide-[#E5E7EB]">
                     {filteredAndSortedPlayers.length === 0 ? (
                       <tr>
-                        <td colSpan={10} className="py-12 text-center text-slate-400">
+                        <td colSpan={10} className="py-12 text-center text-[#64748B]">
                           No players match the selected filters.
                         </td>
                       </tr>
@@ -1068,7 +1068,7 @@ export const RankingsPage: React.FC = () => {
                                   {displayRank}
                                 </span>
                                 {p.official_rank && (
-                                  <span className="text-[9px] text-slate-400 font-mono" title={`Official Phase 8 Rank #${p.official_rank}`}>
+                                  <span className="text-[9px] text-[#64748B] font-mono" title={`Official Phase 8 Rank #${p.official_rank}`}>
                                     (Off #{p.official_rank})
                                   </span>
                                 )}
@@ -1082,7 +1082,7 @@ export const RankingsPage: React.FC = () => {
                                 {p.player_name}
                               </Link>
                               {p.tactical_classification && (
-                                <span className="text-[10px] text-slate-400 font-medium">
+                                <span className="text-[10px] text-[#64748B] font-medium">
                                   {p.tactical_classification}
                                 </span>
                               )}

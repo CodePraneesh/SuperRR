@@ -115,25 +115,25 @@ export const PlayerComparisonPage: React.FC = () => {
     <div className="space-y-8">
       {/* Page Title */}
       <div>
-        <div className="flex items-center gap-2 text-xs font-mono font-medium text-pink-400 mb-1">
-          <GitCompare className="w-4 h-4 text-pink-400" />
+        <div className="flex items-center gap-2 text-xs font-mono font-medium text-[#EC008C] mb-1">
+          <GitCompare className="w-4 h-4 text-[#EC008C]" />
           <span>Role-Adjusted Head-to-Head</span>
         </div>
-        <h1 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+        <h1 className="text-2xl font-bold tracking-tight text-[#0F172A] flex items-center gap-2">
           <span>Player Comparison</span>
-          <span className="text-pink-500 font-black">Matrix</span>
+          <span className="text-pink-600 font-black">Matrix</span>
         </h1>
-        <p className="text-xs text-slate-400 mt-0.5">
+        <p className="text-xs text-[#64748B] mt-0.5">
           Evaluate two players side-by-side across CPRI components, situational phase execution, and tactical deltas.
         </p>
       </div>
 
       {/* Selector Controls Card */}
-      <Card variant="subtle" className="p-6 border-[#182752]">
+      <Card variant="subtle" className="p-6 border-slate-200">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
           {/* Scope Selector */}
           <div>
-            <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5 font-bold">
+            <label className="block text-xs font-mono uppercase tracking-wider text-[#64748B] mb-1.5 font-bold">
               Competition Scope
             </label>
             <div className="grid grid-cols-2 gap-1 p-1 rounded-lg bg-[#070b18] border border-[#182752] text-xs font-semibold">
@@ -258,51 +258,51 @@ export const PlayerComparisonPage: React.FC = () => {
           {/* Side-by-Side CPRI Head-to-Head Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Player A Card */}
-            <Card variant="royal" className="border-pink-500/40 shadow-lg shadow-pink-500/5">
+            <Card variant="royal" className="border-pink-300 shadow-sm">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-pink-500/20 text-pink-300 border border-pink-500/40 font-bold">
+                <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-pink-50 text-[#EC008C] border border-pink-200 font-bold">
                   Player A
                 </span>
-                <span className="text-xs font-mono text-slate-400">
+                <span className="text-xs font-mono text-[#64748B]">
                   {itemA?.official_rank ? `#${itemA.official_rank} in ${scope}` : 'Provisional'}
                 </span>
               </div>
-              <h2 className="text-2xl font-bold text-white mb-2">{comparison.player_a}</h2>
-              <div className="text-4xl font-black font-mono text-pink-400 mb-4">
+              <h2 className="text-2xl font-bold text-[#0F172A] mb-2">{comparison.player_a}</h2>
+              <div className="text-4xl font-black font-mono text-[#EC008C] mb-4">
                 {formatScore(itemA?.cpri_score)}
-                <span className="text-xs text-slate-400 font-normal font-sans ml-2">CPRI</span>
+                <span className="text-xs text-[#64748B] font-normal font-sans ml-2">CPRI</span>
               </div>
 
-              <div className="space-y-2 pt-3 border-t border-[#182752] text-xs font-mono">
+              <div className="space-y-2 pt-3 border-t border-slate-200 text-xs font-mono">
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Pressure Impact (40%)</span>
-                  <span className="text-white font-semibold">{formatScore(itemA?.components.pressure_impact, 1)}</span>
+                  <span className="text-[#64748B]">Pressure Impact (40%)</span>
+                  <span className="text-[#0F172A] font-semibold">{formatScore(itemA?.components.pressure_impact, 1)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Adaptability (25%)</span>
-                  <span className="text-white font-semibold">{formatScore(itemA?.components.pressure_adaptability, 1)}</span>
+                  <span className="text-[#64748B]">Adaptability (25%)</span>
+                  <span className="text-[#0F172A] font-semibold">{formatScore(itemA?.components.pressure_adaptability, 1)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Consistency (20%)</span>
-                  <span className="text-white font-semibold">{formatScore(itemA?.components.clutch_consistency, 1)}</span>
+                  <span className="text-[#64748B]">Consistency (20%)</span>
+                  <span className="text-[#0F172A] font-semibold">{formatScore(itemA?.components.clutch_consistency, 1)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Reliability (15%)</span>
-                  <span className="text-white font-semibold">{formatScore(itemA?.components.reliability_confidence, 1)}</span>
+                  <span className="text-[#64748B]">Reliability (15%)</span>
+                  <span className="text-[#0F172A] font-semibold">{formatScore(itemA?.components.reliability_confidence, 1)}</span>
                 </div>
               </div>
             </Card>
 
             {/* Net Delta Matrix */}
-            <Card variant="default" className="flex flex-col justify-between text-center p-6 border-[#182752] bg-[#070b18]">
+            <Card variant="default" className="flex flex-col justify-between text-center p-6 border-slate-200 bg-slate-50">
               <div>
-                <div className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-1 font-bold">
+                <div className="text-xs font-mono uppercase tracking-wider text-[#64748B] mb-1 font-bold">
                   Net Variance (A minus B)
                 </div>
-                <div className="text-3xl font-black font-mono text-amber-300 mb-1">
+                <div className="text-3xl font-black font-mono text-[#0F172A] mb-1">
                   {formatDelta(deltas?.cpri_delta, 2)}
                 </div>
-                <div className="text-xs text-slate-400 mb-4 font-medium">
+                <div className="text-xs text-[#64748B] mb-4 font-medium">
                   {deltas && deltas.cpri_delta > 0
                     ? `${comparison.player_a} leads by +${deltas.cpri_delta} CPRI`
                     : deltas && deltas.cpri_delta < 0
@@ -311,84 +311,84 @@ export const PlayerComparisonPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="space-y-2.5 text-xs font-mono text-left bg-[#0c132c] p-3 rounded-xl border border-[#182752]">
+              <div className="space-y-2.5 text-xs font-mono text-left bg-white p-3 rounded-xl border border-slate-200">
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Δ Impact:</span>
-                  <span className={deltas && deltas.pressure_impact_delta >= 0 ? 'text-pink-400 font-bold' : 'text-blue-400 font-bold'}>
+                  <span className="text-[#64748B]">Δ Impact:</span>
+                  <span className={deltas && deltas.pressure_impact_delta >= 0 ? 'text-[#EC008C] font-bold' : 'text-blue-700 font-bold'}>
                     {formatDelta(deltas?.pressure_impact_delta, 1)}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Δ Adaptability:</span>
-                  <span className={deltas && deltas.adaptability_delta >= 0 ? 'text-pink-400 font-bold' : 'text-blue-400 font-bold'}>
+                  <span className="text-[#64748B]">Δ Adaptability:</span>
+                  <span className={deltas && deltas.adaptability_delta >= 0 ? 'text-[#EC008C] font-bold' : 'text-blue-700 font-bold'}>
                     {formatDelta(deltas?.adaptability_delta, 1)}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Δ Consistency:</span>
-                  <span className={deltas && deltas.consistency_delta >= 0 ? 'text-pink-400 font-bold' : 'text-blue-400 font-bold'}>
+                  <span className="text-[#64748B]">Δ Consistency:</span>
+                  <span className={deltas && deltas.consistency_delta >= 0 ? 'text-[#EC008C] font-bold' : 'text-blue-700 font-bold'}>
                     {formatDelta(deltas?.consistency_delta, 1)}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Δ Reliability:</span>
-                  <span className={deltas && deltas.reliability_delta >= 0 ? 'text-pink-400 font-bold' : 'text-blue-400 font-bold'}>
+                  <span className="text-[#64748B]">Δ Reliability:</span>
+                  <span className={deltas && deltas.reliability_delta >= 0 ? 'text-[#EC008C] font-bold' : 'text-blue-700 font-bold'}>
                     {formatDelta(deltas?.reliability_delta, 1)}
                   </span>
                 </div>
               </div>
 
-              <div className="text-[10px] text-slate-500 font-mono mt-3">
+              <div className="text-[10px] text-[#64748B] font-mono mt-3">
                 Strict CPRI v1.0.0 Component Decomposition
               </div>
             </Card>
 
             {/* Player B Card */}
-            <Card variant="royal" className="border-blue-500/40 shadow-lg shadow-blue-500/5">
+            <Card variant="royal" className="border-blue-300 shadow-sm">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/40 font-bold">
+                <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200 font-bold">
                   Player B
                 </span>
-                <span className="text-xs font-mono text-slate-400">
+                <span className="text-xs font-mono text-[#64748B]">
                   {itemB?.official_rank ? `#${itemB.official_rank} in ${scope}` : 'Provisional'}
                 </span>
               </div>
-              <h2 className="text-2xl font-bold text-white mb-2">{comparison.player_b}</h2>
-              <div className="text-4xl font-black font-mono text-blue-400 mb-4">
+              <h2 className="text-2xl font-bold text-[#0F172A] mb-2">{comparison.player_b}</h2>
+              <div className="text-4xl font-black font-mono text-blue-700 mb-4">
                 {formatScore(itemB?.cpri_score)}
-                <span className="text-xs text-slate-400 font-normal font-sans ml-2">CPRI</span>
+                <span className="text-xs text-[#64748B] font-normal font-sans ml-2">CPRI</span>
               </div>
 
-              <div className="space-y-2 pt-3 border-t border-[#182752] text-xs font-mono">
+              <div className="space-y-2 pt-3 border-t border-slate-200 text-xs font-mono">
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Pressure Impact (40%)</span>
-                  <span className="text-white font-semibold">{formatScore(itemB?.components.pressure_impact, 1)}</span>
+                  <span className="text-[#64748B]">Pressure Impact (40%)</span>
+                  <span className="text-[#0F172A] font-semibold">{formatScore(itemB?.components.pressure_impact, 1)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Adaptability (25%)</span>
-                  <span className="text-white font-semibold">{formatScore(itemB?.components.pressure_adaptability, 1)}</span>
+                  <span className="text-[#64748B]">Adaptability (25%)</span>
+                  <span className="text-[#0F172A] font-semibold">{formatScore(itemB?.components.pressure_adaptability, 1)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Consistency (20%)</span>
-                  <span className="text-white font-semibold">{formatScore(itemB?.components.clutch_consistency, 1)}</span>
+                  <span className="text-[#64748B]">Consistency (20%)</span>
+                  <span className="text-[#0F172A] font-semibold">{formatScore(itemB?.components.clutch_consistency, 1)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Reliability (15%)</span>
-                  <span className="text-white font-semibold">{formatScore(itemB?.components.reliability_confidence, 1)}</span>
+                  <span className="text-[#64748B]">Reliability (15%)</span>
+                  <span className="text-[#0F172A] font-semibold">{formatScore(itemB?.components.reliability_confidence, 1)}</span>
                 </div>
               </div>
             </Card>
           </div>
 
           {/* Detailed Side-by-Side Component Matrix Table */}
-          <Card variant="default" className="border-[#182752] p-5">
+          <Card variant="default" className="border-slate-200 p-5">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-sm font-bold text-white flex items-center gap-2">
+                <h3 className="text-sm font-bold text-[#0F172A] flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-[#EC008C]" />
                   Direct Component & Standing Comparison Matrix
                 </h3>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-[#64748B]">
                   Comprehensive audit across all official CPRI components, ranks, sample sizes, and last match dates.
                 </p>
               </div>
@@ -397,44 +397,44 @@ export const PlayerComparisonPage: React.FC = () => {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs border-collapse" aria-label="Two-Player Component Comparison Table">
                 <thead>
-                  <tr className="bg-[#0c132c] text-white border-b border-[#182752]">
-                    <th className="py-2.5 px-3">Component / Metric</th>
-                    <th className="py-2.5 px-3 text-pink-400 font-bold">{comparison.player_a}</th>
-                    <th className="py-2.5 px-3 text-center text-slate-400">Variance (Δ)</th>
-                    <th className="py-2.5 px-3 text-blue-400 font-bold">{comparison.player_b}</th>
+                  <tr className="bg-slate-100 text-[#0F172A] border-b border-slate-200">
+                    <th className="py-2.5 px-3 font-semibold">Component / Metric</th>
+                    <th className="py-2.5 px-3 text-[#EC008C] font-bold">{comparison.player_a}</th>
+                    <th className="py-2.5 px-3 text-center text-[#64748B]">Variance (Δ)</th>
+                    <th className="py-2.5 px-3 text-blue-700 font-bold">{comparison.player_b}</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#182752] text-slate-300 font-mono">
+                <tbody className="divide-y divide-slate-200 text-[#334155] font-mono">
                   {/* CPRI */}
-                  <tr className="hover:bg-white/5 transition-colors">
-                    <td className="py-2.5 px-3 font-sans font-semibold text-white">Composite CPRI Score</td>
-                    <td className="py-2.5 px-3 font-bold text-pink-400 text-sm">{formatScore(itemA?.cpri_score)}</td>
-                    <td className="py-2.5 px-3 text-center font-bold text-amber-300">{formatDelta(deltas?.cpri_delta, 2)}</td>
-                    <td className="py-2.5 px-3 font-bold text-blue-400 text-sm">{formatScore(itemB?.cpri_score)}</td>
+                  <tr className="hover:bg-slate-50 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-[#0F172A]">Composite CPRI Score</td>
+                    <td className="py-2.5 px-3 font-bold text-[#EC008C] text-sm">{formatScore(itemA?.cpri_score)}</td>
+                    <td className="py-2.5 px-3 text-center font-bold text-[#0F172A]">{formatDelta(deltas?.cpri_delta, 2)}</td>
+                    <td className="py-2.5 px-3 font-bold text-blue-700 text-sm">{formatScore(itemB?.cpri_score)}</td>
                   </tr>
 
                   {/* Official Rank */}
-                  <tr className="hover:bg-white/5 transition-colors">
-                    <td className="py-2.5 px-3 font-sans font-semibold text-white">Official Competition Rank</td>
+                  <tr className="hover:bg-slate-50 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-[#0F172A]">Official Competition Rank</td>
                     <td className="py-2.5 px-3">
                       {officialA?.is_official_top10 ? (
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-pink-500/20 text-pink-300 border border-pink-500/40">
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-pink-50 text-[#EC008C] border border-pink-200">
                           #{officialA.official_rank} Official Top 10
                         </span>
                       ) : (
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-[#64748B] border border-slate-200">
                           not in Top 10
                         </span>
                       )}
                     </td>
-                    <td className="py-2.5 px-3 text-center text-slate-400 text-[11px]">—</td>
+                    <td className="py-2.5 px-3 text-center text-[#64748B] text-[11px]">—</td>
                     <td className="py-2.5 px-3">
                       {officialB?.is_official_top10 ? (
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/40">
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200">
                           #{officialB.official_rank} Official Top 10
                         </span>
                       ) : (
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-[#64748B] border border-slate-200">
                           not in Top 10
                         </span>
                       )}
@@ -442,89 +442,89 @@ export const PlayerComparisonPage: React.FC = () => {
                   </tr>
 
                   {/* 90% Rank Interval */}
-                  <tr className="hover:bg-white/5 transition-colors">
-                    <td className="py-2.5 px-3 font-sans font-semibold text-white">90% Bootstrap Rank CI</td>
-                    <td className="py-2.5 px-3 text-amber-300">
+                  <tr className="hover:bg-slate-50 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-[#0F172A]">90% Bootstrap Rank CI</td>
+                    <td className="py-2.5 px-3 text-amber-900 font-semibold">
                       {officialA?.rank_uncertainty ? `[${officialA.rank_uncertainty.rank_p5}, ${officialA.rank_uncertainty.rank_p95}]` : '—'}
                     </td>
-                    <td className="py-2.5 px-3 text-center text-slate-400 text-[11px]">—</td>
-                    <td className="py-2.5 px-3 text-amber-300">
+                    <td className="py-2.5 px-3 text-center text-[#64748B] text-[11px]">—</td>
+                    <td className="py-2.5 px-3 text-amber-900 font-semibold">
                       {officialB?.rank_uncertainty ? `[${officialB.rank_uncertainty.rank_p5}, ${officialB.rank_uncertainty.rank_p95}]` : '—'}
                     </td>
                   </tr>
 
                   {/* score_pressure_impact */}
-                  <tr className="hover:bg-white/5 transition-colors">
-                    <td className="py-2.5 px-3 font-sans font-semibold text-white">
-                      score_pressure_impact <span className="text-slate-400 font-normal">(40%)</span>
+                  <tr className="hover:bg-slate-50 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-[#0F172A]">
+                      score_pressure_impact <span className="text-[#64748B] font-normal">(40%)</span>
                     </td>
-                    <td className="py-2.5 px-3 font-semibold text-white">{formatScore(itemA?.components.pressure_impact, 2)}</td>
-                    <td className="py-2.5 px-3 text-center font-bold text-slate-200">{formatDelta(deltas?.pressure_impact_delta, 2)}</td>
-                    <td className="py-2.5 px-3 font-semibold text-white">{formatScore(itemB?.components.pressure_impact, 2)}</td>
+                    <td className="py-2.5 px-3 font-semibold text-[#334155]">{formatScore(itemA?.components.pressure_impact, 2)}</td>
+                    <td className="py-2.5 px-3 text-center font-bold text-[#0F172A]">{formatDelta(deltas?.pressure_impact_delta, 2)}</td>
+                    <td className="py-2.5 px-3 font-semibold text-[#334155]">{formatScore(itemB?.components.pressure_impact, 2)}</td>
                   </tr>
 
                   {/* score_adaptability */}
-                  <tr className="hover:bg-white/5 transition-colors">
-                    <td className="py-2.5 px-3 font-sans font-semibold text-white">
-                      score_adaptability <span className="text-slate-400 font-normal">(25%)</span>
+                  <tr className="hover:bg-slate-50 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-[#0F172A]">
+                      score_adaptability <span className="text-[#64748B] font-normal">(25%)</span>
                     </td>
-                    <td className="py-2.5 px-3 font-semibold text-white">{formatScore(itemA?.components.pressure_adaptability, 2)}</td>
-                    <td className="py-2.5 px-3 text-center font-bold text-slate-200">{formatDelta(deltas?.adaptability_delta, 2)}</td>
-                    <td className="py-2.5 px-3 font-semibold text-white">{formatScore(itemB?.components.pressure_adaptability, 2)}</td>
+                    <td className="py-2.5 px-3 font-semibold text-[#334155]">{formatScore(itemA?.components.pressure_adaptability, 2)}</td>
+                    <td className="py-2.5 px-3 text-center font-bold text-[#0F172A]">{formatDelta(deltas?.adaptability_delta, 2)}</td>
+                    <td className="py-2.5 px-3 font-semibold text-[#334155]">{formatScore(itemB?.components.pressure_adaptability, 2)}</td>
                   </tr>
 
                   {/* score_consistency */}
-                  <tr className="hover:bg-white/5 transition-colors">
-                    <td className="py-2.5 px-3 font-sans font-semibold text-white">
-                      score_consistency <span className="text-slate-400 font-normal">(20%)</span>
+                  <tr className="hover:bg-slate-50 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-[#0F172A]">
+                      score_consistency <span className="text-[#64748B] font-normal">(20%)</span>
                     </td>
-                    <td className="py-2.5 px-3 font-semibold text-white">{formatScore(itemA?.components.clutch_consistency, 2)}</td>
-                    <td className="py-2.5 px-3 text-center font-bold text-slate-200">{formatDelta(deltas?.consistency_delta, 2)}</td>
-                    <td className="py-2.5 px-3 font-semibold text-white">{formatScore(itemB?.components.clutch_consistency, 2)}</td>
+                    <td className="py-2.5 px-3 font-semibold text-[#334155]">{formatScore(itemA?.components.clutch_consistency, 2)}</td>
+                    <td className="py-2.5 px-3 text-center font-bold text-[#0F172A]">{formatDelta(deltas?.consistency_delta, 2)}</td>
+                    <td className="py-2.5 px-3 font-semibold text-[#334155]">{formatScore(itemB?.components.clutch_consistency, 2)}</td>
                   </tr>
 
                   {/* score_reliability */}
-                  <tr className="hover:bg-white/5 transition-colors">
-                    <td className="py-2.5 px-3 font-sans font-semibold text-white">
-                      score_reliability <span className="text-slate-400 font-normal">(15%)</span>
+                  <tr className="hover:bg-slate-50 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-[#0F172A]">
+                      score_reliability <span className="text-[#64748B] font-normal">(15%)</span>
                     </td>
-                    <td className="py-2.5 px-3 font-semibold text-white">{formatScore(itemA?.components.reliability_confidence, 2)}</td>
-                    <td className="py-2.5 px-3 text-center font-bold text-slate-200">{formatDelta(deltas?.reliability_delta, 2)}</td>
-                    <td className="py-2.5 px-3 font-semibold text-white">{formatScore(itemB?.components.reliability_confidence, 2)}</td>
+                    <td className="py-2.5 px-3 font-semibold text-[#334155]">{formatScore(itemA?.components.reliability_confidence, 2)}</td>
+                    <td className="py-2.5 px-3 text-center font-bold text-[#0F172A]">{formatDelta(deltas?.reliability_delta, 2)}</td>
+                    <td className="py-2.5 px-3 font-semibold text-[#334155]">{formatScore(itemB?.components.reliability_confidence, 2)}</td>
                   </tr>
 
                   {/* Pressure Balls */}
-                  <tr className="hover:bg-white/5 transition-colors">
-                    <td className="py-2.5 px-3 font-sans font-semibold text-white">Pressure Deliveries</td>
-                    <td className="py-2.5 px-3 font-semibold text-white">
+                  <tr className="hover:bg-slate-50 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-[#0F172A]">Pressure Deliveries</td>
+                    <td className="py-2.5 px-3 font-semibold text-[#334155]">
                       {officialA?.pressure_stats?.pressure_deliveries ?? itemA?.pressure_deliveries ?? 0}
                     </td>
-                    <td className="py-2.5 px-3 text-center text-slate-400 text-[11px]">—</td>
-                    <td className="py-2.5 px-3 font-semibold text-white">
+                    <td className="py-2.5 px-3 text-center text-[#64748B] text-[11px]">—</td>
+                    <td className="py-2.5 px-3 font-semibold text-[#334155]">
                       {officialB?.pressure_stats?.pressure_deliveries ?? itemB?.pressure_deliveries ?? 0}
                     </td>
                   </tr>
 
                   {/* Pressure Matches */}
-                  <tr className="hover:bg-white/5 transition-colors">
-                    <td className="py-2.5 px-3 font-sans font-semibold text-white">Pressure Matches</td>
-                    <td className="py-2.5 px-3 font-semibold text-white">
+                  <tr className="hover:bg-slate-50 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-[#0F172A]">Pressure Matches</td>
+                    <td className="py-2.5 px-3 font-semibold text-[#334155]">
                       {officialA?.pressure_stats?.pressure_matches ?? '—'}
                     </td>
-                    <td className="py-2.5 px-3 text-center text-slate-400 text-[11px]">—</td>
-                    <td className="py-2.5 px-3 font-semibold text-white">
+                    <td className="py-2.5 px-3 text-center text-[#64748B] text-[11px]">—</td>
+                    <td className="py-2.5 px-3 font-semibold text-[#334155]">
                       {officialB?.pressure_stats?.pressure_matches ?? '—'}
                     </td>
                   </tr>
 
                   {/* Last Played Date */}
-                  <tr className="hover:bg-white/5 transition-colors">
-                    <td className="py-2.5 px-3 font-sans font-semibold text-white">Last Played in Data</td>
-                    <td className="py-2.5 px-3 text-emerald-300 font-semibold">
+                  <tr className="hover:bg-slate-50 transition-colors">
+                    <td className="py-2.5 px-3 font-sans font-semibold text-[#0F172A]">Last Played in Data</td>
+                    <td className="py-2.5 px-3 text-emerald-800 font-semibold">
                       {officialA?.last_played || '—'}
                     </td>
-                    <td className="py-2.5 px-3 text-center text-slate-400 text-[11px]">—</td>
-                    <td className="py-2.5 px-3 text-emerald-300 font-semibold">
+                    <td className="py-2.5 px-3 text-center text-[#64748B] text-[11px]">—</td>
+                    <td className="py-2.5 px-3 text-emerald-800 font-semibold">
                       {officialB?.last_played || '—'}
                     </td>
                   </tr>
@@ -535,15 +535,15 @@ export const PlayerComparisonPage: React.FC = () => {
 
           {/* Dual Overlay Radar Visualization */}
           {itemA && itemB && (
-            <Card variant="default" className="border-[#182752]">
+            <Card variant="default" className="border-slate-200">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h3 className="text-sm font-bold text-white flex items-center gap-2">
-                    <Activity className="w-4 h-4 text-pink-400" />
+                  <h3 className="text-sm font-bold text-[#0F172A] flex items-center gap-2">
+                    <Activity className="w-4 h-4 text-pink-600" />
                     Overlay Radar Comparison
                   </h3>
-                  <p className="text-xs text-slate-400">
-                    Direct comparison of 4 CPRI dimensions: <span className="text-pink-400 font-semibold">{comparison.player_a}</span> (Royal Pink) vs <span className="text-blue-400 font-semibold">{comparison.player_b}</span> (Royal Blue)
+                  <p className="text-xs text-[#64748B]">
+                    Direct comparison of 4 CPRI dimensions: <span className="text-[#EC008C] font-semibold">{comparison.player_a}</span> (Royal Pink) vs <span className="text-blue-700 font-semibold">{comparison.player_b}</span> (Royal Blue)
                   </p>
                 </div>
               </div>
@@ -558,10 +558,10 @@ export const PlayerComparisonPage: React.FC = () => {
           )}
 
           {/* AI Comparison Analysis / Verdict */}
-          <Card variant="default" className="p-6 border-[#182752]">
-            <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#182752] text-xs font-mono">
-              <div className="flex items-center gap-2 text-pink-300 font-bold">
-                <ShieldCheck className="w-4 h-4 text-amber-400" />
+          <Card variant="default" className="p-6 border-slate-200">
+            <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-200 text-xs font-mono">
+              <div className="flex items-center gap-2 text-[#EC008C] font-bold">
+                <ShieldCheck className="w-4 h-4 text-emerald-600" />
                 <span>AI Comparative Verdict & Tactical Breakdown</span>
               </div>
               <Badge variant={comparison.verified ? 'official' : 'warning'} size="sm">

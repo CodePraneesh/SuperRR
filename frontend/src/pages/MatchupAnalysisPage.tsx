@@ -100,25 +100,25 @@ export const MatchupAnalysisPage: React.FC = () => {
     <div className="space-y-8">
       {/* Title */}
       <div>
-        <div className="flex items-center gap-2 text-xs font-mono font-medium text-pink-400 mb-1">
-          <Swords className="w-4 h-4 text-pink-400" />
+        <div className="flex items-center gap-2 text-xs font-mono font-medium text-[#EC008C] mb-1">
+          <Swords className="w-4 h-4 text-[#EC008C]" />
           <span>Tactical Head-to-Head Analytics</span>
         </div>
-        <h1 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+        <h1 className="text-2xl font-bold tracking-tight text-[#0F172A] flex items-center gap-2">
           <span>Batter vs Bowler</span>
-          <span className="text-pink-500 font-black">Matchup Intelligence</span>
+          <span className="text-pink-600 font-black">Matchup Intelligence</span>
         </h1>
-        <p className="text-xs text-slate-400 mt-0.5">
+        <p className="text-xs text-[#64748B] mt-0.5">
           Evaluate historical encounters between specific batters and bowlers with rigorous sample size certification.
         </p>
       </div>
 
       {/* Selection Form */}
-      <Card variant="subtle" className="p-6 border-[#182752]">
+      <Card variant="subtle" className="p-6 border-slate-200">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
           {/* Scope Selector */}
           <div>
-            <label className="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5 font-bold">
+            <label className="block text-xs font-mono uppercase tracking-wider text-[#64748B] mb-1.5 font-bold">
               Competition Scope
             </label>
             <div className="grid grid-cols-2 gap-1 p-1 rounded-lg bg-[#070b18] border border-[#182752] text-xs font-semibold">
@@ -206,13 +206,13 @@ export const MatchupAnalysisPage: React.FC = () => {
         <div className="space-y-6">
           {/* Small Sample Warning Alert Banner if exploratory (<18 balls) */}
           {matchup.is_small_sample && (
-            <div className="p-4 rounded-xl border border-amber-500/40 bg-amber-950/20 flex items-start gap-3">
-              <AlertTriangle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+            <div className="p-4 rounded-xl border border-amber-300 bg-amber-50 flex items-start gap-3">
+              <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
               <div>
-                <h4 className="text-sm font-bold text-amber-200">
+                <h4 className="text-sm font-bold text-amber-900">
                   Exploratory Sample Size Notice ({h2h.balls_faced} balls)
                 </h4>
-                <p className="text-xs text-amber-300/80 mt-0.5">
+                <p className="text-xs text-amber-800 mt-0.5">
                   {matchup.sample_warning ||
                     `This head-to-head encounter contains fewer than 18 legal deliveries. Tactical conclusions should be treated with caution, as high variance governs small sample sizes.`}
                 </p>
@@ -221,20 +221,20 @@ export const MatchupAnalysisPage: React.FC = () => {
           )}
 
           {/* Main Encounter Scoreboard */}
-          <Card variant="royal" className="p-6 md:p-8 border-[#182752]">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-[#182752]">
+          <Card variant="royal" className="p-6 md:p-8 border-slate-200">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-200">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-pink-500/20 border border-pink-500/40 flex items-center justify-center text-pink-400 shadow-md shadow-pink-500/20">
+                <div className="w-12 h-12 rounded-xl bg-pink-50 border border-pink-200 flex items-center justify-center text-[#EC008C] shadow-xs">
                   <Swords className="w-6 h-6" />
                 </div>
                 <div>
-                  <div className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-0.5 font-bold">
+                  <div className="text-xs font-mono uppercase tracking-wider text-[#64748B] mb-0.5 font-bold">
                     {matchup.competition_scope} Head-to-Head
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-extrabold text-white">
-                    <span className="text-pink-400">{matchup.batter_name}</span>{' '}
-                    <span className="text-slate-500 font-light">vs</span>{' '}
-                    <span className="text-blue-400">{matchup.bowler_name}</span>
+                  <h2 className="text-2xl md:text-3xl font-extrabold text-[#0F172A]">
+                    <span className="text-[#EC008C]">{matchup.batter_name}</span>{' '}
+                    <span className="text-slate-400 font-light">vs</span>{' '}
+                    <span className="text-blue-700">{matchup.bowler_name}</span>
                   </h2>
                 </div>
               </div>
@@ -273,19 +273,19 @@ export const MatchupAnalysisPage: React.FC = () => {
             </div>
 
             {/* Secondary Metrics */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 pt-4 border-t border-[#182752]/80 text-xs font-mono text-slate-400">
-              <div>Boundaries: <span className="text-white font-semibold">{h2h.fours} fours, {h2h.sixes} sixes</span></div>
-              <div>Boundary %: <span className="text-white font-semibold">{formatPercent(h2h.boundary_percentage)}</span></div>
-              <div>Batting Average: <span className="text-white font-semibold">{formatScore(h2h.batting_average, 1)}</span></div>
-              <div>Statistical Reliability: <span className={matchup.is_small_sample ? 'text-amber-400 font-bold' : 'text-emerald-400 font-bold'}>{matchup.is_small_sample ? 'Caution (Low Sample)' : 'Certified Reliable'}</span></div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 pt-4 border-t border-slate-200 text-xs font-mono text-[#64748B]">
+              <div>Boundaries: <span className="text-[#0F172A] font-semibold">{h2h.fours} fours, {h2h.sixes} sixes</span></div>
+              <div>Boundary %: <span className="text-[#0F172A] font-semibold">{formatPercent(h2h.boundary_percentage)}</span></div>
+              <div>Batting Average: <span className="text-[#0F172A] font-semibold">{formatScore(h2h.batting_average, 1)}</span></div>
+              <div>Statistical Reliability: <span className={matchup.is_small_sample ? 'text-amber-800 font-bold' : 'text-emerald-800 font-bold'}>{matchup.is_small_sample ? 'Caution (Low Sample)' : 'Certified Reliable'}</span></div>
             </div>
           </Card>
 
           {/* AI Narrative Breakdown */}
-          <Card variant="default" className="p-6 border-[#182752]">
-            <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#182752] text-xs font-mono">
-              <div className="flex items-center gap-2 text-pink-300 font-bold">
-                <Sparkles className="w-4 h-4 text-pink-400" />
+          <Card variant="default" className="p-6 border-slate-200">
+            <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-200 text-xs font-mono">
+              <div className="flex items-center gap-2 text-[#EC008C] font-bold">
+                <Sparkles className="w-4 h-4 text-[#EC008C]" />
                 <span>Tactical Scouting Narrative & Caveats</span>
               </div>
               <Badge variant={matchup.verified ? 'official' : 'warning'} size="sm">
