@@ -28,7 +28,10 @@ import re
 import numpy as np
 from pathlib import Path
 import pandas as pd
-import pypdf
+try:
+    import pypdf
+except ImportError:
+    pypdf = None
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
@@ -173,7 +176,9 @@ def verify_submission():
     # 5. Cross-Check Against Official PDF Report (pypdf Text Extraction)
     pdf_path = REPO_ROOT / "docs" / "reports" / "SupeRR_Intelligence_Methodology_Report.pdf"
     print(f"\n[4/6] Cross-checking against Official PDF Report: {pdf_path.name}...")
-    if not pdf_path.exists():
+    if pypdf is None:
+        warnings.append("pypdf is not installed; skipping PDF text extraction check. Install pypdf to verify PDF report directly.")
+    elif not pdf_path.exists():
         errors.append(f"Official PDF Report not found at {pdf_path}")
     else:
         reader = pypdf.PdfReader(str(pdf_path))

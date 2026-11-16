@@ -4,7 +4,7 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/React-18-61DAFB.svg)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6.svg)](https://www.typescriptlang.org/)
-[![Tests](https://img.shields.io/badge/Tests-145%20passed%20%7C%2076%20skipped-success.svg)]()
+[![Tests](https://img.shields.io/badge/Tests-173%20passed%20%7C%2080%20skipped-success.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
 **SupeRR Intelligence** is an advanced, evidence-grounded cricket scouting and clutch performance platform built for **SupeRR Selector Season 2 (Round 1)**.
@@ -184,7 +184,7 @@ The Phase 2 pressure and win-probability engines utilize gradient-boosted trees 
 ## 6. Test Suite & Verification Metrics
 
 SupeRR Intelligence maintains an exhaustive automated test suite:
-- **Clean Clone Verification:** **145 passed, 76 skipped with reasons naming missing data files** (0 failures, 0 errors, exit code 0). All official Phase 8 rankings, API endpoints, AI scouting verifier, and mathematical schemas run and pass immediately upon cloning without requiring external raw data packs.
+- **Clean Clone Verification:** **173 passed, 80 skipped with reasons naming missing data files** (0 failures, 0 errors, exit code 0). All official Phase 8 rankings, supplementary Phase 12 active views, API endpoints, AI scouting verifier, and mathematical schemas run and pass immediately upon cloning without requiring external raw data packs.
 - **Full Data Present (All Suites):** **236 passed, 0 failures, 0 errors, 0 skipped** across the entire pipeline (16 Phase 1 validation tests + 220 Phase 2–11 engine, API, and invariant tests; exit code 0).
 - **Match Date Coverage:** Evaluated across all 883 matches spanning **2022-01-22 to 2026-11-01** (194,014 in-scope deliveries).
 
