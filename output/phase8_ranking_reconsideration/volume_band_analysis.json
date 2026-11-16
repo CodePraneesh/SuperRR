@@ -1,0 +1,365 @@
+{
+  "volume_band": {
+    "batters": {
+      "table": [
+        {
+          "Pressure Balls Band": "<150",
+          "n_players": 693,
+          "median_cpri": 40.37,
+          "max_cpri": 61.61,
+          "median_ci_width": 99.0,
+          "median_top10_freq": 0.0
+        },
+        {
+          "Pressure Balls Band": "150-249",
+          "n_players": 64,
+          "median_cpri": 46.84,
+          "max_cpri": 85.36,
+          "median_ci_width": 112.0,
+          "median_top10_freq": 0.001
+        },
+        {
+          "Pressure Balls Band": "250-399",
+          "n_players": 34,
+          "median_cpri": 57.72,
+          "max_cpri": 77.45,
+          "median_ci_width": 103.5,
+          "median_top10_freq": 0.022
+        },
+        {
+          "Pressure Balls Band": "400-599",
+          "n_players": 27,
+          "median_cpri": 61.74,
+          "max_cpri": 82.44,
+          "median_ci_width": 95.0,
+          "median_top10_freq": 0.036
+        },
+        {
+          "Pressure Balls Band": "600+",
+          "n_players": 6,
+          "median_cpri": 68.02,
+          "max_cpri": 81.42,
+          "median_ci_width": 69.5,
+          "median_top10_freq": 0.182
+        }
+      ],
+      "corr_pressure_balls_cpri": 0.605
+    },
+    "bowlers": {
+      "table": [
+        {
+          "Pressure Balls Band": "<150",
+          "n_players": 471,
+          "median_cpri": 46.32,
+          "max_cpri": 70.31,
+          "median_ci_width": 109.0,
+          "median_top10_freq": 0.001
+        },
+        {
+          "Pressure Balls Band": "150-249",
+          "n_players": 44,
+          "median_cpri": 44.52,
+          "max_cpri": 78.78,
+          "median_ci_width": 99.0,
+          "median_top10_freq": 0.002
+        },
+        {
+          "Pressure Balls Band": "250-399",
+          "n_players": 44,
+          "median_cpri": 56.46,
+          "max_cpri": 75.51,
+          "median_ci_width": 109.5,
+          "median_top10_freq": 0.029
+        },
+        {
+          "Pressure Balls Band": "400-599",
+          "n_players": 19,
+          "median_cpri": 57.23,
+          "max_cpri": 75.77,
+          "median_ci_width": 93.0,
+          "median_top10_freq": 0.009
+        },
+        {
+          "Pressure Balls Band": "600+",
+          "n_players": 18,
+          "median_cpri": 59.02,
+          "max_cpri": 79.84,
+          "median_ci_width": 72.5,
+          "median_top10_freq": 0.019
+        }
+      ],
+      "corr_pressure_balls_cpri": 0.33
+    }
+  },
+  "sensitivity_400": {
+    "note": "Post-hoc sensitivity check, not pre-registered; the submitted lists remain the Phase 8 lists.",
+    "batter_top10_400": [
+      {
+        "400-Ball Rank": 1,
+        "player_name": "Tim David",
+        "pressure_deliveries": 476,
+        "cpri_score": 82.44
+      },
+      {
+        "400-Ball Rank": 2,
+        "player_name": "Suryakumar Yadav",
+        "pressure_deliveries": 749,
+        "cpri_score": 81.42
+      },
+      {
+        "400-Ball Rank": 3,
+        "player_name": "Rinku Singh",
+        "pressure_deliveries": 457,
+        "cpri_score": 77.18
+      },
+      {
+        "400-Ball Rank": 4,
+        "player_name": "Romario Shepherd",
+        "pressure_deliveries": 428,
+        "cpri_score": 75.33
+      },
+      {
+        "400-Ball Rank": 5,
+        "player_name": "Namboori Tilak Varma",
+        "pressure_deliveries": 777,
+        "cpri_score": 74.81
+      },
+      {
+        "400-Ball Rank": 6,
+        "player_name": "Ravindra Jadeja",
+        "pressure_deliveries": 467,
+        "cpri_score": 73.7
+      },
+      {
+        "400-Ball Rank": 7,
+        "player_name": "Ayush Badoni",
+        "pressure_deliveries": 416,
+        "cpri_score": 69.6
+      },
+      {
+        "400-Ball Rank": 8,
+        "player_name": "Tristan Stubbs",
+        "pressure_deliveries": 579,
+        "cpri_score": 69.55
+      },
+      {
+        "400-Ball Rank": 9,
+        "player_name": "Dasun Shanaka",
+        "pressure_deliveries": 402,
+        "cpri_score": 68.7
+      },
+      {
+        "400-Ball Rank": 10,
+        "player_name": "Nicholas Pooran",
+        "pressure_deliveries": 673,
+        "cpri_score": 68.43
+      }
+    ],
+    "bowler_top10_400": [
+      {
+        "400-Ball Rank": 1,
+        "player_name": "Mitchell Santner",
+        "pressure_deliveries": 653,
+        "cpri_score": 79.84
+      },
+      {
+        "400-Ball Rank": 2,
+        "player_name": "Rashid Khan",
+        "pressure_deliveries": 970,
+        "cpri_score": 77.9
+      },
+      {
+        "400-Ball Rank": 3,
+        "player_name": "Matheesha Pathirana",
+        "pressure_deliveries": 557,
+        "cpri_score": 75.77
+      },
+      {
+        "400-Ball Rank": 4,
+        "player_name": "Sunil Narine",
+        "pressure_deliveries": 511,
+        "cpri_score": 75.63
+      },
+      {
+        "400-Ball Rank": 5,
+        "player_name": "Jasprit Bumrah",
+        "pressure_deliveries": 606,
+        "cpri_score": 73.36
+      },
+      {
+        "400-Ball Rank": 6,
+        "player_name": "Varun Chakravarthy",
+        "pressure_deliveries": 892,
+        "cpri_score": 73.02
+      },
+      {
+        "400-Ball Rank": 7,
+        "player_name": "Yuzvendra Chahal",
+        "pressure_deliveries": 859,
+        "cpri_score": 73.01
+      },
+      {
+        "400-Ball Rank": 8,
+        "player_name": "Mustafizur Rahman",
+        "pressure_deliveries": 527,
+        "cpri_score": 72.12
+      },
+      {
+        "400-Ball Rank": 9,
+        "player_name": "Wanindu Hasaranga",
+        "pressure_deliveries": 639,
+        "cpri_score": 71.86
+      },
+      {
+        "400-Ball Rank": 10,
+        "player_name": "Kuldeep Yadav",
+        "pressure_deliveries": 627,
+        "cpri_score": 71.29
+      }
+    ],
+    "batter_official_check": [
+      {
+        "official_rank": 1,
+        "player_name": "Matthew Wade",
+        "pressure_deliveries": 191,
+        "cpri_score": 85.36,
+        "in_400_view": false
+      },
+      {
+        "official_rank": 2,
+        "player_name": "Tim David",
+        "pressure_deliveries": 476,
+        "cpri_score": 82.44,
+        "in_400_view": true
+      },
+      {
+        "official_rank": 3,
+        "player_name": "Suryakumar Yadav",
+        "pressure_deliveries": 749,
+        "cpri_score": 81.42,
+        "in_400_view": true
+      },
+      {
+        "official_rank": 4,
+        "player_name": "Reeza Hendricks",
+        "pressure_deliveries": 378,
+        "cpri_score": 77.45,
+        "in_400_view": false
+      },
+      {
+        "official_rank": 5,
+        "player_name": "Rinku Singh",
+        "pressure_deliveries": 457,
+        "cpri_score": 77.18,
+        "in_400_view": true
+      },
+      {
+        "official_rank": 6,
+        "player_name": "Phil Salt",
+        "pressure_deliveries": 261,
+        "cpri_score": 76.96,
+        "in_400_view": false
+      },
+      {
+        "official_rank": 7,
+        "player_name": "Romario Shepherd",
+        "pressure_deliveries": 428,
+        "cpri_score": 75.33,
+        "in_400_view": true
+      },
+      {
+        "official_rank": 8,
+        "player_name": "Namboori Tilak Varma",
+        "pressure_deliveries": 777,
+        "cpri_score": 74.81,
+        "in_400_view": true
+      },
+      {
+        "official_rank": 9,
+        "player_name": "Dinesh Karthik",
+        "pressure_deliveries": 277,
+        "cpri_score": 74.54,
+        "in_400_view": false
+      },
+      {
+        "official_rank": 10,
+        "player_name": "Ravindra Jadeja",
+        "pressure_deliveries": 467,
+        "cpri_score": 73.7,
+        "in_400_view": true
+      }
+    ],
+    "bowler_official_check": [
+      {
+        "official_rank": 1,
+        "player_name": "Mitchell Santner",
+        "pressure_deliveries": 653,
+        "cpri_score": 79.84,
+        "in_400_view": true
+      },
+      {
+        "official_rank": 2,
+        "player_name": "Sufiyan Muqeem",
+        "pressure_deliveries": 151,
+        "cpri_score": 78.78,
+        "in_400_view": false
+      },
+      {
+        "official_rank": 3,
+        "player_name": "Rashid Khan",
+        "pressure_deliveries": 970,
+        "cpri_score": 77.9,
+        "in_400_view": true
+      },
+      {
+        "official_rank": 4,
+        "player_name": "Jamie Overton",
+        "pressure_deliveries": 168,
+        "cpri_score": 76.92,
+        "in_400_view": false
+      },
+      {
+        "official_rank": 5,
+        "player_name": "Matheesha Pathirana",
+        "pressure_deliveries": 557,
+        "cpri_score": 75.77,
+        "in_400_view": true
+      },
+      {
+        "official_rank": 6,
+        "player_name": "Sunil Narine",
+        "pressure_deliveries": 511,
+        "cpri_score": 75.63,
+        "in_400_view": true
+      },
+      {
+        "official_rank": 7,
+        "player_name": "Mohammad Nawaz",
+        "pressure_deliveries": 301,
+        "cpri_score": 75.51,
+        "in_400_view": false
+      },
+      {
+        "official_rank": 8,
+        "player_name": "Jasprit Bumrah",
+        "pressure_deliveries": 606,
+        "cpri_score": 73.36,
+        "in_400_view": true
+      },
+      {
+        "official_rank": 9,
+        "player_name": "Varun Chakravarthy",
+        "pressure_deliveries": 892,
+        "cpri_score": 73.02,
+        "in_400_view": true
+      },
+      {
+        "official_rank": 10,
+        "player_name": "Yuzvendra Chahal",
+        "pressure_deliveries": 859,
+        "cpri_score": 73.01,
+        "in_400_view": true
+      }
+    ]
+  }
+}

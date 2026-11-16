@@ -869,7 +869,136 @@ def build_pdf():
     story.append(PageBreak())
 
     # =========================================================================
-    # PAGE 9: SECTION 4 — EVIDENCE FOR THE OFFICIAL TOP 10 BATTERS
+    # PAGE 8b: SECTION 3 (CONT.) — VOLUME-BAND ANALYSIS & 400-BALL SENSITIVITY
+    # =========================================================================
+    story.append(Paragraph("3.5 Volume-Band Analysis of CPRI Scores (Post-hoc)", h2_style))
+    story.append(Paragraph(
+        "<i>Post-hoc analysis — not pre-registered. All numbers are computed programmatically from Phase 8 population CSVs.</i>",
+        body_style
+    ))
+    story.append(Paragraph(
+        "The table below shows how CPRI scores and rank uncertainty vary across pressure-ball exposure bands "
+        "for both batters and bowlers. The correlation between pressure-ball count and CPRI score is "
+        "r = 0.605 for batters and r = 0.330 for bowlers, indicating that high exposure and strong performance "
+        "are complementary — volume alone does not drive CPRI, but elite performers tend to have both.",
+        body_style
+    ))
+
+    def _band_label(n):
+        if n < 150: return "<150"
+        elif n < 250: return "150-249"
+        elif n < 400: return "250-399"
+        elif n < 600: return "400-599"
+        else: return "600+"
+
+    BAND_ORDER_LOCAL = ["<150", "150-249", "250-399", "400-599", "600+"]
+    import numpy as _np
+
+    for pop_path, unc_path, role_label in [
+        (P8_DIR / "batter_full_population.csv", P8_DIR / "batter_rank_uncertainty.csv", "Batters"),
+        (P8_DIR / "bowler_full_population.csv", P8_DIR / "bowler_rank_uncertainty.csv", "Bowlers"),
+    ]:
+        pop_df = pd.read_csv(pop_path)
+        unc_df = pd.read_csv(unc_path)
+        unc_cols = [c for c in ["player_id", "rank_p5", "rank_p95", "top10_inclusion_freq"] if c in unc_df.columns]
+        df = pop_df.merge(unc_df[unc_cols], on="player_id", how="left")
+        df["band"] = df["pressure_deliveries"].apply(_band_label)
+        df["ci_width"] = df["rank_p95"] - df["rank_p5"]
+        tbl = (
+            df.groupby("band", observed=True)
+            .agg(
+                n_players=("player_id", "count"),
+                median_cpri=("cpri_score", "median"),
+                max_cpri=("cpri_score", "max"),
+                median_ci_width=("ci_width", "median"),
+                median_top10_freq=("top10_inclusion_freq", "median"),
+            )
+            .reindex(BAND_ORDER_LOCAL)
+            .reset_index()
+        )
+
+        story.append(Paragraph(f"{role_label} — CPRI by Pressure-Ball Band", h2_style))
+        band_data = [[
+            Paragraph("Ball Band", table_header),
+            Paragraph("N Players", table_header),
+            Paragraph("Median CPRI", table_header),
+            Paragraph("Max CPRI", table_header),
+            Paragraph("Median CI Width", table_header),
+            Paragraph("Median Top-10 Freq", table_header),
+        ]]
+        for _, row in tbl.iterrows():
+            def _fmt(v, d=2):
+                return f"{v:.{d}f}" if not _np.isnan(v) else "—"
+            band_data.append([
+                Paragraph(str(row["band"]), table_cell_bold),
+                Paragraph(str(int(row["n_players"])) if not _np.isnan(row["n_players"]) else "0", table_cell),
+                Paragraph(_fmt(row["median_cpri"]), table_cell),
+                Paragraph(_fmt(row["max_cpri"]), table_cell),
+                Paragraph(_fmt(row["median_ci_width"], 1), table_cell),
+                Paragraph(_fmt(row["median_top10_freq"], 3), table_cell),
+            ])
+        t_band = Table(band_data, colWidths=[65, 55, 70, 65, 80, 90])
+        t_band.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), SECONDARY),
+            ('GRID', (0, 0), (-1, -1), 0.5, BORDER_COLOR),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, LIGHT_BG]),
+            ('TOPPADDING', (0, 0), (-1, -1), 2.5),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 2.5),
+        ]))
+        story.append(t_band)
+        story.append(Spacer(1, 6))
+
+    story.append(Paragraph("3.6 Sensitivity Analysis: Minimum 400 Pressure Balls (Post-hoc)", h2_style))
+    story.append(Paragraph(
+        "<i>Post-hoc sensitivity check, not pre-registered. The official Unstop submission remains the frozen Phase 8 lists.</i>",
+        body_style
+    ))
+    story.append(Paragraph(
+        "As a post-hoc robustness check, we apply a stricter 400-ball minimum exposure filter and report the Top 10 "
+        "by raw Phase 8 CPRI score (no formula change). 6/10 official batters and 7/10 official bowlers pass this filter. "
+        "Matthew Wade (#1 batter, 191 balls) and Sufiyan Muqeem (#2 bowler, 151 balls) would not appear in this stricter "
+        "view — their rankings are definition-sensitive, as disclosed in Section 5.3.",
+        body_style
+    ))
+
+    for pop_path, role_label in [
+        (P8_DIR / "batter_full_population.csv", "Batters"),
+        (P8_DIR / "bowler_full_population.csv", "Bowlers"),
+    ]:
+        pop_df = pd.read_csv(pop_path)
+        top400 = (
+            pop_df[pop_df["pressure_deliveries"] >= 400]
+            .nlargest(10, "cpri_score")[["player_name", "pressure_deliveries", "cpri_score"]]
+            .reset_index(drop=True)
+        )
+        top400.index = top400.index + 1
+
+        story.append(Paragraph(f"{role_label} — Top 10 by Raw CPRI (≥ 400 Pressure Balls)", h2_style))
+        s400_data = [[
+            Paragraph("Rank", table_header),
+            Paragraph("Player", table_header),
+            Paragraph("Pressure Balls", table_header),
+            Paragraph("Raw CPRI", table_header),
+        ]]
+        for rk, row in top400.iterrows():
+            s400_data.append([
+                Paragraph(str(rk), table_cell_bold),
+                Paragraph(str(row["player_name"]), table_cell),
+                Paragraph(str(int(row["pressure_deliveries"])), table_cell),
+                Paragraph(f"{row['cpri_score']:.2f}", table_cell_bold),
+            ])
+        t400 = Table(s400_data, colWidths=[40, 200, 100, 85])
+        t400.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), PRIMARY),
+            ('GRID', (0, 0), (-1, -1), 0.5, BORDER_COLOR),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, LIGHT_BG]),
+            ('TOPPADDING', (0, 0), (-1, -1), 2.5),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 2.5),
+        ]))
+        story.append(t400)
+        story.append(Spacer(1, 6))
+
+    story.append(PageBreak())
     # =========================================================================
     story.append(Paragraph("4. Evidence for the Official Top 10", h1_style))
     story.append(Paragraph("Statistical profiles, own-baseline comparisons, and evidence supporting Top 10 Batters.", subtitle_style))

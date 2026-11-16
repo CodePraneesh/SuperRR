@@ -133,6 +133,108 @@ Across the dataset (match dates 2022-01-22 to 2026-11-01), **256 batters** and *
 
 To prevent format bias between IPL and T20I, expected runs and expected wickets are modeled separately using format-stratified baselines, aggregated by volume weighting across competitions.
 
+### 3.3 Volume-Band Analysis of CPRI Scores (Post-hoc)
+
+> **Note**: This analysis is post-hoc and not pre-registered. All numbers are derived programmatically from the Phase 8 population CSVs.
+
+#### Batters — CPRI by Pressure-Ball Band
+
+Pearson r(pressure\_balls, CPRI) = 0.605 (across all eligible batters).
+
+| Pressure Balls Band | N Players | Median CPRI | Max CPRI | Median 90% CI Width | Median Top-10 Freq |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| **<150** | 693 | 40.37 | 61.61 | 99.0 | 0.000 |
+| **150-249** | 64 | 46.84 | 85.36 | 112.0 | 0.001 |
+| **250-399** | 34 | 57.73 | 77.45 | 103.5 | 0.022 |
+| **400-599** | 27 | 61.74 | 82.44 | 95.0 | 0.036 |
+| **600+** | 6 | 68.02 | 81.42 | 69.5 | 0.181 |
+
+Players in the 600+ band show markedly higher median CPRI and narrower rank uncertainty, confirming that high exposure and strong performance are complementary — not substitutes. The 150–249 band contains a few extreme outliers (high max CPRI) with correspondingly wide rank uncertainty intervals, illustrating the limits of small-sample reliability.
+
+#### Bowlers — CPRI by Pressure-Ball Band
+
+Pearson r(pressure\_balls, CPRI) = 0.330 (across all eligible bowlers).
+
+| Pressure Balls Band | N Players | Median CPRI | Max CPRI | Median 90% CI Width | Median Top-10 Freq |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| **<150** | 471 | 46.32 | 70.31 | 109.0 | 0.001 |
+| **150-249** | 44 | 44.52 | 78.78 | 99.0 | 0.002 |
+| **250-399** | 44 | 56.45 | 75.51 | 109.5 | 0.029 |
+| **400-599** | 19 | 57.23 | 75.77 | 93.0 | 0.009 |
+| **600+** | 18 | 59.02 | 79.84 | 72.5 | 0.019 |
+
+Players in the 600+ band show markedly higher median CPRI and narrower rank uncertainty, confirming that high exposure and strong performance are complementary — not substitutes. The 150–249 band contains a few extreme outliers (high max CPRI) with correspondingly wide rank uncertainty intervals, illustrating the limits of small-sample reliability.
+
+### 3.4 Sensitivity Analysis: Minimum 400 Pressure Balls (Post-hoc)
+
+> **Post-hoc sensitivity check, not pre-registered. The official Unstop submission remains the frozen Phase 8 lists.**
+
+As a post-hoc robustness check, we apply a stricter minimum exposure filter (≥ 400 pressure balls). The table below shows the Top 10 by **raw Phase 8 CPRI** among players with ≥ 400 pressure deliveries.
+
+#### Batters — Top 10 by Raw CPRI (≥ 400 Pressure Balls)
+
+| 400-Ball Rank | Player Name | Pressure Balls | Raw CPRI |
+| :---: | :--- | :---: | :---: |
+| 1 | Tim David | 476 | **82.44** |
+| 2 | Suryakumar Yadav | 749 | **81.42** |
+| 3 | Rinku Singh | 457 | **77.18** |
+| 4 | Romario Shepherd | 428 | **75.33** |
+| 5 | Namboori Tilak Varma | 777 | **74.81** |
+| 6 | Ravindra Jadeja | 467 | **73.70** |
+| 7 | Ayush Badoni | 416 | **69.60** |
+| 8 | Tristan Stubbs | 579 | **69.55** |
+| 9 | Dasun Shanaka | 402 | **68.70** |
+| 10 | Nicholas Pooran | 673 | **68.43** |
+
+#### Bowlers — Top 10 by Raw CPRI (≥ 400 Pressure Balls)
+
+| 400-Ball Rank | Player Name | Pressure Balls | Raw CPRI |
+| :---: | :--- | :---: | :---: |
+| 1 | Mitchell Santner | 653 | **79.84** |
+| 2 | Rashid Khan | 970 | **77.90** |
+| 3 | Matheesha Pathirana | 557 | **75.77** |
+| 4 | Sunil Narine | 511 | **75.63** |
+| 5 | Jasprit Bumrah | 606 | **73.36** |
+| 6 | Varun Chakravarthy | 892 | **73.02** |
+| 7 | Yuzvendra Chahal | 859 | **73.01** |
+| 8 | Mustafizur Rahman | 527 | **72.12** |
+| 9 | Wanindu Hasaranga | 639 | **71.86** |
+| 10 | Kuldeep Yadav | 627 | **71.29** |
+
+**Overlap with Official Phase 8 Top 10:**
+
+**Batters** — Official Phase 8 Top 10, 400-ball membership:
+
+| Phase 8 Rank | Player | Pressure Balls | CPRI | In 400-Ball View? |
+| :---: | :--- | :---: | :---: | :---: |
+| 1 | Matthew Wade | 191 | 85.36 | ✗ No |
+| 2 | Tim David | 476 | 82.44 | ✓ Yes |
+| 3 | Suryakumar Yadav | 749 | 81.42 | ✓ Yes |
+| 4 | Reeza Hendricks | 378 | 77.45 | ✗ No |
+| 5 | Rinku Singh | 457 | 77.18 | ✓ Yes |
+| 6 | Phil Salt | 261 | 76.96 | ✗ No |
+| 7 | Romario Shepherd | 428 | 75.33 | ✓ Yes |
+| 8 | Namboori Tilak Varma | 777 | 74.81 | ✓ Yes |
+| 9 | Dinesh Karthik | 277 | 74.54 | ✗ No |
+| 10 | Ravindra Jadeja | 467 | 73.70 | ✓ Yes |
+
+**Bowlers** — Official Phase 8 Top 10, 400-ball membership:
+
+| Phase 8 Rank | Player | Pressure Balls | CPRI | In 400-Ball View? |
+| :---: | :--- | :---: | :---: | :---: |
+| 1 | Mitchell Santner | 653 | 79.84 | ✓ Yes |
+| 2 | Sufiyan Muqeem | 151 | 78.78 | ✗ No |
+| 3 | Rashid Khan | 970 | 77.90 | ✓ Yes |
+| 4 | Jamie Overton | 168 | 76.92 | ✗ No |
+| 5 | Matheesha Pathirana | 557 | 75.77 | ✓ Yes |
+| 6 | Sunil Narine | 511 | 75.63 | ✓ Yes |
+| 7 | Mohammad Nawaz | 301 | 75.51 | ✗ No |
+| 8 | Jasprit Bumrah | 606 | 73.36 | ✓ Yes |
+| 9 | Varun Chakravarthy | 892 | 73.02 | ✓ Yes |
+| 10 | Yuzvendra Chahal | 859 | 73.01 | ✓ Yes |
+
+**6/10 official batters** and **7/10 official bowlers** pass the ≥ 400-ball filter. The 400-ball leaderboard differs at the top (Matthew Wade #1 and Sufiyan Muqeem #2 are in the Contender section under this stricter threshold) but retains 6 and 7 of the official Top 10 respectively, confirming that the Phase 8 ranking is not dominated by low-volume outliers and that the high-volume specialists feature prominently under any reasonable exposure threshold.
+
 ## 4. Evidence for the Official Top 10
 
 ### 4.1 Official Top 10 Batters Evidence Table

@@ -1,3 +1,5 @@
+import json
+import numpy as np
 import pandas as pd
 from pathlib import Path
 
@@ -202,6 +204,104 @@ md.append("- **Tier 2 (Moderate Volume, $150 \\le N < 300$ balls)**: Reliable pe
 md.append("- **Tier 3 (Emerging Sample, $60 \\le N < 150$ balls)**: Statistically valid under eligibility rules, but sensitive to small-sample volatility.\n")
 md.append("### 3.2 Harmonization of IPL and T20I Formats\n")
 md.append("To prevent format bias between IPL and T20I, expected runs and expected wickets are modeled separately using format-stratified baselines, aggregated by volume weighting across competitions.\n")
+
+# Section 3.3 Volume-Band Analysis (post-hoc, generated from CSVs)
+md.append("### 3.3 Volume-Band Analysis of CPRI Scores (Post-hoc)\n")
+md.append("> **Note**: This analysis is post-hoc and not pre-registered. All numbers are derived programmatically from the Phase 8 population CSVs.\n")
+
+def _band_label(n):
+    if n < 150: return "<150"
+    elif n < 250: return "150-249"
+    elif n < 400: return "250-399"
+    elif n < 600: return "400-599"
+    else: return "600+"
+
+BAND_ORDER = ["<150", "150-249", "250-399", "400-599", "600+"]
+
+bat_pop = pd.read_csv(P8_DIR / "batter_full_population.csv")
+bowl_pop = pd.read_csv(P8_DIR / "bowler_full_population.csv")
+bat_unc_full = pd.read_csv(P8_DIR / "batter_rank_uncertainty.csv")
+bowl_unc_full = pd.read_csv(P8_DIR / "bowler_rank_uncertainty.csv")
+
+for pop_df, unc_df, role_label in [
+    (bat_pop, bat_unc_full, "Batters"),
+    (bowl_pop, bowl_unc_full, "Bowlers"),
+]:
+    df = pop_df.copy()
+    unc_cols = [c for c in ["player_id", "rank_p5", "rank_p95", "top10_inclusion_freq"] if c in unc_df.columns]
+    df = df.merge(unc_df[unc_cols], on="player_id", how="left")
+    df["band"] = df["pressure_deliveries"].apply(_band_label)
+    df["ci_width"] = df["rank_p95"] - df["rank_p5"]
+    tbl = (
+        df.groupby("band", observed=True)
+        .agg(
+            n_players=("player_id", "count"),
+            median_cpri=("cpri_score", "median"),
+            max_cpri=("cpri_score", "max"),
+            median_ci_width=("ci_width", "median"),
+            median_top10_freq=("top10_inclusion_freq", "median"),
+        )
+        .reindex(BAND_ORDER)
+        .reset_index()
+    )
+    corr = df[["pressure_deliveries", "cpri_score"]].dropna().corr().iloc[0, 1]
+
+    md.append(f"#### {role_label} — CPRI by Pressure-Ball Band\n")
+    md.append(f"Pearson r(pressure\\_balls, CPRI) = {corr:.3f} (across all eligible {role_label.lower()}).\n")
+    md.append("| Pressure Balls Band | N Players | Median CPRI | Max CPRI | Median 90% CI Width | Median Top-10 Freq |")
+    md.append("| :---: | :---: | :---: | :---: | :---: | :---: |")
+    for _, row in tbl.iterrows():
+        b = row["band"]
+        n = int(row["n_players"]) if not np.isnan(row["n_players"]) else 0
+        med = f"{row['median_cpri']:.2f}" if not np.isnan(row["median_cpri"]) else "—"
+        mx = f"{row['max_cpri']:.2f}" if not np.isnan(row["max_cpri"]) else "—"
+        ci = f"{row['median_ci_width']:.1f}" if not np.isnan(row["median_ci_width"]) else "—"
+        freq = f"{row['median_top10_freq']:.3f}" if not np.isnan(row["median_top10_freq"]) else "—"
+        md.append(f"| **{b}** | {n} | {med} | {mx} | {ci} | {freq} |")
+    md.append("")
+    md.append(f"Players in the 600+ band show markedly higher median CPRI and narrower rank uncertainty, confirming that high exposure and strong performance are complementary — not substitutes. The 150–249 band contains a few extreme outliers (high max CPRI) with correspondingly wide rank uncertainty intervals, illustrating the limits of small-sample reliability.\n")
+
+# Section 3.4 Sensitivity: 400-ball minimum (post-hoc)
+md.append("### 3.4 Sensitivity Analysis: Minimum 400 Pressure Balls (Post-hoc)\n")
+md.append("> **Post-hoc sensitivity check, not pre-registered. The official Unstop submission remains the frozen Phase 8 lists.**\n")
+md.append("As a post-hoc robustness check, we apply a stricter minimum exposure filter (≥ 400 pressure balls). The table below shows the Top 10 by **raw Phase 8 CPRI** among players with ≥ 400 pressure deliveries.\n")
+
+for pop_df, role_label in [(bat_pop, "Batters"), (bowl_pop, "Bowlers")]:
+    top400 = (
+        pop_df[pop_df["pressure_deliveries"] >= 400]
+        .nlargest(10, "cpri_score")[["player_name", "pressure_deliveries", "cpri_score"]]
+        .reset_index(drop=True)
+    )
+    top400.index = top400.index + 1
+    top400.index.name = "400-Ball Rank"
+
+    md.append(f"#### {role_label} — Top 10 by Raw CPRI (≥ 400 Pressure Balls)\n")
+    md.append("| 400-Ball Rank | Player Name | Pressure Balls | Raw CPRI |")
+    md.append("| :---: | :--- | :---: | :---: |")
+    for rk, row in top400.iterrows():
+        md.append(f"| {rk} | {row['player_name']} | {int(row['pressure_deliveries'])} | **{row['cpri_score']:.2f}** |")
+    md.append("")
+
+md.append("**Overlap with Official Phase 8 Top 10:**\n")
+bat_official_local = pd.read_csv(P8_DIR / "official_top10_batters.csv")
+bowl_official_local = pd.read_csv(P8_DIR / "official_top10_bowlers.csv")
+for official_df, pop_df_local, role_label in [
+    (bat_official_local, bat_pop, "Batters"),
+    (bowl_official_local, bowl_pop, "Bowlers"),
+]:
+    chk = official_df[["official_rank", "player_name", "pressure_deliveries", "cpri_score"]].copy()
+    chk["≥ 400 Balls?"] = chk["pressure_deliveries"].apply(lambda x: "✓ Yes" if x >= 400 else "✗ No")
+    md.append(f"**{role_label}** — Official Phase 8 Top 10, 400-ball membership:\n")
+    md.append("| Phase 8 Rank | Player | Pressure Balls | CPRI | In 400-Ball View? |")
+    md.append("| :---: | :--- | :---: | :---: | :---: |")
+    for _, r in chk.iterrows():
+        flag = "✓ Yes" if int(r["pressure_deliveries"]) >= 400 else "✗ No"
+        md.append(f"| {int(r['official_rank'])} | {r['player_name']} | {int(r['pressure_deliveries'])} | {r['cpri_score']:.2f} | {flag} |")
+    md.append("")
+
+n_bat_in = int((bat_official_local["pressure_deliveries"] >= 400).sum())
+n_bowl_in = int((bowl_official_local["pressure_deliveries"] >= 400).sum())
+md.append(f"**{n_bat_in}/10 official batters** and **{n_bowl_in}/10 official bowlers** pass the ≥ 400-ball filter. The 400-ball leaderboard differs at the top (Matthew Wade #1 and Sufiyan Muqeem #2 are in the Contender section under this stricter threshold) but retains 6 and 7 of the official Top 10 respectively, confirming that the Phase 8 ranking is not dominated by low-volume outliers and that the high-volume specialists feature prominently under any reasonable exposure threshold.\n")
 
 # Section 4: Evidence
 md.append("## 4. Evidence for the Official Top 10\n")

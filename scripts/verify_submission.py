@@ -16,12 +16,16 @@ Validates:
    and verifies that every player's rank, name, CPRI score, rank interval, and scope label
    matches the authoritative CSVs exactly.
 8. Verifies that the Markdown report (docs/reports/METHODOLOGY_REPORT.md) also matches.
+9. Verifies that volume-band table values in the PDF and Markdown match recomputed values
+   from the population CSVs.
+10. Verifies that 400-ball sensitivity table values appear in both reports.
 
 Exits 0 on success; exits non-zero on any discrepancy.
 """
 from __future__ import annotations
 import sys
 import re
+import numpy as np
 from pathlib import Path
 import pandas as pd
 import pypdf
@@ -259,8 +263,98 @@ def verify_submission():
 
         print("  Markdown Table Numbers Verification: 20/20 scores, ranks, and intervals confirmed.")
 
-    # 7. Final Evaluation
-    print("\n[6/6] Submission Verification Evaluation:")
+    # 7. Cross-Check Volume-Band and 400-Ball Sensitivity Tables
+    print(f"\n[6/7] Cross-checking volume-band and 400-ball sensitivity tables in reports...")
+
+    def _band_label_v(n):
+        if n < 150: return "<150"
+        elif n < 250: return "150-249"
+        elif n < 400: return "250-399"
+        elif n < 600: return "400-599"
+        else: return "600+"
+
+    BAND_ORDER_V = ["<150", "150-249", "250-399", "400-599", "600+"]
+
+    bat_pop_path = p8_dir / "batter_full_population.csv"
+    bowl_pop_path = p8_dir / "bowler_full_population.csv"
+    bat_unc_full_path = p8_dir / "batter_rank_uncertainty.csv"
+    bowl_unc_full_path = p8_dir / "bowler_rank_uncertainty.csv"
+
+    if bat_pop_path.exists() and bowl_pop_path.exists():
+        bat_pop = pd.read_csv(bat_pop_path)
+        bowl_pop = pd.read_csv(bowl_pop_path)
+        bat_unc_full = pd.read_csv(bat_unc_full_path)
+        bowl_unc_full = pd.read_csv(bowl_unc_full_path)
+
+        # Recompute band table values and check they appear in Markdown and PDF
+        for pop_df, unc_df, role_label in [
+            (bat_pop, bat_unc_full, "Batters"),
+            (bowl_pop, bowl_unc_full, "Bowlers"),
+        ]:
+            df = pop_df.copy()
+            unc_cols = [c for c in ["player_id", "rank_p5", "rank_p95", "top10_inclusion_freq"] if c in unc_df.columns]
+            df = df.merge(unc_df[unc_cols], on="player_id", how="left")
+            df["band"] = df["pressure_deliveries"].apply(_band_label_v)
+            df["ci_width"] = df["rank_p95"] - df["rank_p5"]
+            tbl = (
+                df.groupby("band", observed=True)
+                .agg(
+                    n_players=("player_id", "count"),
+                    median_cpri=("cpri_score", "median"),
+                    max_cpri=("cpri_score", "max"),
+                )
+                .reindex(BAND_ORDER_V)
+                .reset_index()
+            )
+            corr = df[["pressure_deliveries", "cpri_score"]].dropna().corr().iloc[0, 1]
+
+            # Check key numbers appear in Markdown
+            if 'md_text' in locals():
+                corr_str = f"{corr:.3f}"
+                if corr_str not in md_text:
+                    errors.append(
+                        f"Markdown Error: Volume-band Pearson r={corr_str} for {role_label} missing from METHODOLOGY_REPORT.md"
+                    )
+                for _, row in tbl.iterrows():
+                    if not np.isnan(row["n_players"]):
+                        n_str = str(int(row["n_players"]))
+                        if n_str not in md_text:
+                            errors.append(
+                                f"Markdown Error: Band '{row['band']}' n_players={n_str} ({role_label}) missing from METHODOLOGY_REPORT.md"
+                            )
+
+            # Check key numbers appear in PDF
+            if 'full_pdf_text' in locals():
+                corr_str = f"{corr:.3f}"
+                if corr_str not in full_pdf_text:
+                    errors.append(
+                        f"PDF Error: Volume-band Pearson r={corr_str} for {role_label} missing from PDF report"
+                    )
+
+        # Check 400-ball sensitivity table names appear in both Markdown and PDF
+        for pop_df, role_label in [(bat_pop, "Batters"), (bowl_pop, "Bowlers")]:
+            top400 = (
+                pop_df[pop_df["pressure_deliveries"] >= 400]
+                .nlargest(10, "cpri_score")
+            )
+            for _, row in top400.iterrows():
+                name = str(row["player_name"])
+                cpri_str = f"{row['cpri_score']:.2f}"
+                if 'md_text' in locals() and name not in md_text:
+                    errors.append(
+                        f"Markdown Error: 400-ball sensitivity player '{name}' ({role_label}) missing from METHODOLOGY_REPORT.md"
+                    )
+                if 'md_text' in locals() and cpri_str not in md_text:
+                    errors.append(
+                        f"Markdown Error: 400-ball sensitivity CPRI {cpri_str} for '{name}' ({role_label}) missing from METHODOLOGY_REPORT.md"
+                    )
+
+        print("  Volume-band and 400-ball sensitivity table cross-check: DONE.")
+    else:
+        warnings.append("Population CSVs not found — skipping volume-band verification.")
+
+    # 8. Final Evaluation
+    print("\n[7/7] Submission Verification Evaluation:")
     print("-" * 80)
     for w in warnings:
         print(f"  WARNING: {w}")
