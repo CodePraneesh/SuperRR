@@ -329,8 +329,8 @@ def build_pdf():
     <b>Deliverables:</b> Two Official Ordered Top 10 Lists (Unstop Dropdowns) & Comprehensive Technical Report<br/>
     <b>Dataset Scope:</b> 883 Matches, 194,014 In-Scope Deliveries (IPL + Senior Men's T20I, Excl. Emerging Teams)<br/>
     <b>Authoritative Engine:</b> Cricket Pressure-Performance Reliability Index (CPRI v1.0 / Phase 8 Frozen Baseline)<br/>
-    <b>Integrity Protocol:</b> Exploratory Evaluation with Pre-Registered Decision Gate, Pinned Environments (requirements.lock), Fixed Seed 42<br/>
-    <b>Release Verification:</b> 236/236 Automated Tests Passing | 17/17 Manifest Deliverables Cryptographically Verified
+    <b>Integrity Protocol:</b> Exploratory Evaluation (v3 challenger gate pre-registered), Pinned Environments (requirements.lock), Fixed Seed 42<br/>
+    <b>Release Verification:</b> 173 passed, 80 skipped, 0 failed (clean clone) | 17/17 Manifest Deliverables Cryptographically Verified
     """
     story.append(Paragraph(meta_text, meta_style))
     story.append(Spacer(1, 8))
@@ -508,7 +508,7 @@ def build_pdf():
     verif_box = """
     <b>DISAMBIGUATION WARNING & VERIFICATION PROTOCOL:</b><br/>
     • <b>Duplicate Name Disambiguation:</b> <i>Rashid Khan</i> has two distinct player entries in <code>competition_team_player_mapping.csv</code>: <b>Player ID 4722</b> (Afghanistan / Gujarat Titans, 970 pressure balls in dataset, official rank #3 bowler) vs <b>Player ID 20172</b> (Nepal, 0 balls in dataset). Official submission strictly maps to Player ID 4722.<br/>
-    • <b>Dual-Format Scope Alignment:</b> Dinesh Karthik and Jamie Overton are confirmed as Dual-Format competitors based on active career registrations.<br/>
+    • <b>Dual-Format Scope Alignment:</b> Dinesh Karthik and Jamie Overton are classed as Dual-Format because the supplied ball-by-ball data contains their deliveries in both the IPL and senior men's T20Is.<br/>
     • <b>Mapping Verification Standard:</b> The verification script verifies names and IDs against <code>competition_team_player_mapping.csv</code> only (100% ID and spelling concordance).
     """
     verif_t = Table([[Paragraph(verif_box, callout_style)]], colWidths=[letter[0] - 108])
@@ -1363,7 +1363,7 @@ python scripts/verify_submission.py"""
     concl_text = """
     <b>AUDIT CONCLUSION & RELEASE SIGN-OFF:</b><br/>
     • All 17 manifest deliverables match their registered SHA-256 hashes under LF line-ending normalization.<br/>
-    • Automated testing suite passes with <b>236 passed, 0 failures, 0 errors</b> across the entire pipeline.<br/>
+    • Automated testing suite passes with <b>173 passed, 80 skipped, 0 failed (clean clone)</b> across the entire pipeline.<br/>
     • Complete codebase, reports, and reproduction pipelines are accessible at: <code>https://github.com/CodePraneesh/SuperRR</code>
     """
     story.append(Paragraph(concl_text, meta_style))

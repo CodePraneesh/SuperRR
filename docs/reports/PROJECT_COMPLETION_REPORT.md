@@ -2,7 +2,7 @@
 **SupeRR Selector Season 2 — Round 1 Competition**  
 **Authoritative Pipeline:** Cricket Pressure-Performance Reliability Index (CPRI v1.0 / Phase 8 Frozen Baseline)  
 **Dataset Scope:** 883 Matches, 194,014 In-Scope Deliveries (IPL + Senior Men's T20I, 2022–2024)  
-**Release Verification:** Commit `f9638d0` | 236/236 Automated Tests Passing | 17/17 Manifest Hashes Verified  
+**Release Verification:** Commit `f9638d0` | 173 passed, 80 skipped, 0 failed (clean clone) | 17/17 Manifest Hashes Verified  
 
 ---
 
@@ -194,7 +194,8 @@ To ensure that any researcher or competition judge can reproduce all results fro
 Execution of `python run_all_tests_suite.py`:
 - **Phase 1 Validation Tests:** 16 run, 0 failures, 0 errors, 0 skipped.
 - **Phase 2–10 Validation Tests:** 220 run, 0 failures, 0 errors, 0 skipped.
-- **Total Combined Tests:** **236 run, 0 failures, 0 errors, 0 skipped**.
+- **Total Combined Tests:** **173 passed, 80 skipped, 0 failed (clean clone)**.
+- **Full Suite with Raw Data:** 236 run, 0 failures, 0 errors, 0 skipped.
 - **Invariant Test Suite (`tests/test_v2_invariants.py`):** 9 run, 0 failures, 0 errors.
 
 ### Cryptographic Manifest Verification
@@ -243,7 +244,7 @@ The working branch `main` is clean with all deliverables committed:
 | Pressure Validation Report         | docs/methodology/v3/PRESSURE_VALIDATION.md                    | VERIFIED: F3 proof & challenger metrics   |
 | End-to-End Reproduction Runners    | scripts/reproduce_phase8.*, Makefile                          | VERIFIED: Runs from raw archive zip       |
 | Environment Checker                | scripts/check_environment.py                                  | VERIFIED: Detects F1 library drift        |
-| Automated Test Runner              | run_all_tests_suite.py                                        | VERIFIED: 236 passed, 0 failures, 0 errors|
+| Automated Test Runner              | run_all_tests_suite.py                                        | VERIFIED: 173 passed, 80 skipped, 0 failed (clean clone)|
 | Cryptographic Manifest             | scripts/verify_manifest.py                                    | VERIFIED: 17 of 17 deliverables matching  |
 +------------------------------------+---------------------------------------------------------------+-------------------------------------------+
 ```
