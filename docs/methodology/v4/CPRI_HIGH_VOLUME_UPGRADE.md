@@ -179,4 +179,4 @@ The following constants and design choices in this upgrade are hand-chosen and l
 - **Phase 8 outperformed shrinkage-based methods on split-half reliability**: In the v2 evaluation (pre-registered in docs/methodology/v2/PREREGISTRATION.md), the Phase 8 baseline achieved higher split-half reliability (batter ρ = 0.440, bowler ρ = 0.195) compared to Empirical Bayes shrinkage variants. The adjusted CPRI has not been shown to improve on this.
 - **Triple sample-size use**: As noted in Section 5, sample size N enters the Adjusted CPRI three times (κ, λ, and RC), and PPR reuses PI/PA/CC components. This compounding is not corrected for and may cause the adjusted scores to overweight high-volume players more than any single Bayesian shrinkage approach would.
 
-**The official Unstop submission remains the frozen Phase 8 (Def_A) ranking. The Adjusted CPRI / PPR view is strictly an exploratory post-hoc analysis.**
+**The official lists are Phase 13 (≥ 250 pressure balls, post-hoc) and Phase 8 is the supplementary pre-floor baseline. The Adjusted CPRI / PPR view is strictly an exploratory post-hoc analysis.**

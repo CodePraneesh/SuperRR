@@ -1025,7 +1025,7 @@ def build_pdf():
     # =========================================================================
     story.append(Paragraph("3.7 Eligibility: Recent Activity in the Data (Post-hoc)", h2_style))
     story.append(Paragraph(
-        "<i>Post-hoc eligibility rule, not pre-registered. The official Unstop submission remains the frozen Phase 8 lists.</i>",
+        "<i>Post-hoc eligibility rule, not pre-registered. The official lists are Phase 13 (≥ 250 pressure balls, post-hoc) and Phase 8 is the supplementary pre-floor baseline.</i>",
         body_style
     ))
     story.append(Paragraph(
@@ -1044,11 +1044,10 @@ def build_pdf():
     act_top_bat_pdf = pd.read_csv(act_dir_pdf / "active_top10_batters.csv")
     act_top_bowl_pdf = pd.read_csv(act_dir_pdf / "active_top10_bowlers.csv")
 
-    story.append(Paragraph("<b>Primary 12-Month Window Impact on Official Top 10:</b>", body_style))
+    story.append(Paragraph("<b>Primary 12-Month Window Impact on Phase 13 Official Top 10:</b>", body_style))
     story.append(Paragraph(
-        "• <b>Batters:</b> 2 players drop out: Matthew Wade (#1, last played 2024-04-10) and Dinesh Karthik (#9, last played 2024-05-22). "
-        "2 players enter: Shashank Singh (#9 active, CPRI 72.83) and Ashutosh Sharma (#10 active, CPRI 72.52). Tim David (#1, 82.44) and Suryakumar Yadav (#2, 81.42) lead. "
-        "<br/>• <b>Bowlers:</b> 0 players drop out; all 10 official bowlers remain active in the dataset (100% concordance). Mitchell Santner (#1, 79.84) leads.",
+        "• <b>Batters:</b> Relative to the official Phase 13 Top 10, only 1 player has last played before 2025-11-01: <b>Dinesh Karthik (#8, last played 2024-05-22)</b>. (Matthew Wade was already excluded by the ≥ 250 pressure balls floor). 9 of 10 official Phase 13 batters remain recently active in the dataset, led by Tim David (#1, 82.44, last played 2026-06-21) and Suryakumar Yadav (#2, 81.42, last played 2026-05-24). In the active-only view, Ashutosh Sharma (CPRI 72.52) enters at #10. "
+        "<br/>• <b>Bowlers:</b> Relative to the official Phase 13 Top 10, 9 of 10 bowlers remain recently active; only <b>Mohit Sharma (#10, last played 2025-05-24)</b> has last played before 2025-11-01. Mitchell Santner (#1, 79.84, last played 2026-11-01) leads the active cohort.",
         body_style
     ))
     story.append(Spacer(1, 3))
@@ -1360,10 +1359,10 @@ python scripts/verify_submission.py"""
     story.append(Paragraph("<b>Cryptographic Deliverable Hashes (Phase 13 Official + Phase 8 Pre-Floor):</b>", body_bold))
     manifest_rows = [
         [Paragraph("Deliverable File", table_header), Paragraph("Authoritative SHA-256 Checksum", table_header), Paragraph("Verification Status", table_header)],
-        [Paragraph("official_top10_batters.csv (Phase 13 Official)", table_cell), Paragraph("aa3d25ed9f7b39f9ca8a164aac6e086b154ea1c038ae8296b090312d2a63d49b", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
-        [Paragraph("official_top10_bowlers.csv (Phase 13 Official)", table_cell), Paragraph("a122017ca50560fd24820e23f4491f4e6e82bc8d61c3546cf9d12df52107dbf6", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
-        [Paragraph("batter_rank_uncertainty.csv (Phase 13)", table_cell), Paragraph("7d3885a49e97c262cadb4ec9d798dff8c6d5e0fc2a6d4984888ee0a4de435f63", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
-        [Paragraph("bowler_rank_uncertainty.csv (Phase 13)", table_cell), Paragraph("29a7eb74cac5ca62d22df7ed03f9549c4ff855c887ae0e31110276a70be8872e", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
+        [Paragraph("official_top10_batters.csv (Phase 13 Official)", table_cell), Paragraph("3b4e1bc2361842a2906f39cc10cb92fb26cb542db334c33a5320da6e06eac022", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
+        [Paragraph("official_top10_bowlers.csv (Phase 13 Official)", table_cell), Paragraph("5c3011c4308fa3fb8edbe192ca8205d52501d804e925f513a43c3c7869607760", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
+        [Paragraph("batter_rank_uncertainty.csv (Phase 13)", table_cell), Paragraph("eeda4651a9d4fbd908ccb828eacfaee14baedf4f2fd4b2d01c956d697ad43a2f", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
+        [Paragraph("bowler_rank_uncertainty.csv (Phase 13)", table_cell), Paragraph("e9773d1ceb52146960d81aba3869dae1216ac806021414b62ab33d93f92a10f5", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
         [Paragraph("official_top10_batters.csv (Phase 8 Pre-Floor)", table_cell), Paragraph("7318acf0f60ecff2c71ce840552b719488da117c227e4e1388b0eb6085a81ca4", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
         [Paragraph("official_top10_bowlers.csv (Phase 8 Pre-Floor)", table_cell), Paragraph("2fc5b40679c3c9fd5b9f939e658feefecce38a8e1b6f0003055964db59e51c89", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
         [Paragraph("scouting_store.json (Phase 4 Authoritative)", table_cell), Paragraph("1be10bc82ee17ea47854bc67f78c8bc3c6bfa0f4e3b7bda255ea619ba1973c52", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],

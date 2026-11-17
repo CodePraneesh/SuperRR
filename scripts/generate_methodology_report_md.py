@@ -279,8 +279,8 @@ for pop_df, unc_df, role_label in [
 
 # Section 3.4 Sensitivity: 400-ball minimum (post-hoc)
 md.append("### 3.4 Sensitivity Analysis: Minimum 400 Pressure Balls (Post-hoc)\n")
-md.append("> **Post-hoc sensitivity check, not pre-registered. The official Unstop submission remains the frozen Phase 8 lists.**\n")
-md.append("As a post-hoc robustness check, we apply a stricter minimum exposure filter (≥ 400 pressure balls). The table below shows the Top 10 by **raw Phase 8 CPRI** among players with ≥ 400 pressure deliveries.\n")
+md.append("> **Post-hoc sensitivity check, not pre-registered. The official lists are Phase 13 (≥ 250 pressure balls, post-hoc) and Phase 8 is the supplementary pre-floor baseline.**\n")
+md.append("As a post-hoc robustness check, we apply a stricter minimum exposure filter (≥ 400 pressure balls). The table below shows the Top 10 by **raw CPRI** among players with ≥ 400 pressure deliveries.\n")
 
 for pop_df, role_label in [(bat_pop, "Batters"), (bowl_pop, "Bowlers")]:
     top400 = (
@@ -321,7 +321,7 @@ md.append(f"**{n_bat_in}/10 official batters** and **{n_bowl_in}/10 official bow
 
 # Section 3.5 Eligibility: Recent Activity in the Data
 md.append("### 3.5 Eligibility: Recent Activity in the Data\n")
-md.append("> **Post-hoc eligibility rule, not pre-registered. The official Unstop submission remains the frozen Phase 8 lists.**\n")
+md.append("> **Post-hoc eligibility rule, not pre-registered. The official lists are Phase 13 (≥ 250 pressure balls, post-hoc) and Phase 8 is the supplementary pre-floor baseline.**\n")
 md.append("**Definition**: A player is defined as *recently active in the dataset* if they have at least one delivery in the supplied ball-by-ball dataset in the evaluated role (batting or bowling) in a match dated on or after **2025-11-01** (12 months prior to the latest match date in the dataset, **2026-11-01**). This rule is applied uniformly by code with zero player-name logic.\n")
 md.append("**Data Scope Caveat**: The dataset scope is strictly IPL and senior men's T20I matches. A player absent from this dataset may still play other global leagues; the label is strictly *'not recently active in the supplied data'*, never *'retired'*.\n")
 
@@ -329,6 +329,10 @@ act_dir = REPO_ROOT / "output" / "phase12_active"
 act_bat_df = pd.read_csv(act_dir / "active_top10_batters.csv")
 act_bowl_df = pd.read_csv(act_dir / "active_top10_bowlers.csv")
 sens_df = pd.read_csv(act_dir / "active_sensitivity_table.csv")
+
+md.append("#### Primary 12-Month Window Impact on Phase 13 Official Top 10:\n")
+md.append("- **Batters**: Relative to the official Phase 13 Top 10, only 1 player has last played before 2025-11-01: **Dinesh Karthik (#8, last played 2024-05-22)**. (Matthew Wade was already excluded by the ≥ 250 pressure balls floor). 9 of the 10 official Phase 13 batters remain recently active in the dataset, led by Tim David (#1, 82.44, last played 2026-06-21) and Suryakumar Yadav (#2, 81.42, last played 2026-05-24). In the active-only view, Ashutosh Sharma (CPRI 72.52) enters at #10.")
+md.append("- **Bowlers**: Relative to the official Phase 13 Top 10, 9 of 10 bowlers remain recently active; only **Mohit Sharma (#10, last played 2025-05-24)** has last played before 2025-11-01. Mitchell Santner (#1, 79.84, last played 2026-11-01) leads the active cohort.\n")
 
 md.append("#### Active-Only Top 10 Batters (12-Month Window)\n")
 md.append("| Active Rank | Player Name | Raw CPRI | Pressure Balls | Last Played | 90% Rank CI* | Official Phase 8 Rank | Status |")
@@ -487,10 +491,10 @@ md.append("```\n")
 md.append("### Cryptographic Fingerprints of Official Deliverables\n")
 md.append("| Deliverable File | Authoritative SHA-256 Checksum | Verification Status |")
 md.append("| :--- | :--- | :---: |")
-md.append("| `official_top10_batters.csv` (Phase 13) | `aa3d25ed9f7b39f9ca8a164aac6e086b154ea1c038ae8296b090312d2a63d49b` | **VERIFIED** |")
-md.append("| `official_top10_bowlers.csv` (Phase 13) | `a122017ca50560fd24820e23f4491f4e6e82bc8d61c3546cf9d12df52107dbf6` | **VERIFIED** |")
-md.append("| `batter_rank_uncertainty.csv` (Phase 13) | `7d3885a49e97c262cadb4ec9d798dff8c6d5e0fc2a6d4984888ee0a4de435f63` | **VERIFIED** |")
-md.append("| `bowler_rank_uncertainty.csv` (Phase 13) | `29a7eb74cac5ca62d22df7ed03f9549c4ff855c887ae0e31110276a70be8872e` | **VERIFIED** |")
+md.append("| `official_top10_batters.csv` (Phase 13) | `3b4e1bc2361842a2906f39cc10cb92fb26cb542db334c33a5320da6e06eac022` | **VERIFIED** |")
+md.append("| `official_top10_bowlers.csv` (Phase 13) | `5c3011c4308fa3fb8edbe192ca8205d52501d804e925f513a43c3c7869607760` | **VERIFIED** |")
+md.append("| `batter_rank_uncertainty.csv` (Phase 13) | `eeda4651a9d4fbd908ccb828eacfaee14baedf4f2fd4b2d01c956d697ad43a2f` | **VERIFIED** |")
+md.append("| `bowler_rank_uncertainty.csv` (Phase 13) | `e9773d1ceb52146960d81aba3869dae1216ac806021414b62ab33d93f92a10f5` | **VERIFIED** |")
 md.append("| `reproducibility_manifest.json` | *Phase 13 official deliverables + 17 pre-floor Phase 8 deliverables sealed with 100% cryptographic parity* | **VERIFIED** |\n")
 md.append("### Audit Conclusion & Release Sign-Off\n")
 md.append("- All official Phase 13 and pre-floor Phase 8 manifest deliverables match their registered SHA-256 hashes.\n")

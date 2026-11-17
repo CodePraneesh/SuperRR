@@ -5,11 +5,11 @@
   "random_seed": 42,
   "bootstrap_iterations": 1000,
   "deliverable_hashes": {
-    "official_top10_batters.csv": "aa3d25ed9f7b39f9ca8a164aac6e086b154ea1c038ae8296b090312d2a63d49b",
-    "official_top10_bowlers.csv": "a122017ca50560fd24820e23f4491f4e6e82bc8d61c3546cf9d12df52107dbf6",
-    "batter_rank_uncertainty.csv": "7d3885a49e97c262cadb4ec9d798dff8c6d5e0fc2a6d4984888ee0a4de435f63",
-    "bowler_rank_uncertainty.csv": "29a7eb74cac5ca62d22df7ed03f9549c4ff855c887ae0e31110276a70be8872e",
-    "batter_candidate_comparison.csv": "54a0b8178bc2689b9619328ff112d300ab5b45309ff4417841e2793c01327d86",
-    "bowler_candidate_comparison.csv": "b9a44654393071888eb660422b6da33c05e7bcedfc03935a4e232a1037431211"
+    "official_top10_batters.csv": "3b4e1bc2361842a2906f39cc10cb92fb26cb542db334c33a5320da6e06eac022",
+    "official_top10_bowlers.csv": "5c3011c4308fa3fb8edbe192ca8205d52501d804e925f513a43c3c7869607760",
+    "batter_rank_uncertainty.csv": "eeda4651a9d4fbd908ccb828eacfaee14baedf4f2fd4b2d01c956d697ad43a2f",
+    "bowler_rank_uncertainty.csv": "e9773d1ceb52146960d81aba3869dae1216ac806021414b62ab33d93f92a10f5",
+    "batter_candidate_comparison.csv": "eec5608b58fa153b13faae7b159ffc36627d5479cfb83732c46d0fee8695d20e",
+    "bowler_candidate_comparison.csv": "147f76da9bea57670eaeef3a9fc2be247b837fd16f8790f2bd32db6d7920e156"
   }
 }

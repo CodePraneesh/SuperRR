@@ -22,7 +22,7 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const navItems = [
     { name: 'Overview', to: '/', icon: LayoutDashboard },
-    { name: 'Official Rankings (Phase 8)', to: '/rankings/official', icon: Trophy, badge: 'OFFICIAL' },
+    { name: 'Official Rankings', to: '/rankings/official', icon: Trophy, badge: 'OFFICIAL' },
     { name: 'Recently Active (12m)', to: '/rankings/active', icon: UserCheck, badge: 'SUPP' },
     { name: 'IPL Rankings', to: '/rankings/ipl', icon: Trophy },
     { name: 'T20I Rankings', to: '/rankings/t20i', icon: Globe },

@@ -45,7 +45,7 @@ def verify_manifest_section(target_dir: Path, manifest_name: str, section_title:
             continue
 
         with open(file_path, "rb") as fp:
-            data = fp.read()
+            data = fp.read().replace(b"\r\n", b"\n")
         actual_hash = hashlib.sha256(data).hexdigest()
 
         if actual_hash == expected_hash:

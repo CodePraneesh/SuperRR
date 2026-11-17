@@ -387,7 +387,7 @@ export const RankingsPage: React.FC = () => {
                   Evaluates in-scope IPL and Senior Men's T20Is. Applied uniformly with no player-name logic.
                 </p>
                 <p className="text-emerald-800 text-[11px] mt-1 italic">
-                  Note: A player absent from this dataset may still play other leagues; the label is strictly "not recently active in the supplied data". The official competition submission remains the Frozen Phase 8 Rankings.
+                  Note: A player absent from this dataset may still play other leagues; the label is strictly "not recently active in the supplied data". The official competition submission is Phase 13 (≥ 250 pressure balls, post-hoc), while Phase 8 is the supplementary pre-floor baseline.
                 </p>
               </div>
             </div>
