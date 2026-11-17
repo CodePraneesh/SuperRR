@@ -90,7 +90,7 @@ flowchart TD
         A["Raw Data Pack\n(194,014 official deliveries)"] --> B["Phase 1: Zero-Leakage Processing\n(Pre-ball State Features)"]
         B --> C["Phase 2: Leverage & WPA Engine\n(Par Curves & Win Prob)"]
         C --> D["Phase 3: CPRI Model Engine\n(PI, PA, CC, RC Pillars)"]
-        D --> E["Phase 8: Official Selection & CIs\n(Bootstrap Uncertainty Audits)"]
+        D --> E["Phase 8 & 13: Official Selection & CIs\n(Evidence Floor & Bootstrap Audits)"]
     end
 
     subgraph ServiceEngine["2. Backend & Intelligence Engine (FastAPI)"]
@@ -223,7 +223,7 @@ The Phase 2 pressure and win-probability engines utilize gradient-boosted trees 
 ## 6. Test Suite & Verification Metrics
 
 SupeRR Intelligence maintains an exhaustive automated test suite:
-- **Clean Clone Verification:** **173 passed, 80 skipped with reasons naming missing data files** (0 failures, 0 errors, exit code 0). All official Phase 8 rankings, supplementary Phase 12 active views, API endpoints, AI scouting verifier, and mathematical schemas run and pass immediately upon cloning without requiring external raw data packs.
+- **Clean Clone Verification:** **173 passed, 80 skipped with reasons naming missing data files** (0 failures, 0 errors, exit code 0). All official Phase 13 rankings (and supplementary Phase 8 pre-floor baseline), supplementary Phase 12 active views, API endpoints, AI scouting verifier, and mathematical schemas run and pass immediately upon cloning without requiring external raw data packs.
 - **Full Data Present (All Suites):** **236 passed, 0 failures, 0 errors, 0 skipped** across the entire pipeline (16 Phase 1 validation tests + 220 Phase 2–11 engine, API, and invariant tests; exit code 0).
 - **Match Date Coverage:** Evaluated across all 883 matches spanning **2022-01-22 to 2026-11-01** (194,014 in-scope deliveries).
 
@@ -242,7 +242,7 @@ python run_all_tests_suite.py
 
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| `GET` | `/api/v1/official/rankings` | Authoritative official Phase 8 Top 10 for both Batters and Bowlers with 90% CIs |
+| `GET` | `/api/v1/official/rankings` | Authoritative official Phase 13 Top 10 for both Batters and Bowlers with 90% CIs |
 | `GET` | `/api/v1/official/batters` | Official Top 10 Batters + contender candidates |
 | `GET` | `/api/v1/official/bowlers` | Official Top 10 Bowlers + contender candidates |
 | `GET` | `/api/v1/official/player/{name}` | Player official standing, CPRI, and rank CI |
