@@ -88,7 +88,7 @@ export const MethodologyPage: React.FC = () => {
         </div>
       </Card>
 
-      {/* Official 16-Page Submission Methodology Report & Required Report Sections */}
+      {/* Official 17-Page Submission Methodology Report & Required Report Sections */}
       <Card variant="default" className="p-6 border-pink-200 bg-pink-50/40 shadow-xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-pink-200/60">
           <div className="flex items-start gap-3.5">
@@ -98,7 +98,7 @@ export const MethodologyPage: React.FC = () => {
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="text-lg font-bold text-[#0F172A]">
-                  Official Methodology Report PDF (16 Pages)
+                  Official Methodology Report PDF (17 Pages)
                 </h2>
                 <span className="text-[10px] font-mono font-bold bg-[#EC008C] text-white px-2 py-0.5 rounded">
                   AUTHORITATIVE
@@ -151,7 +151,7 @@ export const MethodologyPage: React.FC = () => {
                 </p>
               </div>
               <div className="mt-2 pt-2 border-t border-slate-100 text-[10px] font-mono text-[#64748B]">
-                PDF Pages 1–3
+                PDF Pages 4–5
               </div>
             </div>
 
@@ -165,7 +165,7 @@ export const MethodologyPage: React.FC = () => {
                 </p>
               </div>
               <div className="mt-2 pt-2 border-t border-slate-100 text-[10px] font-mono text-[#64748B]">
-                PDF Pages 4–6
+                PDF Pages 6–7
               </div>
             </div>
 
@@ -179,7 +179,7 @@ export const MethodologyPage: React.FC = () => {
                 </p>
               </div>
               <div className="mt-2 pt-2 border-t border-slate-100 text-[10px] font-mono text-[#64748B]">
-                PDF Pages 7–9
+                PDF Pages 8–11
               </div>
             </div>
 
@@ -193,7 +193,7 @@ export const MethodologyPage: React.FC = () => {
                 </p>
               </div>
               <div className="mt-2 pt-2 border-t border-slate-100 text-[10px] font-mono text-[#64748B]">
-                PDF Pages 10–13
+                PDF Pages 12–13
               </div>
             </div>
 
@@ -203,14 +203,49 @@ export const MethodologyPage: React.FC = () => {
                 <div className="text-[10px] font-mono text-purple-700 font-bold mb-1">SECTION 5</div>
                 <h4 className="text-xs font-bold text-[#0F172A] mb-1.5">Reliability & Limitations</h4>
                 <p className="text-[11px] text-[#475569] leading-relaxed">
-                  500-iteration bootstrap rank CIs, sample cutoff sensitivity (8/10/12 matches), data windows, and model boundaries.
+                  1,000-iteration bootstrap rank CIs, sample cutoff sensitivity (8/10/12 matches), data windows, and model boundaries.
                 </p>
               </div>
               <div className="mt-2 pt-2 border-t border-slate-100 text-[10px] font-mono text-[#64748B]">
-                PDF Pages 14–16
+                PDF Pages 14–15
               </div>
             </div>
           </div>
+        </div>
+
+        {/* In-Place Interactive Document Viewer */}
+        <div className="mt-6 border border-slate-200 rounded-xl overflow-hidden bg-white shadow-xs">
+          <div className="px-4 py-3 bg-[#101F43] text-white flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <FileText className="w-4 h-4 text-[#EC008C]" />
+              <span className="font-bold text-xs uppercase tracking-wide">
+                Interactive Document Viewer (17 Pages)
+              </span>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#EC008C] text-white">
+                IN-PLACE VIEWER
+              </span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="text-[11px] text-slate-300 font-mono">
+                SupeRR Selector Season 2 · Round 1 Official Submission
+              </span>
+              <a
+                href="/docs/SupeRR_Intelligence_Methodology_Report.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open PDF in new tab"
+                className="inline-flex items-center gap-1 text-[11px] font-bold text-pink-400 hover:text-pink-300 underline"
+              >
+                <span>Open in Tab</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
+          <iframe
+            src="/docs/SupeRR_Intelligence_Methodology_Report.pdf#toolbar=1&navpanes=0"
+            title="Official Methodology Report PDF"
+            className="w-full h-[850px] border-none bg-slate-100"
+          />
         </div>
       </Card>
 
