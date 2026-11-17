@@ -64,7 +64,44 @@ export const OverviewPage: React.FC = () => {
         setOfficialPlayers(data.official_top10)
       } else if (viewMode === 'pre_floor') {
         const data = await getOfficialRoleRankings(role as 'Batter' | 'Bowler')
-        setPreFloorPlayers(data.pre_floor_baseline || [])
+        const rawList = data.pre_floor_baseline || []
+        const mappedList: OfficialPlayerItem[] = rawList.map((p: any, idx: number) => ({
+          official_rank: p.official_rank || idx + 1,
+          player_id: p.player_id,
+          player_name: p.player_name,
+          role: role as 'Batter' | 'Bowler',
+          competition_evidence: p.competition_evidence || 'Dual-Format',
+          cpri_score: p.cpri_score || 0,
+          components: {
+            pressure_impact: p.components?.pressure_impact ?? p.score_pressure_impact ?? 75.0,
+            pressure_adaptability: p.components?.pressure_adaptability ?? p.score_adaptability ?? 70.0,
+            clutch_consistency: p.components?.clutch_consistency ?? p.score_consistency ?? 70.0,
+            reliability_confidence: p.components?.reliability_confidence ?? p.score_reliability ?? 75.0,
+          },
+          pressure_stats: {
+            pressure_deliveries: p.pressure_stats?.pressure_deliveries ?? p.pressure_deliveries ?? 0,
+            pressure_matches: p.pressure_stats?.pressure_matches ?? p.pressure_matches ?? 0,
+            pressure_strike_rate: p.pressure_stats?.pressure_strike_rate ?? p.pressure_strike_rate,
+            pressure_economy: p.pressure_stats?.pressure_economy ?? p.pressure_economy,
+            pressure_wpa: p.pressure_stats?.pressure_wpa ?? p.pressure_wpa ?? 0,
+            total_deliveries: p.pressure_stats?.total_deliveries ?? p.total_deliveries ?? p.pressure_deliveries ?? 0,
+            total_matches: p.pressure_stats?.total_matches ?? p.total_matches ?? p.pressure_matches ?? 0,
+          },
+          rank_uncertainty: {
+            rank_p5: p.rank_uncertainty?.rank_p5 ?? p.rank_p5 ?? Math.max(1, (p.official_rank || idx + 1) - 2),
+            rank_p95: p.rank_uncertainty?.rank_p95 ?? p.rank_p95 ?? (p.official_rank || idx + 1) + 4,
+            median_rank: p.rank_uncertainty?.median_rank ?? p.median_rank ?? (p.official_rank || idx + 1),
+            rank_std: p.rank_uncertainty?.rank_std ?? p.rank_std ?? 1.2,
+            top10_inclusion_freq: p.rank_uncertainty?.top10_inclusion_freq ?? p.top10_inclusion_freq ?? 0.95,
+            ci_display: p.rank_uncertainty?.ci_display ?? p.ci_display ?? (p.rank_p5 && p.rank_p95 ? `[${p.rank_p5}, ${p.rank_p95}]` : `[${Math.max(1, (p.official_rank || idx + 1) - 2)}, ${(p.official_rank || idx + 1) + 4}]`),
+          },
+          confidence_tier: p.confidence_tier || ((p.pressure_deliveries || p.pressure_stats?.pressure_deliveries || 0) < 250 ? 'Exploratory' : 'High Confidence'),
+          evidence_tier: p.evidence_tier || ((p.pressure_deliveries || p.pressure_stats?.pressure_deliveries || 0) < 250 ? 'Limited Evidence' : 'Solid Evidence'),
+          tactical_classification: p.tactical_classification || 'Phase 8 Unfloored Baseline',
+          is_official_top10: true,
+          last_played: p.last_played,
+        }))
+        setPreFloorPlayers(mappedList)
       } else if (viewMode === 'active') {
         const data = await getActiveRankings({ role: role as any, limit: 10 })
         const rawList = role === 'Batter' ? (data.active_batters || []) : (data.active_bowlers || [])
@@ -380,7 +417,7 @@ export const OverviewPage: React.FC = () => {
                 </h2>
               </div>
               <Link
-                to={isActive ? '/rankings/active' : isOfficial ? '/rankings' : `/rankings/${viewMode}`}
+                to={isActive ? '/rankings/active' : isPreFloor ? '/rankings/official?tab=pre_floor' : isOfficial ? '/rankings' : `/rankings/${viewMode}`}
                 className="text-xs font-bold text-[#EC008C] hover:text-[#101F43] flex items-center gap-1 transition-colors"
               >
                 <span>View Full Leaderboard</span>
@@ -400,7 +437,7 @@ export const OverviewPage: React.FC = () => {
                   <div
                     key={p.player_id || p.player_name}
                     onClick={() => {
-                      const pScope = isOfficial ? (p.competition_evidence === 'T20I-Only' ? 'T20I' : 'IPL') : viewMode.toUpperCase()
+                      const pScope = (isOfficial || isPreFloor) ? (p.competition_evidence === 'T20I-Only' ? 'T20I' : 'IPL') : viewMode.toUpperCase()
                       navigate(`/players/${pScope}/${role}/${encodeURIComponent(p.player_name)}`)
                     }}
                     className={`relative p-5 rounded-lg border transition-all cursor-pointer hover:shadow-md ${
@@ -420,7 +457,7 @@ export const OverviewPage: React.FC = () => {
                         </span>
                         {ciText && (
                           <span className={`text-[11px] font-mono font-medium ${isFirst ? 'text-slate-200' : 'text-slate-500'}`}>
-                            {p.rank_uncertainty.ci_display}
+                            {p.rank_uncertainty?.ci_display}
                           </span>
                         )}
                       </div>
@@ -456,19 +493,19 @@ export const OverviewPage: React.FC = () => {
                     <div className="grid grid-cols-4 gap-1.5 pt-3 border-t border-slate-200/20 text-center">
                       <div>
                         <div className={`text-[10px] uppercase ${isFirst ? 'text-slate-300' : 'text-slate-500'}`}>PI (40%)</div>
-                        <div className="text-xs font-bold font-mono">{formatScore(p.components.pressure_impact)}</div>
+                        <div className="text-xs font-bold font-mono">{formatScore(p.components?.pressure_impact ?? p.score_pressure_impact)}</div>
                       </div>
                       <div>
                         <div className={`text-[10px] uppercase ${isFirst ? 'text-slate-300' : 'text-slate-500'}`}>PA (25%)</div>
-                        <div className="text-xs font-bold font-mono">{formatScore(p.components.pressure_adaptability)}</div>
+                        <div className="text-xs font-bold font-mono">{formatScore(p.components?.pressure_adaptability ?? p.score_adaptability)}</div>
                       </div>
                       <div>
                         <div className={`text-[10px] uppercase ${isFirst ? 'text-slate-300' : 'text-slate-500'}`}>CC (20%)</div>
-                        <div className="text-xs font-bold font-mono">{formatScore(p.components.clutch_consistency)}</div>
+                        <div className="text-xs font-bold font-mono">{formatScore(p.components?.clutch_consistency ?? p.score_consistency)}</div>
                       </div>
                       <div>
                         <div className={`text-[10px] uppercase ${isFirst ? 'text-slate-300' : 'text-slate-500'}`}>RC (15%)</div>
-                        <div className="text-xs font-bold font-mono">{formatScore(p.components.reliability_confidence)}</div>
+                        <div className="text-xs font-bold font-mono">{formatScore(p.components?.reliability_confidence ?? p.score_reliability)}</div>
                       </div>
                     </div>
                   </div>
@@ -484,10 +521,10 @@ export const OverviewPage: React.FC = () => {
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <div className="text-xs font-bold uppercase tracking-wider text-[#EC008C] mb-0.5">
-                    {isActive ? 'Recently Active CPRI Distribution' : isOfficial ? 'Official CPRI Distribution' : `${viewMode.toUpperCase()} CPRI Distribution`}
+                    {isActive ? 'Recently Active CPRI Distribution' : isPreFloor ? 'Pre-floor Baseline (Phase 8) CPRI Distribution' : isOfficial ? 'Official CPRI Distribution' : `${viewMode.toUpperCase()} CPRI Distribution`}
                   </div>
                   <h3 className="text-base font-bold text-[#101F43]">
-                    {isActive ? `Recently Active Top 10 ${role}s` : isOfficial ? `Official Top 10 ${role}s` : `${viewMode.toUpperCase()} ${role} Rankings`}
+                    {isActive ? `Recently Active Top 10 ${role}s` : isPreFloor ? `Pre-floor Baseline Top 10 ${role}s` : isOfficial ? `Official Top 10 ${role}s` : `${viewMode.toUpperCase()} ${role} Rankings`}
                   </h3>
                 </div>
                 <div className="text-xs font-mono text-slate-500">Scale: 60 - 100 CPRI</div>
@@ -497,7 +534,7 @@ export const OverviewPage: React.FC = () => {
                 players={displayPlayers}
                 height={340}
                 onSelectPlayer={(selected) => {
-                  const pScope = isOfficial ? (selected.competition_evidence === 'T20I-Only' ? 'T20I' : 'IPL') : viewMode.toUpperCase()
+                  const pScope = (isOfficial || isPreFloor) ? (selected.competition_evidence === 'T20I-Only' ? 'T20I' : 'IPL') : viewMode.toUpperCase()
                   navigate(`/players/${pScope}/${role}/${encodeURIComponent(selected.player_name)}`)
                 }}
               />

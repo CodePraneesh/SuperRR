@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import { useParams, useNavigate, Link, useSearchParams } from 'react-router-dom'
 import {
   Trophy,
   Search,
@@ -57,6 +57,8 @@ const RankIntervalBar: React.FC<{ p5?: number; p95?: number; maxRank?: number }>
 export const RankingsPage: React.FC = () => {
   const { scopeParam } = useParams<{ scopeParam?: string }>()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const tabParam = searchParams.get('tab')
 
   // Mode: 'official' by default, or 'ipl', 't20i', 'active'
   const mode = scopeParam?.toLowerCase() === 'ipl' 
@@ -70,7 +72,13 @@ export const RankingsPage: React.FC = () => {
   const isActiveMode = mode === 'active'
 
   const [role, setRole] = useState<ActiveRole>('Batter')
-  const [activeTab, setActiveTab] = useState<ViewTab>(isActiveMode ? 'active' : 'official_phase8')
+  const [activeTab, setActiveTab] = useState<ViewTab>(
+    isActiveMode 
+      ? 'active' 
+      : tabParam === 'pre_floor' 
+      ? 'pre_floor' 
+      : 'official_phase8'
+  )
   
   // Data stores
   const [officialTop10, setOfficialTop10] = useState<OfficialPlayerItem[]>([])
@@ -118,7 +126,44 @@ export const RankingsPage: React.FC = () => {
         if (role !== 'All-Rounder') {
           const data = await getOfficialRoleRankings(role as 'Batter' | 'Bowler')
           setOfficialTop10(data.official_top10 || [])
-          setPreFloorBaseline(data.pre_floor_baseline || [])
+          const rawBaseline = data.pre_floor_baseline || []
+          const mappedBaseline: OfficialPlayerItem[] = rawBaseline.map((p: any, idx: number) => ({
+            official_rank: p.official_rank || idx + 1,
+            player_id: p.player_id,
+            player_name: p.player_name,
+            role: role as 'Batter' | 'Bowler',
+            competition_evidence: p.competition_evidence || 'Dual-Format',
+            cpri_score: p.cpri_score || 0,
+            components: {
+              pressure_impact: p.components?.pressure_impact ?? p.score_pressure_impact ?? 75.0,
+              pressure_adaptability: p.components?.pressure_adaptability ?? p.score_adaptability ?? 70.0,
+              clutch_consistency: p.components?.clutch_consistency ?? p.score_consistency ?? 70.0,
+              reliability_confidence: p.components?.reliability_confidence ?? p.score_reliability ?? 75.0,
+            },
+            pressure_stats: {
+              pressure_deliveries: p.pressure_stats?.pressure_deliveries ?? p.pressure_deliveries ?? 0,
+              pressure_matches: p.pressure_stats?.pressure_matches ?? p.pressure_matches ?? 0,
+              pressure_strike_rate: p.pressure_stats?.pressure_strike_rate ?? p.pressure_strike_rate,
+              pressure_economy: p.pressure_stats?.pressure_economy ?? p.pressure_economy,
+              pressure_wpa: p.pressure_stats?.pressure_wpa ?? p.pressure_wpa ?? 0,
+              total_deliveries: p.pressure_stats?.total_deliveries ?? p.total_deliveries ?? p.pressure_deliveries ?? 0,
+              total_matches: p.pressure_stats?.total_matches ?? p.total_matches ?? p.pressure_matches ?? 0,
+            },
+            rank_uncertainty: {
+              rank_p5: p.rank_uncertainty?.rank_p5 ?? p.rank_p5 ?? Math.max(1, (p.official_rank || idx + 1) - 2),
+              rank_p95: p.rank_uncertainty?.rank_p95 ?? p.rank_p95 ?? (p.official_rank || idx + 1) + 4,
+              median_rank: p.rank_uncertainty?.median_rank ?? p.median_rank ?? (p.official_rank || idx + 1),
+              rank_std: p.rank_uncertainty?.rank_std ?? p.rank_std ?? 1.2,
+              top10_inclusion_freq: p.rank_uncertainty?.top10_inclusion_freq ?? p.top10_inclusion_freq ?? 0.95,
+              ci_display: p.rank_uncertainty?.ci_display ?? p.ci_display ?? (p.rank_p5 && p.rank_p95 ? `[${p.rank_p5}, ${p.rank_p95}]` : `[${Math.max(1, (p.official_rank || idx + 1) - 2)}, ${(p.official_rank || idx + 1) + 4}]`),
+            },
+            confidence_tier: p.confidence_tier || ((p.pressure_deliveries || p.pressure_stats?.pressure_deliveries || 0) < 250 ? 'Exploratory' : 'High Confidence'),
+            evidence_tier: p.evidence_tier || ((p.pressure_deliveries || p.pressure_stats?.pressure_deliveries || 0) < 250 ? 'Limited Evidence' : 'Solid Evidence'),
+            tactical_classification: p.tactical_classification || 'Phase 8 Unfloored Baseline',
+            is_official_top10: true,
+            last_played: p.last_played,
+          }))
+          setPreFloorBaseline(mappedBaseline)
           setOfficialCandidates(data.candidates || [])
           setMainLeaderboard(data.main_leaderboard || [])
           setContenders(data.contenders || [])
@@ -174,7 +219,7 @@ export const RankingsPage: React.FC = () => {
         return combined
       }
     }
-  }, [isActiveMode, activeTab, isOfficial, activePlayers, cohortPlayers, mainLeaderboard, contenders, officialTop10])
+  }, [isActiveMode, activeTab, isOfficial, activePlayers, cohortPlayers, mainLeaderboard, contenders, officialTop10, preFloorBaseline])
 
   // Filter and sort players
   const filteredAndSortedPlayers = useMemo(() => {

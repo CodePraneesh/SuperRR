@@ -127,76 +127,12 @@ def load_last_played_lookup():
     return last_played_map
 
 
-def build_store():
-    print("=" * 70)
-    print("BUILDING AUTHORITATIVE SCOUTING STORE (PHASE 8 + HIGH-VOLUME UPGRADE)")
-    print("=" * 70)
-
-    lp_map = load_last_played_lookup()
-
-    # 1. Load official rosters (Phase 13 Evidence Floor >= 250 balls by default, falling back to Phase 8)
-    p13_dir = REPO_ROOT / "output" / "phase13_evidence_floor"
-    if p13_dir.exists() and (p13_dir / "official_top10_batters.csv").exists():
-        print("  Loading Official Phase 13 Evidence Floor (>= 250 balls) rosters...")
-        bat_top10_df = pd.read_csv(p13_dir / "official_top10_batters.csv")
-        bowl_top10_df = pd.read_csv(p13_dir / "official_top10_bowlers.csv")
-        bat_unc_df = pd.read_csv(p13_dir / "batter_rank_uncertainty.csv")
-        bowl_unc_df = pd.read_csv(p13_dir / "bowler_rank_uncertainty.csv")
-        bat_comp_df = pd.read_csv(p13_dir / "batter_candidate_comparison.csv")
-        bowl_comp_df = pd.read_csv(p13_dir / "bowler_candidate_comparison.csv")
-    else:
-        print("  Loading Official Phase 8 rosters...")
-        bat_top10_df = pd.read_csv(PHASE8_DIR / "official_top10_batters.csv")
-        bowl_top10_df = pd.read_csv(PHASE8_DIR / "official_top10_bowlers.csv")
-        bat_unc_df = pd.read_csv(PHASE8_DIR / "batter_rank_uncertainty.csv")
-        bowl_unc_df = pd.read_csv(PHASE8_DIR / "bowler_rank_uncertainty.csv")
-        bat_comp_df = pd.read_csv(PHASE8_DIR / "batter_candidate_comparison.csv")
-        bowl_comp_df = pd.read_csv(PHASE8_DIR / "bowler_candidate_comparison.csv")
-    bat_pop_df = pd.read_csv(PHASE8_DIR / "batter_full_population.csv")
-    bowl_pop_df = pd.read_csv(PHASE8_DIR / "bowler_full_population.csv")
-
-    # Load Pre-Floor Phase 8 rosters for supplementary view
-    pre_floor_bat_top10_df = pd.read_csv(PHASE8_DIR / "official_top10_batters.csv")
-    pre_floor_bowl_top10_df = pd.read_csv(PHASE8_DIR / "official_top10_bowlers.csv")
-
-    contextual_splits_by_name = load_contextual_splits()
-
-    bat_unc_map = {int(r["player_id"]): r.to_dict() for _, r in bat_unc_df.iterrows()}
-    bowl_unc_map = {int(r["player_id"]): r.to_dict() for _, r in bowl_unc_df.iterrows()}
-
-    bat_comp_map = {int(r["player_id"]): r.to_dict() for _, r in bat_comp_df.iterrows()}
-    bowl_comp_map = {int(r["player_id"]): r.to_dict() for _, r in bowl_comp_df.iterrows()}
-
-    # 2. Compute delivery-level granular role metrics
-    print("\n[Step 1] Aggregating granular pressure delivery expectations...")
-    del_b_path = PHASE2_DIR / "batter_delivery_expectations.csv"
-    del_bw_path = PHASE2_DIR / "bowler_delivery_expectations.csv"
-
-    if del_b_path.exists():
-        del_b_df = pd.read_csv(del_b_path)
-        bat_del_metrics = compute_batter_role_metrics(del_b_df)
-        bat_metrics_map = {int(r["striker_id"]): r.to_dict() for _, r in bat_del_metrics.iterrows()}
-        print(f"  Processed {len(bat_del_metrics)} batters with delivery-level expectation data.")
-    else:
-        print("  Warning: batter_delivery_expectations.csv not found, using profile fallbacks.")
-        bat_metrics_map = {}
-
-    if del_bw_path.exists():
-        del_bw_df = pd.read_csv(del_bw_path)
-        bowl_del_metrics = compute_bowler_role_metrics(del_bw_df)
-        bowl_metrics_map = {int(r["bowler_id"]): r.to_dict() for _, r in bowl_del_metrics.iterrows()}
-        print(f"  Processed {len(bowl_del_metrics)} bowlers with delivery-level expectation data.")
-    else:
-        print("  Warning: bowler_delivery_expectations.csv not found, using profile fallbacks.")
-        bowl_metrics_map = {}
-
-    # 3. Build Official Top 10 Batters
-    print("\n[Step 2] Enriching Official Top 10 Batters...")
-    official_batters = []
-    for _, row in bat_top10_df.iterrows():
+def enrich_batter_roster(df, unc_map, comp_map, metrics_map, contextual_splits, lp_map, is_official=True):
+    roster = []
+    for _, row in df.iterrows():
         pid = int(row["player_id"])
-        unc = bat_unc_map.get(pid, {})
-        comp = bat_comp_map.get(pid, {})
+        unc = unc_map.get(pid, {})
+        comp = comp_map.get(pid, {})
 
         rank_p5 = int(unc.get("rank_p5", row["official_rank"]))
         rank_p95 = int(unc.get("rank_p95", row["official_rank"]))
@@ -214,7 +150,7 @@ def build_store():
         else:
             classification = "High-Leverage Anchor"
 
-        splits_entry = contextual_splits_by_name.get(row["player_name"], {})
+        splits_entry = contextual_splits.get(row["player_name"], {})
 
         batter_dict = {
             "official_rank": int(row["official_rank"]),
@@ -249,27 +185,27 @@ def build_store():
             },
             "confidence_tier": tier,
             "tactical_classification": classification,
-            "is_official_top10": True,
+            "is_official_top10": is_official,
             "last_played": lp_map.get(pid) or lp_map.get(row["player_name"]) or "2026-11-01",
             "contextual_splits": splits_entry
         }
 
-        # Enrich with PPR & Volume-Adjusted CPRI
         batter_dict = enrich_player_with_ppr_and_adjustment(
             batter_dict,
             role="Batter",
-            delivery_metrics=bat_metrics_map.get(pid),
+            delivery_metrics=metrics_map.get(pid),
             config=DEFAULT_EVIDENCE_CONFIG
         )
-        official_batters.append(batter_dict)
+        roster.append(batter_dict)
+    return roster
 
-    # 4. Build Official Top 10 Bowlers
-    print("\n[Step 3] Enriching Official Top 10 Bowlers...")
-    official_bowlers = []
-    for _, row in bowl_top10_df.iterrows():
+
+def enrich_bowler_roster(df, unc_map, comp_map, metrics_map, contextual_splits, lp_map, is_official=True):
+    roster = []
+    for _, row in df.iterrows():
         pid = int(row["player_id"])
-        unc = bowl_unc_map.get(pid, {})
-        comp = bowl_comp_map.get(pid, {})
+        unc = unc_map.get(pid, {})
+        comp = comp_map.get(pid, {})
 
         rank_p5 = int(unc.get("rank_p5", row["official_rank"]))
         rank_p95 = int(unc.get("rank_p95", row["official_rank"]))
@@ -287,7 +223,7 @@ def build_store():
         else:
             classification = "Clutch Wicket-Taker"
 
-        splits_entry = contextual_splits_by_name.get(row["player_name"], {})
+        splits_entry = contextual_splits.get(row["player_name"], {})
 
         bowler_dict = {
             "official_rank": int(row["official_rank"]),
@@ -323,7 +259,7 @@ def build_store():
             },
             "confidence_tier": tier,
             "tactical_classification": classification,
-            "is_official_top10": True,
+            "is_official_top10": is_official,
             "last_played": lp_map.get(pid) or lp_map.get(row["player_name"]) or "2026-11-01",
             "contextual_splits": splits_entry
         }
@@ -331,10 +267,129 @@ def build_store():
         bowler_dict = enrich_player_with_ppr_and_adjustment(
             bowler_dict,
             role="Bowler",
-            delivery_metrics=bowl_metrics_map.get(pid),
+            delivery_metrics=metrics_map.get(pid),
             config=DEFAULT_EVIDENCE_CONFIG
         )
-        official_bowlers.append(bowler_dict)
+        roster.append(bowler_dict)
+    return roster
+
+
+def build_store():
+    print("=" * 70)
+    print("BUILDING AUTHORITATIVE SCOUTING STORE (PHASE 8 + HIGH-VOLUME UPGRADE)")
+    print("=" * 70)
+
+    lp_map = load_last_played_lookup()
+
+    # 1. Load official rosters (Phase 13 Evidence Floor >= 250 balls by default, falling back to Phase 8)
+    p13_dir = REPO_ROOT / "output" / "phase13_evidence_floor"
+    if p13_dir.exists() and (p13_dir / "official_top10_batters.csv").exists():
+        print("  Loading Official Phase 13 Evidence Floor (>= 250 balls) rosters...")
+        bat_top10_df = pd.read_csv(p13_dir / "official_top10_batters.csv")
+        bowl_top10_df = pd.read_csv(p13_dir / "official_top10_bowlers.csv")
+        bat_unc_df = pd.read_csv(p13_dir / "batter_rank_uncertainty.csv")
+        bowl_unc_df = pd.read_csv(p13_dir / "bowler_rank_uncertainty.csv")
+        bat_comp_df = pd.read_csv(p13_dir / "batter_candidate_comparison.csv")
+        bowl_comp_df = pd.read_csv(p13_dir / "bowler_candidate_comparison.csv")
+    else:
+        print("  Loading Official Phase 8 rosters...")
+        bat_top10_df = pd.read_csv(PHASE8_DIR / "official_top10_batters.csv")
+        bowl_top10_df = pd.read_csv(PHASE8_DIR / "official_top10_bowlers.csv")
+        bat_unc_df = pd.read_csv(PHASE8_DIR / "batter_rank_uncertainty.csv")
+        bowl_unc_df = pd.read_csv(PHASE8_DIR / "bowler_rank_uncertainty.csv")
+        bat_comp_df = pd.read_csv(PHASE8_DIR / "batter_candidate_comparison.csv")
+        bowl_comp_df = pd.read_csv(PHASE8_DIR / "bowler_candidate_comparison.csv")
+    bat_pop_df = pd.read_csv(PHASE8_DIR / "batter_full_population.csv")
+    bowl_pop_df = pd.read_csv(PHASE8_DIR / "bowler_full_population.csv")
+
+    # Load Pre-Floor Phase 8 rosters and uncertainty for supplementary view
+    pre_floor_bat_top10_df = pd.read_csv(PHASE8_DIR / "official_top10_batters.csv")
+    pre_floor_bowl_top10_df = pd.read_csv(PHASE8_DIR / "official_top10_bowlers.csv")
+    p8_bat_unc_df = pd.read_csv(PHASE8_DIR / "batter_rank_uncertainty.csv")
+    p8_bowl_unc_df = pd.read_csv(PHASE8_DIR / "bowler_rank_uncertainty.csv")
+    p8_bat_comp_df = pd.read_csv(PHASE8_DIR / "batter_candidate_comparison.csv")
+    p8_bowl_comp_df = pd.read_csv(PHASE8_DIR / "bowler_candidate_comparison.csv")
+
+    p8_bat_unc_map = {int(r["player_id"]): r.to_dict() for _, r in p8_bat_unc_df.iterrows()}
+    p8_bowl_unc_map = {int(r["player_id"]): r.to_dict() for _, r in p8_bowl_unc_df.iterrows()}
+    p8_bat_comp_map = {int(r["player_id"]): r.to_dict() for _, r in p8_bat_comp_df.iterrows()}
+    p8_bowl_comp_map = {int(r["player_id"]): r.to_dict() for _, r in p8_bowl_comp_df.iterrows()}
+
+    contextual_splits_by_name = load_contextual_splits()
+
+    bat_unc_map = {int(r["player_id"]): r.to_dict() for _, r in bat_unc_df.iterrows()}
+    bowl_unc_map = {int(r["player_id"]): r.to_dict() for _, r in bowl_unc_df.iterrows()}
+
+    bat_comp_map = {int(r["player_id"]): r.to_dict() for _, r in bat_comp_df.iterrows()}
+    bowl_comp_map = {int(r["player_id"]): r.to_dict() for _, r in bowl_comp_df.iterrows()}
+
+    # 2. Compute delivery-level granular role metrics
+    print("\n[Step 1] Aggregating granular pressure delivery expectations...")
+    del_b_path = PHASE2_DIR / "batter_delivery_expectations.csv"
+    del_bw_path = PHASE2_DIR / "bowler_delivery_expectations.csv"
+
+    if del_b_path.exists():
+        del_b_df = pd.read_csv(del_b_path)
+        bat_del_metrics = compute_batter_role_metrics(del_b_df)
+        bat_metrics_map = {int(r["striker_id"]): r.to_dict() for _, r in bat_del_metrics.iterrows()}
+        print(f"  Processed {len(bat_del_metrics)} batters with delivery-level expectation data.")
+    else:
+        print("  Warning: batter_delivery_expectations.csv not found, using profile fallbacks.")
+        bat_metrics_map = {}
+
+    if del_bw_path.exists():
+        del_bw_df = pd.read_csv(del_bw_path)
+        bowl_del_metrics = compute_bowler_role_metrics(del_bw_df)
+        bowl_metrics_map = {int(r["bowler_id"]): r.to_dict() for _, r in bowl_del_metrics.iterrows()}
+        print(f"  Processed {len(bowl_del_metrics)} bowlers with delivery-level expectation data.")
+    else:
+        print("  Warning: bowler_delivery_expectations.csv not found, using profile fallbacks.")
+        bowl_metrics_map = {}
+
+    # 3. Build Official Top 10 Batters
+    print("\n[Step 2] Enriching Official Top 10 Batters...")
+    official_batters = enrich_batter_roster(
+        bat_top10_df,
+        bat_unc_map,
+        bat_comp_map,
+        bat_metrics_map,
+        contextual_splits_by_name,
+        lp_map,
+        is_official=True
+    )
+
+    # 4. Build Official Top 10 Bowlers
+    print("\n[Step 3] Enriching Official Top 10 Bowlers...")
+    official_bowlers = enrich_bowler_roster(
+        bowl_top10_df,
+        bowl_unc_map,
+        bowl_comp_map,
+        bowl_metrics_map,
+        contextual_splits_by_name,
+        lp_map,
+        is_official=True
+    )
+
+    # 4b. Build Enriched Pre-Floor Phase 8 Baseline Rosters (Supplementary)
+    print("\n[Step 3b] Enriching Pre-Floor Phase 8 Baseline Rosters...")
+    pre_floor_batters = enrich_batter_roster(
+        pre_floor_bat_top10_df,
+        p8_bat_unc_map,
+        p8_bat_comp_map,
+        bat_metrics_map,
+        contextual_splits_by_name,
+        lp_map,
+        is_official=True
+    )
+    pre_floor_bowlers = enrich_bowler_roster(
+        pre_floor_bowl_top10_df,
+        p8_bowl_unc_map,
+        p8_bowl_comp_map,
+        bowl_metrics_map,
+        contextual_splits_by_name,
+        lp_map,
+        is_official=True
+    )
 
     # 5. Build Candidate Batters (Ranks 11-25)
     candidate_batters = []
@@ -611,9 +666,14 @@ def build_store():
     compute_adjusted_rank_cis(contender_bowlers)
 
     # Combined dictionaries for fast indexing
-    combined_pool = all_batters + all_bowlers
-    by_player_name = {p["player_name"]: p for p in combined_pool}
-    by_player_id = {str(p["player_id"]): p for p in combined_pool}
+    combined_pool = all_batters + all_bowlers + pre_floor_batters + pre_floor_bowlers
+    by_player_name = {}
+    by_player_id = {}
+    for p in combined_pool:
+        if p["player_name"] not in by_player_name:
+            by_player_name[p["player_name"]] = p
+        if str(p["player_id"]) not in by_player_id:
+            by_player_id[str(p["player_id"])] = p
 
     # Evidence tier breakdown
     bat_tier_counts = pd.Series([p["evidence_tier"] for p in all_batters]).value_counts().to_dict()
@@ -628,6 +688,8 @@ def build_store():
             "floor_rule": "Uniform minimum-evidence floor >= 250 pressure balls in ranked role (post-hoc disclosure)",
             "total_official_batters": len(official_batters),
             "total_official_bowlers": len(official_bowlers),
+            "total_pre_floor_batters": len(pre_floor_batters),
+            "total_pre_floor_bowlers": len(pre_floor_bowlers),
             "total_candidate_batters": len(candidate_batters),
             "total_candidate_bowlers": len(candidate_bowlers),
             "total_main_eligible_batters": len(main_batters),
@@ -640,9 +702,9 @@ def build_store():
         # Official Top 10 arrays (Phase 13: >= 250 balls floor)
         "official_top10_batters": official_batters,
         "official_top10_bowlers": official_bowlers,
-        # Preserved Pre-Floor Phase 8 official arrays for supplementary view
-        "pre_floor_top10_batters": pre_floor_bat_top10_df.to_dict(orient="records"),
-        "pre_floor_top10_bowlers": pre_floor_bowl_top10_df.to_dict(orient="records"),
+        # Preserved Pre-Floor Phase 8 official arrays for supplementary view (enriched)
+        "pre_floor_top10_batters": pre_floor_batters,
+        "pre_floor_top10_bowlers": pre_floor_bowlers,
         "candidate_batters": candidate_batters,
         "candidate_bowlers": candidate_bowlers,
         # High-Volume Upgraded Leaderboards
