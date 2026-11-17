@@ -68,7 +68,7 @@ class ScoutingService:
         }
 
     # -------------------------------------------------------------------------
-    # Official Unified Rankings (Phase 8 Baseline)
+    # Official Unified Rankings (Phase 13: ≥250 Pressure Balls Floor)
     # -------------------------------------------------------------------------
     def get_official_rankings(self, role: Optional[str] = None) -> Dict[str, Any]:
         """
@@ -154,7 +154,7 @@ class ScoutingService:
             "role": validated_role,
             "cohort": cohort_key,
             "view_type": "contextual_league_view",
-            "disclaimer": "Contextual league view, not the official ranking. The authoritative competition ranking is the Unified Phase 8 ranking at /api/v1/official.",
+            "disclaimer": "Contextual league view, not the official ranking. The authoritative competition ranking is the Official Phase 13 ranking (≥250 pressure balls) at /api/v1/official.",
             "total_players": total,
             "official_count": official_count,
             "limit": limit,

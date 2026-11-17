@@ -33,7 +33,7 @@ import { getErrorMessage } from '../api/client'
 
 type SortField = 'rank' | 'adj_cpri' | 'raw_cpri' | 'ppr' | 'success_rate' | 'balls' | 'pi' | 'pa' | 'cc' | 'rc'
 type SortOrder = 'asc' | 'desc'
-type ViewTab = 'main' | 'contenders' | 'active' | 'all' | 'official_phase8'
+type ViewTab = 'main' | 'contenders' | 'active' | 'all' | 'official_phase8' | 'pre_floor'
 
 // Horizontal Bar representation of 90% Rank Confidence Interval
 const RankIntervalBar: React.FC<{ p5?: number; p95?: number; maxRank?: number }> = ({ p5 = 1, p95 = 50, maxRank = 75 }) => {
@@ -74,6 +74,7 @@ export const RankingsPage: React.FC = () => {
   
   // Data stores
   const [officialTop10, setOfficialTop10] = useState<OfficialPlayerItem[]>([])
+  const [preFloorBaseline, setPreFloorBaseline] = useState<OfficialPlayerItem[]>([])
   const [officialCandidates, setOfficialCandidates] = useState<OfficialPlayerItem[]>([])
   const [mainLeaderboard, setMainLeaderboard] = useState<OfficialPlayerItem[]>([])
   const [contenders, setContenders] = useState<OfficialPlayerItem[]>([])
@@ -117,6 +118,7 @@ export const RankingsPage: React.FC = () => {
         if (role !== 'All-Rounder') {
           const data = await getOfficialRoleRankings(role as 'Batter' | 'Bowler')
           setOfficialTop10(data.official_top10 || [])
+          setPreFloorBaseline(data.pre_floor_baseline || [])
           setOfficialCandidates(data.candidates || [])
           setMainLeaderboard(data.main_leaderboard || [])
           setContenders(data.contenders || [])
@@ -163,6 +165,8 @@ export const RankingsPage: React.FC = () => {
         return contenders
       case 'official_phase8':
         return officialTop10
+      case 'pre_floor':
+        return preFloorBaseline
       case 'all':
       default: {
         // Union of main and contenders
@@ -180,8 +184,8 @@ export const RankingsPage: React.FC = () => {
         const matchesName = (p.player_name || '').toLowerCase().includes(search.toLowerCase())
         if (!matchesName) return false
 
-        // Min balls filter (filters supplementary tables only; official Phase 8 table never changes)
-        if (activeTab !== 'official_phase8') {
+        // Min balls filter (filters supplementary tables only; official and pre-floor baseline tables never change)
+        if (activeTab !== 'official_phase8' && activeTab !== 'pre_floor') {
           const balls = p.pressure_stats?.pressure_deliveries || p.pressure_deliveries || p.total_pressure_balls || 0
           if (minBallsFilter > 0 && balls < minBallsFilter) return false
         }
@@ -278,9 +282,10 @@ export const RankingsPage: React.FC = () => {
             {isOfficial ? `Clutch Leaderboard • ${role}s` : `${mode.toUpperCase()} ${role} Rankings`}
           </h1>
           <p className="text-xs text-slate-500 mt-1 max-w-2xl leading-relaxed">
-            <strong className="text-[#101F43]">Official Submission:</strong> The Frozen Phase 8 Top 10 tab shows the official Unstop submission lists.
+            <strong className="text-[#101F43]">Official Submission:</strong> The Official Rankings (Phase 13 · ≥250 pressure balls) tab shows the authoritative official Unstop submission lists.
+            The "Pre-floor Baseline (Phase 8)" tab shows the unfloored supplementary baseline.
             The "Adjusted CPRI" view is an <span className="font-semibold text-amber-700">Exploratory, post-hoc</span> analysis — not the official ranking.
-            Raw Phase 8 CPRI scores are always shown alongside any adjusted scores for transparency.
+            Raw CPRI scores are always shown alongside any adjusted scores for transparency.
           </p>
         </div>
 
@@ -300,7 +305,7 @@ export const RankingsPage: React.FC = () => {
               }`}
             >
               <Crown className="w-3.5 h-3.5 text-[#EC008C]" />
-              <span>Official Unified (Phase 8)</span>
+              <span>Official Rankings (Phase 13 · ≥250 pressure balls)</span>
             </button>
             <button
               onClick={() => {
@@ -480,14 +485,14 @@ export const RankingsPage: React.FC = () => {
         </div>
       )}
 
-      {/* Section Tabs (Official Phase 8 is default, followed by Supplementary Views) */}
+      {/* Section Tabs (Official Phase 13 is default, followed by Pre-floor Baseline and Supplementary Views) */}
       {(isOfficial || isActiveMode) && (
         <div className="flex flex-wrap items-center gap-2 border-b border-[#E5E7EB] pb-3" role="tablist" aria-label="Ranking view categories">
-          {/* 1. Official Phase 8 Top 10 (Default & Official Submission) */}
+          {/* 1. Official Phase 13 Top 10 (Default & Official Submission) */}
           <button
             role="tab"
             aria-selected={activeTab === 'official_phase8'}
-            aria-label="View Frozen Phase 8 Official Top 10 rankings"
+            aria-label="View Official Rankings (Phase 13 · ≥250 pressure balls)"
             onClick={() => {
               setActiveTab('official_phase8')
               setSortField('rank')
@@ -500,11 +505,37 @@ export const RankingsPage: React.FC = () => {
             }`}
           >
             <ShieldCheck className={`w-3.5 h-3.5 ${activeTab === 'official_phase8' ? 'text-[#EC008C]' : 'text-slate-400'}`} />
-            <span>Frozen Phase 8 Top 10</span>
+            <span>Official Rankings (Phase 13 · ≥250 pressure balls)</span>
             <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-bold ${
               activeTab === 'official_phase8' ? 'bg-[#EC008C] text-white' : 'bg-pink-100 text-[#EC008C]'
             }`}>
               OFFICIAL
+            </span>
+          </button>
+
+          {/* Pre-floor Baseline (Phase 8) — supplementary */}
+          <button
+            role="tab"
+            aria-selected={activeTab === 'pre_floor'}
+            aria-label="View Pre-floor Baseline (Phase 8) — supplementary"
+            onClick={() => {
+              setActiveTab('pre_floor')
+              setSortField('rank')
+              setSortOrder('asc')
+            }}
+            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#EC008C] ${
+              activeTab === 'pre_floor'
+                ? 'bg-[#101F43] text-white shadow-xs'
+                : 'bg-white border border-[#E5E7EB] text-slate-700 hover:bg-[#F5F7FA]'
+            }`}
+          >
+            <AlertTriangle className={`w-3.5 h-3.5 ${activeTab === 'pre_floor' ? 'text-amber-400' : 'text-slate-400'}`} />
+            <span>Pre-floor Baseline (Phase 8) — supplementary</span>
+            <span className="text-[9px] bg-amber-500 text-white px-1.5 py-0.2 rounded-full font-bold">SUPP</span>
+            <span className={`px-1.5 py-0.5 rounded-full text-[10px] ${
+              activeTab === 'pre_floor' ? 'bg-[#EC008C] text-white' : 'bg-slate-100 text-slate-600'
+            }`}>
+              {preFloorBaseline.length || 10}
             </span>
           </button>
 
@@ -636,9 +667,9 @@ export const RankingsPage: React.FC = () => {
             <select
               value={minBallsFilter}
               onChange={(e) => setMinBallsFilter(Number(e.target.value))}
-              disabled={activeTab === 'official_phase8'}
+              disabled={activeTab === 'official_phase8' || activeTab === 'pre_floor'}
               aria-label="Minimum pressure balls control (filters supplementary tables only)"
-              title={activeTab === 'official_phase8' ? 'The official Phase 8 Top 10 table is frozen and never filtered. This control applies to supplementary tables only.' : 'Filter supplementary tables by minimum pressure deliveries'}
+              title={activeTab === 'official_phase8' || activeTab === 'pre_floor' ? 'The official and pre-floor baseline tables are fixed and never filtered. This control applies to supplementary tables only.' : 'Filter supplementary tables by minimum pressure deliveries'}
               className="text-xs bg-[#F5F7FA] border border-[#E5E7EB] rounded-md px-2.5 py-1.5 font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#EC008C] disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <option value={0}>All</option>
@@ -646,8 +677,8 @@ export const RankingsPage: React.FC = () => {
               <option value={250}>250</option>
               <option value={400}>400</option>
             </select>
-            {activeTab === 'official_phase8' && (
-              <span className="text-[10px] text-[#64748B] italic">(Supp only)</span>
+            {(activeTab === 'official_phase8' || activeTab === 'pre_floor') && (
+              <span className="text-[10px] text-[#64748B] italic">(Fixed table · unaffected)</span>
             )}
           </div>
 
@@ -742,7 +773,7 @@ export const RankingsPage: React.FC = () => {
                       </div>
                     </th>
                     <th className="py-3 px-3 text-center w-28">Last Played in Data</th>
-                    <th className="py-3 px-3 text-center w-28">Phase 8 Rank</th>
+                    <th className="py-3 px-3 text-center w-28">Baseline Rank</th>
                     <th className="py-3 px-3 text-center w-28">Status</th>
                     <th className="py-3 px-3 text-right w-20">Action</th>
                   </tr>
@@ -830,21 +861,37 @@ export const RankingsPage: React.FC = () => {
                   )}
                 </tbody>
               </table>
-            ) : activeTab === 'official_phase8' ? (
-              /* Authoritative Official Phase 8 Top 10 Table */
+            ) : activeTab === 'official_phase8' || activeTab === 'pre_floor' ? (
+              /* Authoritative Official Top 10 Table or Pre-floor Baseline */
               <div>
                 <div className="px-4 py-3 bg-[#101F43] text-white flex flex-wrap items-center justify-between gap-2 border-b border-[#182752]">
                   <div className="flex items-center gap-2">
-                    <Crown className="w-4 h-4 text-[#EC008C]" />
-                    <span className="font-bold text-xs uppercase tracking-wide">
-                      Authoritative Phase 8 Official Top 10 Submission
-                    </span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#EC008C] text-white">
-                      OFFICIAL SUBMISSION
-                    </span>
+                    {activeTab === 'official_phase8' ? (
+                      <>
+                        <Crown className="w-4 h-4 text-[#EC008C]" />
+                        <span className="font-bold text-xs uppercase tracking-wide">
+                          Official Rankings (Phase 13 · ≥250 pressure balls)
+                        </span>
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#EC008C] text-white">
+                          OFFICIAL SUBMISSION
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <AlertTriangle className="w-4 h-4 text-amber-400" />
+                        <span className="font-bold text-xs uppercase tracking-wide">
+                          Pre-floor Baseline (Phase 8) — supplementary
+                        </span>
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500 text-white">
+                          SUPPLEMENTARY BASELINE
+                        </span>
+                      </>
+                    )}
                   </div>
                   <span className="text-[11px] text-slate-300">
-                    Frozen Phase 8 baseline • 90% bootstrap rank confidence intervals
+                    {activeTab === 'official_phase8'
+                      ? 'CPRI v1.0.0 · Evidence Floor ≥250 • 90% bootstrap rank confidence intervals'
+                      : 'Unfloored Phase 8 baseline • 90% bootstrap rank confidence intervals'}
                   </span>
                 </div>
                 <table className="w-full text-left border-collapse text-xs" aria-label="Official Top 10 Rankings Table">
@@ -1068,7 +1115,7 @@ export const RankingsPage: React.FC = () => {
                                   {displayRank}
                                 </span>
                                 {p.official_rank && (
-                                  <span className="text-[9px] text-[#64748B] font-mono" title={`Official Phase 8 Rank #${p.official_rank}`}>
+                                  <span className="text-[9px] text-[#64748B] font-mono" title={`Official Rank #${p.official_rank}`}>
                                     (Off #{p.official_rank})
                                   </span>
                                 )}

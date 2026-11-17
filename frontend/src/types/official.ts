@@ -60,6 +60,7 @@ export interface OfficialRoleRankingsResponse {
   total_official: number
   total_candidates: number
   official_top10: OfficialPlayerItem[]
+  pre_floor_baseline?: OfficialPlayerItem[]
   candidates: OfficialPlayerItem[]
   main_leaderboard?: OfficialPlayerItem[]
   contenders?: OfficialPlayerItem[]
@@ -73,6 +74,8 @@ export interface UnifiedOfficialOverviewResponse {
   title: string
   batters: OfficialPlayerItem[]
   bowlers: OfficialPlayerItem[]
+  pre_floor_batters?: OfficialPlayerItem[]
+  pre_floor_bowlers?: OfficialPlayerItem[]
   main_leaderboard_batters?: OfficialPlayerItem[]
   main_leaderboard_bowlers?: OfficialPlayerItem[]
   contender_batters?: OfficialPlayerItem[]

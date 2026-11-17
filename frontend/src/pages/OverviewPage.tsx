@@ -27,15 +27,17 @@ import { CPRIComponentRadar } from '../components/charts/CPRIComponentRadar'
 import { formatScore } from '../utils/formatters'
 import { getErrorMessage } from '../api/client'
 
-type ViewMode = 'official' | 'active' | 'ipl' | 't20i'
+type ViewMode = 'official' | 'active' | 'ipl' | 't20i' | 'pre_floor'
 
 export const OverviewPage: React.FC = () => {
-  // Official Phase 8 rankings remain default view
+  // Official Phase 13 rankings remain default view
   const [viewMode, setViewMode] = useState<ViewMode>('official')
   const [role, setRole] = useState<Role>('Batter')
   
   // Official unified state
   const [officialPlayers, setOfficialPlayers] = useState<OfficialPlayerItem[]>([])
+  // Pre-floor baseline state (Phase 8 unfloored supplementary)
+  const [preFloorPlayers, setPreFloorPlayers] = useState<OfficialPlayerItem[]>([])
   // Active players state (last 12 months)
   const [activePlayers, setActivePlayers] = useState<OfficialPlayerItem[]>([])
   // Contextual league state
@@ -60,6 +62,9 @@ export const OverviewPage: React.FC = () => {
       if (viewMode === 'official') {
         const data = await getOfficialRoleRankings(role as 'Batter' | 'Bowler')
         setOfficialPlayers(data.official_top10)
+      } else if (viewMode === 'pre_floor') {
+        const data = await getOfficialRoleRankings(role as 'Batter' | 'Bowler')
+        setPreFloorPlayers(data.pre_floor_baseline || [])
       } else if (viewMode === 'active') {
         const data = await getActiveRankings({ role: role as any, limit: 10 })
         const rawList = role === 'Batter' ? (data.active_batters || []) : (data.active_bowlers || [])
@@ -114,8 +119,15 @@ export const OverviewPage: React.FC = () => {
   }, [viewMode, role])
 
   const isOfficial = viewMode === 'official'
+  const isPreFloor = viewMode === 'pre_floor'
   const isActive = viewMode === 'active'
-  const displayPlayers: any[] = isOfficial ? officialPlayers : isActive ? activePlayers : cohortPlayers
+  const displayPlayers: any[] = isOfficial
+    ? officialPlayers
+    : isPreFloor
+    ? preFloorPlayers
+    : isActive
+    ? activePlayers
+    : cohortPlayers
   const champion = displayPlayers[0]
   const topThree = displayPlayers.slice(0, 3)
 
@@ -155,7 +167,19 @@ export const OverviewPage: React.FC = () => {
                   }`}
                 >
                   <Crown className="w-3.5 h-3.5 text-[#EC008C]" />
-                  <span>Official Unified (Phase 8 Baseline)</span>
+                  <span>Official Rankings (Phase 13 · ≥250 pressure balls)</span>
+                </button>
+                <button
+                  onClick={() => setViewMode('pre_floor')}
+                  className={`px-3 py-1.5 rounded transition-colors flex items-center gap-1.5 ${
+                    viewMode === 'pre_floor'
+                      ? 'bg-[#101F43] text-white shadow-xs'
+                      : 'text-slate-600 hover:text-[#101F43]'
+                  }`}
+                >
+                  <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
+                  <span>Pre-floor Baseline (Phase 8) — supplementary</span>
+                  <span className="text-[9px] bg-amber-500 text-white px-1.5 py-0.2 rounded-full font-bold">SUPP</span>
                 </button>
                 <button
                   onClick={() => setViewMode('active')}
@@ -222,7 +246,7 @@ export const OverviewPage: React.FC = () => {
             {/* Methodology status tag */}
             <div className="ml-auto hidden md:flex items-center gap-1.5 text-xs text-slate-500 font-mono">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              <span>CPRI Phase 8 Frozen Baseline</span>
+              <span>CPRI v1.0.0 · Evidence Floor ≥250</span>
             </div>
           </div>
         </div>
@@ -244,8 +268,24 @@ export const OverviewPage: React.FC = () => {
         </div>
       )}
 
+      {/* Supplementary Pre-Floor Phase 8 Baseline Banner */}
+      {isPreFloor && (
+        <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div className="flex items-start gap-3">
+            <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+            <div className="text-xs text-amber-950 leading-relaxed">
+              <strong className="font-bold text-amber-900">Pre-floor Baseline (Phase 8) — supplementary: </strong>
+              Shows the unconstrained Phase 8 baseline rankings prior to the post-hoc ≥ 250 pressure balls floor. Small-sample rate leaders (e.g. Matthew Wade at 191 balls) exhibited wider bootstrap rank uncertainty intervals [1, 22]. The official competition submission is <strong>Phase 13 (≥ 250 pressure balls)</strong>.
+            </div>
+          </div>
+          <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 border border-amber-300 shrink-0">
+            Supplementary Baseline
+          </span>
+        </div>
+      )}
+
       {/* Contextual Disclaimer Banner when viewing league-only */}
-      {!isOfficial && !isActive && (
+      {!isOfficial && !isActive && !isPreFloor && (
         <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg shadow-xs flex items-start gap-3">
           <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
           <div className="text-xs text-amber-900 leading-relaxed">
@@ -256,7 +296,7 @@ export const OverviewPage: React.FC = () => {
               onClick={() => setViewMode('official')}
               className="font-bold underline text-[#101F43] hover:text-[#EC008C]"
             >
-              Unified Phase 8 Ranking
+              Official Rankings (Phase 13 · ≥250 pressure balls)
             </button>.
           </div>
         </div>
@@ -324,7 +364,9 @@ export const OverviewPage: React.FC = () => {
                   {isActive 
                     ? 'Supplementary Active View (Last 12 Months)' 
                     : isOfficial 
-                    ? 'Official Competition Podium (Phase 8 Baseline)' 
+                    ? 'Official Competition Podium (Phase 13 · ≥250 pressure balls)'
+                    : isPreFloor
+                    ? 'Pre-floor Baseline (Phase 8) — supplementary'
                     : `${viewMode.toUpperCase()} Contextual Leaders`}
                 </div>
                 <h2 className="text-lg font-bold text-[#101F43]">
@@ -332,6 +374,8 @@ export const OverviewPage: React.FC = () => {
                     ? `Recently Active Top 3 ${role}s` 
                     : isOfficial 
                     ? `Official Top 3 ${role}s` 
+                    : isPreFloor
+                    ? `Pre-floor Baseline Top 3 ${role}s`
                     : `${viewMode.toUpperCase()} ${role} Leaders`}
                 </h2>
               </div>

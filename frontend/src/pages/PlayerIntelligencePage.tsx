@@ -131,14 +131,14 @@ export const PlayerIntelligencePage: React.FC = () => {
 
   return (
     <div className="space-y-8">
-      {/* Official Phase 8 Competition Standing Banner */}
+      {/* Official Phase 13 Competition Standing Banner */}
       {officialData ? (
         <div className="bg-[#101F43] border border-[#EC008C]/40 rounded-2xl p-5 shadow-lg text-white">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-1.5">
                 <span className="text-[10px] font-mono uppercase tracking-wider bg-[#EC008C] text-white px-2 py-0.5 rounded font-black">
-                  Official Phase 8 Submission
+                  Official Rankings (Phase 13 · ≥250 pressure balls)
                 </span>
                 <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold ${
                   officialData.confidence_tier === 'High Confidence'
@@ -196,7 +196,7 @@ export const PlayerIntelligencePage: React.FC = () => {
                 <div className="text-3xl font-black font-mono text-[#EC008C]">
                   {formatScore(officialData.cpri_score)}
                 </div>
-                <div className="text-[10px] font-mono text-amber-300">Phase 8 Baseline</div>
+                <div className="text-[10px] font-mono text-emerald-300">CPRI v1.0.0 · Evidence Floor ≥250</div>
               </div>
             </div>
           </div>
@@ -272,8 +272,8 @@ export const PlayerIntelligencePage: React.FC = () => {
                 <span>{formatScore(officialData?.cpri_score ?? profile.cpri_score)}</span>
               </div>
               <div className="text-[10px] font-mono text-[#64748B] mt-1 flex items-center gap-1 font-medium">
-                <ShieldCheck className="w-3.5 h-3.5 text-amber-600" />
-                CPRI v1.0.0 Frozen Baseline
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                CPRI v1.0.0 · Evidence Floor ≥250
               </div>
             </div>
 

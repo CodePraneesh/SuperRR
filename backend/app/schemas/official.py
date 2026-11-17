@@ -1,6 +1,6 @@
 """
 backend/app/schemas/official.py
-Pydantic schemas for the authoritative official Phase 8 CPRI rankings
+Pydantic schemas for the authoritative official Phase 13 CPRI rankings (and supplementary Phase 8 baseline)
 and High-Volume Pressure Performance Reliability (PPR) rankings.
 """
 from typing import Optional, List, Dict, Any
@@ -51,6 +51,7 @@ class OfficialRoleRankingsResponse(BaseModel):
     total_official: int = Field(10, description="Total official top 10 players")
     total_candidates: int = Field(..., description="Total candidates in ranking pool")
     official_top10: List[OfficialPlayerItem] = Field(..., description="Ordered list of official Top 10 players")
+    pre_floor_baseline: Optional[List[Dict[str, Any]]] = Field(default_factory=list, description="Pre-floor Baseline (Phase 8) — supplementary unfloored Top 10")
     candidates: List[OfficialPlayerItem] = Field(default_factory=list, description="Contender candidates ranked 11+")
     main_leaderboard: Optional[List[OfficialPlayerItem]] = Field(default_factory=list, description="High-volume clutch leaderboard (>= 400 balls)")
     contenders: Optional[List[OfficialPlayerItem]] = Field(default_factory=list, description="Contender / Emerging pool (150-399 balls)")
@@ -64,6 +65,8 @@ class UnifiedOfficialOverviewResponse(BaseModel):
     title: str = Field("SupeRR Intelligence — Official Competition Rankings", description="Headline overview title")
     batters: List[OfficialPlayerItem] = Field(..., description="Official Top 10 Batters")
     bowlers: List[OfficialPlayerItem] = Field(..., description="Official Top 10 Bowlers")
+    pre_floor_batters: Optional[List[Dict[str, Any]]] = Field(default_factory=list, description="Pre-floor Baseline Batters (Phase 8) — supplementary")
+    pre_floor_bowlers: Optional[List[Dict[str, Any]]] = Field(default_factory=list, description="Pre-floor Baseline Bowlers (Phase 8) — supplementary")
     main_leaderboard_batters: Optional[List[OfficialPlayerItem]] = Field(default_factory=list, description="Main Leaderboard Batters (>= 400 balls)")
     main_leaderboard_bowlers: Optional[List[OfficialPlayerItem]] = Field(default_factory=list, description="Main Leaderboard Bowlers (>= 400 balls)")
     contender_batters: Optional[List[OfficialPlayerItem]] = Field(default_factory=list, description="Contender Batters (150-399 balls)")

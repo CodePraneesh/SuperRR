@@ -1,6 +1,7 @@
 """
 backend/app/api/routes/official.py
-Authoritative official Phase 8 competition rankings, bootstrap uncertainty,
+Authoritative official Phase 13 competition rankings (≥250 pressure balls floor,
+post-hoc disclosed), supplementary Phase 8 pre-floor baseline, bootstrap uncertainty,
 and High-Volume Pressure Performance Reliability (PPR) endpoints.
 """
 from typing import Optional, List, Dict, Any
@@ -52,8 +53,9 @@ def get_official_unified_rankings(
 ):
     """
     Returns the headline official competition Top 10 batters and bowlers
-    frozen in Phase 8, alongside High-Volume Main Leaderboards (>= 400 pressure balls)
-    and Contender pools with bootstrap rank confidence intervals.
+    under Phase 13 (≥250 pressure balls floor, post-hoc disclosed), alongside
+    supplementary pre-floor Phase 8 baseline, High-Volume Main Leaderboards
+    (>= 400 pressure balls), and Contender pools with bootstrap rank confidence intervals.
     """
     return service.get_official_rankings()
 
@@ -70,8 +72,8 @@ def get_official_batters(
     service: ScoutingService = Depends(get_scouting_service)
 ):
     """
-    Returns official Top 10 batters (led by Matthew Wade at CPRI 85.36)
-    and High-Volume Main Leaderboard (led by Suryakumar Yadav and Tim David).
+    Returns official Top 10 batters under Phase 13 (led by Tim David at CPRI 82.44)
+    and High-Volume Main Leaderboard (led by Tim David and Suryakumar Yadav).
     """
     res = service.get_official_rankings(role="Batter")
     if min_balls or evidence_tier or format_evidence:
@@ -93,8 +95,8 @@ def get_official_bowlers(
     service: ScoutingService = Depends(get_scouting_service)
 ):
     """
-    Returns official Top 10 bowlers (led by Mitchell Santner at CPRI 79.84)
-    and High-Volume Main Leaderboard (led by Rashid Khan and Mitchell Santner).
+    Returns official Top 10 bowlers under Phase 13 (led by Mitchell Santner at CPRI 79.84)
+    and High-Volume Main Leaderboard (led by Mitchell Santner and Rashid Khan).
     """
     res = service.get_official_rankings(role="Bowler")
     if min_balls or evidence_tier or format_evidence:
@@ -125,7 +127,7 @@ def get_methodology_report_pdf():
     summary="Get official unified player ranking, CPRI score, PPR score, and rank uncertainty"
 )
 def get_official_player(
-    name: str = Path(..., description="Player name (e.g. 'Matthew Wade' or 'Suryakumar Yadav')"),
+    name: str = Path(..., description="Player name (e.g. 'Tim David' or 'Suryakumar Yadav')"),
     service: ScoutingService = Depends(get_scouting_service)
 ):
     """
