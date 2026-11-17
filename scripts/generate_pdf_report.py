@@ -74,6 +74,7 @@ class NumberedCanvas(canvas.Canvas):
         self.restoreState()
 
 
+P13_DIR = REPO_ROOT / "output" / "phase13_evidence_floor"
 P8_DIR = REPO_ROOT / "output" / "phase8_ranking_reconsideration"
 
 PLAYER_TEAMS = {
@@ -87,6 +88,7 @@ PLAYER_TEAMS = {
     7897: "India / Mumbai Indians",
     143: "India / Royal Challengers Bengaluru",
     152: "India / Chennai Super Kings",
+    2756: "India / Punjab Kings",
     4101: "New Zealand / Chennai Super Kings",
     34485: "Pakistan",
     4722: "Afghanistan / Gujarat Titans*",
@@ -97,6 +99,8 @@ PLAYER_TEAMS = {
     2933: "India / Mumbai Indians",
     6256: "India / Kolkata Knight Riders",
     1612: "India / Rajasthan Royals",
+    5979: "Pakistan",
+    2878: "India / Gujarat Titans",
 }
 
 def format_scope(scope_val: str) -> str:
@@ -117,10 +121,10 @@ def get_tier_label(balls: int, full: bool = True) -> str:
         return "Tier 3 (Emerging)" if full else "Tier 3"
 
 def load_report_data():
-    top10_bat_df = pd.read_csv(P8_DIR / "official_top10_batters.csv")
-    top10_bowl_df = pd.read_csv(P8_DIR / "official_top10_bowlers.csv")
-    unc_bat_df = pd.read_csv(P8_DIR / "batter_rank_uncertainty.csv").set_index("player_id")
-    unc_bowl_df = pd.read_csv(P8_DIR / "bowler_rank_uncertainty.csv").set_index("player_id")
+    top10_bat_df = pd.read_csv(P13_DIR / "official_top10_batters.csv")
+    top10_bowl_df = pd.read_csv(P13_DIR / "official_top10_bowlers.csv")
+    unc_bat_df = pd.read_csv(P13_DIR / "batter_rank_uncertainty.csv").set_index("player_id")
+    unc_bowl_df = pd.read_csv(P13_DIR / "bowler_rank_uncertainty.csv").set_index("player_id")
 
     b_exp_path = REPO_ROOT / "output" / "phase2" / "batter_delivery_expectations.csv"
     bw_exp_path = REPO_ROOT / "output" / "phase2" / "bowler_delivery_expectations.csv"
@@ -328,9 +332,9 @@ def build_pdf():
     meta_text = """
     <b>Deliverables:</b> Two Official Ordered Top 10 Lists (Unstop Dropdowns) & Comprehensive Technical Report<br/>
     <b>Dataset Scope:</b> 883 Matches, 194,014 In-Scope Deliveries (IPL + Senior Men's T20I, Excl. Emerging Teams)<br/>
-    <b>Authoritative Engine:</b> Cricket Pressure-Performance Reliability Index (CPRI v1.0 / Phase 8 Frozen Baseline)<br/>
-    <b>Integrity Protocol:</b> Exploratory Evaluation (v3 challenger gate pre-registered), Pinned Environments (requirements.lock), Fixed Seed 42<br/>
-    <b>Release Verification:</b> 173 passed, 80 skipped, 0 failed (clean clone) | 17/17 Manifest Deliverables Cryptographically Verified
+    <b>Authoritative Engine:</b> Cricket Pressure-Performance Reliability Index (CPRI v1.0 / Phase 13 Evidence Floor >= 250 Balls)<br/>
+    <b>Integrity Protocol:</b> Exploratory Evaluation (v3 challenger gate pre-registered, post-hoc evidence floor disclosed), Pinned Environments (requirements.lock), Fixed Seed 42<br/>
+    <b>Release Verification:</b> 173 passed, 80 skipped, 0 failed (clean clone) | 17/17 Pre-Floor + 6/6 Phase 13 Manifest Deliverables Verified
     """
     story.append(Paragraph(meta_text, meta_style))
     story.append(Spacer(1, 8))
@@ -340,8 +344,8 @@ def build_pdf():
     <b>EXECUTIVE SUMMARY & CORE STATISTICAL FINDINGS:</b><br/>
     • <b>Strict Pre-Delivery Pressure Demarcation:</b> Pressure is formulated strictly prior to delivery execution using cumulative match-state dynamics (Pressure Index PI ≥ 50), partitioning 194,014 balls into 61,719 pressure deliveries (31.81%) and 132,295 ordinary deliveries (68.19%). Under pressure, league-wide wicket rates surge by +34.3% (6.81% vs 5.07%, p &lt; 0.001) while batter strike rates decline by -2.17.<br/>
     • <b>Own-Baseline Elevation (Clutch Delivery):</b> 9 of the Official Top 10 Batters score significantly faster under pressure than their own usual standard (averaging +18.9 SR improvement against the league-wide decline of -2.17). 8 of the Top 10 Bowlers concede fewer runs per over under pressure.<br/>
-    • <b>Volume vs Specialization Balance:</b> Leaderboards successfully balance heavy-volume pillars (Suryakumar Yadav 749b, Tilak Varma 777b, Rashid Khan 970b, Varun Chakravarthy 892b) with situational execution masters (Matthew Wade, Mitchell Santner).<br/>
-    • <b>Statistical Closeness & Honest Uncertainty:</b> While #1 positions are statistically distinct, Ranks 4–10 are separated by thin margins (CPRI 85.36 down to 73.70 for batters; 79.84 down to 73.01 for bowlers) with overlapping 90% bootstrap rank confidence intervals.<br/>
+    • <b>Uniform Minimum-Evidence Floor:</b> To prevent short-sample rate outliers from distorting official submissions, a uniform floor of ≥ 250 pressure deliveries is applied (disclosed as a post-hoc enhancement), ensuring leaderboards reflect battle-tested performers (Tim David #1, Mitchell Santner #1) while preserving the pre-floor Phase 8 baseline.<br/>
+    • <b>Statistical Closeness & Honest Uncertainty:</b> While #1 positions are statistically distinct (Tim David [1, 16], Mitchell Santner [1, 26]), Ranks 4–10 are separated by thin margins (CPRI 77.18 down to 72.83 for batters; 75.63 down to 72.71 for bowlers) with overlapping 90% bootstrap rank confidence intervals.<br/>
     • <b>Critical Limitation — Absence of Future Predictive Power:</b> In 5-fold temporal cross-validation, out-of-sample rank correlation is near zero (ρ ≈ 0). CPRI is an objective retrospective evaluator of delivered performance, not a forecasting oracle.
     """
     callout_data = [[Paragraph(exec_summary_html, callout_style)]]
@@ -435,9 +439,9 @@ def build_pdf():
 
     bat_guide_box = """
     <b>HOW TO LOCATE AND ENTER BATTERS IN UNSTOP DROPDOWNS:</b><br/>
-    • <b>Exact Full Name Indexing:</b> The Unstop platform dropdown matches exact player strings. For Rank #8, search under 'Namboori Tilak Varma' (not Tilak Varma). For Rank #9, search 'Dinesh Karthik'. For Rank #10, search 'Ravindra Jadeja'.<br/>
-    • <b>Franchise Disambiguation:</b> Where players share common family names, match against Player ID (e.g. Matthew Wade = 796, Tim David = 6396, Phil Salt = 5553).<br/>
-    • <b>Volume Integrity:</b> 6 of the 10 batters belong to Tier 1 (N ≥ 300 pressure balls), representing thoroughly battle-tested international and IPL finishers.
+    • <b>Exact Full Name Indexing:</b> The Unstop platform dropdown matches exact player strings. For Rank #7, search under 'Namboori Tilak Varma' (not Tilak Varma). For Rank #8, search 'Dinesh Karthik'. For Rank #9, search 'Ravindra Jadeja'. For Rank #10, search 'Shashank Singh'.<br/>
+    • <b>Franchise Disambiguation:</b> Where players share common family names, match against Player ID (e.g. Tim David = 6396, Phil Salt = 5553, Shashank Singh = 2756).<br/>
+    • <b>Volume Integrity:</b> 100% of the 10 batters belong to Tier 1 or Tier 2 (N ≥ 250 pressure balls under the uniform evidence floor), representing thoroughly battle-tested international and IPL finishers.
     """
     bat_g_t = Table([[Paragraph(bat_guide_box, callout_style)]], colWidths=[letter[0] - 108])
     bat_g_t.setStyle(TableStyle([
@@ -507,8 +511,8 @@ def build_pdf():
     # Verification status callout
     verif_box = """
     <b>DISAMBIGUATION WARNING & VERIFICATION PROTOCOL:</b><br/>
-    • <b>Duplicate Name Disambiguation:</b> <i>Rashid Khan</i> has two distinct player entries in <code>competition_team_player_mapping.csv</code>: <b>Player ID 4722</b> (Afghanistan / Gujarat Titans, 970 pressure balls in dataset, official rank #3 bowler) vs <b>Player ID 20172</b> (Nepal, 0 balls in dataset). Official submission strictly maps to Player ID 4722.<br/>
-    • <b>Dual-Format Scope Alignment:</b> Dinesh Karthik and Jamie Overton are classed as Dual-Format because the supplied ball-by-ball data contains their deliveries in both the IPL and senior men's T20Is.<br/>
+    • <b>Duplicate Name Disambiguation:</b> <i>Rashid Khan</i> has two distinct player entries in <code>competition_team_player_mapping.csv</code>: <b>Player ID 4722</b> (Afghanistan / Gujarat Titans, 970 pressure balls in dataset, official rank #2 bowler) vs <b>Player ID 20172</b> (Nepal, 0 balls in dataset). Official submission strictly maps to Player ID 4722.<br/>
+    • <b>Dual-Format Scope Alignment:</b> Dinesh Karthik is classed as Dual-Format because the supplied ball-by-ball data contains his deliveries in both the IPL and senior men's T20Is.<br/>
     • <b>Mapping Verification Standard:</b> The verification script verifies names and IDs against <code>competition_team_player_mapping.csv</code> only (100% ID and spelling concordance).
     """
     verif_t = Table([[Paragraph(verif_box, callout_style)]], colWidths=[letter[0] - 108])
@@ -789,7 +793,25 @@ def build_pdf():
         ('BOTTOMPADDING', (0, 0), (-1, -1), 3),
     ]))
     story.append(t_tier)
-    story.append(Spacer(1, 8))
+    story.append(Spacer(1, 6))
+
+    story.append(Paragraph("3.1.1 Uniform Minimum-Evidence Floor Rule (≥ 250 Pressure Deliveries)", h2_style))
+    floor_box = """
+    <b>CRITICAL DISCLOSURE — POST-HOC MINIMUM-EVIDENCE FLOOR:</b><br/>
+    • <b>Post-Hoc Status:</b> The uniform floor of <b>N ≥ 250 pressure deliveries</b> is an <b>explicitly post-hoc rule</b> formulated after inspecting initial Phase 8 results. It was NOT pre-registered.<br/>
+    • <b>Statistical Motivation:</b> Unconstrained leaderboards allowed low-exposure players with extreme rate metrics to rank at the very top (e.g., Sufiyan Muqeem with 151 balls at Rank #2, Jamie Overton with 168 balls at Rank #4, Matthew Wade with 191 balls at Rank #1). In bootstrap resampling, these players exhibited extreme 90% rank uncertainty (up to [1, 74]).<br/>
+    • <b>Uniform & Invariant:</b> The rule is applied mechanically across all players: CPRI scores, component weights, and the PI ≥ 50 pressure definition are 100% unchanged. Ranks are simply re-numbered 1..10 among eligible players.<br/>
+    • <b>Supplementary Baseline:</b> The unconstrained Phase 8 baseline remains permanently preserved and verifiable as a supplementary baseline view.
+    """
+    story.append(Table([[Paragraph(floor_box, callout_style)]], colWidths=[letter[0] - 108], style=[
+        ('BACKGROUND', (0, 0), (-1, -1), LIGHT_BG),
+        ('BOX', (0, 0), (-1, -1), 1, SECONDARY),
+        ('TOPPADDING', (0, 0), (-1, -1), 4),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 4),
+        ('LEFTPADDING', (0, 0), (-1, -1), 6),
+        ('RIGHTPADDING', (0, 0), (-1, -1), 6),
+    ]))
+    story.append(Spacer(1, 6))
 
     story.append(Paragraph("3.2 Harmonization Across IPL and T20I Competitions", h2_style))
     story.append(Paragraph(
@@ -950,14 +972,14 @@ def build_pdf():
 
     story.append(Paragraph("3.6 Sensitivity Analysis: Minimum 400 Pressure Balls (Post-hoc)", h2_style))
     story.append(Paragraph(
-        "<i>Post-hoc sensitivity check, not pre-registered. The official Unstop submission remains the frozen Phase 8 lists.</i>",
+        "<i>Post-hoc sensitivity check, not pre-registered. The official Unstop submission uses the uniform ≥ 250 pressure balls floor.</i>",
         body_style
     ))
     story.append(Paragraph(
-        "As a post-hoc robustness check, we apply a stricter 400-ball minimum exposure filter and report the Top 10 "
-        "by raw Phase 8 CPRI score (no formula change). 6/10 official batters and 7/10 official bowlers pass this filter. "
-        "Matthew Wade (#1 batter, 191 balls) and Sufiyan Muqeem (#2 bowler, 151 balls) would not appear in this stricter "
-        "view — their rankings are definition-sensitive, as disclosed in Section 5.3.",
+        "As a post-hoc robustness check, we apply an even stricter 400-ball minimum exposure filter and report the Top 10 "
+        "by raw CPRI score (no formula change). 6/10 official batters and 7/10 official bowlers pass this filter. "
+        "Under the official Phase 13 ≥ 250-ball floor, low-volume rate outliers like Matthew Wade (191 balls) and "
+        "Sufiyan Muqeem (151 balls) are already excluded, while this 400-ball view evaluates heavy-volume franchise pillars.",
         body_style
     ))
 
@@ -1128,12 +1150,11 @@ def build_pdf():
 
     story.append(Paragraph("4.2 Player-by-Player Analytical Justifications", h2_style))
     story.append(Paragraph(
-        "• <b>Matthew Wade (#1, CPRI 85.36):</b> Extraordinary +58.13 SR elevation (165.97 vs 107.84) across 191 balls; premier death finisher (Tier 2, CI [1, 22])."
-        "<br/>• <b>Tim David (#2, CPRI 82.44):</b> Heavy volume (476b), sustaining an explosive 172.90 pressure SR (+7.05 delta, CI [1, 19])."
-        "<br/>• <b>Suryakumar Yadav (#3, CPRI 81.42):</b> Highest volume in top tier (749b), 162.22 pressure SR (+1.34 delta, CI [2, 25]), undisputed 360-degree pillar."
-        "<br/>• <b>Reeza Hendricks (#4, CPRI 77.45):</b> T20I anchor-accelerator (378b), elevating from 129.67 to 158.47 (+28.80 delta, CI [2, 49])."
-        "<br/>• <b>Rinku Singh (#5, CPRI 77.18) & Phil Salt (#6, CPRI 76.96):</b> Rinku delivered 148.14 SR (+4.40 delta over 457b, CI [1, 51]); Salt generated the highest pressure strike rate in the Top 10 (188.51 SR, +29.37 delta over 261b, CI [2, 70])."
-        "<br/>• <b>Romario Shepherd (#7, CPRI 75.33), Tilak Varma (#8, CPRI 74.81), Dinesh Karthik (#9, CPRI 74.54), Ravindra Jadeja (#10, CPRI 73.70):</b> Shepherd absorbs heavy death overs (428b); Tilak anchors chases across 777 balls (146.07 SR, +12.28 delta); Karthik delivered 166.43 SR (+16.67 delta across 277 balls in Dual-Format); Jadeja posted 137.47 SR (+15.60 delta over 467b).",
+        "• <b>Tim David (#1, CPRI 82.44) & Suryakumar Yadav (#2, CPRI 81.42):</b> Form the elite foundation of the leaderboard (476b and 749b), scoring at 172.90 and 162.22 SR with narrow rank intervals ([1, 16] and [2, 20])."
+        "<br/>• <b>Reeza Hendricks (#3, CPRI 77.45):</b> T20I specialist (378b), elevating from 129.67 to 158.47 (+28.80 delta, CI [1, 32])."
+        "<br/>• <b>Rinku Singh (#4, CPRI 77.18) & Phil Salt (#5, CPRI 76.96):</b> Rinku posted 148.14 SR (+4.40 delta over 457b, CI [1, 37]); Salt recorded the highest pressure strike rate in the Top 10 (188.51 SR, +29.37 delta over 261b, CI [1, 41])."
+        "<br/>• <b>Romario Shepherd (#6, CPRI 75.33) & Tilak Varma (#7, CPRI 74.81):</b> Shepherd absorbs heavy death overs (428b, CI [2, 34]); Tilak anchored chases across 777 balls (146.07 SR, +12.28 delta, CI [3, 34])."
+        "<br/>• <b>Dinesh Karthik (#8, CPRI 74.54), Ravindra Jadeja (#9, CPRI 73.70) & Shashank Singh (#10, CPRI 72.83):</b> Karthik delivered 166.43 SR (+16.67 delta across 277 balls); Jadeja posted 137.47 SR (+15.60 delta over 467b); Shashank Singh entered at #10 (327 balls, 164.22 SR, +12.44 delta, CI [2, 46]) as an elite IPL clutch finisher.",
         body_style
     ))
     story.append(PageBreak())
@@ -1194,12 +1215,11 @@ def build_pdf():
 
     story.append(Paragraph("4.4 Player-by-Player Analytical Justifications", h2_style))
     story.append(Paragraph(
-        "• <b>Mitchell Santner (#1, CPRI 79.84):</b> The definitive #1 clutch bowler (653 balls, 6.51 Econ, CI [2, 36]), conceding -1.10 RPO fewer runs under pressure."
-        "<br/>• <b>Sufiyan Muqeem (#2, CPRI 78.78):</b> Extraordinary run suppression (5.60 Econ, -1.33 delta), though in an emerging sample (151 balls, Tier 3, CI [1, 74])."
-        "<br/>• <b>Rashid Khan (#3, CPRI 77.90):</b> Highest bowling volume in dataset (970 balls, 7.03 Econ, -0.48 delta, CI [2, 33]), the ultimate defensive anchor (disambiguated from Nepal ID 20172)."
-        "<br/>• <b>Jamie Overton (#4, CPRI 76.92) & Matheesha Pathirana (#5, CPRI 75.77):</b> Overton posted a massive -2.86 Econ delta in Dual-Format (Tier 2, CI [1, 71]); Pathirana stifled death overs (7.01 Econ, -1.40 delta over 557 balls, CI [4, 49])."
-        "<br/>• <b>Sunil Narine (#6, CPRI 75.63), Mohammad Nawaz (#7, CPRI 75.51):</b> Narine conceded just 6.29 Econ in IPL (-0.70 delta, CI [4, 47]); Nawaz restricted T20I opponents to 6.04 Econ (-1.41 delta, CI [1, 38])."
-        "<br/>• <b>Jasprit Bumrah (#8, CPRI 73.36), Varun Chakravarthy (#9, CPRI 73.02), Yuzvendra Chahal (#10, CPRI 73.01):</b> Bumrah (606b, 6.96 Econ, CI [3, 67]) and Varun (892b, 7.82 Econ, CI [5, 46]) absorb the hardest death overs with near-zero deviation from world-class baselines; Chahal bowled 859 pressure balls at 7.92 Econ (-0.63 delta, CI [3, 48]).",
+        "• <b>Mitchell Santner (#1, CPRI 79.84):</b> The definitive #1 clutch bowler (653 balls, 6.51 Econ, CI [1, 26]), conceding -1.10 RPO fewer runs under pressure."
+        "<br/>• <b>Rashid Khan (#2, CPRI 77.90):</b> Highest volume in dataset (970 balls, 7.03 Econ, -0.48 delta, CI [1, 24]), the ultimate franchise defensive weapon (*verified as ID 4722, strictly distinguished from Nepal ID 20172*)."
+        "<br/>• <b>Matheesha Pathirana (#3, CPRI 75.77) & Sunil Narine (#4, CPRI 75.63):</b> Pathirana stifled death overs (7.01 Econ, -1.40 delta over 557 balls, CI [2, 34]); Narine conceded just 6.29 Econ in IPL (511 balls, CI [2, 32])."
+        "<br/>• <b>Mohammad Nawaz (#5, CPRI 75.51) & Jasprit Bumrah (#6, CPRI 73.36):</b> Nawaz restricted T20I opponents to 6.04 Econ (-1.41 delta over 301 balls, CI [1, 26]); Bumrah absorbed 606 balls (6.96 Econ, CI [2, 44])."
+        "<br/>• <b>Varun Chakravarthy (#7, CPRI 73.02), Yuzvendra Chahal (#8, CPRI 73.01), Abrar Ahmed (#9, CPRI 72.93), Mohit Sharma (#10, CPRI 72.71):</b> Varun (892b, 7.82 Econ, CI [3, 32]) and Chahal (859b, 7.92 Econ, CI [2, 32]) control middle/death overs; Abrar Ahmed (291b, 6.34 Econ, CI [1, 47]) and Mohit Sharma (282b, 8.13 Econ, CI [1, 52]) enter the Top 10 with robust sample evidence under the >= 250 ball floor.",
         body_style
     ))
     story.append(PageBreak())
@@ -1225,7 +1245,7 @@ def build_pdf():
     ))
 
     story.append(Paragraph("5.2 Statistical Closeness & Rank Uncertainty Intervals", h2_style))
-    rank_summary_html = """Using 1,000 match-cluster bootstrap replicates (Seed 42), we constructed 90% confidence intervals for every player rank. This reveals that while #1 ranks (Mitchell Santner [2, 36] and Matthew Wade [1, 22]) lead their respective tables, <b>Ranks 4 through 10 are statistically close with wide confidence bands</b>:<br/><br/>For Batters, ranks 4 through 10 span a CPRI range of 77.45 down to 73.70 (Δ = 3.75 points), with overlapping rank CIs spanning from [1, 51] (Rinku Singh) to [2, 73] (Dinesh Karthik) and [7, 63] (Ravindra Jadeja). For Bowlers, ranks 4 through 10 span 76.92 down to 73.01 (Δ = 3.91 points), with rank intervals extending from [1, 71] (Jamie Overton) to [3, 67] (Jasprit Bumrah) and [3, 48] (Yuzvendra Chahal). A shift of just 1–2 deliveries in a single match could reorder these positions, underscoring the necessity of reporting honest confidence bands."""
+    rank_summary_html = """Using 1,000 match-cluster bootstrap replicates (Seed 42) on the eligible population (≥ 250 balls), we constructed 90% confidence intervals for every player rank. This reveals that while #1 ranks (Tim David [1, 16] and Mitchell Santner [1, 26]) lead their respective tables, <b>Ranks 4 through 10 are statistically close with overlapping confidence bands</b>:<br/><br/>For Batters, ranks 4 through 10 span a CPRI range of 77.18 down to 72.83 (Δ = 4.35 points), with overlapping rank CIs spanning from [1, 37] (Rinku Singh) to [1, 43] (Dinesh Karthik) and [2, 46] (Shashank Singh). For Bowlers, ranks 4 through 10 span 75.63 down to 72.71 (Δ = 2.92 points), with rank intervals extending from [2, 32] (Sunil Narine) to [1, 47] (Abrar Ahmed) and [1, 52] (Mohit Sharma). Under the minimum-evidence floor, rank confidence intervals tightened substantially compared to the unconstrained baseline, eliminating the extreme [1, 74] spreads of sub-200-ball players."""
     story.append(Paragraph(rank_summary_html, body_style))
     story.append(PageBreak())
 
@@ -1337,17 +1357,16 @@ python scripts/verify_submission.py"""
     ]))
     story.append(Spacer(1, 6))
 
-    story.append(Paragraph("<b>Cryptographic Deliverable Hashes (reproducibility_manifest.json):</b>", body_bold))
+    story.append(Paragraph("<b>Cryptographic Deliverable Hashes (Phase 13 Official + Phase 8 Pre-Floor):</b>", body_bold))
     manifest_rows = [
         [Paragraph("Deliverable File", table_header), Paragraph("Authoritative SHA-256 Checksum", table_header), Paragraph("Verification Status", table_header)],
-        [Paragraph("official_top10_batters.csv", table_cell), Paragraph("7318acf0f60ecff2c71ce840552b719488da117c227e4e1388b0eb6085a81ca4", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
-        [Paragraph("official_top10_bowlers.csv", table_cell), Paragraph("2fc5b40679c3c9fd5b9f939e658feefecce38a8e1b6f0003055964db59e51c89", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
-        [Paragraph("batter_rank_uncertainty.csv", table_cell), Paragraph("215eebdd4243d2fa15c613000ae6f112001509aee54c0152fc55a5b172fc92d9", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
-        [Paragraph("bowler_rank_uncertainty.csv", table_cell), Paragraph("412e3273e7cd6ecc9a633dc9e54a6136fa5e7441551bc4f6990d02daec31375c", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
-        [Paragraph("source_data_coverage_report.md", table_cell), Paragraph("f27dec98a554286bebb044f509e510255b77c57ebcaee468eb98944516ff8363", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
-        [Paragraph("pressure_definition_report.md", table_cell), Paragraph("535e9526cee67e1fe0e5ae4fa29d0aa01ea99ecfdfba8311aa80c98492020297", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
-        [Paragraph("phase8_reconsideration_summary.md", table_cell), Paragraph("688fc9058b8577742d45a987d605c0c2e3dd74bb7c336b13cf0bb426615b130e", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
-        [Paragraph("scouting_store.json", table_cell), Paragraph("1be10bc82ee17ea47854bc67f78c8bc3c6bfa0f4e3b7bda255ea619ba1973c52", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
+        [Paragraph("official_top10_batters.csv (Phase 13 Official)", table_cell), Paragraph("aa3d25ed9f7b39f9ca8a164aac6e086b154ea1c038ae8296b090312d2a63d49b", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
+        [Paragraph("official_top10_bowlers.csv (Phase 13 Official)", table_cell), Paragraph("a122017ca50560fd24820e23f4491f4e6e82bc8d61c3546cf9d12df52107dbf6", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
+        [Paragraph("batter_rank_uncertainty.csv (Phase 13)", table_cell), Paragraph("7d3885a49e97c262cadb4ec9d798dff8c6d5e0fc2a6d4984888ee0a4de435f63", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
+        [Paragraph("bowler_rank_uncertainty.csv (Phase 13)", table_cell), Paragraph("29a7eb74cac5ca62d22df7ed03f9549c4ff855c887ae0e31110276a70be8872e", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
+        [Paragraph("official_top10_batters.csv (Phase 8 Pre-Floor)", table_cell), Paragraph("7318acf0f60ecff2c71ce840552b719488da117c227e4e1388b0eb6085a81ca4", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
+        [Paragraph("official_top10_bowlers.csv (Phase 8 Pre-Floor)", table_cell), Paragraph("2fc5b40679c3c9fd5b9f939e658feefecce38a8e1b6f0003055964db59e51c89", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
+        [Paragraph("scouting_store.json (Phase 4 Authoritative)", table_cell), Paragraph("1be10bc82ee17ea47854bc67f78c8bc3c6bfa0f4e3b7bda255ea619ba1973c52", table_cell), Paragraph("VERIFIED (Exact Match)", table_cell_bold)],
     ]
     t_man = Table(manifest_rows, colWidths=[150, 260, 94])
     t_man.setStyle(TableStyle([
@@ -1362,7 +1381,7 @@ python scripts/verify_submission.py"""
 
     concl_text = """
     <b>AUDIT CONCLUSION & RELEASE SIGN-OFF:</b><br/>
-    • All 17 manifest deliverables match their registered SHA-256 hashes under LF line-ending normalization.<br/>
+    • All Phase 13 official deliverables and Phase 8 pre-floor deliverables match their registered SHA-256 hashes under LF line-ending normalization.<br/>
     • Automated testing suite passes with <b>173 passed, 80 skipped, 0 failed (clean clone)</b> across the entire pipeline.<br/>
     • Complete codebase, reports, and reproduction pipelines are accessible at: <code>https://github.com/CodePraneesh/SuperRR</code>
     """

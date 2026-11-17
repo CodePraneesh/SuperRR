@@ -24,41 +24,61 @@ Traditional cricket statistics treat every delivery identically: a single off th
 
 ---
 
-## 2. Official Competition Submission (Phase 8 Frozen Baseline)
+## 2. Official Competition Submission (Phase 13: Uniform Minimum-Evidence Floor)
 
-The authoritative competition submission is frozen in **CPRI-v1.0.0-PROD-FREEZE**. Single-tournament slices serve as contextual secondary league views.
+> **CRITICAL METHODOLOGICAL DISCLOSURE (POST-HOC RULE)**:
+> The **uniform minimum-evidence floor of $N_{\text{pressure balls}} \ge 250$ in the evaluated role** is an **explicitly POST-HOC rule** formulated and implemented after inspecting the initial Phase 8 results. It was **NOT pre-registered**.
+> 
+> **Motivation**: In the unconstrained Phase 8 baseline, small-sample rate variance produced high rank instability: Sufiyan Muqeem (#2 Bowler, 151 balls) exhibited a 90% rank interval of [1, 74]; Jamie Overton (#4 Bowler, 168 balls) had [1, 71]; Matthew Wade (#1 Batter, 191 balls) had [1, 22]. Applying a uniform floor of $\ge 250$ pressure deliveries ensures the official Unstop submission represents robustly battle-tested clutch performers. All CPRI scores, component weights, and pressure definitions ($PI \ge 50$) are **100% unchanged**; ranks are simply re-numbered among eligible players.
+>
+> The full formal rule specification is documented in [`docs/methodology/v6/EVIDENCE_FLOOR_RULE.md`](docs/methodology/v6/EVIDENCE_FLOOR_RULE.md).
 
-### Official Top 10 Batters
-
-| Rank | Player | Unified CPRI | 90% Bootstrap CI | Confidence Tier | Evidence Scope | Pressure Balls |
-| :---: | :--- | :---: | :---: | :---: | :---: | :---: |
-| **1** | **Matthew Wade** | **85.36** | [1, 22] | Exploratory | Dual-Format | 191 |
-| **2** | **Tim David** | **82.44** | [1, 19] | High Confidence | Dual-Format | 476 |
-| **3** | **Suryakumar Yadav** | **81.42** | [2, 25] | High Confidence | Dual-Format | 749 |
-| **4** | **Reeza Hendricks** | **77.45** | [2, 49] | High Confidence | Dual-Format | 378 |
-| **5** | **Rinku Singh** | **77.18** | [1, 51] | High Confidence | Dual-Format | 457 |
-| **6** | **Phil Salt** | **76.96** | [2, 46] | High Confidence | Dual-Format | 261 |
-| **7** | **Romario Shepherd** | **75.33** | [2, 47] | High Confidence | Dual-Format | 428 |
-| **8** | **Namboori Tilak Varma** | **74.81** | [3, 49] | High Confidence | Dual-Format | 777 |
-| **9** | **Dinesh Karthik** | **74.54** | [3, 44] | High Confidence | Dual-Format | 277 |
-| **10** | **Ravindra Jadeja** | **73.70** | [3, 56] | High Confidence | Dual-Format | 467 |
-
-### Official Top 10 Bowlers
+### Official Top 10 Batters (Phase 13: $\ge 250$ Pressure Balls)
 
 | Rank | Player | Unified CPRI | 90% Bootstrap CI | Confidence Tier | Evidence Scope | Pressure Balls |
 | :---: | :--- | :---: | :---: | :---: | :---: | :---: |
-| **1** | **Mitchell Santner** | **79.84** | [2, 36] | High Confidence | Dual-Format | 653 |
-| **2** | **Sufiyan Muqeem** | **78.78** | [1, 74] | Exploratory | T20I-Only | 151 |
-| **3** | **Rashid Khan** | **77.90** | [2, 33] | High Confidence | Dual-Format | 970 |
-| **4** | **Jamie Overton** | **76.92** | [1, 71] | Exploratory | T20I-Only | 168 |
-| **5** | **Matheesha Pathirana** | **75.77** | [4, 49] | High Confidence | IPL-Only | 557 |
-| **6** | **Sunil Narine** | **75.63** | [3, 52] | High Confidence | Dual-Format | 511 |
-| **7** | **Mohammad Nawaz** | **75.51** | [2, 60] | High Confidence | Dual-Format | 301 |
-| **8** | **Jasprit Bumrah** | **73.36** | [3, 67] | High Confidence | Dual-Format | 606 |
-| **9** | **Varun Chakravarthy** | **73.02** | [3, 68] | High Confidence | Dual-Format | 892 |
-| **10** | **Yuzvendra Chahal** | **73.01** | [3, 48] | High Confidence | Dual-Format | 859 |
+| **1** | **Tim David** | **82.44** | [1, 16] | Heavy Volume (Tier 1) | Dual-Format | 476 |
+| **2** | **Suryakumar Yadav** | **81.42** | [2, 20] | Heavy Volume (Tier 1) | Dual-Format | 749 |
+| **3** | **Reeza Hendricks** | **77.45** | [1, 32] | Heavy Volume (Tier 1) | T20I-Only | 378 |
+| **4** | **Rinku Singh** | **77.18** | [1, 37] | Heavy Volume (Tier 1) | Dual-Format | 457 |
+| **5** | **Phil Salt** | **76.96** | [1, 41] | Moderate Volume (Tier 2) | Dual-Format | 261 |
+| **6** | **Romario Shepherd** | **75.33** | [2, 34] | Heavy Volume (Tier 1) | Dual-Format | 428 |
+| **7** | **Namboori Tilak Varma** | **74.81** | [3, 34] | Heavy Volume (Tier 1) | Dual-Format | 777 |
+| **8** | **Dinesh Karthik** | **74.54** | [1, 43] | Moderate Volume (Tier 2) | Dual-Format | 277 |
+| **9** | **Ravindra Jadeja** | **73.70** | [5, 44] | Heavy Volume (Tier 1) | Dual-Format | 467 |
+| **10** | **Shashank Singh** | **72.83** | [2, 46] | Heavy Volume (Tier 1) | IPL-Only | 327 |
 
-> **Uncertainty & Tier Classification:** Players with $\ge 300$ pressure balls and bounded CIs are categorized as **High Confidence**. Outliers with elite rate stats but $<250$ deliveries (e.g. Wade [1, 22], Muqeem [1, 74], Overton [1, 71]) are categorized as **Exploratory**. Full sensitivity details: [`docs/methodology/ADAPTABILITY_FORMULA_AND_SENSITIVITY.md`](docs/methodology/ADAPTABILITY_FORMULA_AND_SENSITIVITY.md).
+### Official Top 10 Bowlers (Phase 13: $\ge 250$ Pressure Balls)
+
+| Rank | Player | Unified CPRI | 90% Bootstrap CI | Confidence Tier | Evidence Scope | Pressure Balls |
+| :---: | :--- | :---: | :---: | :---: | :---: | :---: |
+| **1** | **Mitchell Santner** | **79.84** | [1, 26] | Heavy Volume (Tier 1) | Dual-Format | 653 |
+| **2** | **Rashid Khan** | **77.90** | [1, 24] | Heavy Volume (Tier 1) | Dual-Format | 970 |
+| **3** | **Matheesha Pathirana** | **75.77** | [2, 34] | Heavy Volume (Tier 1) | Dual-Format | 557 |
+| **4** | **Sunil Narine** | **75.63** | [2, 32] | Heavy Volume (Tier 1) | IPL-Only | 511 |
+| **5** | **Mohammad Nawaz** | **75.51** | [1, 26] | Heavy Volume (Tier 1) | T20I-Only | 301 |
+| **6** | **Jasprit Bumrah** | **73.36** | [2, 44] | Heavy Volume (Tier 1) | Dual-Format | 606 |
+| **7** | **Varun Chakravarthy** | **73.02** | [3, 32] | Heavy Volume (Tier 1) | Dual-Format | 892 |
+| **8** | **Yuzvendra Chahal** | **73.01** | [2, 32] | Heavy Volume (Tier 1) | Dual-Format | 859 |
+| **9** | **Abrar Ahmed** | **72.93** | [1, 47] | Moderate Volume (Tier 2) | T20I-Only | 291 |
+| **10** | **Mohit Sharma** | **72.71** | [1, 52] | Moderate Volume (Tier 2) | IPL-Only | 282 |
+
+### Sensitivity Across Delivery Floor Thresholds (Post-hoc)
+
+| Pressure Floor | Eligible Batters | Batters Dropped from Baseline | Batters Promoted to Top 10 | Eligible Bowlers | Bowlers Dropped from Baseline | Bowlers Promoted to Top 10 |
+| :---: | :---: | :--- | :--- | :---: | :--- | :--- |
+| **None (Phase 8 Baseline)** | 256 | None | None | 212 | None | None |
+| **≥ 150 Balls** | 116 | None | None | 114 | None | None |
+| **≥ 200 Balls** | 86 | Matthew Wade (191b, #1) | Shashank Singh (327b, #11) | 90 | Sufiyan Muqeem (151b, #2), Jamie Overton (168b, #4) | Abrar Ahmed (291b, #11), Mohit Sharma (282b, #12) |
+| **≥ 250 Balls (Official)** | **64** | **Matthew Wade (191b, #1)** | **Shashank Singh (327b, #11)** | **66** | **Sufiyan Muqeem (151b, #2), Jamie Overton (168b, #4)** | **Abrar Ahmed (291b, #11), Mohit Sharma (282b, #12)** |
+| **≥ 300 Balls** | 44 | Wade (191b), Salt (261b), Karthik (277b) | Shashank Singh (#11), Ashutosh Sharma (#12), Klaasen (#13) | 48 | Muqeem (151b), Overton (168b), Abrar (291b), Mohit (282b) | Arshdeep Singh (#13), Harshal Patel (#14) |
+| **≥ 400 Balls** | 20 | Wade, Salt, Karthik, Hendricks (378b), Shashank (327b) | Klaasen (#13), Pooran (#14), Miller (#16) | 26 | Muqeem, Overton, Nawaz (301b), Abrar, Mohit | Arshdeep (#13), Harshal (#14), Bhuvneshwar (#15) |
+
+### Supplementary Pre-Floor Baseline (Phase 8 Frozen)
+
+The unconstrained Phase 8 baseline remains permanently preserved and verifiable:
+- **Top 10 Batters (Pre-Floor)**: Matthew Wade (191b, 85.36), Tim David (476b, 82.44), Suryakumar Yadav (749b, 81.42), Reeza Hendricks (378b, 77.45), Rinku Singh (457b, 77.18), Phil Salt (261b, 76.96), Romario Shepherd (428b, 75.33), Namboori Tilak Varma (777b, 74.81), Dinesh Karthik (277b, 74.54), Ravindra Jadeja (467b, 73.70).
+- **Top 10 Bowlers (Pre-Floor)**: Mitchell Santner (653b, 79.84), Sufiyan Muqeem (151b, 78.78), Rashid Khan (970b, 77.90), Jamie Overton (168b, 76.92), Matheesha Pathirana (557b, 75.77), Sunil Narine (511b, 75.63), Mohammad Nawaz (301b, 75.51), Jasprit Bumrah (606b, 73.36), Varun Chakravarthy (892b, 73.02), Yuzvendra Chahal (859b, 73.01).
 
 ---
 

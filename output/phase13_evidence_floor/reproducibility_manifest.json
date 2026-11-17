@@ -1,0 +1,15 @@
+{
+  "pipeline_version": "Phase-13-Official-Evidence-Floor-v1.0.0",
+  "rule": "Uniform minimum-evidence floor >= 250 pressure balls in ranked role (post-hoc disclosure)",
+  "pressure_threshold": 50.0,
+  "random_seed": 42,
+  "bootstrap_iterations": 1000,
+  "deliverable_hashes": {
+    "official_top10_batters.csv": "aa3d25ed9f7b39f9ca8a164aac6e086b154ea1c038ae8296b090312d2a63d49b",
+    "official_top10_bowlers.csv": "a122017ca50560fd24820e23f4491f4e6e82bc8d61c3546cf9d12df52107dbf6",
+    "batter_rank_uncertainty.csv": "7d3885a49e97c262cadb4ec9d798dff8c6d5e0fc2a6d4984888ee0a4de435f63",
+    "bowler_rank_uncertainty.csv": "29a7eb74cac5ca62d22df7ed03f9549c4ff855c887ae0e31110276a70be8872e",
+    "batter_candidate_comparison.csv": "54a0b8178bc2689b9619328ff112d300ab5b45309ff4417841e2793c01327d86",
+    "bowler_candidate_comparison.csv": "b9a44654393071888eb660422b6da33c05e7bcedfc03935a4e232a1037431211"
+  }
+}

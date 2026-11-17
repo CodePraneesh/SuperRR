@@ -230,23 +230,29 @@ class TestPhase42ScoutingStores(unittest.TestCase):
         with open(off_store_path, "r", encoding="utf-8") as f:
             off_store = json.load(f)
 
-        p8_bat = pd.read_csv("output/phase8_ranking_reconsideration/official_top10_batters.csv")
-        p8_bowl = pd.read_csv("output/phase8_ranking_reconsideration/official_top10_bowlers.csv")
+        p13_bat = pd.read_csv("output/phase13_evidence_floor/official_top10_batters.csv")
+        p13_bowl = pd.read_csv("output/phase13_evidence_floor/official_top10_bowlers.csv")
 
         self.assertEqual(len(off_store["official_top10_batters"]), 10)
         self.assertEqual(len(off_store["official_top10_bowlers"]), 10)
 
-        for i, row in p8_bat.iterrows():
+        for i, row in p13_bat.iterrows():
             store_item = off_store["official_top10_batters"][i]
             self.assertEqual(store_item["official_rank"], int(row["official_rank"]))
             self.assertEqual(store_item["player_name"], str(row["player_name"]))
             self.assertAlmostEqual(store_item["cpri_score"], round(float(row["cpri_score"]), 2), places=2)
 
-        for i, row in p8_bowl.iterrows():
+        for i, row in p13_bowl.iterrows():
             store_item = off_store["official_top10_bowlers"][i]
             self.assertEqual(store_item["official_rank"], int(row["official_rank"]))
             self.assertEqual(store_item["player_name"], str(row["player_name"]))
             self.assertAlmostEqual(store_item["cpri_score"], round(float(row["cpri_score"]), 2), places=2)
+
+        # Also verify pre-floor baseline lists exist in store
+        if "pre_floor_top10_batters" in off_store:
+            p8_bat = pd.read_csv("output/phase8_ranking_reconsideration/official_top10_batters.csv")
+            self.assertEqual(len(off_store["pre_floor_top10_batters"]), 10)
+            self.assertEqual(off_store["pre_floor_top10_batters"][0]["player_name"], str(p8_bat.iloc[0]["player_name"]))
 
 
 if __name__ == "__main__":

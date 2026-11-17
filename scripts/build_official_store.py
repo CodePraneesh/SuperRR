@@ -114,6 +114,12 @@ def load_last_played_lookup():
         "Matthew Wade": "2024-04-10",
         143: "2024-05-22",  # Dinesh Karthik
         "Dinesh Karthik": "2024-05-22",
+        2756: "2026-05-17", # Shashank Singh
+        "Shashank Singh": "2026-05-17",
+        5979: "2026-10-11", # Abrar Ahmed
+        "Abrar Ahmed": "2026-10-11",
+        2878: "2025-05-24", # Mohit Sharma
+        "Mohit Sharma": "2025-05-24",
     }
     for k, v in fallbacks.items():
         if k not in last_played_map:
@@ -128,15 +134,30 @@ def build_store():
 
     lp_map = load_last_played_lookup()
 
-    # 1. Load official Phase 8 CSVs
-    bat_top10_df = pd.read_csv(PHASE8_DIR / "official_top10_batters.csv")
-    bowl_top10_df = pd.read_csv(PHASE8_DIR / "official_top10_bowlers.csv")
-    bat_unc_df = pd.read_csv(PHASE8_DIR / "batter_rank_uncertainty.csv")
-    bowl_unc_df = pd.read_csv(PHASE8_DIR / "bowler_rank_uncertainty.csv")
-    bat_comp_df = pd.read_csv(PHASE8_DIR / "batter_candidate_comparison.csv")
-    bowl_comp_df = pd.read_csv(PHASE8_DIR / "bowler_candidate_comparison.csv")
+    # 1. Load official rosters (Phase 13 Evidence Floor >= 250 balls by default, falling back to Phase 8)
+    p13_dir = REPO_ROOT / "output" / "phase13_evidence_floor"
+    if p13_dir.exists() and (p13_dir / "official_top10_batters.csv").exists():
+        print("  Loading Official Phase 13 Evidence Floor (>= 250 balls) rosters...")
+        bat_top10_df = pd.read_csv(p13_dir / "official_top10_batters.csv")
+        bowl_top10_df = pd.read_csv(p13_dir / "official_top10_bowlers.csv")
+        bat_unc_df = pd.read_csv(p13_dir / "batter_rank_uncertainty.csv")
+        bowl_unc_df = pd.read_csv(p13_dir / "bowler_rank_uncertainty.csv")
+        bat_comp_df = pd.read_csv(p13_dir / "batter_candidate_comparison.csv")
+        bowl_comp_df = pd.read_csv(p13_dir / "bowler_candidate_comparison.csv")
+    else:
+        print("  Loading Official Phase 8 rosters...")
+        bat_top10_df = pd.read_csv(PHASE8_DIR / "official_top10_batters.csv")
+        bowl_top10_df = pd.read_csv(PHASE8_DIR / "official_top10_bowlers.csv")
+        bat_unc_df = pd.read_csv(PHASE8_DIR / "batter_rank_uncertainty.csv")
+        bowl_unc_df = pd.read_csv(PHASE8_DIR / "bowler_rank_uncertainty.csv")
+        bat_comp_df = pd.read_csv(PHASE8_DIR / "batter_candidate_comparison.csv")
+        bowl_comp_df = pd.read_csv(PHASE8_DIR / "bowler_candidate_comparison.csv")
     bat_pop_df = pd.read_csv(PHASE8_DIR / "batter_full_population.csv")
     bowl_pop_df = pd.read_csv(PHASE8_DIR / "bowler_full_population.csv")
+
+    # Load Pre-Floor Phase 8 rosters for supplementary view
+    pre_floor_bat_top10_df = pd.read_csv(PHASE8_DIR / "official_top10_batters.csv")
+    pre_floor_bowl_top10_df = pd.read_csv(PHASE8_DIR / "official_top10_bowlers.csv")
 
     contextual_splits_by_name = load_contextual_splits()
 
@@ -602,8 +623,9 @@ def build_store():
         "version": "CPRI-v1.1.0-HIGH-VOLUME-UPGRADE",
         "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "metadata": {
-            "description": "Authoritative unified official Top 10 and High-Volume Pressure Performance Reliability rankings for SupeRR Selector Season 2.",
-            "source": "Phase 8 Official Reconsideration + Phase 12 High-Volume PPR Upgrade",
+            "description": "Authoritative unified official Top 10 rankings (with uniform >= 250 pressure balls evidence floor) for SupeRR Selector Season 2.",
+            "source": "Phase 13 Uniform Minimum-Evidence Floor (>= 250 balls) + Pre-Floor Phase 8 Baseline",
+            "floor_rule": "Uniform minimum-evidence floor >= 250 pressure balls in ranked role (post-hoc disclosure)",
             "total_official_batters": len(official_batters),
             "total_official_bowlers": len(official_bowlers),
             "total_candidate_batters": len(candidate_batters),
@@ -615,9 +637,12 @@ def build_store():
             "evidence_tier_counts_batters": bat_tier_counts,
             "evidence_tier_counts_bowlers": bowl_tier_counts,
         },
-        # Preserved exact Phase 8 official arrays for transparency
+        # Official Top 10 arrays (Phase 13: >= 250 balls floor)
         "official_top10_batters": official_batters,
         "official_top10_bowlers": official_bowlers,
+        # Preserved Pre-Floor Phase 8 official arrays for supplementary view
+        "pre_floor_top10_batters": pre_floor_bat_top10_df.to_dict(orient="records"),
+        "pre_floor_top10_bowlers": pre_floor_bowl_top10_df.to_dict(orient="records"),
         "candidate_batters": candidate_batters,
         "candidate_bowlers": candidate_bowlers,
         # High-Volume Upgraded Leaderboards

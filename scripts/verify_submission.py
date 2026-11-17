@@ -46,6 +46,7 @@ PLAYER_TEAMS = {
     7897: "India / Mumbai Indians",
     143: "India / Royal Challengers Bengaluru",
     152: "India / Chennai Super Kings",
+    2756: "India / Punjab Kings",
     4101: "New Zealand / Chennai Super Kings",
     34485: "Pakistan",
     4722: "Afghanistan / Gujarat Titans",
@@ -56,6 +57,8 @@ PLAYER_TEAMS = {
     2933: "India / Mumbai Indians",
     6256: "India / Kolkata Knight Riders",
     1612: "India / Rajasthan Royals",
+    5979: "Pakistan",
+    2878: "India / Gujarat Titans",
 }
 
 def find_player_mapping() -> Path:
@@ -97,15 +100,16 @@ def verify_submission():
             f"ID 20172 corresponds to Nepal (0 deliveries in dataset). Submission strictly uses ID 4722."
         )
 
-    # 2. Locate official CSVs
+    # 2. Locate official CSVs (Phase 13: >= 250 balls floor)
+    official_dir = REPO_ROOT / "output" / "phase13_evidence_floor"
     p8_dir = REPO_ROOT / "output" / "phase8_ranking_reconsideration"
-    batters_path = p8_dir / "official_top10_batters.csv"
-    bowlers_path = p8_dir / "official_top10_bowlers.csv"
-    unc_bat_path = p8_dir / "batter_rank_uncertainty.csv"
-    unc_bowl_path = p8_dir / "bowler_rank_uncertainty.csv"
+    batters_path = official_dir / "official_top10_batters.csv"
+    bowlers_path = official_dir / "official_top10_bowlers.csv"
+    unc_bat_path = official_dir / "batter_rank_uncertainty.csv"
+    unc_bowl_path = official_dir / "bowler_rank_uncertainty.csv"
 
     if not batters_path.exists() or not bowlers_path.exists():
-        print(f"ERROR: Official CSVs missing in {p8_dir}")
+        print(f"ERROR: Official CSVs missing in {official_dir}")
         sys.exit(1)
 
     batters = pd.read_csv(batters_path)

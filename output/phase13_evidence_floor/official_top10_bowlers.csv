@@ -1,0 +1,11 @@
+official_rank,player_id,player_name,competition_evidence,cpri_score,score_pressure_impact,score_adaptability,score_consistency,score_reliability,pressure_deliveries,pressure_matches,pressure_economy,pressure_strike_rate,pressure_runs_saved,pressure_wkts_above_exp,pressure_wpa,floor_applied
+1,4101,Mitchell Santner,Dual-Format,79.84,76.48,79.15,76.45,94.45,653,40,6.51,14.51,122.05,10.72,0.3597,250
+2,4722,Rashid Khan,Dual-Format,77.9,75.35,74.09,71.95,99.0,970,65,7.03,14.06,137.22,16.92,0.2563,250
+3,8661,Matheesha Pathirana,Dual-Format,75.77,72.14,70.31,79.53,89.54,557,29,7.01,13.93,144.34,3.96,-0.376,250
+4,781,Sunil Narine,IPL-Only,75.63,72.44,70.46,77.9,89.7,511,35,6.29,18.93,156.61,1.31,0.0178,250
+5,2490,Mohammad Nawaz,T20I-Only,75.51,83.53,84.21,50.98,72.34,301,24,6.04,11.15,55.94,11.5,0.0701,250
+6,2933,Jasprit Bumrah,Dual-Format,73.36,70.53,68.12,70.14,93.94,606,44,6.96,15.15,140.88,3.31,-0.0612,250
+7,6256,Varun Chakravarthy,Dual-Format,73.02,69.8,64.43,71.17,98.42,892,57,7.82,13.94,40.23,15.98,0.3009,250
+8,1612,Yuzvendra Chahal,Dual-Format,73.01,71.93,75.28,53.54,98.04,859,53,7.92,13.63,69.49,15.71,0.1177,250
+9,5979,Abrar Ahmed,T20I-Only,72.93,73.8,71.66,75.2,69.68,291,21,5.3,16.17,95.97,1.88,0.0877,250
+10,2878,Mohit Sharma,IPL-Only,72.71,76.53,84.91,52.4,69.28,282,22,8.11,10.07,26.34,9.27,-0.0977,250

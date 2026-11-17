@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 scripts/verify_manifest.py
-Verifies SHA-256 cryptographic hashes for all deliverables listed in
-output/phase8_ranking_reconsideration/reproducibility_manifest.json.
+Verifies SHA-256 cryptographic hashes for all deliverables listed in:
+1. output/phase13_evidence_floor/reproducibility_manifest.json (Official Submission)
+2. output/phase8_ranking_reconsideration/reproducibility_manifest.json (Pre-Floor Baseline, 17/17)
 
 Exits with code 0 on complete match, or non-zero if any file mismatches or is missing.
 """
@@ -12,31 +13,32 @@ import hashlib
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+PHASE13_DIR = REPO_ROOT / "output" / "phase13_evidence_floor"
 PHASE8_DIR = REPO_ROOT / "output" / "phase8_ranking_reconsideration"
-MANIFEST_PATH = PHASE8_DIR / "reproducibility_manifest.json"
 
 
-def verify_manifest() -> bool:
-    if not MANIFEST_PATH.exists():
-        print(f"ERROR: Manifest not found at {MANIFEST_PATH}", file=sys.stderr)
+def verify_manifest_section(target_dir: Path, manifest_name: str, section_title: str) -> bool:
+    manifest_path = target_dir / manifest_name
+    if not manifest_path.exists():
+        print(f"ERROR: Manifest not found at {manifest_path}", file=sys.stderr)
         return False
 
-    with open(MANIFEST_PATH, "r", encoding="utf-8") as f:
+    with open(manifest_path, "r", encoding="utf-8") as f:
         manifest = json.load(f)
 
     deliverable_hashes = manifest.get("deliverable_hashes", {})
     if not deliverable_hashes:
-        print("ERROR: No deliverable_hashes found in manifest.", file=sys.stderr)
+        print(f"ERROR: No deliverable_hashes found in {manifest_path}.", file=sys.stderr)
         return False
 
     all_matched = True
     print("=" * 80)
-    print("REPRODUCIBILITY MANIFEST CRYPTOGRAPHIC VERIFICATION")
-    print(f"Manifest: {MANIFEST_PATH.relative_to(REPO_ROOT)}")
+    print(f"{section_title}")
+    print(f"Manifest: {manifest_path.relative_to(REPO_ROOT)}")
     print("=" * 80)
 
     for filename, expected_hash in deliverable_hashes.items():
-        file_path = PHASE8_DIR / filename
+        file_path = target_dir / filename
         if not file_path.exists():
             print(f"MISSING : {filename:<35} (File not found on disk)")
             all_matched = False
@@ -62,6 +64,25 @@ def verify_manifest() -> bool:
     print("=" * 80)
 
     return all_matched
+
+
+def verify_manifest() -> bool:
+    ok_p13 = True
+    if (PHASE13_DIR / "reproducibility_manifest.json").exists():
+        ok_p13 = verify_manifest_section(
+            PHASE13_DIR,
+            "reproducibility_manifest.json",
+            "OFFICIAL DELIVERABLES CRYPTOGRAPHIC VERIFICATION (Phase 13: >= 250 Balls Floor)"
+        )
+        print()
+
+    ok_p8 = verify_manifest_section(
+        PHASE8_DIR,
+        "reproducibility_manifest.json",
+        "PRE-FLOOR BASELINE CRYPTOGRAPHIC VERIFICATION (Phase 8 Frozen: 17/17 Deliverables)"
+    )
+
+    return ok_p13 and ok_p8
 
 
 if __name__ == "__main__":

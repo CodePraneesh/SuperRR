@@ -23,12 +23,12 @@ class TestOfficialRankingsAPI(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.client = TestClient(app)
-        cls.phase8_dir = REPO_ROOT / "output" / "phase8_ranking_reconsideration"
-        cls.batters_csv = pd.read_csv(cls.phase8_dir / "official_top10_batters.csv")
-        cls.bowlers_csv = pd.read_csv(cls.phase8_dir / "official_top10_bowlers.csv")
+        cls.official_dir = REPO_ROOT / "output" / "phase13_evidence_floor"
+        cls.batters_csv = pd.read_csv(cls.official_dir / "official_top10_batters.csv")
+        cls.bowlers_csv = pd.read_csv(cls.official_dir / "official_top10_bowlers.csv")
 
     def test_01_official_unified_rankings_match_phase8(self):
-        """Verify GET /api/v1/official/rankings returns exact Phase 8 top 10."""
+        """Verify GET /api/v1/official/rankings returns exact official Phase 13 top 10."""
         res = self.client.get("/api/v1/official/rankings")
         self.assertEqual(res.status_code, 200)
         data = res.json()
@@ -67,19 +67,19 @@ class TestOfficialRankingsAPI(unittest.TestCase):
         self.assertEqual(data["role"], "Batter")
         self.assertEqual(len(data["official_top10"]), 10)
 
-        # Matthew Wade must be #1 with CPRI 85.36
-        wade = data["official_top10"][0]
-        self.assertEqual(wade["official_rank"], 1)
-        self.assertEqual(wade["player_name"], "Matthew Wade")
-        self.assertAlmostEqual(wade["cpri_score"], 85.36, places=2)
-        self.assertEqual(wade["rank_uncertainty"]["ci_display"], "[1, 22]")
+        # Tim David must be #1 with CPRI 82.44
+        david = data["official_top10"][0]
+        self.assertEqual(david["official_rank"], 1)
+        self.assertEqual(david["player_name"], "Tim David")
+        self.assertAlmostEqual(david["cpri_score"], 82.44, places=2)
+        self.assertEqual(david["rank_uncertainty"]["ci_display"], "[1, 16]")
 
-        # Rinku Singh must be #5 with CPRI 77.18
-        rinku = data["official_top10"][4]
-        self.assertEqual(rinku["official_rank"], 5)
+        # Rinku Singh must be #4 with CPRI 77.18
+        rinku = data["official_top10"][3]
+        self.assertEqual(rinku["official_rank"], 4)
         self.assertEqual(rinku["player_name"], "Rinku Singh")
         self.assertAlmostEqual(rinku["cpri_score"], 77.18, places=2)
-        self.assertEqual(rinku["rank_uncertainty"]["ci_display"], "[1, 51]")
+        self.assertEqual(rinku["rank_uncertainty"]["ci_display"], "[1, 37]")
 
     def test_03_official_bowlers_endpoint(self):
         """Verify GET /api/v1/official/bowlers returns complete Top 10 with 90% CIs."""
@@ -94,14 +94,14 @@ class TestOfficialRankingsAPI(unittest.TestCase):
         self.assertEqual(santner["official_rank"], 1)
         self.assertEqual(santner["player_name"], "Mitchell Santner")
         self.assertAlmostEqual(santner["cpri_score"], 79.84, places=2)
-        self.assertEqual(santner["rank_uncertainty"]["ci_display"], "[2, 36]")
+        self.assertEqual(santner["rank_uncertainty"]["ci_display"], "[1, 26]")
 
-        # Jasprit Bumrah must be #8 with CPRI 73.36
-        bumrah = data["official_top10"][7]
-        self.assertEqual(bumrah["official_rank"], 8)
+        # Jasprit Bumrah must be #6 with CPRI 73.36
+        bumrah = data["official_top10"][5]
+        self.assertEqual(bumrah["official_rank"], 6)
         self.assertEqual(bumrah["player_name"], "Jasprit Bumrah")
         self.assertAlmostEqual(bumrah["cpri_score"], 73.36, places=2)
-        self.assertEqual(bumrah["rank_uncertainty"]["ci_display"], "[3, 67]")
+        self.assertEqual(bumrah["rank_uncertainty"]["ci_display"], "[2, 44]")
 
     def test_04_official_player_lookup(self):
         """Verify GET /api/v1/official/player/{name} returns exact player dossier."""
@@ -109,7 +109,7 @@ class TestOfficialRankingsAPI(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         data = res.json()
         self.assertEqual(data["player_name"], "Suryakumar Yadav")
-        self.assertEqual(data["official_rank"], 3)
+        self.assertEqual(data["official_rank"], 2)
         self.assertAlmostEqual(data["cpri_score"], 81.42, places=2)
         self.assertEqual(data["confidence_tier"], "High Confidence")
 
